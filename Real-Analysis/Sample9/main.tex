@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Differentiation}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{5.2.2}
+\doublespacing
+\begin{center}
+    c is impossible because this would imply $(f + g) - g = f$ is differentiable at 0 by the algebraic differentiability theorem.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(x) = 0$ and $g(x) = 1$ if $x\in (-\infty , 0)$ and let $f(x) = 1$ and $g(x) = 0$ if $x\in [0,\infty )$.
+\begin{center}
+    Let $\epsilon < 1$ then $|f(x) - f(0)| = |0 - 1| = 1 >\epsilon$ for all $x < 0$ so there does not exist a $\delta > 0$ such that $|x - 0| <\delta$ implies $|f(x) - f(0)| < 1 =\epsilon$ so $f$ is not continuous at 0 and without loss of generality the same can be said about $g$.
+    \\Since $f$ and $g$ are both discontinuous at $x = 0$ they can not be differentiable at $x = 0$.
+    \\Furthermore $(fg)(x) = f(x) g(x) = 0$ for all $x\in\mathbb{R}$. Which is differentiable on $\mathbb{R}$ by the following.
+    \\Let $c\in\mathbb{R}$ then consider $lim_{x\rightarrow c}\frac{(fg)(x) - (fg)(c)}{x - c} = lim_{x\rightarrow c}\frac{0 - 0}{x - c} = lim_{x\rightarrow c} 0 = 0$.
+    \\So $(fg)' (c) = 0$ for arbitrary $c\in\mathbb{R}$ so $(fg)' = 0$ and hence $fg$ is differentiable on all of $\mathbb{R}$.
+    \\So this is an example of functions $f$ and $g$ that both aren't differentiable at 0 but $fg$ is differentiable at 0.
+\end{center}
+
+{\Large\textbf{b.}} Let $f(x) = 0$ if $x\in (-\infty , 0)$ and $f(x) = 1$ if $x\in [0,\infty )$. Let $g(x) = 0$.
+\begin{center}
+    From the results of part a we know that $f$ is not continuous at 0 and therefore can not be differentiable at 0.
+    \\Furthermore $g$ is differentiable on $\mathbb{R}$ and $(fg) (x) = f(x) g(x) = 0 = g(x)$ for all $x\in\mathbb{R}$. So $fg$ is differentiable on $\mathbb{R}$.
+    \\So this is an example of functions $f$ and $g$ where $f$ isn't differentiable at 0 but $g$ is and where $fg$ is differentiable at 0.
+\end{center}
+
+{\Large\textbf{c.}} I showed at the very start that this request is impossible.
+
+{\Large\textbf{d.}} Let $\mathbb{I}$ denote the irrationals. Then let $f(x) = 0$ if $x\in\mathbb{Q}$ and let $f(x) = x$ if $x\in\mathbb{I}$.
+\begin{center}
+    Let $c\neq 0$, then since $\mathbb{I}$ is dense in $\mathbb{R}$ there exists some $(x_n)\subset\mathbb{I}$ such that $(x_n)\rightarrow c$.
+    \\Since $\mathbb{Q}$ is also dense in $\mathbb{R}$ there exists some $(y_n)\subset\mathbb{Q}$ such that $(y_n)\rightarrow c$.
+    \\But $(f(x_n)) = (x_n)\rightarrow c\neq 0$ while $(f(y_n)) = (0)\rightarrow 0$. So $lim_{x\rightarrow c} f(x)$ does not exist for $c\neq 0$.
+    \\Now at $c = 0$: Let $\epsilon > 0$ then let $\delta =\epsilon$.
+    \\Then if $|x - 0| = |x| <\delta$ we have $|f(x) - f(0)| = |f(x) - 0| = |f(x)|\leq |x| <\delta =\epsilon$ since $f(x) = 0$ or $f(x) = x$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$. So $f$ is continuous at 0 and $lim_{x\rightarrow 0} f(x) = 0$.
+    \\Now define the function $g(x) = x f(x)$.
+    \\We have $g'(0) = lim_{x\rightarrow 0}\frac{g(x) - g(0)}{x - 0} = lim_{x\rightarrow 0}\frac{x f(x)}{x} = lim_{x\rightarrow 0} f(x) = 0$.
+    \\However at $c\neq 0$ it must be that $g'(c)$ does not exist because otherwise $lim_{x\rightarrow c}\frac{g(x) - g(c)}{x - c}$ exists.
+    \\But this would imply $lim_{x\rightarrow c}\frac{g(x) - g(c)}{x - c} (x - c) = lim_{x\rightarrow c} g(x) - g(c)$ exists by the algebraic limit theorem.
+    \\Which implies $lim_{x\rightarrow c} g(x)$ exists and hence $lim_{x\rightarrow c}\frac{g(x)}{x} = lim_{x\rightarrow c}\frac{x f(x)}{x} = lim_{x\rightarrow c} f(x)$ exists which it doesn't since $c\neq 0$.
+    \\So this is such a function $g$ where $g$ is differentiable only at 0.
+\end{center}
+
+
+\newpage
+\section*{5.2.9}
+
+{\Large\textbf{a.}} This is true. Let $f$ be differentiable on an interval $A$ such that $f'$ is non-constant. Let $\mathbb{I}$ denote the irrationals.
+\begin{center}
+    \doublespacing
+    Then there exists some closed interval $[a, b]\subseteq A$ where $f$ is differentiable and where $f'(a)\neq f'(b)$.
+    \\Since $\mathbb{I}$ is dense in $\mathbb{R}$ there exists some $x\in\mathbb{I}$ such that $f'(a) < x < f'(b)$ or $f'(b) < x < f'(a)$.
+    \\Therefore by Darboux's theorem there exists a $c\in [a, b]\subseteq A$ such that $f'(c) = x\in\mathbb{I}$.
+    \\So if $f'$ exists on an interval and if $f'$ is non-constant then $f'$ takes on some irrational values in that interval \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} This is false. To find a counter example consider $sin(\frac{1}{x})$ which takes negative values in every $V_{\delta}(0)$.
+\begin{center}
+    \doublespacing
+    First I am going to prove a result about $g(x) = x\:cos(\frac{1}{x})$, namely $lim_{x\rightarrow 0} g(x) = 0$:
+    \\Let $\epsilon > 0$ and let $\delta =\epsilon$.
+    \\Then if $|x - 0| = |x| <\delta =\epsilon$ we have $|g(x) - 0| = |x\:cos(\frac{1}{x})| = |x||cos(\frac{1}{x})|\leq |x| <\delta =\epsilon$ since $|cos(z)|\leq 1$ for all $z\in\mathbb{R}$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$ so $lim_{x\rightarrow 0} x\:cos(\frac{1}{x}) = 0$.
+    \\Now let $f(0) = 0$ and $f(x) = cx + x^2 cos(\frac{1}{x})$ if $x\in (-1, 1)\backslash\{0\}$ and $c\in (0, 1)$.
+    \\Then when $x\neq 0$ we have $f'(x) = c + 2x\:cos(\frac{1}{x}) - sin(\frac{1}{x})$ by using properties from the algebraic differentiability theorem.
+    \\As $x\rightarrow 0$ we know by the algebraic limit theorem that $2x\:cos(\frac{1}{x})\rightarrow 0$.
+    \\So as we get arbitrarily close to 0, $sin(\frac{1}{x})$ oscillates between $-1$ and 1 in every $V_{\delta}(0)$ and since $c < 1$ and $2x\:cos(\frac{1}{x})$ grows arbitrarily close to 0 we get that $f'$ takes negative values in every $V_{\delta}(0)$.
+    \\Now let's see what happens at 0:
+    \\$f'(0) = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x - 0} = lim_{x\rightarrow 0}\frac{cx + x^2 cos(\frac{1}{x})}{x} = lim_{x\rightarrow 0} c + x\:cos(\frac{1}{x}) = c > 0$ by the algebraic limit theorem.
+    \\So this is a function on an open interval $A$ where $f'(a) > 0$ for some $a\in A$ but $f'$ takes negative values in every $V_{\delta}(a)$.
+\end{center}
+
+{\Large\textbf{c.}} This is true. Let $f$ be differentiable on an interval containing 0 and let $lim_{x\rightarrow 0} f'(x) = L$.
+\begin{center}
+    \doublespacing
+    Then $f'(0) = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x - 0} = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x}$ gives the 0/0 case for L'hospital's rule.
+    \\So $f'(0) = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x} = lim_{x\rightarrow 0}\frac{f'(x) - 0}{1} = lim_{x\rightarrow 0} f'(x) = L$ from taking the derivative of the top and bottom and using the algebraic differentiability theorem.
+    \\So if $f$ is differentiable on an interval containing 0 and $lim_{x\rightarrow 0} f'(x) = L$ then $f'(0) = L$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{5.3.1}
+
+{\Large\textbf{a.}} Let $f:[a,b]\rightarrow\mathbb{R}$ be differentiable on $[a,b]$ such that $f'$ is continuous on $[a,b]$.
+\begin{center}
+    \doublespacing
+    Since $[a, b]$ is closed and bounded it is compact. So since $f'$ is continuous on $[a, b]$ we know $f'([a, b])$ is compact.
+    \\So $f'$ is bounded and there exists some $M > 0$ such that $|f'(z)|\leq M$ for all $z\in [a, b]$.
+    \\Now let $x, y\in [a, b]$ where $x\neq y$ then $x < y$ or $y < x$.
+    \\If $x < y$:
+    \\Since $[x, y]\subseteq [a, b]$ we know $f$ is differentiable on $[x, y]$.
+    \\So by the mean value theorem there exists some $w\in [x, y]$ such that $f'(w) =\frac{f(y) - f(x)}{y - x} =\frac{f(x) - f(y)}{x - y}$.
+    \\Therefore $|\frac{f(x) - f(y)}{x - y}| = |f'(w)|\leq M$.
+    \\If $y < x$: The same process with x and y swapped leads to the same conclusion without loss of generality.
+    \\This was for arbitrary distinct $x, y\in [a, b]$ and is therefore true for all distinct $x, y\in [a, b]$.
+    \\So there exists some $M > 0$ such that $|\frac{f(x) - f(y)}{x - y}|\leq M$ for all distinct $x, y\in [a, b]$. So $f$ is Lipschitz \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Yes this means that $f$ is contractive. Add the assumption that $|f'(z)| < 1$ to part a.
+\begin{center}
+    \doublespacing
+    If $|f'(z)|\leq 0$ then $|f'(z)| = 0$ so $f'(z) = 0$ for all $z\in [a, b]$.
+    \\This means that $f(z) = k$ for some $k\in\mathbb{R}$.
+    \\So $|f(x) - f(y)| = |k - k| = 0\leq c|x - y|$ for all $c\in (0, 1)$ and all $x, y\in [a, b]$, hence $f$ is contractive.
+    \\Otherwise we can say that $|f'(z)|\leq c$ for some $c\in (0, 1)$.
+    \\So for all distinct $x, y\in [a, b]$ we have there exists some $w\in [x, y]$ such that $f'(w) =\frac{f(x) - f(y)}{x - y}$ by the mean value theorem.
+    \\Therefore for all distinct $x, y\in [a, b]$ there exists a $w\in [x, y]$ such that $\frac{|f(x) - f(y)|}{|x - y|} = |\frac{f(x) - f(y)}{x - y}| = f'(w)\leq c$.
+    \\This gives us $|f(x) - f(y)|\leq c|x - y|$ for all distinct $x, y\in [a, b]$.
+    \\Now consider $x = y$, then $|f(x) - f(y)| = |f(x) - f(x)| = 0 = c|x - x| = c|x - y|$.
+    \\Therefore there exists a $c\in (0, 1)$ such that for all $x, y\in [a, b]$ we have $|f(x) - f(y)|\leq c|x - y|$, hence $f$ is contractive.
+    \\So if we add the assumption that $|f'(z)| < 1$ then $f$ is contractive \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{5.3.5}
+
+{\Large\textbf{a.}} Let $f, g: [a, b]\rightarrow\mathbb{R}$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+\begin{center}
+    \doublespacing
+    Let $h(x) = [g(b) - g(a)] f(x) - [f(b) - f(a)] g(x)$.
+    \\Then $h$ is continuous on $[a, b]$ by the algebraic continuity theorem and differentiable on $(a, b)$ by the algebraic differentiability theorem.
+    \\Furthermore $h'(x) = [g(b) - g(a)] f'(x) - [f(b) - f(a)] g'(x)$ by the algebraic differentiability theorem.
+    \\We can see $h(a) = [g(b) - g(a)] f(a) - [f(b) - f(a)] g(a) = g(b) f(a) - g(a) f(a) - f(b) g(a) + g(a) f(a) = g(b) f(a) - f(b) g(a)$.
+    \\Also $h(b) = [g(b) - g(a)] f(b) - [f(b) - f(a)] g(b) = g(b) f(b) - g(a) f(b) - g(b) f(b) + f(a) g(b) = g(b) f(a) - f(b) g(a)$.
+    \\So $h(a) = g(b) f(a) - f(b) g(a) = h(b)$.
+    \\Then by Rolle's theorem there exists some point $c\in (a, b)$ where $h'(c) = 0$.
+    \\Therefore there exist some point $c\in (a, b)$ where $h'(c) = [g(b) - g(a)] f'(c) - [f(b) - f(a)] g'(c) = 0$.
+    \\So there exists some point $c\in (a, b)$ where $[g(b) - g(a)] f'(c) = [f(b) - f(a)] g'(c)$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{5.3.8} Let $f$ be continuous on an interval containing 0 and let $f$ be differentiable for all $x\neq 0$. Assume $lim_{x\rightarrow 0} f'(x) = L$.
+\begin{center}
+    \doublespacing
+    I believe I proved this in a previous problem but here it is again.
+    \\Let $g(x) = f(x) - f(0)$ then by the algebraic differentiability theorem $g$ is differentiable for all $x\neq 0$.
+    \\We also know $g(x)$ is continuous on the domain of $f$ by the algebraic differentiability theorem.
+    \\Let $h(x) = x - 0$ we have seen before that $h$ is differentiable for all $x\in\mathbb{R}$ and is therefore also continuous for all $x\in\mathbb{R}$.
+    \\Furthermore $g(0) = f(0) - f(0) = 0 = 0 - 0 = h(0)$.
+    \\Then $f'(0) = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x - 0} = lim_{x\rightarrow 0}\frac{g(x)}{h(x)}$ satisfies the 0/0 case for L'hospital's rule.
+    \\So $f'(0) = lim_{x\rightarrow 0}\frac{f(x) - f(0)}{x - 0} = lim_{x\rightarrow 0}\frac{(f(x) - f(0))'}{(x - 0)'} = lim_{x\rightarrow 0}\frac{f'(x)}{1} = lim_{x\rightarrow 0} f'(x) = L$.
+    \\From using the algebraic differentiability theorem.
+    \\So if $f$ is continuous on an interval containing 0, differentiable for all $x\neq 0$, and $lim_{x\rightarrow 0} f'(x) = L$ then $f'(0) = L$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{5.2.7}
+\begin{center}
+    Let $g_a (x) = 0$ if $x = 0$ and $g_a (x) = x^a sin(\frac{1}{x})$.
+    \\First I want to prove that $lim_{x\rightarrow 0} x^c sin(\frac{1}{x}) = lim_{x\rightarrow 0} x^c cos(\frac{1}{x}) = 0$ for $c > 0$ as long as $x^c$ is defined for all $x\in\mathbb{R}$.
+    \\Let $\epsilon > 0$ and $\delta =\epsilon ^{\frac{1}{c}}$ then if $|x - 0| = |x| <\delta$.
+    \\We have $|x^c sin(\frac{1}{x}) - 0| = |x^c sin(\frac{1}{x})|\leq |x^c| = |x|^c <\delta ^c =\epsilon$ and $|x^c cos(\frac{1}{x}) - 0| = |x^c cos(\frac{1}{x})|\leq |x^c| = |x|^c <\delta ^c =\epsilon$.
+    \\Such a $\delta$ exists since $c > 0$, $|x^c| = |x|^c$ since $x^c$ is defined for all $x\in\mathbb{R}$, and $|x|^c <\delta ^c$ since $c > 0$ and $|x| <\delta$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So if $c > 0$ such that $x^c$ is defined for all $x\in\mathbb{R}$ then $lim_{x\rightarrow 0} x^c sin(\frac{1}{x}) = lim_{x\rightarrow 0} x^c cos(\frac{1}{x}) = 0$ \qedsymbol
+    \\Note: I require that $x^c$ is defined for all $x\in\mathbb{R}$ because while clearly it is for $x\geq 0$ it is not always the case for $x < 0$.
+    \\Also if $c\leq 0$ this limit clearly does not converge as for $c = 0$ we have seen previously that $lim_{x\rightarrow 0} sin(\frac{1}{x})$ and $lim_{x\rightarrow 0} cos(\frac{1}{x})$ do not exist. And for $c < 0$ $x^c$ would be unbounded when $x$ is close to 0 and therefore can not counteract the oscillatory nature of $sin(\frac{1}{x})$ and $cos(\frac{1}{x})$.
+\end{center}
+
+{\Large\textbf{a.}}
+\begin{center}
+    \doublespacing
+    For $x = 0$ we need $lim_{x\rightarrow 0} g_a (x) = lim_{x\rightarrow 0} x^a sin(\frac{1}{x}) = g(0) = 0$ in order for $g_a$ to be continuous at 0.
+    \\Otherwise $g_a$ wouldn't be differentiable at 0 and therefore not differentiable on $\mathbb{R}$.
+    \\From the proof at the beginning this means we need $a > 0$ such that $x^a$ is defined for all $x\in\mathbb{R}$.
+    \\We have $g_a '(0) = lim_{x\rightarrow 0}\frac{g_a (x) - g_a (0)}{x - 0} = lim_{x\rightarrow 0}\frac{x^a sin(\frac{1}{x})}{x} = lim_{x\rightarrow 0} x^{a-1} sin(\frac{1}{x})$ and we need this limit to exist so from the proof at the beginning we need $a - 1> 0$ and therefore $a > 1$ giving $g_a '(0) = 0$.
+    \\For $x\neq 0$ we have $g_a '(x) = (x^a sin(\frac{1}{x}))' = (x^a)' sin(\frac{1}{x}) + x^a (sin(\frac{1}{x}))' = a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})$ by the algebraic differentiability theorem. We already know $a - 1 > 0$ so the first term in the derivative is bounded on $[0, 1]$ so to get unboundedness on $[0, 1]$ we need $x^{a-2}$ to be unbounded and hence $a < 2$.
+    \\So far we have that $1 < a < 2$. Let $a = 1.2$, then $x^a$ is defined for all $x\in\mathbb{R}$ and therefore so is $g_a$.
+    \\Since $x^a$ is differentiable on $\mathbb{R}$ and $sin(\frac{1}{x})$ is differentiable when $x\neq 0$ we have that $g_a$ is differentiable when $x\neq 0$ and from above we have $g_a$ is differentiable at 0. So for $a = 1.2$ we have $g_a$ is differentiable on $\mathbb{R}$.
+    \\Furthermore for $x\in (0, 1]$ we have $g_a '(x) = a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})$ which has a bounded first term and unbounded second term since $a = 1.2 < 2$ therefore $g_a '$ is unbounded on $[0, 1]$.
+    \\So $a = 1.2$ is a satisfactory value for the desired qualities of $g_a$.
+\end{center}
+
+\newpage
+{\Large\textbf{b.}} Again we want $g_a$ to be differentiable on $\mathbb{R}$ so we need the condition $a > 1$ so that it is differentiable at 0.
+\begin{center}
+    \doublespacing
+    We also want $g_a '$ to be continuous at 0 so we want $lim_{x\rightarrow 0} g_a '(x) = g_a '(0)$ which is actually guaranteed by the previous problem as long as $g_a$ is differentiable for $x\neq 0$ and $lim_{x\rightarrow 0} g_a '(x)$ exists.
+    \\We have $lim_{x\rightarrow 0} g_a '(x) = lim_{x\rightarrow 0} a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})$.
+    \\By letting $a > 2$ we get from the proof at the beginning and by the algebraic limit theorem $lim_{x\rightarrow 0} g_a '(x) = 0$ for $a > 2$ and hence $g_a '(0) = 0$ so $g_a '$ is continuous at 0 for $a > 2$.
+    \\We also want $g_a '$ to not be differentiable at 0 so we want $lim_{x\rightarrow 0}\frac{g_a '(x) - g_a '(0)}{x - 0} = lim_{x\rightarrow 0}\frac{g_a ' (x)}{x}$ to not exist.
+    \\We have $lim_{x\rightarrow 0}\frac{g_a ' (x)}{x} = lim_{x\rightarrow 0}\frac{a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})}{x} = lim_{x\rightarrow 0} a x^{a-2} sin(\frac{1}{x}) - x^{a-3} cos(\frac{1}{x})$.
+    \\Since $a > 2$ we have seen that the first term will converge to 0.
+    \\By letting $a < 3$ this limit does not exist since $x^{a-3}$ is unbounded and won't counteract the oscillatory nature of $cos(\frac{1}{x})$.
+    \\So let $a = 2.2$ then $x^{a-2}$ and $g_a$ are defined for all $x\in\mathbb{R}$. Also $g_a$ is differentiable on all of $\mathbb{R}$ and $g_a '$ is continuous but not differentiable at 0.
+    \\So $a = 2.2$ is a satisfactory value for the desired qualities of $g_a$.
+\end{center}
+
+{\Large\textbf{c.}} Again we want $g_a$ to be differentiable on $\mathbb{R}$ so we need the condition $a > 1$ so that it is differentiable at 0.
+\begin{center}
+    \doublespacing
+    Since we want $g_a '$ to be continuous at 0 we get from the previous part that $a > 2$ and $g_a '(0) = 0$.
+    \\We have $g_a '(x) = a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})$ for $x\neq 0$ which is differentiable since $a > 2$ and $x\neq 0$.
+    \\So $g_a ''(x) = a (a-1) x^{a-2} sin(\frac{1}{x}) - a x^{a-3} cos(\frac{1}{x}) - (a-2) x^{a-3} cos(\frac{1}{x}) - x^{a-4} sin(\frac{1}{x}) = a (a-1) x^{a-2} sin(\frac{1}{x}) - 2(a-1) x^{a-3} cos(\frac{1}{x}) - x^{a-4} sin(\frac{1}{x})$ for $x\neq 0$ by using the algebraic differentiability theorem.
+    \\We want $g_a ''(0) = lim_{x\rightarrow 0}\frac{g_a '(x) - g_a '(0)}{x - 0} = lim_{x\rightarrow 0}\frac{g_a '(x)}{x} = lim_{x\rightarrow 0}\frac{a x^{a-1} sin(\frac{1}{x}) - x^{a-2} cos(\frac{1}{x})}{x} = lim_{x\rightarrow 0} a x^{a-2} sin(\frac{1}{x}) - x^{a-3} cos(\frac{1}{x})$ to exist. By letting $a > 3$ we know from the proof at the beginning and the algebraic limit theorem that $g_a ''(0) = 0$.
+    \\So provided $a > 3$ and $x^{a-3}$ is defined on $\mathbb{R}$ we get that $g_a '$ is differentiable on $\mathbb{R}$.
+    \\We also want $g_a ''$ to be discontinuous at 0.
+    \\So we want $lim_{x\rightarrow 0} g_a ''(x)\neq g_a ''(0) = 0$.
+    \\We have $lim_{x\rightarrow 0} g_a ''(x) = lim_{x\rightarrow 0} a (a-1) x^{a-2} sin(\frac{1}{x}) - 2(a-1) x^{a-3} cos(\frac{1}{x}) - x^{a-4} sin(\frac{1}{x})$.
+    \\We have $a > 3$ so the first two terms converge to 0 by the proof at the beginning and the algebraic limit theorem.
+    \\So to have this limit not be 0 we need $a\leq 4$ and then $a - 4\leq 0$ which causes the limit of the last term to not exist.
+    \\Then we would have $g_a ''$ is discontinuous at 0 since its limit at 0 doesn't exist.
+    \\So let $a = 3.2$ then $x^{a-2}$ and $g_a$ are defined for all $x\in\mathbb{R}$. Also $g_a$ and $g_a '$ are differentiable on all of $\mathbb{R}$ but $g_a ''$ is not continuous at 0.
+    \\So $a = 3.2$ is a satisfactory value for the desired qualities of $g_a$.
+\end{center}
+ 
+\end{document}
