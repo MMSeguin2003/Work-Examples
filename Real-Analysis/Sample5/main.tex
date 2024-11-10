@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Sequences and Series}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{2.5.1}
+
+{\Large \textbf{a.}} This is not possible. Let $(a_n)$ be a sequence that contains a bounded subsequence, say $(b_n)$.
+\begin{center}
+    \doublespacing
+    Then by the Bolzano-Weierstrass Theorem $(b_n)$ has some subsequence that is convergent.
+    \\Therefore $(a_n)$ has a subsequence that is convergent.
+\end{center}
+
+{\Large \textbf{b.}} Let $(a_n)$ be defined by $a_n =\frac{1}{n + 1}$ if $n$ is odd and $a_n = 1 -\frac{1}{n + 1}$ if $n$ is even.
+\begin{center}
+    \doublespacing
+    Then $(a_n) = (\frac{1}{2}, 1 -\frac{1}{3},\frac{1}{4}, 1 -\frac{1}{5}, ...) = (\frac{1}{2},\frac{2}{3},\frac{1}{4},\frac{4}{5}, ...)$. Clearly $0 < a_n < 1$ for all $n\in\mathbb{N}$. So $0,1\notin (a_n)$.
+    \\Consider $(a_{2n - 1}) = (a_1, a_3, a_5, ...) = (\frac{1}{2},\frac{1}{4},\frac{1}{6}, ...) = (\frac{1}{2n})$. Then $a_{2n - 1} = (\frac{1}{2}) \frac{1}{n}$.
+    \\Since as shown in previous sample works $(\frac{1}{n})\rightarrow 0$ we have by the Algebraic Limit Theorem that $(a_{2n - 1})\rightarrow (\frac{1}{2}) 0 = 0$.
+    \\So the subsequence $(a_{2n-1})$ of $a_n$ converges to 0.
+    \\Consider $(a_{2n}) = (a_2, a_4, a_6, ...) = (1 -\frac{1}{3}, 1 -\frac{1}{5}, 1 - \frac{1}{7}, ...) = (1 - \frac{1}{2n+1})$.
+    \\Then $1 -\frac{1}{2n} < 1 -\frac{1}{2n+1} = a_{2n} < 1$ for all $n\in\mathbb{N}$. 
+    \\By the Algebraic Limit Theorem, $(1 -\frac{1}{2n})\rightarrow 1 - lim_{n\rightarrow\infty}\frac{1}{2n} = 1 - 0 = 1$. Clearly $(1)\rightarrow 1$.
+    \\So by the squeeze theorem, proved in a previous sample work, we have that $(a_{2n})\rightarrow 1$.
+    \\So the subsequence $(a_{2n})$ of $a_n$ converges to 1.
+    \\So this is an example of such a sequence that does not contain 0 or 1 but has subsequences that converge to 0 and 1.
+    \\Note: If you start with a convergent sequence this is not possible since its subsequences must converge to the same value.
+\end{center}
+
+{\Large \textbf{c.}} Let $(a_n) = (1,\frac{1}{2},1,\frac{1}{2},\frac{1}{3}, 1,\frac{1}{2},\frac{1}{3},\frac{1}{4}, ...)$. Then let $x\in\{\frac{1}{n} : n\in\mathbb{N}\}$.
+\begin{center}
+    \doublespacing
+    Then by construction of $(a_n)$ there exists a point in the sequence after which there are infinitely many terms equal to $x$.
+    \\Therefore for any $x\in\{\frac{1}{n} : n\in\mathbb{N}\}$ you can make a subsequence $(x, x, x, x, ...)$ of $(a_n)$ which clearly converges to $x$.
+    \\So this is such a sequence that for every element of $\{\frac{1}{n} : n\in\mathbb{N}\}$ there is a subsequence converging to that element.
+\end{center}
+
+{\Large \textbf{d.}} This is not possible. Let $(a_n)$ be a sequence that for every $x\in\{\frac{1}{n} : n\in\mathbb{N}\}$ there is a subsequence converging to $x$.
+\begin{center}
+    \doublespacing
+    Let $\epsilon _n =\frac{1}{n}$. Then choose $n_1$ such that $|a_{n_1} - 1| <\epsilon _1$, $n_2 > n_1$ such that $|a_{n_2} - \frac{1}{2}| <\epsilon _2$, and so on.
+    \\Then $n_1 < n_2 < n_3 < ... < n_m < ...$ and $n_m$ is such that $|a_{n_m} -\frac{1}{m}| <\epsilon _m =\frac{1}{m}$.
+    \\Each $n_m$ exists since for each $x\in\{\frac{1}{n} : n\in\mathbb{N}\}$ there is a subsequence of $(a_n)$ converging to $x$.
+    \\Then $-\frac{1}{m} < a_{n_m} -\frac{1}{m} <\frac{1}{m}$ and $0 < a_{n_m} <\frac{2}{m}$ for all $m\in\mathbb{N}$.
+    \\By the Algebraic Limit Theorem $(\frac{2}{m})\rightarrow 2\;lim_{m\rightarrow\infty}\frac{1}{m} = 0$. Clearly $(0)\rightarrow 0$.
+    \\So by the squeeze theorem, the subsequence $(a_{n_1}, a_{n_2}, a_{n_3}, ..., a_{n_m}, ...)\rightarrow 0$.
+    \\$0\notin\{\frac{1}{n} : n\in\mathbb{N}\}$ so any sequence that has a subsequence converging to $x$ for all $x\in\{\frac{1}{n} : n\in\mathbb{N}\}$ also has a subsequence converging to some value not in $\{\frac{1}{n} : n\in\mathbb{N}\}$ because it must contain a subsequence converging to 0 \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{2.5.5} Let $(a_n)$ be a bounded sequence such that every convergent subsequence converges to the same $a\in\mathbb{R}$.
+\begin{center}
+    \doublespacing
+    Assume for the sake of contradiction that $(a_n)$ does not converge to $a$.
+    \\That is there exists an $\epsilon > 0$ such that for all $N\in\mathbb{N}$ there exists an $n\geq N$ such that $|a_n - a|\geq\epsilon$.
+    \\Let $\epsilon ^{'}$ be such an $\epsilon$ and let $n_1$ be such that $|a_{n_1} - a|\geq\epsilon ^{'}$, $n_2 > n_2$ be such that $|a_{n_2} - a|\geq\epsilon ^{'}$, and so on.
+    \\Then $n_1 < n_2 < n_3 < ... < n_m < ...$ and $|a_{n_m} - a|\geq\epsilon ^{'}$ for all $m\in\mathbb{N}$.
+    \\This set of $n_m$ exists because of our assumption that for all $N\in\mathbb{N}$ there exists an $n\geq N$ such that $|a_n - a|\geq\epsilon ^{'}$.
+    \\Then since $(a_n)$ is bounded we have that $(a_{n_m})$ is also bounded.
+    \\Then by the Bolzano-Weierstrass Theorem $(a_{n_m})$ has some subsequence that is convergent.
+    \\Since this subsequence of $(a_{n_m})$ is also a subsequence of $(a_n)$ it must converge to $a$ by our assumption that every convergent subsequence converges to the same $a\in\mathbb{R}$.
+    \\But we have constructed $(a_{n_m})$ so that $|a_{n_m} - a|\geq\epsilon ^{'}$ for all $m\in\mathbb{N}$.
+    \\Therefore a subsequence of $(a_{n_m})$ can not converge to $a$ and we have a contradiction.
+    \\So it must be that our assumption was wrong and therefore $(a_n)\rightarrow a$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{2.6.2}
+
+{\Large \textbf{a.}} Let $(a_n) = (\frac{(-1)^n}{n})$. This series converges to 0.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $\epsilon > 0$ then $|a_N - 0| = |\frac{(-1)^N}{N}| =\frac{1}{N}$.
+    \\By the Archimedean Property there exists an $N\in\mathbb{N}$ such that $|a_N - 0| =\frac{1}{N} <\epsilon$.
+    \\When $n\geq N$ we now have $|a_n - 0| =\frac{1}{n}\leq\frac{1}{N} <\epsilon$.
+    \\So for arbitrary $\epsilon > 0$ we have shown there exists an $N\in\mathbb{N}$ such that for $n\geq N$, $|a_n - 0| <\epsilon$.
+    \\Therefore $(a_n) = (\frac{(-1)^n}{n})\rightarrow 0$.
+    \\Since all convergent sequences are Cauchy we have that $(a_n)$ is a Cauchy sequence.
+    \\Furthermore $(a_n)$ is not monotone as its terms oscillate from positive to negative.
+    \\So this is an example of such a sequence that is Cauchy but not monotone.
+\end{center}
+
+{\Large \textbf{b.}} This is not possible. Let $(a_n)$ be a sequence that has an unbounded subsequence.
+\begin{center}
+    \doublespacing
+    Then $(a_n)$ must be unbounded itself. Since all Cauchy sequences are bounded $(a_n)$ can not be a Cauchy sequence \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} This is not possible. Let $(a_n)$ be a divergent, monotone sequence.
+\begin{center}
+    \doublespacing
+    Then $(a_n)$ is unbounded because if it were bounded then it would converge by the Monotone Convergence Theorem.
+    \\Let $(a_{n_m})$ be a subsequence of $(a_n)$ then $(a_{n_m})$ is monotone as well.
+    \\If $(a_{n_m})$ were Cauchy then it would be bounded, but this would imply that $(a_n)$ is bounded as well.
+    \\Because if $(a_{n_m}) = (a_{n_1}, a_{n_2}, a_{n_3}, ...)$ is bounded then we have $|a_{n_m}|\leq M$ for all $m\in\mathbb{N}$ and some $M\in\mathbb{N}$.
+    \\Since $(a_{n_m})$ is monotonically increasing and $n_m$ is unbounded we would have that $|a_1|\leq |a_2|\leq ...\leq |a_{n_1}|\leq ...\leq |a_{n_m}|\leq ...\leq M$.
+    \\This would imply $|a_n|\leq M$ for all $n\in\mathbb{N}$ and $(a_n)$ is bounded. But $(a_n)$ is unbounded.
+    \\Therefore if $(a_{n_m})$ is a subsequence of $(a_n)$ then $(a_{n_m})$ can not be Cauchy \qedsymbol
+\end{center}
+
+{\Large \textbf{d.}} Let $(a_n)$ be defined by $a_n = n$ if $n$ is odd and $a_n =\frac{1}{n}$ if $n$ is even.
+\begin{center}
+    \doublespacing
+    Then $(a_n)$ is unbounded since the set of all odd natural numbers is unbounded.
+    \\The subsequence $(a_{2n}) = (a_2, a_4, a_6, ...) = (\frac{1}{2},\frac{1}{4},\frac{1}{6}, ...) = \frac{1}{2} (\frac{1}{n})$ clearly converges.
+    \\Since $(\frac{1}{n})\rightarrow 0$ we have $(a_{2n})\rightarrow \frac{1}{2} (0) = 0$ by the algebraic limit theorem.
+    \\Since $(a_{2n})$ converges it is Cauchy.
+    \\Therefore this is an example of such a sequence that is unbounded and has a Cauchy subsequence.
+    \\Note: The key is in not letting the sequence be monotone as then it is not possible.
+\end{center}
+
+
+\newpage
+\section*{2.7.1}
+{\Large \textbf{c.}} Let $(a_n)$ be a sequence where $a_1\geq a_2\geq a_3\geq ...$ and $(a_n)\rightarrow 0$.
+\begin{center}
+    \doublespacing
+    Then it must be that $a_n\geq 0$ for all $n\in\mathbb{N}$, otherwise $(a_n)$ is getting further away from 0 and can not converge to 0.
+    \\Consider the alternating sequence of partial sums $(s_n) = (a_1 - a_2 + a_3 - a_4 + ...\pm a_n)$.
+    \\The subsequence $(s_{2n}) = (a_1 - a_2, a_1 - a_2 + a_3 - a_4, ...)$ is clearly bounded above by $a_1$ and is monotonically increasing.
+    \\This is because $a_n\geq a_{n+1}$ and $a_n - a_{n+1}\geq 0$ for all $n\in\mathbb{N}$ so $s_{2(n+1)} = s_{2n} + (a_{2n+1} - a_{2n+2})\geq s_{2n}$.
+    \\Also $s_2 = a_1 - a_2\leq a_1$. So $(s_{2n})$ is bounded and monotone and converges by the monotone convergence theorem.
+    \\Similarly $(s_{2n+1}) = (a_1 - a_2 + a_3, a_1 - a_2 + a_3 - a_4 + a_5, ...) = (s_{2n} + a_{2n+1})$.
+    \\So by the algebraic limit theorem we have $(s_{2n+1}) = (s_{2n} + a_{2n+1})\rightarrow lim\; s_{2n} + lim\; a_{2n+1} = lim\; s_{2n}$.
+    \\Since $(s_n) = (s_1, s_{2(1)}, s_{2(1) + 1}, s_{2(2)}, s_{2(2) + 1}, ...)$ we have that $(s_n)$ alternates between $s_{2n}$ and $s_{2n+1}$.
+    \\Let $\epsilon > 0$ then $(s_{2n})\rightarrow lim\; s_{2n}$, $(s_{2n+1})\rightarrow lim\; s_{2n+1}$, and $lim\; s_{2n} = lim_{2n+1} = x$.
+    \\So we can find an $N\in\mathbb{N}$ where $|s_n - x| <\epsilon$ for $n\geq N$ because either $n = 2k + 1$ or $n = 2k$ for some $k\in\mathbb{N}$.
+    \\So $|s_n - x| = |s_{2n} - x| <\epsilon$ or $|s_n - x| = |s_{2n+1} - x| <\epsilon$ since $lim\; s_{2n} = lim\; s_{2n+1} = x$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore $(s_n)$ converges as well \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{2.7.2}
+
+{\Large \textbf{a.}} The series $\sum_{n=1}^{\infty}\frac{1}{2^n + n}$ converges.
+\begin{center}
+    \doublespacing
+    Consider the sequence $(\frac{1}{2^n})$. Then $0 <\frac{1}{2^n + n} <\frac{1}{2^n}$ for all $n\in\mathbb{N}$.
+    \\The geometric series $\sum_{n=0}^{\infty}\frac{1}{2^n} = \sum_{n=0}^{\infty} (\frac{1}{2})^n$ converges to $\frac{1}{1 - \frac{1}{2}} = 2$ 
+    \\So we have that $\sum_{n=1}^{\infty}\frac{1}{2^n} = (\sum_{n=0}^{\infty}\frac{1}{2^n}) - \frac{1}{2^0}$ converges to $2 - 1 = 1$.
+    \\Since $0 <\frac{1}{2^n + n} <\frac{1}{2^n}$ for all $n\in\mathbb{N}$ and $\sum_{n=1}^{\infty}\frac{1}{2^n}$ converges, by the comparison test for series $\sum_{n=1}^{\infty}\frac{1}{2^n + 1}$ converges \qedsymbol
+\end{center}
+
+{\Large \textbf{b.}} The series $\sum_{n=1}^{\infty}\frac{sin(n)}{n^2}$ converges.
+\begin{center}
+    \doublespacing
+    Since $|sin(x)|\leq 1$ for all $x\in\mathbb{R}$ we have that $0\leq |\frac{sin(n)}{n^2}| =\frac{|sin(n)|}{n^2}\leq \frac{1}{n^2}$ for all $n\in\mathbb{N}$.
+    \\We have seen in class that the series $\sum_{n=1}^{\infty}\frac{1}{n^2}$ converges and $0\leq |\frac{sin(n)}{n^2}|\leq \frac{1}{n^2}$ for all $n\in\mathbb{N}$.
+    \\So by the comparison test, the series $\sum_{n=1}^{\infty} |\frac{sin(n)}{n^2}|$ converges.
+    \\Therefore $\sum_{n=1}^{\infty}\frac{sin(n)}{n^2}$ converges by the absolute convergence test \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} The series $1 -\frac{3}{4} +\frac{4}{6} -\frac{5}{8} +\frac{6}{10} -\frac{7}{12} + ... = \sum _{n=1}^{\infty}\frac{n + 1}{2n} (-1)^{n+1}$ diverges.
+\begin{center}
+    \doublespacing
+    Clearly $0 <\frac{n + 1}{2n + 2} =\frac{n + 1}{2(n + 1)} =\frac{1}{2} <\frac{n + 1}{2n}$ for all $n\in\mathbb{N}$.
+    \\If $\sum _{n=1}^{\infty}\frac{n + 1}{2n} (-1)^{n+1}$ were to converge then the sequence $(\frac{n + 1}{2n} (-1)^{n+1})\rightarrow 0$.
+    \\However as above $\frac{1}{2} <\frac{n + 1}{2n}$ for all $n\in\mathbb{N}$. So $|\frac{n+1}{2n}(-1)^{n+1} - 0| =\frac{n+1}{2n} >\frac{1}{2}$ and it can not be that $(\frac{n + 1}{2n} (-1)^{n+1})\rightarrow 0$.
+    \\Therefore $\sum _{n=1}^{\infty}\frac{n + 1}{2n} (-1)^{n+1}$ must diverge \qedsymbol
+\end{center}
+
+{\Large \textbf{d.}} The series $1 +\frac{1}{2} -\frac{1}{3} +\frac{1}{4} +\frac{1}{5} -\frac{1}{6} + ...$ diverges.
+\begin{center}
+    \doublespacing
+    We can group the series as $1 +(\frac{1}{2} -\frac{1}{3}) +\frac{1}{4} +(\frac{1}{5} -\frac{1}{6}) + ... +\frac{1}{n} +(\frac{1}{n+1} -\frac{1}{n+2}) + ...$.
+    \\Since $\frac{1}{n+1} >\frac{1}{n+2}$ we have $\frac{1}{n} + (\frac{1}{n+1} -\frac{1}{n+2}) >\frac{1}{n} > 0$ for all $n\in\mathbb{N}$.
+    \\Therefore $s_{3n} = 1 +(\frac{1}{2} -\frac{1}{3}) +\frac{1}{4} +(\frac{1}{5} -\frac{1}{6}) + ... +\frac{1}{3n-2} +(\frac{1}{3n-1} -\frac{1}{3n}) > 1 +\frac{1}{4} +\frac{1}{7} + ... +\frac{1}{3n-2} > 0$ for all $n\in\mathbb{N}$.
+    \\Clearly $\frac{1}{3n-2} >\frac{1}{4n} > 0$ for all $n\in\mathbb{N}$. The series $\frac{1}{4}\sum _{n=1}^{\infty}\frac{1}{n} =\sum _{n=1}^{\infty}\frac{1}{4n}$ diverges since $\sum _{n=1}^{\infty}\frac{1}{n}$ diverges.
+    \\So by the comparison test we have that $\sum _{n=1}^{\infty}\frac{1}{3n-2}$ diverges.
+    \\Since the series $\sum _{n=1}^{\infty}\frac{1}{3n-2}$ diverges, we have by the comparison test that $1 +\frac{1}{2} -\frac{1}{3} +\frac{1}{4} +\frac{1}{5} -\frac{1}{6} + ...$ diverges \qedsymbol
+\end{center}
+
+{\Large \textbf{e.}} The series $1 -\frac{1}{2^2} +\frac{1}{3} -\frac{1}{4^2} + ...$ diverges.
+\begin{center}
+    \doublespacing
+    This series is equal to $(\sum _{n=1}^{\infty}\frac{1}{2n - 1}) - (\sum _{n=1}^{\infty}\frac{1}{(2n)^2})$.
+    \\Since $\sum _{n=1}^{\infty}\frac{1}{(n)^2}$ converges and $\frac{1}{(2n)^2} <\frac{1}{n^2}$ for all $n\in\mathbb{N}$ we have that $\sum _{n=1}^{\infty}\frac{1}{(2n)^2}$ converges by the comparison test.
+    \\Clearly $\frac{1}{3}\sum _{n=1}^{\infty}\frac{1}{n} =\sum _{n=1}^{\infty}\frac{1}{3n}$ diverges since $\sum _{n=1}^{\infty}\frac{1}{n}$ diverges, and $0 <\frac{1}{3n} <\frac{1}{2n - 1}$ for all $n\in\mathbb{N}$.
+    \\So we have that $\sum _{n=1}^{\infty}\frac{1}{2n - 1}$ diverges by the comparison test.
+    \\Therefore $1 -\frac{1}{2^2} +\frac{1}{3} -\frac{1}{4^2} + ... = (\sum _{n=1}^{\infty}\frac{1}{2n - 1}) - (\sum _{n=1}^{\infty}\frac{1}{(2n)^2})$ diverges since you are taking a divergent series and subtracting a convergent one \qedsymbol
+\end{center}
+
+\end{document}
