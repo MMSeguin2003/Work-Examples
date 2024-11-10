@@ -1,0 +1,210 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Countable Sets and Sequences}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{1.5.3}
+
+{\Large \textbf{a.}} Let $A_1$ and $A_2$ be countable sets and let $B = A_2\backslash A_1 = A_2\cap A_1^c$. Then $A_1\cup A_2 = A_1\cup B$.
+\begin{center}
+    \doublespacing
+    Since $A_1$ and $A_2$ are countable we can represent them as $A_1 = \{a_1, a_2, a_3, ...\}$ and $A_2 = \{c_1, c_2, c_3, ...\}$.
+    \begin{itemize}
+        \item If $B$ is finite we can write $A_1\cup A_2 = A_1\cup B$ as $\{b_1, b_2, ..., b_n, a_1, a_2, a_3, ...\}$.
+        \\Let $f: A_1\cup A_2\rightarrow\mathbb{N}$ be defined by $f(b_1) = 1, f(b_2) = 2, ..., f(b_n) = n, f(a_1) = n+1, f(a_2) = n+2, ..., f(a_j) = n+j, ...$
+        \\Clearly if $a, b\in A_1\cup A_2$ such that $a\neq b$ then $f(a)\neq f(b)$ by the construction of $f$. So $f$ is one to one.
+        \\Let $m\in\mathbb{N}$ then if $m\leq n$, (where $n = |B|$) then $f(b) = n$ for some $b\in B$ by construction.
+        \\If $m > n$, (where $n = |B|$) then $m = n + k$ for some $k\in\mathbb{N}$ so $f(a_k) = n + k = m$ for some $a_k\in A_1$.
+        \\So every element in $\mathbb{N}$ is mapped to by some element of $A_1\cup A_2$ under $f$. So $f$ is also onto.
+        \\Therefore we have found a one to one correspondence between $A_1\cup A_2$ and $\mathbb{N}$ so $A_1\cup A_2$ is countable.
+        \item If $B$ is not finite then it must be countable since $B\subseteq A_2$ where $A_2$ is countable.
+        \\So let us represent $B$ as $\{b_1, b_2, b_3, ...\}$. Now we can represent $A_1\cup A_2 = A_1\cup B$ as:
+        \\$\{a_1, b_1, a_2, b_2, a_3, b_3, ...\}$ now define $f:\mathbb{N}\rightarrow A_1\cup B$ by $f(n) = a_{\frac{n+1}{2}}$ if $n$ is odd and $f(n) = b_{\frac{n}{2}}$ if $n$ is odd.
+        \\Clearly if $a, b\in\mathbb{N}$ such that $a\neq b$ then $f(a)\neq f(b)$ by the construction of $f$. So $f$ is one to one.
+        \\Furthermore if $c\in A_1\cup B$ then $c = a_j$ for some $j\in\mathbb{N}$ or $c = b_k$ for some $k\in\mathbb{N}$.
+        \\We also know for any $j, k\in\mathbb{N}$ that $j = \frac{n+1}{2}$ for some $n\in\mathbb{N}$ and $k = \frac{m}{2}$ for some $m\in\mathbb{N}$.
+        \\So for any $c\in A_1\cup B$ we have that $f(n) = c$ for some $n\in\mathbb{N}$ So $f$ is also onto.
+        \\Therefore we have found a one to one correspondence between $A_1\cup B$ and $\mathbb{N}$ so $A_1\cup B$ is countable.
+        \\Since $A_1\cup B = A_1\cup A_2$ we have that $A_1\cup A_2$ is countable.
+    \end{itemize}
+    So for any countable sets $A_1$ and $A_2$ we have shown that $A_1\cup A_2$ is countable.
+    \\The more general statement follows from induction on this fact. 
+    \\Let $S = \{n\in\mathbb{N}: A_1\cup ...\cup A_n \;is\;countable\;for\;arbitrary\;countable\;sets\;A_1, ..., A_n\}$.
+    \\Assume $n\in S$, that is assume $A_1\cup ...\cup A_n$ is countable for arbitrary countable sets $A_1, ..., A_n$.
+    \\Now consider an arbitrary countable set $A_{n+1}$. We know for any two countable sets their union is countable.
+    \\So we have that $(A_1\cup ...\cup A_n)\cup A_{n+1} = A_1\cup ...\cup A_n\cup A_{n+1}$ is countable and hence $n+1\in S$.
+    \\Clearly $1\in S$ since for one countable set $A_1$ we know that $A_1$ is countable.
+    \\Therefore since $1\in S$ and $n\in S$ implies $n+1\in S$ we have that $S =\mathbb{N}$. So for all $n\in\mathbb{N}$ we have that for arbitrary countable sets $A_1, ..., A_n$ the set $A_1\cup ...\cup A_n$ is countable.
+\end{center}
+
+{\Large \textbf{b.}} 
+Induction can not be used to prove that $\cup _{i=1}^{\infty} A_i$ is countable for arbitrary countable sets $A_1, A_2, A_3, ...$ because 
+\\ \indent induction can only be used to show that a claim is true for all $n\in\mathbb{N}$ but the issue is $\infty\notin\mathbb{N}$ so we can not use induction 
+\\ \indent for the countably infinite union.\\
+
+{\Large \textbf{c.}} Let $A_1, A_2, A_3, ...$ be a countably infinite collection of arbitrary disjoint countable sets. Then for each $A_j$ we can 
+\\ \indent\indent\indent\indent write $A_j = \{a_{(1,1)}, a_{(1,2)}, a_{(1,3)}, ...\}$ where $(m,n)$ denotes that $a_{(m,n)}$ is the nth element in $A_m$. 
+\\ \indent\indent\indent\indent\indent\indent\indent\indent\indent\indent\indent\indent\indent So we can write $A_1\cup A_2\cup A_3\cup ...$ as:
+\begin{center}
+    \doublespacing
+    \begin{singlespace}
+        \[\begin{array}{ccccccc}
+            &  \\A_1 & A_2 & A_3 & A_4 & A_5 & ...
+            &  \\a_{(1,1)} & a_{(2,1)} & a_{(3,1)} & a_{(4,1)} & a_{(5,1)} & ...
+            &  \\a_{(1,2)} & a_{(2,2)} & a_{(3,2)} & a_{(4,2)} & ...
+            &  \\a_{(1,3)} & a_{(2,3)} & a_{(3,3)} & ...
+            &  \\a_{(1,4)} & a_{(2,4)} & ...
+            &  \\a_{(1,5)} & ...
+            &  \\ \vdots
+        \end{array}\]
+        \\So by arranging $\mathbb{N}$ as follows we can form a one to one correspondence between $\cup _{i=1}^{\infty} A_i$ and $\mathbb{N}$.
+        \[\begin{array}{ccccccc}
+            &  \\B_1 & B_2 & B_3 & B_4 & B_5 & ...
+            &  \\1 & 3 & 6 & 10 & 15 & ...
+            &  \\2 & 5 & 9 & 14 & ...
+            &  \\4 & 8 & 13 & ...
+            &  \\7 & 12 & ...
+            &  \\11 & ...
+            &  \\ \vdots
+        \end{array}\]
+    \end{singlespace}
+    The essence of this arrangement is that we already know we can arrange our countably infinite collection of arbitrary disjoint countable sets into such an array, so by arranging $\mathbb{N}$ into such an array we are arranging $\mathbb{N}$ into a countably infinite collection of countable subsets $B_1, B_2, B_3, ...$ of $\mathbb{N}$. Then since there is certainly a one to one correspondence, say $f_n: A_n\rightarrow B_n$, we can make a one to one correspondence between $\cup _{i=1}^{\infty} A_i$ and $\mathbb{N}$. Namely let $f: \cup _{i=1}^{\infty} A_i\rightarrow\mathbb{N}$ be defined by $f(a_{(j,k)}) = f_j (a_{(j,k)})$ then since each $f_j$ is one to one and onto we have that every element in every column of our arrangement of $\mathbb{N}$ is uniquely mapped to: 
+    \begin{itemize}
+        \item If $a_{(j,k)}\neq a_{(m,n)}$ then $f_j(a_{(j,k)}) = f(a_{(j,k)})\neq f(a_{(m,n)}) = f_m(a_{(m,n)})$ since $f_j$ and $f_m$ have disjoint ranges by construction of $B_1, B_2, B_3, ...$ from $\mathbb{N}$.
+        \\So $f$ is one to one.
+        \item If $n\in\mathbb{N}$ then $n\in B_j$ for some $j\in\mathbb{N}$ so since each $f_j$ is onto we have $f_j(a_{(j,k)}) = f(a_{(j,k)}) = n$ for some $k\in\mathbb{N}$ so every $n\in\mathbb{N}$ is mapped to by $f$. 
+        \\So $f$ is onto.
+    \end{itemize}
+    Therefore we have found a one to one correspondence $f:\cup _{i=1}^{\infty} A_i\rightarrow\mathbb{N}$. So $\cup _{i=1}^{\infty} A_i\sim\mathbb{N}$ and $\cup _{i=1}^{\infty} A_i$ is countable.
+    \\This was for a countably infinite collection of arbitrary disjoint countable sets but we can generalize this to any countably infinite collection of arbitrary sets. Say $C_1, C_2, C_3, ...$ are arbitrary countable sets (not necessarily disjoint). Then let $A_1 = C_1, A_2 = C_2\backslash A_1, A_3 = C_3\backslash A_2, ...$ then $A_1, A_2, A_3, ...$ are all disjoint and therefore we know $\cup _{i=1}^{\infty} A_i$ is countable. Since $\cup _{i=1}^{\infty} A_i = \cup _{i=1}^{\infty} C_i$ we have that $\cup _{i=1}^{\infty} C_i$ is countable for arbitrary countable sets $C_1, C_2, C_3, ...$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{2.2.1}
+\begin{center}
+    \doublespacing
+    \begin{itemize}
+        \item This vercongent definition does not work for convergence. This definition says that a sequence $(a_n)$ verconges to $a$ if for a single choice of $\epsilon > 0$ all values of the sequence $(a_n)$ lie within an epsilon neighborhood of $a$. This is because by the definition if $(a_n)$ verconges to $a$ then there exists an $\epsilon > 0$ such that for all $N\in\mathbb{N}$ when $n\geq N$ then $|a_n - a| <\epsilon$ so since $1\in\mathbb{N}$ we have $|a_n - a| <\epsilon$ for all $n\in\mathbb{N}$ such that $n\geq 1$. This is essentially saying that $(a_n)$ is bounded because $|a_n - a| <\epsilon$ implies $-\epsilon < a_n - a <\epsilon$ implies $a -\epsilon < a_n < a +\epsilon$ for all $n\in\mathbb{N}$ and some finite $a,\epsilon\in\mathbb{R}$.
+        \item The sequence $(a_n) = ((-1)^n) = (-1, 1, -1, 1, -1, ...)$ for $n\in\mathbb{N}$ is vercongent by this definition. Let $a = 0$ and $\epsilon = 2$ then $|a_n - a| = |(-1)^n - 0| = |(-1)^n| = 1 <\epsilon = 2$ for all $n\in\mathbb{N}$.
+        \\Therefore $(a_n) = ((-1)^n)$ verconges to $a = 0$.
+        \item However, this sequence is known to diverge due to its oscillating and non-absolutely-decreasing nature. So this is an example of a divergent series that verconges according to this definition.
+        \\Proof:
+        \\Let $(a_n) = ((-1)^n)$ and $a\in\mathbb{R}$ then if $n$ is odd $|a_n - a| = |-1 - a| = |a + 1|$ and if $n$ is even $|a_n - a| = |1 - a| = |a - 1|$.
+        \\Let $0 < \epsilon < min(|a + 1|, |a - 1|)$, such an $\epsilon$ exists because of the density of $\mathbb{R}$, then clearly $|a_n - a|\not < \epsilon$ for any $n\in\mathbb{N}$.
+        \\We have found an $\epsilon > 0$ where there does not exists an $N\in\mathbb{N}$ such that if $n\geq N$ then $|a_n - a| <\epsilon$ for any $a\in\mathbb{R}$.
+        \\Therefore by the definition of convergence $(a_n) = ((-1)^n)$ does not converge, so $(a_n)$ diverges.
+        \item Furthermore, a sequence can verconge to more than one value.
+        \\Let $(a_n)$ be as before and $a = 1$ then if $n$ is odd $|a_n - a| = |(-1)^n - 1| = |-1 - 1| = 2$ or if $n$ is even $|a_n - a| = |(-1)^n - 1| = |1 - 1| = 0$ so choosing $\epsilon = 3$ we see that $|a_n - a| <\epsilon$ for all $n\in\mathbb{N}$.
+        \\Therefore $(a_n)$ verconges to $a = 1$ as well.
+    \end{itemize}
+\end{center}
+
+
+\newpage
+\section*{2.2.2}
+
+{\Large \textbf{a.}} Let $(a_n) = (\frac{2n+1}{5n+4})$ for $n\in\mathbb{N}$ and let $\epsilon > 0$. The proposed limit is $\frac{2}{5}$.
+\begin{center}
+    \doublespacing
+    We know {\large $|a_n - \frac{2}{5}| = |\frac{2n+1}{5n+4} -\frac{2}{5}| = |\frac{5(2n+1) - 2(5n+4)}{5(5n+4)}| = |\frac{-3}{25n+20}| =\frac{3}{25n+20}$} since $n > 0$.
+    \\This shows that as $n\in\mathbb{N}$ increases $|a_n -\frac{2}{5}|$ decreases.
+    \\So if $|a_n -\frac{2}{5}| < c$ then when $m\in\mathbb{N}$ such that $m\geq n$ we have $|a_m -\frac{2}{5}|\leq |a_n -\frac{2}{5}| < c$ for $c\in\mathbb{R}$.
+    \\So we want to find an $N\in\mathbb{N}$ such that $|a_N -\frac{2}{5}| <\epsilon$ and it will follow that if $n\geq N$ then $|a_n -\frac{2}{5}| <\epsilon$.
+    \\Let $|a_N -\frac{2}{5}| =\frac{3}{25N+20} <\epsilon$ then $3 <\epsilon (25N + 20) = 25N\epsilon + 20\epsilon$ then $3 - 20\epsilon < 25N\epsilon$.
+    \\So for $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ choose $N\in\mathbb{N}$ such that {\large $N >\frac{3-20\epsilon}{25\epsilon}$}. Such an $N$ exists because $\mathbb{N}$ is unbounded.
+    \\Then we will have that $|a_N -\frac{2}{5}| <\epsilon$ and if $n\in\mathbb{N}$ such that $n\geq N$ then $|a_n -\frac{2}{5}| <\epsilon$.
+    \\So we have shown that for all $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that if $n\geq N$ then $|a_n -\frac{2}{5}| <\epsilon$.
+    \\Therefore $(a_n) = (\frac{2n+1}{5n+4})$ converges to $\frac{2}{5}$ \qedsymbol
+\end{center}
+
+{\Large \textbf{b.}} Let $(a_n) = (\frac{2n^2}{n^3 +3})$ for $n\in\mathbb{N}$ and let $\epsilon > 0$. The proposed limit is $0$.
+\begin{center}
+    \doublespacing
+    We know {\large $|a_n - 0| = |\frac{2n^2}{n^3 +3} -0| = |\frac{2n^2}{n^3 +3}| = \frac{2n^2}{n^3 +3}$} since $n > 0$.
+    \\This shows that as $n\in\mathbb{N}$ increases $|a_n - 0|$ decreases because $n^3 + 3$ grows faster than $2n^2$.
+    \\So if $|a_n - 0| < c$ then when $m\in\mathbb{N}$ such that $m\geq n$ we have $|a_m - 0|\leq |a_n - 0| < c$ for $c\in\mathbb{R}$.
+    \\So we want to find an $N\in\mathbb{N}$ such that $|a_N - 0| <\epsilon$ and it will follow that if $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\Let {\large $\frac{2N^2}{N^3} <\epsilon$} then {\large $|a_N - 0| = \frac{2N^2}{N^3 +3} < \frac{2N^2}{N^3} = \frac{2}{N} <\epsilon$}.
+     \\So for $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ choose $N\in\mathbb{N}$ such that {\large $N >\frac{2}{\epsilon}$}. Such an $N$ exists because $\mathbb{N}$ is unbounded.
+     \\Then we will have that $|a_N - 0| <\epsilon$ and if $n\in\mathbb{N}$ such that $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\So we have shown that for all $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that if $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\Therefore $(a_n) = (\frac{2n^2}{n^3 +3})$ converges to $0$ \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} Let $(a_n) = (\frac{sin(n^2)}{\sqrt[3]{n}})$ for $n\in\mathbb{N}$ and let $\epsilon > 0$. The proposed limit is $0$.
+\begin{center}
+    \doublespacing
+    We know {\large $|a_n - 0| = |\frac{sin(n^2)}{\sqrt[3]{n}} -0| = |\frac{sin(n^2)}{\sqrt[3]{n}}|\leq \frac{1}{\sqrt[3]{n}}$} since $-1\leq sin(n^2)\leq 1$.
+    \\This shows that as $n\in\mathbb{N}$ increases $|a_n - 0|$ decreases.
+    \\So if $|a_n - 0| < c$ then when $m\in\mathbb{N}$ such that $m\geq n$ we have $|a_m - 0|\leq |a_n - 0| < c$ for $c\in\mathbb{R}$.
+    \\So we want to find an $N\in\mathbb{N}$ such that $|a_N - 0| <\epsilon$ and it will follow that if $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\Let {\large $\frac{1}{\sqrt[3]{N}} <\epsilon$} then {\large $|a_N - 0| = |\frac{sin(N^2)}{\sqrt[3]{N}}|\leq \frac{1}{\sqrt[3]{N}} <\epsilon$}.
+     \\So for $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ choose $N\in\mathbb{N}$ such that {\large $N >\frac{1}{\epsilon ^3}$}. Such an $N$ exists because $\mathbb{N}$ is unbounded.
+     \\Then we will have that $|a_N - 0| <\epsilon$ and if $n\in\mathbb{N}$ such that $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\So we have shown that for all $\epsilon\in\mathbb{R}$ such that $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that if $n\geq N$ then $|a_n - 0| <\epsilon$.
+    \\Therefore $(a_n) = (\frac{sin(n^2)}{\sqrt[3]{n}})$ converges to $0$ \qedsymbol
+\end{center}
+
+\newpage
+\section*{2.2.4}
+
+{\Large \textbf{a.}} Let $(a_n) = ((-1)^n) = (-1, 1, -1, 1, -1, 1, ...)$ for $n\in\mathbb{N}$.
+\begin{center}
+    \doublespacing
+    Then $(a_n)$ has an infinite number of ones.
+    \\Proof:
+    \\Say $(a_n)$ has a finite number of ones. That is say for some $k\in\mathbb{N}$ that $a_k$ is the last one in the sequence.
+    \\But consider $a_{k+2}$. Since $a_k = (-1)^k = 1$ we have that $a_{k+2} = (-1)^{k+2} = (-1)^k(-1)^2 = (-1)^k(1) = (-1)^k = 1$.
+    \\So we have a contradiction and there can not be a finite number of ones in the sequence.
+    \\So there are an infinite number of ones in the sequence $(a_n) = ((-1)^n)$.
+    \\However, as proved in problem 2.2.1 this sequence diverges.
+    \\So this is such a sequence that contains an infinite number of ones that does not converge to one.
+\end{center}
+
+{\Large \textbf{b.}} This is not possible. Let $(a_n)$ be a convergent series that has an infinite number of ones.
+\begin{center}
+    \doublespacing
+    Say $(a_n)\rightarrow a$ then for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ where if $n\in\mathbb{N}$ such that $n\geq N$ then $|a_n - a| <\epsilon$.
+    \\Since $(a_n)$ contains an infinite number of ones we know that for any $N$ there exists a one in the sequence beyond $a_N$.
+    \\So if $a\neq 1$ then for any choice of $N$ we have a point later in the sequence where $|1 - a| > 0$.
+    \\So let $0 <\epsilon < |1 - a|$ such an $\epsilon$ exists because of the density of $\mathbb{R}$.
+    \\Therefore if $a\neq 1$ we have shown that there exists an $\epsilon > 0$ such that there does not exist an $N\in\mathbb{N}$ where if $n\geq N$ then $|a_n - a| <\epsilon$ due to the presence of infinitely many ones.
+    \\Therefore a sequence that has infinitely many ones can not converge to a value that is not one \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} Let $(a_n) = (1, a, 1, 1, a, 1, 1, 1, a, 1, 1, 1, 1, a, 1, 1, 1, 1, 1, a, ...)$ where $a\in\mathbb{R}$ and $a\neq 1$.
+\begin{center}
+    \doublespacing
+    By construction for any $n\in\mathbb{N}$ you can find $n$ consecutive ones in the sequence. This sequence also diverges.
+    \\Proof:
+    \begin{itemize}
+        \item To show this I will prove a more generalized form of the previous part of the problem:
+        \\Let $(b_n)$ be a convergent series that has an infinite number of terms equal to $c$ for some $c\in\mathbb{R}$.
+        \\Say $(b_n)\rightarrow b$ then for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ where if $n\in\mathbb{N}$ such that $n\geq N$ then $|b_n - b| <\epsilon$.
+        \\Since $(b_n)$ contains an infinite number of terms $c$ we know for any $N$ there exists an $c$ in the sequence beyond $b_N$.
+        \\So if $b\neq c$ then for any choice of $N$ we have a term later in the sequence where $|c - b| > 0$.
+        \\So let $0 <\epsilon < |c - b|$ such an $\epsilon$ exists because of the density of $\mathbb{R}$.
+        \\Therefore if $b\neq c$ we have shown that there exists an $\epsilon > 0$ such that there does not exist an $N\in\mathbb{N}$ where if $n\geq N$ then $|b_n - b| <\epsilon$ due to the presence of infinitely many terms $c$.
+        \\Therefore a sequence that has infinitely many terms equal to $c$ can not converge to a value that is not $c$ \qedsymbol
+        \item Since this was for arbitrary $c\in\mathbb{R}$ it applies to our construction for both $a$ and one.
+        \\So if our constructed sequence converges then it must converge to $a$ and to one. So we would need $a = 1$.
+        \\However by our construction $a\neq 1$ so it can not be that our sequence converges.
+    \end{itemize}
+    Therefore this is such a divergent sequence where for any $n\in\mathbb{N}$ you can find $n$ consecutive ones in the sequence.
+\end{center}
+
+\end{document}
