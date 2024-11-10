@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Integration}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{7.2.3}
+
+{\Large\textbf{a.}} Let $f: [a, b]\rightarrow\mathbb{R}$ be a bounded function.
+\begin{center}
+    \doublespacing
+    First assume there exists a sequence of partitions $(P_n)$ of $[a, b]$ such that $lim_{n\rightarrow\infty} U(f, P_n) - L(f, P_n) = 0$.
+    \\Recall that for any partition $P$ of $[a, b]$ we have $U(f, P)\geq L(f, P)$.
+    \\So for all $n\in\mathbb{N}$ we have $U(f, P_n) - L(f, P_n)\geq 0$ and therefore $|U(f, P_n) - L(f, P_n)| = U(f, P_n) - L(f, P_n)$.
+    \\Then for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that for $n\geq N$ we have $|U(f, P_n) - L(f, P_n) - 0| = U(f, P_n) - L(f, P_n) <\epsilon$.
+    \\So for any $\epsilon > 0$ let $P_{\epsilon} = P_N$ then we have found a partition such that $U(f, P_{\epsilon}) - L(f, P_{\epsilon}) <\epsilon$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore $f$ is integrable on $[a, b]$ by the integrability criterion.
+    \break
+    \\Now assume that $f$ is integrable on $[a, b]$.
+    \\Then by the integrability criterion for all $\epsilon > 0$ there exists a partition $P_{\epsilon}$ of $[a, b]$ such that $U(f, P_{\epsilon}) - L(f, P_{\epsilon}) <\epsilon$.
+    \\So for each $n\in\mathbb{N}$ let $P_n$ be such that $U(f, P_n) - L(f, P_n) <\frac{1}{n}$. Such a $P_n$ exists by the integrability criterion.
+    \\Recall that for any partition $P$ of $[a, b]$ we have $U(f, P)\geq L(f, P)$.
+    \\So for all $n\in\mathbb{N}$ we have $0\leq U(f, P_n) - L(f, P_n) <\frac{1}{n}$.
+    \\Therefore $lim_{n\rightarrow\infty} U(f, P_n) - L(f, P_n) = 0$ by the squeeze theorem since $(\frac{1}{n})\rightarrow 0$ and $(0)\rightarrow 0$.
+    \\So we have found a sequence of partitions $(P_n)$ of $[a, b]$ such that $lim_{n\rightarrow\infty} U(f, P_n) - L(f, P_n) = 0$.
+    \break
+    \\Assume we have such a sequence of partitions $(P_n)$ of $[a, b]$, then by the above proof $f$ is integrable on $[a, b]$.
+    \\Furthermore note that for any partition $P$ we have that $L(f, P)\leq L(f) =\int _a^b f = U(f)\leq U(f, P)$.
+    \\Therefore for all $n\in\mathbb{N}$ we have $L(f, P_n)\leq\int _a^b f\leq U(f, P_n)$.
+    \\So for all $n\in\mathbb{N}$ we have $0\leq\int _a^b f - L(f, P_n)\leq U(f, P_n) - L(f, P_n)$.
+    \\So by the squeeze theorem $lim_{n\rightarrow\infty}\int _a^b f - L(f, P_n) = \int _a^b f - lim_{n\rightarrow\infty} L(f, P_n) = 0$ and hence $lim_{n\rightarrow\infty} L(f, P_n) =\int _a^b f$.
+    \\Since $lim_{n\rightarrow\infty} U(f, P_n) - L(f, P_n) = 0$ we have by the algebraic limit theorem that $lim_{n\rightarrow\infty} U(f, P_n) = lim_{n\rightarrow\infty} L(f, P_n) =\int _a^b f$.
+    \break
+    \\Therefore $f$ is integrable on $[a, b]$ if and only if there exists a sequence of partitions $(P_n)$ of $[a, b]$ such that $lim_{n\rightarrow\infty} U(f, P_n) - L(f, P_n) = 0$, and in this case $lim_{n\rightarrow\infty} L(f, P_n) = lim_{n\rightarrow\infty} U(f, P_n) =\int _a^b f$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{7.3.5}
+
+{\Large\textbf{a.}} Let $A = [a, b]\cap\mathbb{Q}$. Since $\mathbb{Q}$ is countable we know that $A$ is also countable so we may write $A =\{a_1, a_2, a_3, ...\}$.
+\begin{center}
+    \doublespacing
+    For $n\in\mathbb{N}$ let $A_n =\{a_1, a_2, ..., a_n\}$ then let $f_n (x) = 1$ if $x\in A_n$ and $f_n (x) = 0$ otherwise.
+    \\As $n\rightarrow\infty$ clearly $A_n\rightarrow A$ and so $(f_n (x))\rightarrow f(x)$ where $f(x) = 1$ is $x\in A$ and $f(x) = 0$ otherwise.
+    \\This is Dirichlet's function restricted to the domain of $[a, b]$.
+    \\Clearly each $f_n$ has only finitely many discontinuities.
+    \\Since $\mathbb{Q}$ is dense in $\mathbb{R}$ we know for all $x\in [a, b]$ that in every $V_{\epsilon} (x)$ there is some element of $A$.
+    \\Therefore $U(f, P) = 1$ for any partition $P$. Similarly, the irrationals are dense in $\mathbb{R}$ so $L(f, P) = 0$ for any partition $P$.
+    \\So we have that $U(f) = 1$ and $L(f) = 0$ so $f$ is not integrable.
+    \\So this is such an example of a sequence of functions $(f_n)\rightarrow f$ such that each $f_n$ has at most finitely many discontinuities but $f$ is not integrable.
+\end{center}
+
+{\Large\textbf{b.}} This is not possible. Let $(f_n)\rightarrow f$ uniformly with each $f_n$ having at most finitely many discontinuities.
+\begin{center}
+    \doublespacing
+    Let the discontinuities of $f_n$ be $D_n = \{d_{1}, d_{2}, ..., d_{m_n}\}$, and let these be in increasing order.
+    \\Then we know $f_n$ is continuous and therefore integrable on $(d_k, d_{k+1})$ for each $k\in \{1, 2, ..., m_n - 1\}$.
+    \\For each $k$ fix some $z_k\in (d_k, d_{k+1})$ then we know $f_n$ is integrable on $[x, z_k]$ for all $x\in (d_k, z_k)$.
+    \\Therefore $f_n$ is integrable on $[d_k, z_k]$.
+    \\Similarly we know $f_n$ is integrable on $[z_k, y]$ for all $y\in (z_k, d_{k+1})$.
+    \\Therefore $f_n$ is integrable on $[z_k, d_{k+1}]$ and is hence integrable on $[d_k, d_{k+1}]$.
+    \\This was for each $[d_k, d_{k+1}]$ and therefore we have that $f_n$ is integrable on its domain.
+    \\This was for arbitrary $f_n$ and is therefore true for each $f_n$, so each $f_n$ is integrable on its domain.
+    \\Since uniform convergence preserves integrability we have that $f$ is also integrable on its domain.
+    \\So if $(f_n)\rightarrow f$ uniformly with each $f_n$ having at most finitely many discontinuities then $f$ is integrable \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}} Let $A = [a, b]\cap\mathbb{Q}$. Then for $n\in\mathbb{N}$ let $f_n (x) =\frac{1}{n}$ if $x\in A$ and $f_n (x) = 0$ otherwise.
+\begin{center}
+    \doublespacing
+    This is a modified version of Dirichlet's function restricted to the domain of $[a, b]$.
+    \\Consider some arbitrary $f_n$.
+    \\As before we have that since $\mathbb{Q}$ is dense in $\mathbb{R}$ we know for all $x\in [a, b]$ that in every $V_{\epsilon} (x)$ there is some element of $A$.
+    \\Therefore $U(f_n, P) =\frac{1}{n}$ for any partition $P$. Similarly, the irrationals are dense in $\mathbb{R}$ so $L(f_n, P) = 0$ for any partition $P$.
+    \\So we have that $U(f_n) =\frac{1}{n}$ and $L(f_n) = 0$ so $f_n$ is not integrable.
+    \\This was for arbitrary $f_n$ and is therefore true for all $f_n$, so each $f_n$ is not integrable.
+    \\Now let $\epsilon > 0$ then let $N\in\mathbb{N}$ be such that $\frac{1}{N} <\epsilon$.
+    \\Then for $n\geq N$ we have $|f_n (x) - 0| = |f_n (x)|\leq\frac{1}{n}\leq\frac{1}{N} <\epsilon$. So $(f_n)\rightarrow f = 0$ uniformly.
+    \\Since constant functions are continuous they are also integrable.
+    \\So this is such an example of a sequence of functions $(f_n)\rightarrow f$ uniformly where each $f_n$ is not integrable but $f$ is integrable.
+\end{center}
+
+
+\newpage
+\section*{7.5.2}
+
+{\Large\textbf{a.}} False, derivatives do not necessarily conserve continuity.
+\begin{center}
+    \doublespacing
+    I don't remember which sample work it was but we looked at $f(x) = x^2 cos(\frac{1}{x})$ for $x\neq 0$ and $f(0) = 0$.
+    \\We concluded that $f'(x) = 2x\:cos(\frac{1}{x}) + sin(\frac{1}{x})$ for $x\neq 0$ and $f' (0) = 0$.
+    \\However $f'$ is clearly not continuous at 0 as $2x\:cos(\frac{1}{x})$ grows arbitrarily small as we get close to 0 but $sin(\frac{1}{x})$ grows extremely oscillatory as we get close to 0. So the limit of $f'$ does not exist at 0 and hence $f'$ is not continuous at 0.
+\end{center}
+
+{\Large\textbf{b.}} True, this is a result of the fundamental theorem of calculus.
+\begin{center}
+    \doublespacing
+    If $g$ is continuous on $[a, b]$ then it is also integrable on $[a, b]$.
+    \\By defining the function $G(x) =\int _a^x g$ we get that $G$ is continuous on $[a, b]$, and differentiable on $[a, b]$ since $g$ is continuous on $[a, b]$. Consequently, $G' = g$.
+    \\So every continuous function is the derivative of some function.
+\end{center}
+
+{\Large\textbf{c.}} False, the converse is true but this statement is not true.
+\begin{center}
+    \doublespacing
+    Let $h$ be Thomae's function on $[0, a]$ which we have seen previously is discontinuous at every rational number.
+    \\Now consider any partition $P$ of $[0, a]$. You can always find an irrational number in any of the segments of the partition since the irrationals are dense in $\mathbb{R}$ so $L(h, P) = 0$ for any partition $P$. Hence $L(h) = 0$.
+    \\Furthermore for any point $y\in\mathbb{R}$ we have seen that $lim_{x\rightarrow y} h(x) = 0$. So by refining your partitions repeatedly you can make $U(h, P)$ arbitrarily small hence $inf\{U(h, P), P\in\mathcal{P}\} = 0$.
+    \\So $\int _0^a h = 0$ and this was for an arbitrary $a\in\mathbb{R}$ and is therefore true for all $a\in\mathbb{R}$.
+    \\So choose any $x\in\mathbb{Q}$, then $H(x) =\int _0^x h = 0$ is constant and therefore differentiable. However $h(x)$ is discontinuous.
+    \\So the differentiability of $H$ does not imply the continuity of $h$.
+\end{center}
+
+\end{document}
