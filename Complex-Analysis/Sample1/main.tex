@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Imaginary Numbers}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{2.2}
+Let $z = x + iy$, then $Re\:z = x$ and $Im\:z = y$. Recall that $i^2 = -1$ and $(-1)z = -z$ for any complex number $z$.
+
+{\Large\textbf{a.}}
+\begin{center}
+    \doublespacing
+    Since multiplication is distributive for complex numbers we get $iz = i(x + iy) = ix + i^2 y = ix + (-1)y$.
+    \\Since addition is commutative for complex numbers we get $iz = ix + (-1)y = (-1)y + ix = -y + ix$.
+    \\So $Re(iz) = Re(-y + ix) = -y = -Im\:z$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}}
+\begin{center}
+    \doublespacing
+    Since multiplication is distributive for complex numbers we get $iz = i(x + iy) = ix + i^2 y = ix + (-1)y$.
+    \\Since addition is commutative for complex numbers we get $iz = ix + (-1)y = (-1)y + ix = -y + ix$.
+    \\So $Im(iz) = Im(-y + ix) = x = Re\:z$ \qedsymbol
+\end{center}
+
+
+\section*{2.11}
+\begin{center}
+    \doublespacing
+    Let $z = (x, y)$ and $z^2 + z + 1 = 0$.
+    \\We get $z^2 + z + 1 = (x, y)(x, y) + (x, y) + (1, 0) = (x^2 - y^2, 2xy) + (x, y) + (1, 0) = (x^2 + x - y^2 + 1, 2xy + y) = (0, 0)$.
+    \\Since $z_1 = z_2$ if and only if $Re\:z_1 = Re\:z_2$ and $Im\:z_1 = Im\:z_2$ we get the simultaneous equations:
+    \\$x^2 + x - y^2 + 1 = 0$ and $2xy + y = 0$.
+    \\If $y = 0$ the second equation is satisfied and we are left to solve $x^2 + x + 1 = 0$ for $x\in\mathbb{R}$, this can also be seen as if $y = 0$ then $z$ is purely real and we have the equation we started with.
+    \\If $x\in\mathbb{R}$ then $x^2 + x + 1 = x^2 + x +\frac{1}{4} +\frac{3}{4} = (x +\frac{1}{2})^2 +\frac{3}{4} > 0$ since $\frac{3}{4} > 0$ and $t^2\geq 0$ for all $t\in\mathbb{R}$.
+    \\Therefore we are left with no solutions if $y = 0$. So assume $y\neq 0$.
+    \\Then from $2xy + y = 0$ we get $y(2x + 1) = 0$ and since $y\neq 0$ this means $2x + 1 = 0$ and hence $x = -\frac{1}{2}$.
+    \\Using $x = -\frac{1}{2}$ we get $x^2 + x - y^2 + 1 =\frac{1}{4} -\frac{1}{2} - y^2 + 1 =\frac{3}{4} - y^2 = 0$ giving $y^2 =\frac{3}{4}$ and hence $y =\pm\frac{\sqrt{3}}{2}$.
+    \\Therefore from the equation $z^2 + z + 1 = 0$ we get the solutions $z = (-\frac{1}{2},\pm\frac{\sqrt{3}}{2}) = -\frac{1}{2}\pm\frac{\sqrt{3}}{2}i$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{3.1}
+Recall that for complex numbers $z = x + iy$, $\frac{1}{z} = z^{-1} =\frac{x}{x^2 + y^2} - i\frac{y}{x^2 + y^2}$ and $i^2 = -1$.
+
+{\Large\textbf{a.}}
+\begin{center}
+    \doublespacing
+    We are considering $z =\frac{1 + 2i}{3 - 4i} +\frac{2 - i}{5i} =\frac{(1 + 2i)(3 + 4i)}{(3 - 4i)(3 + 4i)} +\frac{(2 - i)i}{5i^2} =\frac{3 + 4i + 6i + 8i^2}{9 + 12i - 12i - 16i^2} +\frac{2i - i^2}{-5} =\frac{3 - 8 + 10i}{9 + 16} -\frac{1 + 2i}{5} =\frac{-5 + 10i}{25} -\frac{1 + 2i}{5} =\frac{-1 + 2i}{5} -\frac{1 + 2i}{5} = -\frac{2}{5}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}}
+\begin{center}
+    \doublespacing
+    We are considering $z =\frac{5i}{(1 - i)(2 - i)(3 - i)} =\frac{5i}{(2 - 1 - i - 2i)(3 - i)} =\frac{5i}{(1 - 3i)(3 - i)} =\frac{5i}{3 - 3 - i - 9i} =\frac{5i}{-10i} =\frac{5i^2}{-10i^2} =\frac{-5}{10} = -\frac{1}{2}$.
+\end{center}
+
+{\Large\textbf{c.}}
+\begin{center}
+    \doublespacing
+    We are considering $z = (1 - i)^4 = (1 - i)^2 (1 - i)^2$.
+    \\It is easier to first examine $(1 - i)^2 = (1 - i)(1 - i) = 1 - 1 - 2i = -2i$.
+    \\Now we have $z = (1 - i)^2 (1 - i)^2 = (-2i)(-2i) = 4i^2 = -4$ \qedsymbol
+\end{center}
+
+\newpage
+\section*{5.6}
+\begin{center}
+    \doublespacing
+    Let $S = \{z\in\mathbb{C}: |z - 1| = | z + i|\} = \{z\in\mathbb{C}: |z - 1| = |z - (-i)|\}$.
+    \\For $z\in\mathbb{C}$, $|z - 1|$ represents the distance of $z$ from 1 and $|z + i| = |z - (-i)|$ represents the distance of $z$ from $-i$.
+    \\This means that $S$ consists of all points in $\mathbb{C}$ that are equidistant from the points $z_1 = 1$ and $z_2 = -i$.
+    \\If you have two circles of radius $r$ centered at 1 and $-i$ they will only ever intersect at most twice and the real value of these two intersections will be different. Therefore if $z_1\in S$ and $Re\:z_2 = Re\:z_1$ then $z_2\in S$ if and only if $z_1 = z_2$.
+    \break
+    \\As $Re\:z$ varies the rate of change of the distance from 1 must be equal to the rate of change of the distance from $-i$ otherwise subsequent points in $S$ can't remain equidistant to both 1 and $-i$.
+    \\This equality of rates of change along different axes is the nature of lines, so it is safe to say that $S$ defines a line.
+    \\The line defined by $S$ must be perpendicular to the line segment connecting 1 and $-i$, otherwise we get different rates of change for the distances from 1 and $-i$, which again we can't have.
+    \\Simply said, the line must be the perpendicular bisector of the line segment connecting 1 and $-i$.
+    \break
+    \\In $\mathbb{C}$ the vector going from $z_1$ to $z_2$ is given by $z_2 - z_1$. For our example this is $1 - (-i) = 1 + i$.
+    \\To get a perpendicular vector for the purpose of defining a line we must rotate this $90^o$ (direction of the rotation doesn't matter here it will define the same line later), multiplying by $i$ will rotate this vector $90^o$ counterclockwise.
+    \\So we can use the vector $i(1 + i) = i + i^2 = -1 + i$ to define our line, this gives us the necessary slope but we still need a point on the line. We could use the midpoint of the line segment but there is an easier one.
+    \\Notice that $|0 - (-i)| = |i| = 1 = |1| = |0 - 1|$ so we have that $0\in S$ and hence on our line.
+    \\Therefore the line $S$ defines is represented with the parametric equation $0 + t(-1 + i) = t(-1 + i)$ for $t\in\mathbb{R}$.
+    \\In vector notation this is given by $(-t, t)$ for $t\in\mathbb{R}$ and hence $y = -x$ as desired.
+    \\Therefore $|z - 1| = |z + i|$ defines the line through the origin with slope -1 \qedsymbol
+    \break
+    \\What I am doing by multiplying the vector defining our slope by $t$ is allowing the length of our vector to cover all of $\mathbb{R}$ as $t$ varies while still keeping the same direction thus constructing a line. Adding 0 then gives our line a starting point. Note however that you could make the starting point any point on the line for example $\frac{1}{2} - i\frac{1}{2}$, the midpoint of the segment connecting 1 and $-i$.
+    \\Another way to think of this is to consider two expanding circles whose radii are always equal (initially 0) that are centered at 1 and $-i$, then $S$ is the set of all points where these circles intersect at any radius in $\mathbb{R}$.
+    \break
+    \\You can see this algebraically as well. Let $z = x + iy$.
+    \\Then $|z - 1| = |x + iy - 1| = |x - 1 + iy| =\sqrt{(x - 1)^2 + y^2}$ and $|z + i| = |x + iy + i| = |x + i(1 + y)| =\sqrt{x^2 + (1 + y)^2}$.
+    \\So if $|z - 1| = |z + i|$ we have $\sqrt{(x - 1)^2 + y^2} =\sqrt{x^2 + (1 + y)^2}$ and hence $(x - 1)^2 + y^2 =x^2 + (1 + y)^2$.
+    \\So $x^2 -2x + 1 + y^2 = x^2 + 1 + 2y + y^2$ and $-2x = 2y$, therefore $y = -x$ as desired.
+\end{center}
+
+
+\newpage
+\section*{5.7}
+\begin{center}
+    \doublespacing
+    Note that in this problem I use the result of 5.9 to say that $|z^n| = |z|^n$ for each $n\in\mathbb{N}$.
+    \break
+    \\Let $n\in\mathbb{N}$ and $P(z) = a_0 + a_1 z + a_2 z^2 + ... + a_n z^n$ for $a_0, a_1, ..., a_n\in\mathbb{C}$ and $a_n\neq 0$.
+    \\Now let $w =\frac{a_0}{z^n} +\frac{a_1}{z^{n-1}} +\frac{a_2}{z^{n-2}} + ... +\frac{a_{n-1}}{z}$ for $z\neq 0$, then $z^n w + a_n z^n = z^n (w + a_n) = P(z)$ for $z\neq 0$.
+    \\We also get that $w z^n = a_0 + a_1 z + a_2 z^2 + ... + a_{n-1} z^{n-1}$ and by the triangle inequality $|w z^n| = |w||z|^n\leq |a_0| + |a_1 z| + |a_2 z^2| + ... + |a_{n-1} z^{n-1}| = |a_0| + |a_1||z| + |a_2||z|^2 + ... + |a_{n-1}||z|^{n-1}$.
+    \\Therefore $|w|\leq\frac{|a_0|}{|z|^n} +\frac{|a_1|}{|z|^{n-1}} +\frac{|a_2|}{|z|^{n-2}} + ... +\frac{|a_{n-1}|}{|z|}$.
+    \\Since each of $|a_0|, |a_1|, |a_2|, ..., |a_n|$ is finite we can let $a = max\{|a_0|, |a_1|, |a_2|, ..., |a_{n-1}|\}$.
+    \\Then let $R > max\{\frac{n a}{|a_n|}, 1\}$, this exists because $n, a,$ and $|a_n|$ are finite and $|a_n|\neq 0$ otherwise this problem simplifies to the case where $P(z)$ is a polynomial of degree $n-1$.
+    \\Now if $|z| > R >\frac{n a}{|a_n|}$ we have $|z| >\frac{n a}{|a_n|}\geq\frac{n |a_k|}{|a_n|}$ for all $k\in\{0, 1, 2, ..., n-1\}$ by our definition of $a$.
+    \\Furthermore we get that $|z|^n > |z|^{n-1} > ... > |z|$ since $|z| > R > 1$.
+    \\So we have $\frac{|a_k|}{|z|^{n-k}}\leq\frac{|a_k|}{|z|} <\frac{|a_n|}{n}$ for each $k\in\{0, 1, 2, ..., n-1\}$ when $|z| > R$.
+    \\Using our expression we got from the triangle inequality we have:
+    \\$|w|\leq\frac{|a_0|}{|z|^n} +\frac{|a_1|}{|z|^{n-1}} +\frac{|a_2|}{|z|^{n-2}} + ... +\frac{|a_{n-1}|}{|z|} < (n-1)\frac{a_n}{n}$ when $|z| > R$.
+    \\Therefore $|a_n + w|\leq |a_n| + |w| < |a_n| +\frac{(n-1)}{n}|a_n| < 2|a_n|$ when $|z| > R$.
+    \\This gives $|P(z)| = |z|^n |w + a_n| < |z|^n (2|a_n|) = 2|a_n||z|^n$ when $|z| > R$ 
+    \\This was true for an arbitrary choice of $n\in\mathbb{N}$ and is therefore true for all $n\in\mathbb{N}$ \qedsymbol
+\end{center}
+
+
+\section*{5.9}
+\begin{center}
+    \doublespacing
+    Let $S =\{n\in\mathbb{N}:\forall z\in\mathbb{C}, |z^n| = |z|^n\}$
+    \\Clearly $1\in S$ since $z^1 = z$ and so $|z^1| = |z| = |z|^1$.
+    \\From problem 5.8 we have the result that for two complex numbers $z_1, z_2$ we know $|z_1 z_2| = |z_1||z_2|$.
+    \\Now assume that $n\in S$, then $|z^n| = |z|^n$.
+    \\Then $|z^{n+1}| = |z^n z| = |z^n||z| = |z|^n |z| = |z|^{n+1}$, so $n+1\in S$.
+    \\Therefore by induction $S =\mathbb{N}$ and so for all $n\in\mathbb{N}$, $|z^n| = |z|^n$ for all $z\in\mathbb{C}$ \qedsymbol
+    \break
+    \\Proof of the result from problem 5.8:
+    \\Let $z_1 = x_1 + i y_1$ and $z_2 = x_2 + i y_2$. Then as seen before $z_1 z_2 = (x_1 + i y_1)(x_2 + i y_2) = (x_1 x_2 - y_1 y_2) + i(x_1 y_2 + y_1 x_2)$.
+    \\Therefore $|z_1 z_2| =\sqrt{(x_1 x_2 - y_1 y_2)^2 + (x_1 y_2 + y_1 x_2)^2} =\sqrt{x_1^2 x_2^2 - 2 x_1 x_2 y_1 y_2 + y_1^2 y_2^2 + x_1^2 y_2^2 + 2 y_1 y_2 x_1 x_2 + y_1^2 x_2^2} =\sqrt{x_1^2 x_2^2 + y_1^2 y_2^2 + x_1^2 y_2^2 + y_1^2 x_2^2} =\sqrt{x_1^2 (x_2^2 + y_2^2) + y_1^2 y_2^2 + y_1^2 x_2^2} =\sqrt{x_1^2 (x_2^2 + y_2^2) + y_1^2 (y_2^2 + x_2^2)} =\sqrt{(x_2^2 + y_2^2)(x_1^2 + y_1^2)}$
+    \\We also know $|z_1| =\sqrt{x_1^2 + y_1^2}$ and $|z_2| =\sqrt{x_2^2 + y_2^2}$, so $|z_1||z_2| =(\sqrt{x_1^2 + y_1^2})(\sqrt{x_2^2 + y_2^2}) =\sqrt{(x_2^2 + y_2^2)(x_1^2 + y_1^2)} = |z_1 z_2|$.
+    \\Therefore for all $z_1, z_2\in\mathbb{C}$ we have $|z_1 z_2| = |z_1||z_2|$ \qedsymbol
+\end{center}
+
+\end{document}

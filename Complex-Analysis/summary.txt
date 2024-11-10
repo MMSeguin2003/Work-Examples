@@ -1,0 +1,1 @@
+This folder contains work on complex analysis ranging from the basics of imaginary numbers all the way through differentiation, integration, and residue theory. There are many types of problems, both proof based and application based. This work is extended from the real analysis folder.
