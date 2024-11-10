@@ -1,0 +1,235 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Compact Sets}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{3.2.5}
+\doublespacing
+\begin{center}
+    Recall that $x$ is a limit point of $A$ if and only if $x = lim\; a_n$ for some sequence $(a_n)$ contained in $A$ such that $a_n\neq x$ for all $n\in\mathbb{N}$.
+\end{center}
+\begin{itemize}
+    \item Proving if $F\subseteq\mathbb{R}$ is closed then every Cauchy sequence contained in $F$ has its limit point in $F$:
+    \\Assume that $F\subseteq\mathbb{R}$ is closed.
+    \\Since $F$ is closed it contains all its limit points. Let $(a_n)$ be a Cauchy sequence contained in $F$.
+    \\Then $(a_n)\rightarrow a$ for some $a\in\mathbb{R}$ since all Cauchy sequences converge. 
+    \\If $a_n\neq a$ for all $n\in\mathbb{N}$ then since $(a_n)$ is contained in $F$, $a$ is a limit point of $F$.
+    \\Since $F$ contains all its limit points $a\in F$.
+    \\If $a_n = a$ for some $n\in\mathbb{N}$ then $a\in F$ since the sequence $(a_n)$ is contained in $F$.
+    \\Therefore if $F\subseteq\mathbb{R}$ is closed then every Cauchy sequence contained in $F$ has its limit point in $F$.
+    \item Proving if every Cauchy sequence contained in $F$ has its limit point in $F$ then $F\subseteq\mathbb{R}$ is closed:
+    \\Assume that every Cauchy sequence contained in $F$ has its limit point in $F$.
+    \\Consider an arbitrary limit point $a$ of $F$.
+    \\Then for some sequence $(a_n)$ contained in $F$ such that $a_n\neq a$ for all $n\in\mathbb{N}$ it must be that $(a_n)\rightarrow a$.
+    \\Since this $(a_n)$ converges it is a Cauchy sequence, so by assumption we also have that $a\in F$.
+    \\This was for an arbitrary limit point of $F$ and is therefore true for all limit points of $F$.
+    \\Therefore if every Cauchy sequence contained in $F$ has its limit point in $F$ then $F\subseteq\mathbb{R}$ is closed.
+\end{itemize}
+
+
+\newpage
+\section*{3.2.14}
+\begin{center}
+    The interior of a set $E$ is $E^o =\{x\in E :\exists V_{\epsilon} (x)\subseteq E\}$.
+\end{center}
+
+{\Large \textbf{a.}} Let $E$ be a set and $L_E$ be the set of all the limit points of $E$.
+\begin{center}
+    \doublespacing
+    Showing $E$ is closed if and only if $\overline{E} = E$:
+    \\If $E$ is closed then $L_E\subseteq E$ because $E$ contains its limit points, so $\overline{E} = L_E\cup E = E$.
+    \\If $\overline{E} = L_E\cup E = E$ then $L_E\subseteq E$ so $E$ contains its limit points and is closed.
+    \\So $E$ is closed if and only if $\overline{E} = E$ \qedsymbol
+    \\Showing $E$ is open if and only if $E^o = E$:
+    \\If $E$ is open then every $x\in E$ has some $V_{\epsilon} (x)\subseteq E$ and therefore $E^o = E$.
+    \\If $E^o = E$ then every $x\in E$ has some $V_{\epsilon} (x)\subseteq E$ and therefore $E$ is open.
+    \\So $E$ is closed if and only if $E^o = E$ \qedsymbol
+\end{center}
+
+{\Large \textbf{b.}} Let $E$ be a set and $L_E$ be the set of all the limit points of $E$.
+\begin{center}
+    \doublespacing
+    Showing $\overline{E} ^c = (E^c)^o$:
+    \\Let $x\in\overline{E} ^c$ then $x\notin\overline{E} = E\cup L_E$. So $x\notin E$ and $x\notin L_E$, therefore $x\in E^c$ and $x\in (L_E)^c$.
+    \\So $x$ is not a limit point of $E$ and therefore there does not exist a $V_{\epsilon} (x)\subseteq E$.
+    \\Therefore, there does exist a $V_{\epsilon} (x)\subseteq E^c$, so $x\in (E^c)^o$.
+    \\So $\overline{E} ^c\subseteq (E^c)^o$.
+    \\Let $x\in (E^c)^o$ then there exists a $V_{\epsilon} (x)\subseteq E^c$.
+    \\Then $x\in E^c$ and there exists a $V_{\epsilon} (x)\subseteq E^c$.
+    \\Therefore, there does not exist a $V_{\epsilon} (x)\subseteq E$.
+    \\So $x$ is not a limit point of $E$, so $x\notin E$ and $x\notin L_E$.
+    \\Therefore $x\notin E\cup L_E =\overline{E}$, and $x\in\overline{E} ^c$.
+    \\So $(E^c)^o\subseteq\overline{E} ^c$.
+    \\Therefore $\overline{E} ^c = (E^c)^o$ \qedsymbol
+    \\Showing $(E^o)^c = \overline{E^c}$:
+    \\Let $x\in (E^o)^c$, then $x\notin E^o$. So there does not exist a $V_{\epsilon} (x)\subseteq E$.
+    \\Therefore there does exist a $V_{\epsilon} (x)\subseteq E^c$. So $x$ is a limit point of $E^c$.
+    \\So $x\in L_{(E^c)}$ therefore $x\in L_{(E^c)}\cup E^c = \overline{E^c}$.
+    \\So $(E^o)^c\subseteq\overline{E^c}$.
+    \\Let $x\in\overline{E^c} = E^c\cup L_{(E^c)}$, then $x\in E^c$ or $x\in L_{(E^c)}$.
+    \\So $x\notin E$ or there exists a $V_{\epsilon} (x)\subseteq E^c$. So $x\notin E$ or there does not exist a $V_{\epsilon} (x)\subseteq E$.
+    \\Therefore $x\notin E^o$, and $x\in (E^o)^c$.
+    \\So $\overline{E^c}\subseteq (E^o)^c$.
+    \\Therefore $(E^o)^c = \overline{E^c}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{3.3.1} 
+\begin{center}
+    Let $K\subset R$ be a compact, nonempty set. Then $K$ is closed and bounded.
+    \\Since $K$ is bounded there exists an upper bound and a lower bound of $K$.
+    \\Therefore since $\mathbb{R}$ has the least upper bound property, the least upper bound and greatest lower bound of $K$ exist in $\mathbb{R}$.
+    \begin{itemize}
+        \item Proving $sup K\in K$:
+        \\Say $sup K = x$, then for all $\epsilon > 0$ there exists an $a\in K$ such that $x -\epsilon < a$.
+        \\So for all $n\in\mathbb{N}$ there exists an $a_n\in K$ such that $x -\frac{1}{n} < a_n$.
+        \\Consider the sequences $(x - a_n)$ and $(\frac{1}{n})$ then $0 < x - a_n <\frac{1}{n}$ for all $n\in\mathbb{N}$.
+        \\As shown in previous sample works, the sequences $(0)$ and $(\frac{1}{n})$ both converge to 0.
+        \\Therefore by the squeeze theorem $(x - a_n)\rightarrow 0$.
+        \\Clearly the sequence $(x)\rightarrow x$ so by the algebraic limit theorem $(a_n)\rightarrow x = sup K$.
+        \\So we have found a sequence contained in $K$ such that its limit is $sup K$, so $sup K$ is a limit point of $K$.
+        \\Therefore since $K$ is closed it contains its limit points, and so $sup K\in K$ \qedsymbol
+        \item Proving $inf K\in K$:
+        \\Say $inf K = x$, then for all $\epsilon > 0$ there exists an $a\in K$ such that $x +\epsilon > a$.
+        \\So for all $n\in\mathbb{N}$ there exists an $a_n\in K$ such that $x +\frac{1}{n} > a_n\geq x$.
+        \\Consider the sequences $(x +\frac{1}{n})$ and $(x)$ then $x +\frac{1}{n} > a_n\geq x$ for all $n\in\mathbb{N}$.
+        \\As shown in previous sample works, the sequence $(\frac{1}{n})$ converges to 0. Clearly the sequence $(x)\rightarrow x$.
+        \\By the algebraic limit theorem $(x +\frac{1}{n})\rightarrow x$, so by the squeeze theorem $(a_n)\rightarrow x$.
+        \\So we have found a sequence contained in $K$ such that its limit is $inf K$, so $inf K$ is a limit point of $K$.
+        \\Therefore since $K$ is closed it contains its limit points, and so $inf K\in K$ \qedsymbol
+    \end{itemize}
+\end{center}
+
+
+\newpage
+\section*{3.3.9}
+\begin{center}
+    Let $K$ be a compact set and let this imply $K$ is closed and bounded.
+    \\Let $\{O_{\lambda} :\lambda\in\Lambda\}$ be an open cover of $K$ and assume no finite subcover exists.
+    \\Let $I_0$ be a closed interval containing $K$, such an interval exists since $K$ is bounded.
+\end{center}
+
+{\Large \textbf{a.}} Then $I_0\cap K = K$ can not be finitely covered.
+\begin{center}
+    \doublespacing
+    Bisect $I_0$, then either the left half of $I_0\cap K$ or the right half of $I_0\cap K$ can not be finitely covered.
+    \\Otherwise if both can be finitely covered then the union of those finite covers, which is a finite cover would cover $I_0\cap K$ which can not happen.
+    \\Let $I_1$ be the half that can not be finitely covered, if both can then just pick either.
+    \\Then bisect $I_1$ and again we have the same process one of the two halves can not be finitely covered.
+    \\Repeat this, then $I_n\cap K$ can not be finitely covered for all $n\in\{0, 1, 2, ...\} = \{0\}\cup\mathbb{N}$.
+    \\Furthermore $I_0\supseteq I_1\supseteq I_2\supseteq ...$
+    \\And if the original length of $I_0$ is $|I_0| = l$ then the length of $I_n$ is $|I_n| =\frac{l}{2^n}$.
+    \\So $(|I_n|) = (\frac{l}{2^n})\rightarrow 0$ by the algebraic limit theorem and the fact that $(\frac{1}{2^n})\rightarrow 0$.
+\end{center}
+
+{\Large \textbf{b.}} Since $K$ is compact so is $K\cap I_n$ for all $n\in\{0\}\cup\mathbb{N}$.
+\begin{center}
+    \doublespacing
+    We also know $I_0\supseteq I_1\supseteq I_2\supseteq ...$, so $I_0\cap K\supseteq I_1\cap K\supseteq I_2\cap K\supseteq ...$
+    \\Therefore $\cap _{n=0}^{\infty} K\cap I_n\neq\phi$ since the arbitrary intersection of nested compact sets is nonempty.
+    \\So there exists an element in $K$ that is in every $I_n$.
+\end{center}
+
+{\Large \textbf{c.}} Since $x\in K$ there must be some open set $O_{\lambda _0}$ such that $x\in O_{\lambda _0}$.
+\begin{center}
+    \doublespacing
+    However, since $O_{\lambda _0}$ is open there must exist some $\epsilon > 0$ such that $V_{\epsilon} (x)\subseteq O_{\lambda _0}$.
+    \\Since $(|I_n|)\rightarrow 0$ we can find an $N\in\mathbb{N}$ such that $|I_n| <\epsilon$ for all $n\geq N$.
+    \\Then $O_{\lambda _0}$ contains $I_n$ for all $n\geq N$.
+    \\But this implies that $I_n$ can be finitely covered for all $n\geq N$, a contradiction.
+    \\Therefore our assumption that $K$ can not be finitely covered must be false.
+    \\So for a compact set $K$, $K$ can be finitely covered \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{3.2.12} Let $A$ be an uncountable set and let $s\in B$ if $\{x\in\mathbb{R} : x\in A, x < s\}$ and $\{x\in\mathbb{R} : x\in A, x > s\}$ are uncountable.
+\begin{center}
+    \doublespacing
+    For some $s\in\mathbb{R}$ let $L_s = \{x\in\mathbb{R} : x\in A, x < s\} = (-\infty, s)\cap A$ and $R_s = \{x\in\mathbb{R} : x\in A, x > s\} = (s, \infty)\cap A$.
+    \\Now let $T_1 = \{s\in\mathbb{R} : L_s\;\;is\;\;uncountable\}$ and $T_2 = \{s\in\mathbb{R} : R_s\;\;is\;\;uncountable\}$.
+    \\Recall that the countable union of countable or finite sets is countable.
+    \\Let $(a_n)$ be a positive, monotonically decreasing sequence that converges to 0.
+    \\Then $(a_n + s)\rightarrow s$ for all $s\in\mathbb{R}$ by the algebraic limit theorem.
+    \begin{itemize}
+        \item Proving $T_1$ is nonempty and open:
+        \\\textbf{$T_1$ is nonempty:}
+        \\Assume $T_1$ is empty, that is $L_s = (-\infty, s)\cap A$ is countable or finite for all $s\in\mathbb{R}$.
+        \\Then $L_n = (-\infty, n)\cap A$ is countable or finite for all $n\in\mathbb{N}$.
+        \\This implies $\cup _{n=1}^{\infty} L_n =\cup _{n=1}^{\infty} (-\infty, n)\cap A$ is countable.
+        \\However, $\cup _{n=1}^{\infty} (-\infty, n)\cap A = A\cap (\cup _{n=1}^{\infty} (-\infty, n)) = A\cap (-\infty, \infty) = A$ is uncountable.
+        \\So it must be that $T_1$ is nonempty.
+        \\\textbf{$T_1$ is open:}
+        \\$T_1\neq\phi$ from above. So let $s\in T_1$, then $L_s$ is uncountable.
+        \\Clearly for any $t > s$, $t\in T_1$ because $L_s = (-\infty, s)\cap A\subseteq (-\infty, t)\cap A = L_t$.
+        \\And $L_s = (-\infty, s)\cap A$ is uncountable so $L_t = (-\infty, t)\cap A$ is uncountable, hence $t\in T_1$.
+        \\Furthermore there exists some $\epsilon > 0$ such that $s -\epsilon\in T_1$.
+        \\Otherwise $(-\infty, s - a_n)\cap A$ is countable or finite for all $n\in\mathbb{N}$.
+        \\But this would imply $\cup _{n=1}^{\infty} (-\infty, s - a_n)\cap A$ is countable.
+        \\However, $\cup _{n=1}^{\infty} (-\infty, s - a_n)\cap A = A\cap (\cup _{n=1}^{\infty} (-\infty, s - a_n)) = A\cap (-\infty, s) = L_s$ is uncountable since $s\in T_1$.
+        \\Therefore for all $s\in T_1$ there exists some $\epsilon > 0$ such that $s -\epsilon\in T_1$.
+        \\We have shown that for any $x\in T_1$ if $y > x$ then $y\in T_1$ and for all $s\in T_1$ there exists an $\epsilon > 0$ such that $s -\epsilon\in T_1$.
+        \\Consequently we have shown that for all $s\in T_1$ there exists an $\epsilon > 0$ such that for all $t\geq s -\epsilon$, $t\in T_1$.
+        \\So for all $s\in T_1$ there exists a $V_{\epsilon} (s)\subseteq T_1$.
+        \\So $T_1$ is open.
+        \item Proving $T_2$ is nonempty and open:
+        \\\textbf{$T_2$ is nonempty:}
+        \\Assume $T_2$ is empty, that is $R_s = (s, \infty)\cap A$ is countable or finite for all $s\in\mathbb{R}$.
+        \\Then $R_{-n} = (-n, \infty)\cap A$ is countable or finite for all $n\in\mathbb{N}$.
+        \\This implies $\cup _{n=1}^{\infty} R_{-n} =\cup _{n=1}^{\infty} (-n, \infty)\cap A$ is countable.
+        \\However, $\cup _{n=1}^{\infty} (-n, \infty)\cap A = A\cap (\cup _{n=1}^{\infty} (-n, \infty)) = A\cap (-\infty, \infty) = A$ is uncountable.
+        \\So it must be that $T_2$ is nonempty.
+        \\\textbf{$T_2$ is open:}
+        \\$T_2\neq\phi$ from above. So let $s\in T_2$, then $R_s$ is uncountable.
+        \\Clearly for any $t < s$, $t\in T_2$ because $R_s = (s, \infty)\cap A\subseteq (t, \infty)\cap A = R_t$.
+        \\And $R_s = (s, \infty)\cap A$ is uncountable so $R_t = (t, \infty)\cap A$ is uncountable, hence $t\in T_2$.
+        \\Furthermore there exists some $\epsilon > 0$ such that $s +\epsilon\in T_2$.
+        \\Otherwise $(s + a_n, \infty)\cap A$ is countable or finite for all $n\in\mathbb{N}$.
+        \\But this would imply $\cup _{n=1}^{\infty} (s + a_n, \infty)\cap A$ is countable.
+        \\However, $\cup _{n=1}^{\infty} (s + a_n, \infty)\cap A = A\cap (\cup _{n=1}^{\infty} (s + a_n, \infty)) = A\cap (s, \infty) = R_s$ is uncountable since $s\in T_2$.
+        \\Therefore for all $s\in T_2$ there exists some $\epsilon > 0$ such that $s +\epsilon\in T_2$.
+        \\We have shown that for any $x\in T_2$ if $y < x$ then $y\in T_2$ and for all $s\in T_2$ there exists an $\epsilon > 0$ such that $s +\epsilon\in T_2$.
+        \\Consequently we have shown that for all $s\in T_2$ there exists an $\epsilon > 0$ such that for all $t\leq s +\epsilon$, $t\in T_2$.
+        \\So for all $s\in T_2$ there exists a $V_{\epsilon} (s)\subseteq T_2$.
+        \\So $T_2$ is open.
+        \item Proving $B = T_1\cap T_2$ is nonempty and open:
+        \\\textbf{$B$ is nonempty:}
+        \\We have shown that $T_1$ is nonempty and open and that for $s\in T_1$ if $t > s$ then it must be that $t\in T_1$.
+        \\So $T_1$ is of the form $T_1 = (t_1, \infty)$ for some $t_1\in\mathbb{R}$ or $T_1 = (-\infty, \infty) =\mathbb{R}$.
+        \\We have shown that $T_2$ is nonempty and open and that for $s\in T_2$ if $t < s$ then it must be that $t\in T_2$.
+        \\So $T_2$ is of the form $T_2 = (-\infty, t_2)$ for some $t_2\in\mathbb{R}$ or $T_2 = (-\infty, \infty) =\mathbb{R}$.
+        \\If $T_1 =\mathbb{R}$ or $T_2 =\mathbb{R}$ then $B = T_1\cap T_2 =\mathbb{R}\cap T_2 = T_2\neq\phi$ or $B = T_1\cap T_2 = T_1\cap\mathbb{R} = T_1\neq\phi$ and we would be done.
+        \\Otherwise we want to show $B = T_1\cap T_2 = (t_1, \infty)\cap (-\infty, t_2) = (-\infty, t_2)\cap (t_1, \infty)$ is nonempty.
+        \\So we want to show that $t_1 < t_2$.
+        \\For all $x\in\mathbb{R}$ it must be that $L_x = (-\infty, x)\cap A$ or $R_x = (x, \infty)\cap A$ is uncountable.
+        \\This is because otherwise both $L_x$ and $R_x$ would be countable or finite for all $x\in\mathbb{R}$.
+        \\But this implies $L_x\cup R_x\cup (\{x\}\cap A)$ is a finite union of countable or finite sets and is therefore countable or finite.
+        \\However, $L_x\cup R_x\cup (\{x\}\cap A) = A\cap ((-\infty, x)\cup\{x\}\cup (x, \infty)) = A\cap (-\infty, \infty) = A$ is uncountable.
+        \\So it must be that for all $x\in\mathbb{R}$, $L_x$ or $R_x$ is uncountable, so $x\in T_1$ or $x\in T_2$.
+        \\So $T_1\cup T_2\subseteq\mathbb{R}$ trivially and $\mathbb{R}\subseteq T_1\cup T_2$ as we have just shown.
+        \\Therefore $T_1\cup T_2 =(t_1, \infty)\cup (-\infty, t_2) = (-\infty, t_2)\cup (t_1, \infty) =\mathbb{R}$.
+        \\This can only happen if $t_1 < t_2$. So it must be that $t_1 < t_2$.
+        \\So $B = T_1\cap T_2 = (t_1, \infty)\cap (-\infty, t_2) = (t_1, t_2)\neq\phi$. So $B$ is nonempty.
+        \\\textbf{$B$ is open:}
+        \\$B = T_1\cap T_2$ where $T_1$ and $T_2$ are both open.
+        \\Since the intersection of finitely many open sets is open we have that $B$ is open.
+        \\So $B$ is nonempty and open \qedsymbol
+    \end{itemize}
+\end{center}
+
+\end{document}
