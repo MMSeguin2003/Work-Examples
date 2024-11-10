@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Connected Sets and Limits of Functions}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{3.4.8}
+\begin{center}
+    Recall $C =\cap _{n=1}^{\infty} C_n$.
+    \\A set $E$ is totally disconnected if for all $x, y\in E$ you can find two separated sets, say $A$ and $B$ such that $x\in A$, $y\in B$ and $E = A\cup B$.
+\end{center}
+
+{\Large \textbf{a.}} Let $x, y\in C$ where $x < y$. Let $\epsilon = y - x$.
+\begin{center}
+    \doublespacing
+    Then $x$ and $y$ are in $C_n$ for all $n\in\mathbb{N}$. Consider the length of any interval in $C_n$.
+    \\Since the length of all intervals in $C_n$ approaches $0$ we can find an $N\in\mathbb{N}$ such that the maximum length of any interval of $C_N$ is less than $\epsilon$.
+    \\Therefore since the length of any interval is less than $\epsilon$ it can not be that $x$ and $y$ are in any one interval otherwise the interval must have at least length $\epsilon$.
+\end{center}
+
+{\Large \textbf{b.}}
+\begin{center}
+    \doublespacing
+    For arbitrary $x, y\in C$ where $x < y$ there exists an $N\in\mathbb{N}$ such that $x$ and $y$ are in different intervals of $C_N$.
+    \\From the way the Cantor set is constructed by removing the middle third in each iteration there must exists some interval between $x$ and $y$ that is not contained in $C$.
+    \\Therefore the interval containing $x$ and the interval containing $y$ are separated.
+    \\Let $A$ be the union of the interval containing $x$ and all the intervals contained in $C$ to the left of that.
+    \\And let $B$ be the union of the interval containing $y$ and all the intervals contained in $C$ to the right of that.
+    \\Then since $x < y$ we have that $A$ and $B$ are also separated.
+    \\Furthermore $x\in A$, $y\in B$ and $A\cup B = C$ by construction.
+    \\This was for arbitrary $x, y\in C$ so for all $x, y\in C$ where $x < y$ this is the case and therefore $C$ is totally disconnected.
+\end{center}
+
+
+\newpage
+\section*{4.2.3}
+\doublespacing
+Recall $t(x)$ takes the value 1 if $x = 0$, the value $\frac{1}{n}$ when $x =\frac{m}{n}$ is in lowest terms, and the value 0 when $x\notin\mathbb{Q}$.
+
+{\Large \textbf{a.}} Let $(x_n) = (1 -\frac{1}{n})$, $(y_n) = (1 -\frac{1}{n^2})$, and $(z_n) = (1 -\frac{1}{n^3})$.
+\begin{center}
+    \doublespacing
+    Then $(x_n) = (0,\frac{1}{2},\frac{2}{3},\frac{3}{4}, ...)$, $(y_n) = (0,\frac{3}{4},\frac{8}{9},\frac{15}{16}, ...)$, and $(z_n) = (0,\frac{7}{8},\frac{26}{27},\frac{63}{64})$.
+    \\Clearly all of these sequences are different.
+    \\As we have seen before $(\frac{1}{n})\rightarrow 0$ and clearly $(0)\rightarrow 0$.
+    \\Since $0 <\frac{1}{n^3} <\frac{1}{n^2} <\frac{1}{n}$ for all $n\in\mathbb{N}$ we have by the squeeze theorem that $(\frac{1}{n^2})\rightarrow 0$ and $(\frac{1}{n^3})\rightarrow 0$.
+    \\Therefore by the algebraic limit theorem $(x_n) = (1 -\frac{1}{n})\rightarrow 1$, $(y_n) = (1 -\frac{1}{n^2})\rightarrow 1$, and $(z_n) = (1 -\frac{1}{n^3})\rightarrow 1$.
+    \\All of these sequences do not contain the number 1 as a term so we have made three distinct sequences converging to 1 that do not contain 1.
+\end{center}
+
+{\Large \textbf{b.}} Consider the sequences $(t(x_n))$, $(t(y_n))$, and $(t(z_n))$.
+\begin{center}
+    \doublespacing
+    We have $(t(x_n)) = (1,\frac{1}{2},\frac{1}{3},\frac{1}{4}, ...) = (\frac{1}{n})$, $(t(y_n)) = (0,\frac{1}{4},\frac{1}{9},\frac{1}{16}, ...) = (\frac{1}{n^2})$, $(t(z_n)) = (1,\frac{1}{8},\frac{1}{27},\frac{1}{64}, ...) = (\frac{1}{n^3})$.
+    \\This comes from the definition of $t(x)$ and the fact that all terms of each sequence in part a were written in lowest terms.
+    \\As shown in part a each of these sequences converge to 0. So $lim\; t(x_n) = lim\; t(y_n) = lim\; t(z_n) = 0$.
+\end{center}
+
+{\Large \textbf{c.}} I propose that $lim_{x\rightarrow 1} t(x) = 0$ since $t(x) = 0$ for all $x\notin\mathbb{Q}$ and because of the limits above.
+\begin{center}
+    \doublespacing
+    For a specified $\epsilon > 0$ let $S =\{x\in\mathbb{R} : t(x)\geq\epsilon\}$.
+    \\Then $S\subseteq\mathbb{Q}$ since all irrational values assume the value 0 under $t(x)$ and therefore can not be in $S$.
+    \\\textbf{Proving every point in $S$ is isolated:}
+    \\Assume for the sake of contradiction that not every point in $S$ is isolated. That is say $x\in S$ is a limit point of $S$.
+    \\Then there must exist some sequence $(x_n)\subseteq S$ such that $x_n\neq x$ for all $n\in\mathbb{N}$ and $(x_n)\rightarrow x$.
+    \\Since $x\in S$ and $x_n\in S$ for all $n\in\mathbb{N}$ we have $x =\frac{p_0}{q_0}$ for some $p_0, q_0\in\mathbb{Z}$ and $x_n =\frac{p_n}{q_n}$ for all $n\in\mathbb{N}$ and some $p_n, q_n\in\mathbb{Z}$.
+    \\We can say that all of these $p$'s and $q$'s are in lowest terms without loss of generality.
+    \\Furthermore $t(x) =\frac{1}{q_0}\geq\epsilon > 0$ and $t(x_n) =\frac{1}{q_n}\geq\epsilon > 0$ for all $n\in\mathbb{N}$. So $0 < q_0\leq\frac{1}{\epsilon}$ and $0 < q_n\leq\frac{1}{\epsilon}$ for all $n\in\mathbb{N}$.
+    \\Since $\epsilon$ is fixed we have that $(0,\frac{1}{\epsilon}]$ must have finite length, so there are only finitely many integers in $(0,\frac{1}{\epsilon}]$.
+    \\This means that one integer in $(0,\frac{1}{\epsilon}]$ is used infinitely many times as the denominator for terms of $(x_n)$, say $q$.
+    \\Consider the subsequence $(x_{n_k})$ of $(x_n)$ where the denominator of $x_{n_k}$ is $q$ for all $k\in\mathbb{N}$.
+    \\Then $(x_{n_k}) = (\frac{p_{n_k}}{q})\rightarrow x$ so by the algebraic limit theorem $(p_{n_k})\rightarrow qx$.
+    \\Then $(p_{n_k})$ is a Cauchy sequence. This implies that there exists a $K\in\mathbb{N}$ such that for $k_1, k_2\geq K$, $|p_{n_{k_1}} - p_{n_{k_2}}| < 1$.
+    \\Since $p_{n_k}\in\mathbb{Z}$ for all $k\in\mathbb{N}$ this means that there exists a $K\in\mathbb{N}$ such that for $k_1, k_2\geq K$, $p_{n_{k_1}} = p_{n_{k_2}}$.
+    \\This means $(p_{n_k})$ contains infinitely many repeating terms, and as proved in a previous sample work these terms must be equal to $qx$ since $(p_{n_k})\rightarrow qx$. (I will attach the proof of that below)
+    \\But this implies $(x_{n_k})$ contains infinitely many terms equal to $\frac{qx}{q} = x$, a contradiction since this implies $(x_n)$ contains $x$.
+    \\So it must be that every point of $S$ is an isolated point.
+    \\\textbf{Proving $lim_{x\rightarrow 1} t(x) = 0$:}
+    \\If $0 <\epsilon\leq 1$:
+    \\Then we know $t(1) = 1\geq\epsilon$ so $1\in S$, but it is also therefore an isolated point in $S$.
+    \\Therefore there must exist some $\delta > 0$ such that $V_{\delta} (1)\cap S = \{1\}$ by the definition of isolated points.
+    \\Therefore if $x\in V_{\delta} (1)$ then $x\notin S$, so $t(x) <\epsilon$. Since $t(y)\geq 0$ for all $y\in\mathbb{R}$ this implies $t(x)\in V_{\epsilon} (0)$.
+    \\If $\epsilon > 1$:
+    \\Simply choose any $\delta$ from the above process and you will again get that if $x\in V_{\delta} (1)$ then $t(x)\in V_{\epsilon} (0)$.
+    \\Therefore for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $x\in V_{\delta} (1)$ then $t(x)\in V_{\epsilon} (0)$.
+    \\So $lim _{x\rightarrow 1} t(x) = 0$ \qedsymbol
+    \\\textbf{Used proof from previous sample work:}
+    \\Let $(b_n)$ be a convergent series that has an infinite number of terms equal to $c$ for some $c\in\mathbb{R}$.
+    \\Say $(b_n)\rightarrow b$ then for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ where if $n\in\mathbb{N}$ such that $n\geq N$ then $|b_n - b| <\epsilon$.
+    \\Since $(b_n)$ contains an infinite number of terms $c$ we know for any $N$ there exists an $c$ in the sequence beyond $b_N$.
+    \\So if $b\neq c$ then for any choice of $N$ we have a term later in the sequence where $|c - b| > 0$.
+    \\So let $0 <\epsilon < |c - b|$ such an $\epsilon$ exists because of the density of $\mathbb{R}$.
+    \\Therefore if $b\neq c$ we have shown that there exists an $\epsilon > 0$ such that there does not exist an $N\in\mathbb{N}$ where if $n\geq N$ then $|b_n - b| <\epsilon$ due to the presence of infinitely many terms $c$, contradicting that $(b_n)\rightarrow b$.
+    \\Therefore a sequence that has infinitely many terms equal to $c$ can not converge to a value that is not $c$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{4.2.8}
+
+{\Large \textbf{a.}} Let $f(x) =\frac{|x - 2|}{x - 2}$. Then $lim _{x\rightarrow 2} f(x)$ does not exist.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $(x_n)$ be a strictly positive sequence such that $(x_n)\rightarrow 0$.
+    \\Then $(2 + x_n)\rightarrow 2$ by the algebraic limit theorem and $2 + x_n > 2$ for all $n\in\mathbb{N}$.
+    \\And $(2 - x_n)\rightarrow 2$ by the algebraic limit theorem and $2 - x_n < 2$ for all $n\in\mathbb{N}$.
+    \\Consider the sequences $(f(2 + x_n))$ and $(f(2 - x_n))$.
+    \\$f(2 + x_n) =\frac{|2 + x_n - 2|}{2 + x_n - 2} =\frac{|x_n|}{x_n} =\frac{x_n}{x_n} = 1$ since $x_n > 0$ for all $n\in\mathbb{N}$. This also exists since $x_n\neq 0$ for all $n\in\mathbb{N}$.
+    \\$f(2 - x_n) =\frac{|2 - x_n - 2|}{2 - x_n - 2} =\frac{|- x_n|}{- x_n} =\frac{x_n}{- x_n} = -1$ since $x_n > 0$ for all $n\in\mathbb{N}$. This also exists since $x_n\neq 0$ for all $n\in\mathbb{N}$.
+    \\So $lim\; f(2 + x_n) = 1$ and $lim\; f(2 - x_n) = -1$ since $(f(2 + x_n)) = (1)$ and $(f(2 - x_n)) = (-1)$.
+    \\So we have found two different sequences $(2 + x_n)$ and $(2 - x_n)$ such that 2 is not in either sequence but both converge to 2 where $lim\; f(2 + x_n)\neq lim\; f(2 - x_n)$
+    \\Therefore $lim _{x\rightarrow 2} f(x) = lim _{x\rightarrow 2}\frac{|x - 2|}{x - 2}$ does not exist \qedsymbol
+\end{center}
+
+{\Large \textbf{b.}} Let $f(x) =\frac{|x - 2|}{x - 2}$. Then $lim _{x\rightarrow\frac{7}{4}} f(x) = -1$.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $\epsilon > 0$ and let $\delta =\frac{1}{4}$. Then if $x\in V_{\delta} (\frac{7}{4}) = (\frac{7}{4} -\frac{1}{4},\frac{7}{4} +\frac{1}{4}) = (\frac{3}{2}, 2)$ we have that $x < 2$.
+    \\Therefore $x - 2 < 0$ so $|x - 2| = 2 - x = -(x - 2)$.
+    \\So $f(x) =\frac{|x - 2|}{x - 2} =\frac{-(x - 2)}{x - 2} = -1$ and this is defined since $x - 2 < 0$ so $x - 2\neq 0$.
+    \\Therefore $f(x)\in V_{\epsilon} (-1)$ since $f(x) = -1$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So for all $\epsilon > 0$ we have found a $\delta > 0$ such that if $x\in V_{\delta} (\frac{7}{4})$ then $f(x)\in V_{\epsilon} (-1)$.
+    \\So $lim _{x\rightarrow\frac{7}{4}} f(x) = lim _{x\rightarrow\frac{7}{4}}\frac{|x - 2|}{x - 2} = -1$ \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} Let $f(x) = (-1)^{\frac{1}{x}}$ then $lim _{x\rightarrow 0} f(x)$ does not exist.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $(x_n) = (1,\frac{1}{3},\frac{1}{5}, ...) = (\frac{1}{2n - 1})$. Let $(y_n) = (\frac{1}{2},\frac{1}{4},\frac{1}{6}, ...) = (\frac{1}{2n})$.
+    \\Clearly $(x_n)\rightarrow 0$ and $(y_n)\rightarrow 0$ and 0 is not in either sequence.
+    \\Consider the sequences $(f(x_n))$ and $(f(y_n))$.
+    \\$f(x_n) = (-1)^{\frac{1}{1/2n - 1}} = (-1)^{2n - 1} = (-1)^{2n} (-1)^{-1} = -1$ for all $n\in\mathbb{N}$. This also exists since $\frac{1}{2n - 1}\neq 0$ for all $n\in\mathbb{N}$.
+    \\$f(y_n) = (-1)^{\frac{1}{1/2n}} = (-1)^{2n} = ((-1)^2)^n = (1)^n = 1$ for all $m\in\mathbb{N}$. This also exists since $\frac{1}{2n}\neq 0$ for all $n\in\mathbb{N}$.
+    \\So $lim\; f(x_n) = -1$ and $lim\; f(y_n) = 1$ since $(f(x_n)) = (-1)$ and $(f(y_n)) = (1)$.
+    \\So we have found two different sequences $(x_n)$ and $(y_n)$ such that 0 is not in either sequence but both converge to 0 where $lim\; f(x_n)\neq lim\; f(y_n)$
+    \\Therefore $lim _{x\rightarrow 0} f(x) = lim _{x\rightarrow 0} (-1)^{\frac{1}{x}}$ does not exist \qedsymbol
+\end{center}
+
+\newpage
+{\Large \textbf{d.}} Let $f(x) =\sqrt[3]{x} (-1)^{\frac{1}{x}}$ then $lim _{x\rightarrow 0} f(x) = 0$.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $\epsilon > 0$ then let $\delta =\epsilon ^3$.
+    \\If $|x - 0| = |x| <\delta =\epsilon ^3$ then $|f(x) - 0| = |\sqrt[3]{x} (-1)^{\frac{1}{x}} - 0| = |\sqrt[3]{x} (-1)^{\frac{1}{x}}| = |\sqrt[3]{x}| = |x^\frac{1}{3}| = |x|^\frac{1}{3} <\sqrt[3]{\delta} =\epsilon$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore $lim _{x\rightarrow 0} f(x) = lim _{x\rightarrow 0} \sqrt[3]{x} (-1)^{\frac{1}{x}} = 0$ \qedsymbol
+    \\Note however that this function is not continuous in the slightest. When I say if $|x| <\delta$ I mean those parts of the $\delta$ neighborhood where $f(x)$ is defined.
+\end{center}
+
+
+\newpage
+\section*{4.2.10}
+
+{\Large \textbf{a.}} Let $f: A\rightarrow\mathbb{R}$ be a function and let $a$ be a limit point of $A$.
+\begin{center}
+    \doublespacing
+    Starting with the left hand limit $lim _{x\rightarrow a^{-}} f(x)$:
+    \\We say $lim _{x\rightarrow a^{-}} f(x) = L$ if for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $0 < a - x <\delta$ then $|f(x) - L| <\epsilon$.
+    \\Now for the right hand limit $lim _{x\rightarrow a^{+}} f(x)$:
+    \\We say $lim _{x\rightarrow a^{+}} f(x) = L$ if for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $0 < x - a <\delta$ then $|f(x) - L| <\epsilon$.
+\end{center}
+
+{\Large \textbf{b.}} Let $f: A\rightarrow\mathbb{R}$ be as before and $a$ be a limit point of $A$. Let the left and right hand limits be defined as before.
+\begin{center}
+    \doublespacing
+    \begin{itemize}
+        \item Showing if $lim _{x\rightarrow a^{-}} f(x) = L$ and $lim _{x\rightarrow a^{+}} f(x) = L$ then $lim _{x\rightarrow a} f(x) = L$:
+        \\Assume $lim _{x\rightarrow a^{-}} f(x) = L$ and $lim _{x\rightarrow a^{+}} f(x) = L$.
+        \\Then for all $\epsilon > 0$ there exists a $\delta _1$ such that if $0 < a - x <\delta _1$ then $|f(x) - L| <\epsilon$, and there exists a $\delta _2$ such that if $0 < x - a <\delta _2$ then $|f(x) - L| <\epsilon$.
+        \\For each $\epsilon > 0$ let $\delta = min\{\delta _1, \delta _2\}$. Then $0 <\delta\leq\delta _1$ and $0 <\delta\leq\delta _2$.
+        \\So if $0 < a - x <\delta$ it follows $|f(x) - L| <\epsilon$ and if $0 < x - a <\delta$ it follows that $|f(x) - L| <\epsilon$.
+        \\So if $|x - a| <\delta$ then $|f(x) - L| <\epsilon$. Such a $\delta$ was found for all $\epsilon > 0$.
+        \\Therefore for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $|x - a| <\delta$ then it follows that $|f(x) - L| <\epsilon$.
+        \\So $lim _{x\rightarrow a} f(x) = L$.
+        \item Showing if $lim _{x\rightarrow a} f(x) = L$ then $lim _{x\rightarrow a^{-}} f(x) = L$ and $lim _{x\rightarrow a^{+}} f(x) = L$:
+        \\Assume $lim _{x\rightarrow a} f(x) = L$. And let $\epsilon > 0$.
+        \\Then there exists a $\delta > 0$ such that if $|x - a| <\delta$ it follows that $|f(x) - L| <\epsilon$.
+        \\So if $0 < a - x <\delta$ then $|x - a| <\delta$ and therefore it follows that $|f(x) - L| <\epsilon$.
+        \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+        \\So for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $0 < a - x <\delta$ it follows that $|f(x) - L| <\epsilon$.
+        \\Therefore $lim _{x\rightarrow a^{-}} f(x) = L$.
+        \\Similarly if $0 < x - a <\delta$ then $|x - a| <\delta$ and therefore it follows that $|f(x) - L| <\epsilon$.
+        \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+        \\So for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $0 < x - a <\delta$ it follows that $|f(x) - L| <\epsilon$.
+        \\Therefore $lim _{x\rightarrow a^{+}} f(x) = L$.
+    \end{itemize}
+    Therefore $lim _{x\rightarrow a} f(x) = L$ if and only if $lim _{x\rightarrow a^{-}} f(x) = L$ and $lim _{x\rightarrow a^{+}} f(x) = L$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{4.2.11}
+\begin{center}
+    \doublespacing
+    Let $f, g, h$ be functions with a common domain $A$ such that $f(x)\leq g(x)\leq h(x)$ for all $x\in A$.
+    \\Let $c$ be a limit point of $A$ and assume that $lim _{x\rightarrow c} f(x) = L$ and $lim _{x\rightarrow c} h(x) = L$.
+    \\Let $\epsilon > 0$ and let $\alpha =\epsilon / 3$ there exists a $\delta _1 > 0$ such that if $|x - c| <\delta _1$ it follows that $|f(x) - L| <\alpha$.
+    \\And there exists a $\delta _2 > 0$ such that if $|x - c| <\delta _2$ it follows that $|h(x) - L| <\alpha$.
+    \\Let $\delta = min\{\delta _1,\delta _2\}$. Then if $|x - c| <\delta$ it follows that $|f(x) - L| <\alpha$ and $|h(x) - L| <\alpha$.
+    \\Note that $f(x) - h(x)\leq g(x) - h(x)\leq 0$ so $|g(x) - h(x)|\leq |f(x) - h(x)|$.
+    \\So if $|x - c| <\delta$ then $|g(x) - L| = |g(x) - h(x) + h(x) - L|\leq |g(x) - h(x)| + |h(x) - L|\leq |f(x) - h(x)| + |f(x) - L| = |f(x) - L + L - h(x)| + |f(x) - L|\leq |f(x) - L| + |L - h(x)| + |f(x) - L| < 3\alpha =\epsilon$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So for all $\epsilon > 0$ there exists a $\delta > 0$ such that if $|x - c| <\delta$ it follows that $|g(x) - L| <\epsilon$.
+    \\Therefore $lim _{x\rightarrow c} g(x) = L$ \qedsymbol
+\end{center}
+
+
+\end{document}
