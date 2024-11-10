@@ -1,0 +1,186 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{More on Sets and Irrationality}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1.3.2}
+
+{\Large \textbf{a.}} Let $S = \mathbb{R}$ and $B = \{b\}$ for any $b\in\mathbb{R}$ then $B\subset S$.
+\begin{center}
+    \doublespacing
+    Clearly here $inf B = b$ and $sup B = b$. So this is an example of a set $B$ where $inf B \geq sup B$.
+    \begin{singlespace}
+        Note: if the question asked for a set $B$ where $inf B > sup B$ this would not be possible as by definition $inf B$ is less than or equal to any element of $B$ and $sup B$ is greater than or equal to any element of $B$. So we can only possibly get $inf B \geq sup B$ and not $inf B > sup B$.
+    \end{singlespace}
+\end{center}
+
+{\Large \textbf{b.}} It is not possible to have a finite set that does not contain its own supremum.
+\begin{center}
+    \doublespacing
+    Proof:
+    \\Let $A = \{a_1, a_2, ..., a_n\}$ be a finite set and $S\supseteq A$ be the superset of $A$ for finding the infimum and supremum.
+    \begin{singlespace}
+        We can assume that $A$ is ordered so that if $j, k\in [1, n]\subset\mathbb{Z}$ with $j < k$ then $a_j < a_k$ ($A$ is in increasing order) because if it isn't we can simply rearrange $A$ so that it is.
+    \end{singlespace}
+    Then since every element of $A$ is in $S$ we have $a_1\in S$ and $a_n\in S$. Clearly for all $x\in A, \;a_1\leq x$ and $a_n\geq x$.
+    \\So $a_1$ is a lower bound of $A$ and $a_n$ is an upper bound of $A$.
+    \\Say $x\in S$ such that $x$ is a lower bound of $A$ then for all $y\in A, \;x\leq y$ and since $a_1\in A$ we have that $x\leq a_1$.
+    \\So $inf A = a_1$
+    \\Say $x\in S$ such that $x$ is an upper bound of $A$ then for all $y\in A, \;x\geq y$ and since $a_n\in A$ we have that $x\geq a_n$.
+    \\So $sup A = a_n$
+    \\Therefore since $A$ and $S$ were arbitrary choices of a finite set and any superset, any finite set contains its
+    \\supremum and its infimum. \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} Let $S = \mathbb{R}$ and $A = \{x\in\mathbb{Q} : a_1 < x \leq a_2\}$. For some $a_1, a_2\in\mathbb{Q}$. Clearly $A$ is a bounded subset of $\mathbb{Q}$.
+\begin{center}
+    \doublespacing
+    We know $a_2\in S$, $x\leq a_2$ for all $x\in A$. Therefore $a_2$ is an upper bound of $A$. If $y\in S$ is an upper bound of $A$ then for all $x\in A$ we know $y\geq x$ so since $a_2\in A$ we have that $y\geq a_2$.
+    \\Therefore $sup A = a_2$.
+    \\We also know $a_1\in S$, $x > a_1$ for all $x\in A$. Therefore $a_1$ is a lower bound of $A$. If $y\in S$ such that $y > a_1$ then since $\mathbb{Q}$ is dense in $\mathbb{R}$ there exists an $r\in\mathbb{Q}$ such that $a_1 < r < y$. So either $a_1 < r\leq a_2$ so that $r\in A$ and therefore $y > z$ for some $z\in A$ and is not a lower bound of $A$ or $a_2 < r < y$ and therefore $y$ is not a lower bound of $A$.
+    \\Therefore $inf A = a_1$.
+    \\Since $sup A = a_2\in A$ and $inf A = a_1\notin A$ this is an example of a bounded subset of $\mathbb{Q}$ that contains its supremum but not its infimum.
+\end{center}
+
+
+
+
+\newpage
+\section*{1.3.11}
+
+{\Large \textbf{a.}} This is true. Let $A$ and $B$ both be nonempty sets so $A\subseteq B$.
+\begin{center}
+    \doublespacing
+        Let $x = sup B$. Then $x\geq b$ for all $b\in B$. Since $A\subseteq B$ if $a\in A$ then $a\in B$.
+        \\So we also know $x\geq a$ for all $a\in A$ and is an upper bound of $A$, meaning it must be greater than or equal to $sup A$.
+        \\Therefore $x = sup B\geq sup A$ \qedsymbol
+\end{center}
+
+{\Large \textbf{b.}} This is true. Let $A$ and $B$ be sets such that $sup A < inf B$.
+\begin{center}
+    \doublespacing
+    Let $x = sup A$ and $y = inf B$, according to our assumptions then $x < y$.
+    \\Consider $z = \cfrac{x + y}{2}$ then since $x < y$ by adding $x$ to both sides and dividing by 2 we get $x <\cfrac{x + y}{2} = z$.
+    \\Similarly since $x < y$ by adding $y$ to both sides and dividing by 2 we get $z =\cfrac{x + y}{2} < y$.
+    \\So $x < z < y$, and since $x\in\mathbb{R}$ and $y\in\mathbb{R}$ we know $\cfrac{x + y}{2} = z\in\mathbb{R}$
+    \\Since $x = sup A$ and $y = inf B$ we know $x\geq a$ for all $a\in A$ and $y\leq b$ for all $b\in B$.
+    \\So we have that $a\leq x < z < y\leq b$ for all $a\in A$ and all $b\in B$.
+    \\So $z\in\mathbb{R}$ is such an example where $a < z < b$ for all $a\in A$ and all $b\in B$.
+    \\Therefore if $sup A < inf B$ there does exist a $c\in\mathbb{R}$ such that $a < c < b$ for all $a\in A$ and all $b\in B$ \qedsymbol
+\end{center}
+
+{\Large \textbf{c.}} This is false. Let $A = (-\infty, t)$ and $B = (t, \infty)$ for some $t\in\mathbb{R}$.
+\begin{center}
+    \doublespacing
+    Then $a < t < b$ for all $a\in A$ and all $b\in B$. So $t$ is both an upper bound for $A$ and a lower bound for $B$.
+    \begin{itemize}
+        \item Showing $t = sup A$:
+        \begin{center}
+            If $z\in\mathbb{R}$ such that $z < t$ then adding $t$ to both sides and dividing by 2 we get $\cfrac{z + t}{2} < t$.
+            \\Similarly since $z < t$ by adding $z$ to both sides and dividing by 2 we get $z < \cfrac{z + t}{2}$.
+            \\So $r = \cfrac{z + t}{2}\in A$ and therefore $z < w$ for some $w\in A$ and can't be an upper bound of $A$.
+            \\Therefore if $z\in\mathbb{R}$ is an upper bound of $A$ then $z\geq t$, so $sup A = t$.
+        \end{center}
+        \item Showing $t = inf B$:
+        \begin{center}
+            If $z\in\mathbb{R}$ such that $z > t$ then adding $t$ to both sides and dividing by 2 we get $\cfrac{z + t}{2} > t$.
+            \\Similarly since $z > t$ by adding $z$ to both sides and dividing by 2 we get $z > \cfrac{z + t}{2}$.
+            \\So $r = \cfrac{z + t}{2}\in B$ and therefore $z > w$ for some $w\in B$ and can't be a lower bound of $B$.
+            \\Therefore if $z\in\mathbb{R}$ is a lower bound of $B$ then $z\leq t$, so $inf B = t$.
+        \end{center}
+    \end{itemize}
+    Since $sup A = t = inf B$, we have that $sup A\not < inf B$.
+    \\So this is such an example where there exists a $c\in\mathbb{R}$ such that $a < c < b$ for all $a\in A$ and all $b\in B$ but $sup A\not < inf B$.
+    \\Therefore the existence of a $c\in\mathbb{R}$ such that $a < c < b$ for all $a\in A$ and all $b\in B$ does not imply that $sup A < inf B$ \qedsymbol
+\end{center}
+
+\newpage
+\section*{1.4.5}
+\begin{center}
+    \doublespacing
+    From problem 1.4.1 we have: If $a\in\mathbb{Q}$ and $t\in\mathbb{I}$ then $a + t\in\mathbb{I}$ and if $t\neq 0$ then $at\in\mathbb{I}$.
+    \\Let $a, b\in\mathbb{R}$ such that $a < b$, then $a - \sqrt{2}, b - \sqrt{2}\in\mathbb{R}$ and $a - \sqrt{2} < b - \sqrt{2}$.
+    \\Furthermore, as proved in a previous Sample Work, $\sqrt{2}\in\mathbb{I}$.
+    \\So for all $a, b\in\mathbb{R}$ such that $a < b$, since $\mathbb{Q}$ is dense in $\mathbb{R}$ there exists a $q\in\mathbb{Q}$ such that $a - \sqrt{2} < q < b - \sqrt{2}$.
+    \\By adding $\sqrt{2}$ to each side we have that for all $a, b\in\mathbb{R}$ such that $a < b$, there exists a $q\in\mathbb{Q}$ such that $a < q + \sqrt{2} < b$.
+    \\Let $t = q + \sqrt{2}$ for this $q\in\mathbb{Q}$. By the result of problem 1.4.1 we have that $t = q + \sqrt{2}\in\mathbb{I}$
+    \\Therefore for all $a, b\in\mathbb{R}$ there exists a $t\in\mathbb{I}$ such that $a < t < b$ \qedsymbol
+\end{center}
+
+
+\section*{1.4.8}
+
+{\Large \textbf{a.}} Let $A = \{x\in\mathbb{Q} : x < t\}$ and $B = \{x\in\mathbb{I} : x < t\}$ for some $t\in\mathbb{R}$.
+\begin{center}
+    \doublespacing
+    Clearly since if $x\in\mathbb{Q}$ then $x\notin\mathbb{I}$ and vice versa we know that $A\cap B =\phi$.
+    \begin{itemize}
+        \item Showing $t = sup A$:
+        \\Since $t > x$ for all $x\in A$, $t$ is an upper bound of $A$.
+        \\If $y\in\mathbb{R}$ such that $y < t$ then since $\mathbb{Q}$ is dense in $\mathbb{R}$ there exists an $x\in\mathbb{Q}$ such that $y < x < t$.
+        \\Since for this $x\in\mathbb{Q}$ we know $x < t$, $x\in A$ so $y < z$ for some $z\in A$ and therefore can't be an upper bound of $A$.
+        \\So if $w\in\mathbb{R}$ is an upper bound of $A$ then $w\geq t$.
+        \\Therefore $sup A = t$.
+        \item Showing $t = sup B$:
+        \\Since $t > x$ for all $x\in B$, $t$ is an upper bound of $B$.
+        \\If $y\in\mathbb{R}$ such that $y < t$ then since $\mathbb{I}$ is dense in $\mathbb{R}$ there exists an $x\in\mathbb{I}$ such that $y < x < t$.
+        \\Since for this $x\in\mathbb{I}$ we know $x < t$, $x\in B$ so $y < z$ for some $z\in B$ and therefore can't be an upper bound of $B$.
+        \\So if $w\in\mathbb{R}$ is an upper bound of $B$ then $w\geq t$.
+        \\Therefore $sup B = t$.
+    \end{itemize}
+    So $sup A = t = sup B$, and $t\notin A$, $t\notin B$
+    \\So this is an example of sets $A$ and $B$ where $A\cap B = \phi$, $sup A\notin A$, $sup B\notin B$, and $sup A = sup B$.
+\end{center}
+
+{\Large \textbf{b.}} For $n\in\mathbb{N}$, let $J_n = (-\frac{1}{n}, \frac{1}{n})$. Notice that $0\in J_n$ for all $n\in\mathbb{N}$.
+\begin{center}
+    \doublespacing
+    Let $x\in\mathbb{R}$ be such that $x > 0$. By the Archimedean property there exists an $m\in\mathbb{N}$ such that $\frac{1}{m} < x$.
+    \\Since $\frac{1}{m} < x$ we have that $x\notin J_{m}$, and therefore $x\notin\cap _{i=1}^{\infty} J_i$.
+    \\Let $x\in\mathbb{R}$ be such that $x < 0$. Then $-x > 0$. By the Archimedean property there exists an $m\in\mathbb{N}$ such that $\frac{1}{m} < -x$.
+    \\Since $\frac{1}{m} < -x$ we have that $x < -\frac{1}{m}$ and consequently $x\notin J_{m}$, and therefore $x\notin\cap _{i=1}^{\infty} J_i$.
+    \\So if $x\neq 0$ then $x\notin J_n$ for some $n\in\mathbb{N}$ therefore $\cap _{i=1}^{\infty} J_i = \{0\}$.
+    \\So this is an example of a sequence of nested open intervals $J_1\supseteq J_2\supseteq J_3\supseteq ...$ such that $\cap _{i=1}^{\infty} J_i\neq\phi$ and $\cap _{i=1}^{\infty} J_i$ only has a finite number of elements.
+\end{center}
+
+\newpage
+{\Large \textbf{c.}} For $n\in\mathbb{N}$ let $L_n = [n, \infty)$. Then $L_1\supseteq L_2\supseteq L_3\supseteq ...$
+\begin{center}
+    \doublespacing
+    Let $x\in\mathbb{R}$ then by the Archimedean property there exists an $n\in\mathbb{N}$ such that $n > x$.
+    \\Since $x < n$ we have that $x\notin L_n$ and therefore $x\notin\cap _{i=1}^\infty L_i$.
+    \\Therefore $\cap _{i=1}^\infty L_i =\phi$.
+    \\So this is an example of nested unbounded closed intervals $L_1\supseteq L_2\supseteq L_3\supseteq ...$ such that $\cap _{i=1}^\infty L_i =\phi$.
+\end{center}
+
+{\Large \textbf{d.}} Let $I_1, I_2, I_3, ...$ be closed bounded intervals such that $\cap _{i=1}^n I_i\neq\phi$ for all $n\in\mathbb{N}$.
+\begin{center}
+    \doublespacing
+    Then $\cap _{i=1}^n I_i$ is a closed bounded interval itself for all $n\in\mathbb{N}$. That is $\cap _{i=1}^n I_i = [a_n, b_n]$ for some $a_n, b_n\in\mathbb{R}$.
+    \\Furthermore $\cap _{i=1}^{n+1} I_i = (\cap _{i=1}^n I_i)\cap I_{n+1}\subseteq\cap _{i=1}^n I_i$ because if $x\in\cap _{i=1}^{n+1} I_i$ then $x\in\cap _{i=1}^n I_i$.
+    \\Denote $\cap _{i=1}^n I_i$ as $[a_n, b_n]$ since each $\cap _{i=1}^n I_i$ is a closed bounded interval.
+    \\So we have that $[a_1, b_1]\supseteq [a_2, b_2]\supseteq [a_3, b_3]\supseteq ...$ as a sequence of closed bounded nested intervals.
+    \\The nested interval property tells us that $\cap _{n=1}^\infty [a_n, b_n]\neq\phi$.
+    \\Therefore $\cap _{n=1}^\infty [a_n, b_n] = \cap _{n=1}^\infty \cap _{i=1}^n I_i = I_1\cap (I_1\cap I_2)\cap (I_1\cap I_2\cap I_3)\cap ... = I_1\cap I_2\cap I_3\cap... = \cap _{n=1}^\infty I_n\neq\phi$.
+    \\So if you have closed bounded intervals $I_1, I_2, I_3, ...$ (not necessarily nested) such that $\cap _{i=1}^n I_i\neq\phi$ for all $n\in\mathbb{N}$ then it can not be that $\cap _{n=1}^\infty I_n =\phi$ \qedsymbol
+\end{center}
+
+\section*{External Sources}
+\doublespacing
+\noindent I believe that Abbott's book had an analogous example to my solution for 1.4.8.c. where they took $A_1 =\mathbb{N} = \{1, 2, 3, ...\}$, $A_2 = \{2, 3, 4, ...\}$, $A_3 = \{3, 4, 5, ...\}$, ... then proceeded to show that $\cap _{i=1}^\infty A_i =\phi$.
+\\This idea from the book also contributed to my solution for 1.4.8.b.
+\\I don't know if I have to list the textbook as a source for ideas but I thought I would just to be safe.
+
+\end{document}
