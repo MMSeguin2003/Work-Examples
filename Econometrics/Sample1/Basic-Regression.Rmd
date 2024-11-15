@@ -1,0 +1,99 @@
+---
+title: "Basic Regression"
+author: "Matthew Seguin"
+geometry: margin=1.5cm
+output:
+  pdf_document: default
+---
+
+# 2.
+```{r}
+library(rio)
+hprice <- import("hprice.xls")
+```
+## a.
+```{r}
+reg1 <- lm(price ~ sqrft + bdrms, data = hprice)
+summary(reg1)
+```
+
+We just ran the regression $price =\beta _0 +\beta _1 sqrft +\beta _2 bdrms + U$. The estimated intercept is $\hat{\beta}_0 = -16.47429$, estimated coefficient for $sqrft$ is $\hat{\beta}_1 = 0.12809$ and the estimated coefficient for $bdrms$ is $\hat{\beta}_2 = 14.41436$. The intercept has a very significant p-value, it would be unwise to leave the intercept out of a regression. As you can see the t-statistic for $\hat{\beta}_1$ is very large, and hence the p-value for the hypothesis $\beta _1 = 0$ is very small. We can reject the hypothesis $H_0:\beta _1 = 0$, this implies that square feet has a significant effect on the selling price (an expected result). The p-value for $\hat{\beta}_2$ is non-negligible, so we can't reject the hypothesis $H_0:\beta _2 = 0$ which implies that the number of bedrooms might not have a significant effect on the selling price (a rather counter intuitive result). The $R^2$ isn't high but it isn't low either, so the model has a decent fit overall. Lastly, the p-value for the F-statistic is extremely low which tells us that at least one of the slopes is nonzero (which we know is probably $\beta _1$, the coefficient for square feet).
+
+\newpage
+## b.
+\begin{center}
+Under our regression model $price =\beta _0 +\beta _1 sqrft +\beta _2 bdrms + U$, if $sqrft$ is held constant and $bdrms$ increases by 1 \\(i.e. $bdrms_1 = bdrms_0 + 1$) we will get the following:
+$$\Delta price = price_1 - price_0 = (\beta _0 +\beta _1 sqrft +\beta _2 bdrms _1) - (\beta _0 +\beta _1 sqrft +\beta _2 bdrms _0) =\beta _2 (bdrms _1 - bdrms _0) =\beta _2\approx\hat{\beta}_2$$
+This was estimated via the results of our regression using OLS, the result ($\hat{\beta}_2$) is shown below.
+\end{center}
+```{r}
+as.numeric(reg1$coefficients[3])
+```
+\begin{center}
+So the estimated increase in price for a house with one more bedroom, holding square footage constant, is 14.41436 which is 14,414.36 dollars in the real world.
+\end{center}
+
+## c.
+\begin{center}
+Under our regression model $price =\beta _0 +\beta _1 sqrft +\beta _2 bdrms + U$, if $bdrms$ increases by 1 \\(i.e. $bdrms_1 = bdrms_0 + 1$) and the extra bedroom is 140 extra square feet (i.e. $sqrft_1 = sqrft_0 + 140$) \\we will get the following:
+$$\Delta price = price_1 - price_0 = (\beta _0 +\beta _1 sqrft_1 +\beta _2 bdrms _1) - (\beta _0 +\beta _1 sqrft_0 +\beta _2 bdrms _0)$$
+$$=\beta _1 (sqrft_1 - sqrft_0) +\beta _2 (bdrms _1 - bdrms _0) = 140\beta _1 +\beta _2\approx 140\hat{\beta}_1 +\hat{\beta}_2$$
+We can use our estimations from the results of our regression using OLS, the result is shown below.
+\end{center}
+```{r}
+as.numeric(140*reg1$coefficients[2] + reg1$coefficients[3])
+```
+\begin{center}
+So the estimated increase in price for a house with one more bedroom, which is 140 extra square feet, is 32.34678 which is 32,346.78 dollars in the real world. This is higher than our result from part b, which is expected because not only do we have an increase in the number of bedrooms but we also have an increase in square feet (which has a positive coefficient).
+\end{center}
+
+## d.
+\begin{center}
+From part a we saw that $R^2 = 0.6283$ for this regression (which uses square feet and the number of bedrooms), so we can say that square feet and the number of bedrooms account for approximately $62.83\%$ of the variation in price.
+\end{center}
+
+## e.
+\begin{center}
+Under our regression model $price =\beta _0 +\beta _1 sqrft +\beta _2 bdrms + U$, if $bdrms = 4$ and $sqrft = 2438$ \\we will get the following:
+$$price =\beta _0 + 2438\beta _1 + 4\beta _2\approx\hat{\beta}_0 + 2438\hat{\beta}_1 + 4\hat{\beta}_2$$
+We can use our estimations from the results of our regression using OLS, the result is shown below.
+\end{center}
+```{r}
+as.numeric(reg1$coefficients[1] + 2438*reg1$coefficients[2] + 4*reg1$coefficients[3])
+```
+\begin{center}
+So the estimated price for a house with four bedrooms and 2438 square feet is 353.4635 which is 353,463.50 dollars in the real world.
+\end{center}
+
+\newpage
+## f.
+\begin{center}
+From the previous part the estimated price for a house with four bedrooms and 2438 square feet is $\hat{price} = 353.4635$, whereas the buyer actually payed $price = 300$. Therefore the residual here is $price -\hat{price} = 300 - 353.4635 = -53.4635$ which indicates that if this model is correct the buyer underpaid for the house. This regression is not the best, as indicated by the $R^2$, but it does have some significance so it is fairly indicative that the buyer did indeed underpay.
+\end{center}
+
+## g.
+\begin{center}
+The number of bedrooms almost certainly is a determinant of price which is indicated by the regression run before and by real world knowledge. Furthermore the number of bedrooms is clearly positively correlated with the square footage since if there are more bedrooms you need the space for them and hence there will be more square feet. This implies that if bedrooms is left out of the regression then the coefficient for square feet will have omitted variable bias. In the case of omitted variable bias we know $plim\:\hat{\beta}_1 =\beta _1 +\beta _2\rho _{x,u}\frac{\sigma _u}{\sigma _x}$ (where $\rho$ is the correlation between the included variable and the true residual term, and $\sigma _u,\sigma _x$ are the standard deviations of the residual term and the included variable respectively). We know that $\rho > 0$ for square feet and the number of bedrooms and if bedrooms is left out it becomes part of the residual term we know that $\rho _{sqrft, u} > 0$ when the number of bedrooms is left out. Therefore we would have that the coefficient for square feet will be overestimated (that is it is positively biased) if the number of bedrooms is left out of the regression.
+\\I will show the sample correlation between square feet and the number of bedrooms below as well as the new regression.
+\end{center}
+```{r}
+cor(hprice$bdrms, hprice$sqrft)
+reg2 <- lm(price ~ sqrft, data = hprice)
+summary(reg2)
+```
+\begin{center}
+As expected the sample correlation is fairly strong and positive between square feet and the number of bedrooms. In this new regression we got that $\hat{\beta}_1 = 0.13931$ which is greater than our estimate from the first regression ($\hat{\beta}_1 = 0.1280887$). This is consistent with what we predicted would happen in the case of omitted variable bias.
+\end{center}
+
+\newpage
+## h.
+\begin{center}
+If all the houses were one story and covered the entire lot then there would be perfect multicollinearity, but this is not the reality. Firstly, not every house covers the entire lot and the amount of the lot it covers is variable because some people like to have bigger backyards for example. Secondly, some houses are several floors which allows there to be more square feet in the house than even the lot has. So the lot size and the square feet of the house are definitely not perfectly multicollinear. The result of the regression is below.
+\end{center}
+```{r}
+reg3 <- lm(price ~ sqrft + bdrms + lotsize, data = hprice)
+summary(reg3)
+```
+\begin{center}
+The regression gives $\hat{\beta}_3 = 0.002129$ as the coefficient for lot size. This means that increasing the lot size by 1 square foot (while keeping all else constant) is expected to increase the price by 0.002129 which is a little over 2 dollars in the real world. Note however that in the real world people are much more likely to increase lot size by a more significant number than just one square foot. If the lot size increases but the square footage of the house does not this means that the outside space (for example the backyard) got larger. So the coefficient for lot size can be interpreted as the expected increase in price extra outside space gives, according to this regression outside space costs about 2.13 dollars per square foot.
+\end{center}

@@ -1,0 +1,6 @@
+#R History Files
+*.Rhistory
+#csv files
+*.csv
+#xls files
+*.xls

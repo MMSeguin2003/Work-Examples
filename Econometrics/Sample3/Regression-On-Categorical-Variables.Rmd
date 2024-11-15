@@ -1,0 +1,164 @@
+---
+title: "Regression with Categorical Variables"
+author: "Matthew Seguin"
+geometry: margin=1.5cm
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# 2.
+```{r}
+library(rio);library(plm);library(car)
+mrd <- import("murder.xls")
+```
+
+## a.
+\begin{center}
+Below is the estimated random effects model for $mrdrte_{it} =\beta _0 +\beta _1 exec_{it} +\gamma _1 D90_t +\gamma _2 D93_t +\alpha _i + u_{it}$ where $\alpha _i$ is an unobserved state specific effect.
+\end{center}
+```{r}
+reg1 <- plm(mrdrte ~ exec + d90 + d93, data = mrd[,-2], model = "random")
+summary(reg1)
+```
+
+\newpage
+## b.
+\begin{center}
+There is not a dummy variable equal to 1 if $t=1987$ and 0 otherwise because it would introduce perfect multicollinearity which violates the assumptions of the model.
+\\This is because we may write:
+$$DY_t = 1 -\sum _{X\neq Y} DX_t$$
+If $t = Y$ we get that $DY_t = 1$ and all other dummy variables must be 0 so:
+$$DY_t = 1 = 1 -\sum _{X\neq Y} DX_t = 1 - 0 - 0 = 1$$
+If $t\neq Y$ we get that $DY_t = 0$ and only one of the other dummy variables must be 1 with the other being 0 so:
+$$DY_t = 0 = 1 -\sum _{X\neq Y} DX_t = 1 - 1 - 0 = 0$$
+So if the last dummy variable was included there is obviously an issue with perfect multicollinearity, however how it is with only 2 of the dummy variables is fine because you need all three to the above linear combination true.
+\end{center}
+
+\newpage
+## c.
+\begin{center}
+The new model is $mrdrte_{it} =\beta _0 +\beta _1 exec_{it} +\beta _2 unemp_{it} +\gamma _1 D90_t +\gamma _2 D93_t +\alpha _i + u_{it}$ where $\alpha _i$ is an unobserved state specific effect. Recall that if there is omitted variable bias then for the original biased $\beta_1$ coefficient we know:
+$$plim\:\hat{\beta}_1 =\beta _1 +\beta _2\frac{cov(exec_{it}, unemp_{it})}{var(exec_{it})}$$
+Many murder victims are homeless so we expect an increase in in the murder rate to follow an increase in unemployment (i.e. $\beta _2 > 0$), this is reinforced in the regression. When murder rates are high we expect more executions as more murderers will be caught and the death penalty was still in place. So when unemployment is higher we expect higher murder rates and then higher executions, so we expect for unemployment and executions to be positively correlated.
+\\Therefore since we expect $\beta _2 > 0$ and $cov(exec_{it}, unemp_{it}) > 0$ we expect that $plim\:\hat{\beta}_1 >\beta_1$ and hence the estimated coefficient from the first regression was positively biased. Below are the new regression results.
+\end{center}
+```{r}
+reg2 <- plm(mrdrte ~ exec + unemp + d90 + d93, data = mrd[,-2], model = "random")
+summary(reg2)
+reg1$coefficients[2] - reg2$coefficients[2]
+```
+\begin{center}
+As we can see the estimated coefficient $\hat{\beta}_1$ is larger in the first regression, which we expect since we are saying it is positively biased there and unbiased in the second regression.
+\end{center}
+
+\newpage
+## d.
+\begin{center}
+Below are the t statistics (though the regression labels them as normal statistics) and associated p-values for $H_0:\beta_1 = 0$ in each regression (recall $\beta_1$ is the coefficient on $exec_{it}$ in each regression).
+\end{center}
+```{r}
+reg1_data <- summary(reg1)
+reg2_data <- summary(reg2)
+t_reg1 <- reg1_data$coefficients[2, "z-value"]
+t_reg1
+p_reg1 <- reg1_data$coefficients[2, "Pr(>|z|)"]
+p_reg1
+t_reg2 <- reg2_data$coefficients[2, "z-value"]
+t_reg2
+p_reg2 <- reg2_data$coefficients[2, "Pr(>|z|)"]
+p_reg2
+```
+\begin{center}
+In the first regression we get $t = -0.2496078$ which has an approximate p-value of 0.8028907 which is very large so we definitely wouldn't want to reject $H_0$.
+\\In the second regression we get $t = -0.340672$ which has an approximate p-value of 0.7333505 which is again very large so we definitely wouldn't want to reject $H_0$.
+\\Therefore in both regressions we can not reject $H_0:\beta_1 = 0$ which means we can not reject the hypothesis that the predicted effect on the
+murder rate of the number of executions is zero. This is true for any significance level less than the p-values and so is definitely true at the $10\%$ level.
+\end{center}
+
+\newpage
+## e.
+\begin{center}
+Below is the estimated fixed effects model for $mrdrte_{it} =\beta _0 +\beta _1 exec_{it} +\beta _2 unemp_{it} +\gamma _1 D90_t +\gamma _2 D93_t +\alpha _i + u_{it}$ where $\alpha _i$ is an unobserved state specific effect.
+\end{center}
+```{r}
+reg3 <- plm(mrdrte ~ exec + unemp + d90 + d93, data = mrd[,-2], model = "within")
+summary(reg3)
+```
+\begin{center}
+We weren't asked to find it but I'm curious what the Hausman test says so I'll run it below.
+\end{center}
+```{r}
+phtest(reg2, reg3)
+```
+\begin{center}
+The p-value is 0.2165 which means we can't reject $H_0:\alpha_i$ is uncorrelated with the regressors. So it isn't a bad idea to use the regression with random effects because this test tells us it's still consistent.
+\end{center}
+
+\newpage
+## f.
+\begin{center}
+If $exec$ increases by 30 (i.e. $\Delta exec = 30$) we get the following expected change (keeping all else constant) in murder rate under our model:
+$$\Delta mrdrte = mrdrte_1 - mrdrte_0 =(\beta _0 +\beta _1 (exec +\Delta exec) +\beta _2 unemp +\gamma_1 D90 +\gamma _2 D93) - (\beta _0 +\beta _1 exec +\beta _2 unemp +\gamma_1 D90 +\gamma _2 D93)$$
+$$=\beta _1\Delta exec = 30\beta _1$$
+We can find a $95\%$ confidence interval for $\beta _1$ via the results of our regression as $\Big{[}\hat{\beta}_1 - 1.96SE(\hat{\beta}_1),\hat{\beta}_1 + 1.96SE(\hat{\beta}_1)\Big{]}$. The result of which is shown below.
+\end{center}
+```{r}
+reg3_data <- summary(reg3)
+b_1_hat <- as.numeric(reg3_data$coefficients[1, "Estimate"])
+b_1_hat
+se_b_1_hat <- as.numeric(reg3_data$coefficients[1, "Std. Error"])
+se_b_1_hat
+b_1_CI <- c(b_1_hat - 1.96*se_b_1_hat, b_1_hat + 1.96*se_b_1_hat)
+b_1_CI
+```
+\begin{center}
+Therefore using this result we have that the $95\%$ confidence interval for $\Delta mrdrte$ as a result of an increase in $exec$ by 30 is given by $30\:CI(\beta_1)$ where $CI(\beta_1)$ is the confidence interval for $\beta_1$ (found above). The result of which is shown below.
+\end{center}
+```{r}
+chg_mrdrte_CI <- 30*b_1_CI
+chg_mrdrte_CI
+```
+
+\newpage
+## g.
+\begin{center}
+Below is the test of the hypothesis $H_0:\gamma_1 =\gamma_2 = 0$ in the regression $mrdrte_{it} =\beta _0 +\beta _1 exec_{it} +\beta _2 unemp_{it} +\gamma _1 D90_t +\gamma _2 D93_t +\alpha _i + u_{it}$ where $\alpha _i$ is an unobserved state specific effect.
+\end{center}
+```{r}
+linearHypothesis(reg3, c("d90=0","d93=0"))
+reg3_data$coefficients[3, "Estimate"]
+reg3_data$coefficients[4, "Estimate"]
+```
+\begin{center}
+For this test we get the p-value 0.0265 so we can't reject $H_0$ at the $1\%$ level but we can reject $H_0$ at the $5\%$ level (Note that R is using a Chi-squared stat instead of an F stat to calculate this, this doesn't matter because $F_{(q,\infty)} =\frac{X^2_q}{q}$). The $5\%$ level is standard so we can say that the true coefficients on $d90$ and $d93$ are nonzero, that is there is some change in the murder rate relative to 1987 in the years 1990 and 1993. Since the coefficients estimated on each of the year variables are positive (shown above) we take this as evidence that the murder rate increased relative to 1987 in both the years 1990 and 1993.
+\end{center}
+
+\newpage
+## h.
+\begin{center}
+We want to test $H_0:\gamma_1=\gamma_2$ (i.e $\gamma_1-\gamma_2=0$). We can use a simple t test for this. We know:
+$$Var(\hat{\gamma}_1 -\hat{\gamma}_2) = Var(\hat{\gamma}_1) + Var(\hat{\gamma}_2) - 2Cov(\hat{\gamma}_1,\hat{\gamma}_2)$$
+We also know under $H_0$ that $\gamma_1 -\gamma_2 = 0$, so the t-statistic will be:
+$$t =\frac{(\hat{\gamma}_1-\hat{\gamma}_2) - 0}{\sqrt{Var(\hat{\gamma}_1) + Var(\hat{\gamma}_2) - 2Cov(\hat{\gamma}_1,\hat{\gamma}_2)}}\approx\frac{\hat{\gamma}_1-\hat{\gamma}_2}{\sqrt{(SE(\hat{\gamma}_1))^2 +(SE(\hat{\gamma}_1))^2 - 2Cov(\hat{\gamma}_1,\hat{\gamma}_2)}}$$
+The result of the test is shown below (note we are given $Cov(\hat{\gamma}_1,\hat{\gamma}_2) = 0.24$).
+\end{center}
+```{r}
+g_1_hat <- as.numeric(reg3_data$coefficients[3, "Estimate"])
+g_1_hat
+se_g_1_hat <- as.numeric(reg3_data$coefficients[3, "Std. Error"])
+se_g_1_hat
+g_2_hat <- as.numeric(reg3_data$coefficients[4, "Estimate"])
+g_2_hat
+se_g_2_hat <- as.numeric(reg3_data$coefficients[4, "Std. Error"])
+se_g_2_hat
+cov_g1_g2 <- 0.24
+se_diff_hat <- sqrt((se_g_1_hat)^2 + (se_g_2_hat)^2 - 2*cov_g1_g2)
+t <- (g_1_hat - g_2_hat)/se_diff_hat
+t
+p_val <- 2*pnorm(-abs(t))
+p_val
+```
+\begin{center}
+So out t-statistic is -0.235 which gives a p-value of 0.814 which is very large so we definitely don't want to reject $H_0$. Therefore we can say that there is no significant difference between $\gamma_1$ and $\gamma_2$ which means that the increase in the murder rate for 1990 and 1993 was the same relative to 1987.
+\end{center}
