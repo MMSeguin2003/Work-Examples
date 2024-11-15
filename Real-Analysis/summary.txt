@@ -1,2 +1,1 @@
 This folder contains work on real analysis ranging from the basics of sets and sequences of real numbers all the way through differentiation and integration. There are many types of problems, both proof based and application based. This work is extended in the complex analysis folder.
-All problems are from Understanding Analysis (Stephen Abbott)
