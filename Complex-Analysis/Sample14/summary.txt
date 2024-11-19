@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around counting roots of complex functions and linear fractional transformations.

@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Counting Roots and Linear Fractional Transformations}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{94.2}
+\begin{center}
+    \doublespacing
+    Let $f$ be a function that is analytic inside and on a positively oriented simple closed contour $C$.
+    \\Further suppose that $f$ is never zero on $C$.
+    \\Let the image of $C$ under $w = f(z)$ be the closed contour $\Gamma$ as shown in the book.
+    \\If you imagine a person standing at the origin ($w = 0$), initially looking to any point $w_0\in\Gamma$ and tracing the path of someone else walking around $\Gamma$, then that person at the origin will do 3 complete counterclockwise rotations while tracing the other's path.
+    \\Therefore we know the winding number is 3 and so $\frac{1}{2\pi}\Delta _C\:arg\:f(z) = 3$ which gives the result $\Delta _C\:arg\:f(z) = 6\pi$.
+    \\Since $f$ is analytic inside and on $C$ we know it has 0 poles inside $C$ (that is $N_{\infty} = 0$).
+    \\Furthermore since $f$ is nonzero on $C$ we know that $\frac{1}{2\pi}\Delta _C\:arg\:f(z) = 3 = N_0 - N_{\infty}$ where $N_0$ is the number of zeros of $f$ inside $C$ and $N_{\infty}$ is the number of poles of $f$ inside $C$ (which we know is 0).
+    \\Therefore we have that $f$ has 3 zeros (counting multiplicity) interior to $C$ and $\Delta _C\:arg\:f(z) = 6\pi$ \qedsymbol
+    \break
+\end{center}
+
+
+\newpage
+\section*{94.6}
+\begin{center}
+    Let $C$ be the unit circle centered at the origin $|z| = 1$, clearly $C$ is a simple closed contour.
+\end{center}
+
+{\Large\textbf{a.}}
+\begin{center}
+    \doublespacing
+    Clearly $f(z) = -5z^4$ and $g(z) = z^6 + z^3 - 2z$ are both analytic inside and on $C$.
+    \\Furthermore we know that for all $z\in C$:
+    \\$|g(z)| = |z^6 + z^3 - 2z|\leq |z^6| + |z^3| + |-2z| = |z|^6 + |z|^3 + 2|z| = 4 < 5 = 5|z|^4 = |-5z^4| =  |f(z)|$
+    \\Therefore by Rouche's Theorem we know $f(z) = -5z^4$ and $f(z) + g(z) = z^6 - 5z^4 + z^3 - 2z$ have the same number of zeros (counting multiplicity) inside $C$.
+    \\Clearly $f(z) = -5z^4$ has 4 zeros (counting multiplicity) inside $C$ so we know $f(z) + g(z) = z^6 - 5z^4 + z^3 - 2z$ has 4 zeros inside $C$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}}
+\begin{center}
+    \doublespacing
+    Clearly $f(z) = 9$ and $g(z) = 2z^4 - 2z^3 + 2z^2 - 2z$ are both analytic inside and on $C$.
+    \\Furthermore we know that for all $z\in C$:
+    \\$|g(z)| = |2z^4 - 2z^3 + 2z^2 - 2z|\leq |2z^4| + |-2z^3| + |2z^2| + |-2z| = 2|z|^4 + 2|z|^3 + 2|z|^2 + 2|z| = 8 < 9 = |f(z)|$
+    \\Therefore by Rouche's Theorem we know $f(z) = 9$ and $f(z) + g(z) = 2z^4 - 2z^3 + 2z^2 - 2z + 9$ have the same number of zeros (counting multiplicity) inside $C$.
+    \\Clearly $f(z) = 9$ has no zeros inside $C$ so we know $f(z) + g(z) = 2z^4 - 2z^3 + 2z^2 - 2z + 9$ has no zeros inside $C$ \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}}
+\begin{center}
+    \doublespacing
+    Clearly $f(z) = -4z^3$ and $g(z) = z^7 + z - 1$ are both analytic inside and on $C$.
+    \\Furthermore we know that for all $z\in C$:
+    \\$|g(z)| = |z^7 + z - 1|\leq |z^7| + |z| + |-1| = |z|^7 + |z| + 1 = 3 < 4 = 4|z|^3 = |-4z^3| = |f(z)|$
+    \\Therefore by Rouche's Theorem we know $f(z) = -4z^3$ and $f(z) + g(z) = z^7 - 4z^3 + z - 1$ have the same number of zeros (counting multiplicity) inside $C$.
+    \\Clearly $f(z) = -4z^3$ has 3 zeros (counting multiplicity) inside $C$ so we know $f(z) + g(z) = z^7 - 4z^3 + z - 1$ has 3 zeros inside $C$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{94.9}
+\begin{center}
+    \doublespacing
+    Let $c\in\mathbb{C}$ such that $|c| > e$ then consider the functions $f(z) = cz^n$ for some $n\in\mathbb{N}$ and $g(z) = -e^z$.
+    \\Let $C$ be the unit circle $|z| = 1$. Clearly both are analytic inside and on $C$.
+    \\On $C$ we know $|f(z)| = |cz^n| = |c||z|^n = |c| > e$.
+    \\We also know if $z = x + iy$ then $|g(z)| = |-e^z| = |-e^{x+iy}| = |-e^x||e^{iy}| = e^x$.
+    \\On $C$ this is clearly maximized my maximizing $x =Re\:z$ and hence is maximized at $z = 1$.
+    \\So on $C$ we have that $|f(z)| = |c| > e = |-e^1|\geq |e^z| = |g(z)|$.
+    \\Therefore we know $f(z) = cz^n$ and $f(z) + g(z) = cz^n - e^z$ have the same number of zeros (counting multiplicity) inside $C$.
+    \\Clearly $f(z) = cz^n$ has $n$ zeros (counting multiplicity) inside $C$ (namely all at $z = 0$), so we know $f(z) + g(z) = cz^n - e^z$ has $n$ zeros inside $C$.
+    \\This is equivalent to saying the equation $cz^n = e^z$ has $n$ roots inside $C$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{98.12}
+\begin{center}
+    \doublespacing
+    Consider the circle $|z - z_0| = R$ under the map $f(z) =\frac{1}{z} =\frac{\overline{z}}{|z|^2}$.
+    \\Given we know that the circle is mapped to another circle we know that neither circle passes through the origin.
+    \\Recall that we may represent such a circle with the equation:
+    \[A(x^2 + y^2) + Bx + Cy + D = 0\]
+    Where $A\neq 0$ because it's a circle and $D\neq 0$ because it does not pass through the origin.
+    \\This is also equivalent to:
+    \[\Big{(}x +\frac{B}{2A}\Big{)}^2 +\Big{(}y +\frac{C}{2A}\Big{)}^2 =\Big{(}\frac{\sqrt{B^2 + C^2 - 4AD}}{2A}\Big{)}^2\]
+    Implying that the such a circle has center $z_0 = -\frac{B}{2A} - i\frac{C}{2A}$ and radius $R =\Big{(}\frac{\sqrt{B^2 + C^2 - 4AD}}{2A}\Big{)}^2$
+    \\Further recall that this under $f(z) =\frac{1}{z} = u(x, y) + iv(x, y)$ is mapped to:
+    \[D(u^2 + v^2) + Bu - Cv + A = 0\]
+    We may also write this as:
+    \[u^2 +\frac{B}{D} u + v^2 -\frac{C}{D} v +\frac{A}{D} = 0\]
+    \[u^2 + 2\frac{B}{2D} u + (\frac{B}{2D})^2 + v^2 - 2\frac{C}{2D} + (-\frac{C}{2D})^2 = -\frac{A}{D} + (\frac{B}{2D})^2 + (-\frac{C}{2D})^2\]
+    \[\Big{(}u +\frac{B}{2D}\Big{)}^2 +\Big{(}v -\frac{C}{2D}\Big{)}^2 =\frac{B^2 + C^2 - 4AD}{4D^2} =\Big{(}\frac{\sqrt{B^2 + C^2 - 4AD}}{2D}\Big{)}^2\]
+    This is clearly the equation of a circle with center $w_0 = -\frac{B}{2D} + i\frac{C}{2D}$ and radius $\rho =\Big{(}\frac{\sqrt{B^2 + C^2 - 4AD}}{2D}\Big{)}^2$.
+    \\If we had $z_0 = w_0$ then it must be that $-\frac{B}{2A} - i\frac{C}{2A} = -\frac{B}{2D} + i\frac{C}{2D}$.
+    \\Giving the simultaneous equations $-\frac{B}{2A} = -\frac{B}{2D}$ (hence $A = D$) and $-\frac{C}{2A} =\frac{C}{2D}$ (hence $A = -D$).
+    \\The only way for these to be simultaneously true is if $A = D = 0$ which contradicts the initial assumption that $A\neq 0$ and $D\neq 0$.
+    \\Therefore a circle that is mapped to a circle never has it's center mapped to the new center \qedsymbol
+    \break
+    \\Note that if the center of the original circle is the origin then the center remains the origin for the new circle, however under $\frac{1}{z}$ the origin is mapped to $\infty$ so there is still no issue.
+\end{center}
+
+
+\newpage
+\section*{100.1}
+\begin{center}
+    \doublespacing
+    Recall that the implicit form of the linear fractional transformation (given below) maps $z_1$ to $w_1$, $z_2$ to $w_2$, and $z_3$ to $w_3$:
+    \[\frac{(w - w_1)(w_2 - w_3)}{(w - w_3)(w_2 - w_1)} =\frac{(z - z_1)(z_2 - z_3)}{(z - z_3)(z_2 - z_1)}\]
+    Therefore by letting $z_1 = -1$, $z_2 = 0$, $z_3 = 1$, $w_1 = -i$, $w_2 = 1$, and $w_3 = i$ we get the following:
+    \[\frac{(w + i)(1 - i)}{(w - i)(1 + i)} =\frac{(z + 1)(0 - 1)}{(z - 1)(0 + 1)}\]
+    \[(w + i)(1 - i)(z - 1) = -(z + 1)(1 + i)(w - i)\]
+    \[(w - iw + i + 1)(z - 1) = -(z + iz + i + 1)(w - i)\]
+    \[wz - iwz + iz + z - w + iw - i - 1 = -zw - izw - iw - w + iz - z - 1 + i\]
+    \[wz + z + iw - i = -wz - iw - z + i\]
+    \[2(wz + z + iw - i) = 0\]
+    \[w(z + i) + (z - i) = 0\]
+    \[w =-\frac{z - i}{z + i} =\frac{i - z}{i + z}\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+
+{\Large\textbf{a.}} Let $f(z) =\frac{1}{z+1}$ and $\Gamma$ be the contour shown in the problem description.
+\begin{center}
+    \doublespacing
+    Let $D$ be a domain that encompasses $\Gamma$ but that does not contain $-1$, such a domain exists because $-1$ is exterior to $\Gamma$.
+    \\Clearly $f$ is analytic in $D$ since $-1\notin D$ and $-1$ is clearly the only point where $f$ is not analytic.
+    \\If you imagine a person standing outside of $D$, initially looking to any point $w_0\in\Gamma$ and tracing the path of someone else walking around $\Gamma$, then that person standing outside of $D$ won't rotate any times counterclockwise while tracing the other's path.
+    \\Therefore we know the winding number $W(\Gamma,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D$.
+    \\Therefore since $0\in D\backslash\Gamma$ and $W(\Gamma,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D$ we know:
+    \[\frac{1}{2\pi i}\int _{\Gamma}\frac{f(z)}{z} dz = W(\Gamma, 0) f(0)\]
+    Where $W(C, z_0)$ represents the winding number for a contour $C$ and a given point $z_0\notin C$.
+    \\If you imagine a person standing at the origin ($z_0 = 0$), initially looking to any point $w_0\in\Gamma$ and tracing the path of someone else walking around $\Gamma$, then that person at the origin will do 3 complete counterclockwise rotations while tracing the other's path.
+    \\Therefore we know the winding number $W(\Gamma, 0) = 3$.
+    \\So we have that:
+    \[\frac{1}{2\pi i}\int _{\Gamma}\frac{f(z)}{z} dz = W(\Gamma, 0) f(0) = 3(\frac{1}{0+1}) = 3\]
+    Leaving us with the final result:
+    \[\int _{\Gamma}\frac{f(z)}{z} dz =\int _{\Gamma}\frac{1}{z(z+1)} dz = 6\pi i\]
+    \qedsymbol
+    \break
+    \\Part b on next page.
+\end{center}
+
+\newpage
+{\Large\textbf{b.}} Let $f(z) =\frac{1}{z(z^2 - 1)}$ and $C$ be the contour shown in the problem description.
+\begin{center}
+    \doublespacing
+    What we are going to do is deconstruct this into a number of simple closed contours.
+    \\Let $C_1$ be the simple closed contour encompassing only $z_1 = 0$, $\Gamma _1$ be the contour following directly from $C_1$ and ending where $C$ intersects itself next, $C_2$ be the simple closed contour following directly from $\Gamma _1$ and ending where $C$ intersects itself next, $\Gamma _2$ be the contour following directly from $C_2$ and ending where $C$ intersects itself next, and finally let $C_3 =\Gamma _1 +\Gamma _2$.
+    \\Note that $C_1$, $C_2$, and $C_3$ are all simple closed contours.
+    \\We know first that:
+    \[\int _C f(z) dz =\int _{C_1} f(z) dz +\int _{\Gamma _1} f(z) dz +\int _{C_2} f(z) dz +\int _{\Gamma _2} f(z) dz =\int _{C_1} f(z) dz +\int _{C_2} f(z) dz +\int _{C_3} f(z) dz\]
+\end{center}
+\begin{itemize}
+    \item Considering $C_1$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Let $D_1$ be a domain that encompasses $C_1$ but that does not contain $\pm 1$, such a domain exists because $\pm 1$ are exterior $C_1$.
+    \\Clearly $f_1 (z) =\frac{1}{z^2 - 1}$ is analytic in $D_1$ since $\pm 1\notin D_1$ and $\pm 1$ are clearly the only points where $f_1$ is not analytic.
+    \\If you imagine a person standing outside of $D_1$, initially looking to any point $w_0\in C_1$ and tracing the path of someone else walking around $C_1$, then that person standing outside of $D_1$ won't rotate any times counterclockwise while tracing the other's path.
+    \\Therefore we know the winding number $W(C_1,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D_1$.
+    \\Therefore since $0\in D_1\backslash C_1$ and $W(C_1,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D_1$ we know:
+    \[\frac{1}{2\pi i}\int _{C_1}\frac{f_1(z)}{z} dz = W(C_1, 0) f_1(0)\]
+    Where $W(\Gamma, z_0)$ represents the winding number for a contour $\Gamma$ and a given point $z_0\notin\Gamma$.
+    \\If you imagine a person standing at the origin ($z_0 = 0$), initially looking to any point $w_0\in C_1$ and tracing the path of someone else walking around $C_1$, then that person at the origin will do 1 complete clockwise rotation while tracing the other's path.
+    \\Therefore we know the winding number $W(C_1, 0) = -1$.
+    \\So we have that:
+    \[\frac{1}{2\pi i}\int _{C_1}\frac{f_1(z)}{z} dz = W(C_1, 0) f_1(0) = -(\frac{1}{0-1}) = 1\]
+    Leaving us with the final result:
+    \[\int _{C_1}\frac{f_1(z)}{z} dz =\int _{C_1}\frac{1}{z(z^2-1)} dz = 2\pi i\]
+    Continued on next page.
+    \newpage
+\end{center}
+\begin{itemize}
+    \item Considering $C_3$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Let $D_3$ be a domain that encompasses $C_3$ but that does not contain 1 or 0, such a domain exists because 1 and 0 are exterior $C_1$.
+    \\Clearly $f_3 (z) =\frac{1}{z(z - 1)}$ is analytic in $D_3$ since $0, 1\notin D_1$ and $0, 1$ are clearly the only points where $f_3$ is not analytic.
+    \\If you imagine a person standing outside of $D_3$, initially looking to any point $w_0\in C_3$ and tracing the path of someone else walking around $C_3$, then that person standing outside of $D_3$ won't rotate any times counterclockwise while tracing the other's path.
+    \\Therefore we know the winding number $W(C_3,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D_3$.
+    \\Therefore since $-1\in D_3\backslash C_3$ and $W(C_3,\xi) = 0$ for $\xi\in\mathbb{C}\backslash D_3$ we know:
+    \[\frac{1}{2\pi i}\int _{C_3}\frac{f_3(z)}{z+1} dz = W(C_3, -1) f_3(-1)\]
+    Where $W(\Gamma, z_0)$ represents the winding number for a contour $\Gamma$ and a given point $z_0\notin\Gamma$.
+    \\If you imagine a person standing at the origin ($z_0 = 0$), initially looking to any point $w_0\in C_3$ and tracing the path of someone else walking around $C_3$, then that person at the origin will do 1 complete counterclockwise rotation while tracing the other's path.
+    \\Therefore we know the winding number $W(C_3, -1) = 1$.
+    \\So we have that:
+    \[\frac{1}{2\pi i}\int _{C_3}\frac{f_3(z)}{z+1} dz = W(C_3, -1) f_3(-1) =\frac{1}{-1(-1 - 1)} =\frac{1}{2}\]
+    Leaving us with the final result:
+    \[\int _{C_3}\frac{f_3(z)}{z} dz =\int _{C_3}\frac{1}{z(z^2-1)} dz =\pi i\]
+    \break
+    Continued on next page.
+    \newpage
+\end{center}
+\begin{itemize}
+    \item Considering $C_2$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Clearly $C_2$ is a simple closed contour that encompasses all of the singularities ($0,\pm 1$) of $f(z) =\frac{1}{z(z^2 - 1)}$.
+    \\Furthermore we may write $f(z) =\frac{\frac{1}{z^2-1}}{z}$, $f(z) =\frac{\frac{1}{z(z+1)}}{z-1}$, and $f(z) =\frac{\frac{1}{z(z-1)}}{z+1}$.
+    \\The numerator of the first representation above is analytic at $z_1 = 0$, similarly that of the second is analytic at $z_2 = 1$, and finally that of the third is analytic at $z_3 = -1$.
+    \\Since these are simple poles we may use the fact that $Res_{z = z_0}\frac{\phi (z)}{z - z_0} =\phi (z_0)$ where $\phi (z)$ is analytic at $z_0$.
+    \\Therefore:
+    \\$Res_{z = 0} f(z) = Res_{z=0}\frac{1}{z(z^2 - 1)} =\frac{1}{z^2 - 1}\Big{|}_{z = 0} = -1$
+    \\$Res_{z = -1} f(z) = Res_{z=-1}\frac{1}{z(z^2 - 1)} =\frac{1}{z(z-1)}\Big{|}_{z = -1} =\frac{1}{2}$
+    \\$Res_{z = 1} f(z) = Res_{z=1}\frac{1}{z(z^2 - 1)} =\frac{1}{z(z+1)}\Big{|}_{z = 1} =\frac{1}{2}$
+    \\Since $C_2$ is a simple closed contour and $f(z) =\frac{1}{z(z^2 - 1)}$ is analytic inside and on $C_2$ except at isolated singularities we know:
+    \[\int _{C_2} f(z) dz =\int _{C_2}\frac{1}{z(z^2 - 1)} dz = 2\pi i\Bigg{(}\sum _{k=1}^3 Res_{z = z_k} f(z)\Bigg{)} = 2\pi i\big{(}-1 +\frac{1}{2} +\frac{1}{2}\big{)} = 0\]
+    So finally we have that:
+    \[\int _{C}\frac{1}{z(z^2 - 1)} dz =\int _{C} f(z) dz =\int _{C_1} f(z) dz +\int _{C_2} f(z) dz +\int _{C_3} f(z) dz = 2\pi i + 0 +\pi i = 3\pi i\]
+\end{center}
+
+\end{document}
