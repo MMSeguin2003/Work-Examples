@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Complex Series, Taylor Series, and Laurent Series}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{61.3}
+\begin{center}
+    \doublespacing
+    Recall the triangle inequality $||z_1| - |z_2||\leq |z_1 - z_2|$ for $z_1, z_2\in\mathbb{C}$.
+    \\Let $(z_n)$ be a complex sequence such that $\lim _{n\to\infty} z_n = z$.
+    \\Then for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that for $n\geq N$ we know $|z_n - z| <\epsilon$.
+    \\Now consider the sequence $(w_n) =\big{(}|z_n|\big{)}$, and let $w = |z|$.
+    \\Let $\epsilon > 0$, then let $N$ be such that for $n\geq N$ we know $|z_n - z| <\epsilon$, such an $N$ exists because $\lim _{n\to\infty} z_n = z$.
+    \\Then for $n\geq N$ we know $|w_n - w| = ||z_n| - |z||\leq |z_n - z| <\epsilon$.
+    \\This was true for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So for all $\epsilon > 0$ we know there exists an $N\in\mathbb{N}$ such that $|w_n - w| = ||z_n| - |z|| <\epsilon$ for all $n\geq N$.
+    \\Therefore we have that $\lim _{n\to\infty} w_n = w$, or equivalently $\lim _{n\to\infty} |z_n| = |z|$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{61.6}
+\begin{center}
+    \doublespacing
+    Recall that if $z_n = x_n + iy_n$ is a sequence and $z = x + iy$ then $z_n\rightarrow z$ if and only if $x_n\rightarrow x$ and $y_n\rightarrow y$.
+    \\Let $z_n = x_n + iy_n$ be a sequence and assume:
+    \[\sum _{n=1}^{\infty} z_n = S = X + iY\]
+    Then we know that $S_N\rightarrow S$ where $S_N$ is defined below:
+    \[S_N =\sum _{n=1}^N z_n =\sum _{n=1}^N x_n + iy_n =\sum _{n=1}^N x_n + i\sum _{n=1}^N y_n\]
+    Define the sequences $X_N$ and $Y_N$ as below:
+    \[X_N =\sum _{n=1}^N x_n\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;Y_N =\sum _{n=1}^N y_n\]
+    We know that $X_N\rightarrow X$ and $Y_N\rightarrow Y$ as per the theorem before.
+    \\Now consider the sequence $w_n =\overline{z_n} = x_n - iy_n$.
+    \\Then we know:
+    \[T_N =\sum _{n=1}^N w_n =\sum _{n=1}^N x_n - iy_n =\sum _{n=1}^N x_n - i\sum _{n=1}^N y_n = X_N - iY_N\]
+    Again we know $X_N\rightarrow X$ and $Y_N\rightarrow Y$ so from the theorem above we know $T_N\rightarrow X - iY =\overline{S}$.
+    \\Since $T_N$, the sequence of partial sums of $w_n$, converges to $\overline{S}$ we know:
+    \[\sum _{n=1}^{\infty}\overline{z_n} =\sum _{n=1}^{\infty} w_n =\overline{S}\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{61.9}
+
+{\Large\textbf{a.}} Let $z_n$ be a sequence that converges to a complex number $z$.
+\begin{center}
+    \doublespacing
+    Since $z_n\rightarrow z$ we know for all $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that $|z_n - z| <\epsilon$ for all $n\geq N$.
+    \\Let $\epsilon = 1$ then we know there exists an $N_0\in\mathbb{N}$ such that $|z_n - z| <\epsilon = 1$ for all $n\geq N_0$.
+    \\This means for all $n\geq N_0$ we know $|z_n| = |z + (z_n - z)|\leq |z| + |z_n - z| < |z| + 1$.
+    \\Let $m = N_0 - 1$ (just for neatness), then let $M = max\{|z_1|, |z_2|, ..., |z_m|, |z| + 1\}$.
+    \\Such an $M > 0$ exists because the maximum of a finite set of real numbers always exists.
+    \\Let $n\in\mathbb{N}$ be arbitrary.
+    \\If $n\leq m = N_0 - 1$ we know that $|z_n|\leq M$ by construction of $M$.
+    \\If $n\geq N_0$ then we know that $|z_n|\leq |z| + 1\leq M$ by construction.
+    \\This was true for arbitrary $n\in\mathbb{N}$ and hence is true for all $n\in\mathbb{N}$.
+    \\Therefore we have found an $M > 0$ such that $|z_n|\leq M$ for all $n\in\mathbb{N}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $z_n = x_n + iy_n$ be a sequence that converges to a complex number $z = x + iy$.
+\begin{center}
+    \doublespacing
+    This means that $x_n\rightarrow x$ and $y_n\rightarrow y$ and so $x_n$ and $y_n$ are convergent real sequences.
+    \\Then we know that there exists $M_1, M_2 > 0$ such that $|x_n|\leq M_1$ and $|y_n|\leq M_2$ for all $n\in\mathbb{N}$.
+    \\Which means there exists $M_1, M_2 > 0$ such that $(x_n)^2\leq (M_1)^2$ and $(y_n)^2\leq (M_2)^2$ for all $n\in\mathbb{N}$.
+    \\Fix such $M_1, M_2 > 0$ then let $M =\sqrt{(M_1)^2 + (M_2)^2}$.
+    \\We know $|z_n| = |x_n + iy_n| =\sqrt{(x_n)^2 + (y_n)^2}\leq\sqrt{(M_1)^2 + (M_2)^2} = M$ for all $n\in\mathbb{N}$.
+    \\Therefore we have found an $M > 0$ such that $|z_n|\leq M$ for all $n\in\mathbb{N}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{65.5}
+\begin{center}
+    \doublespacing
+    We are given that $sinh(z +\pi i) = -sinh\:z$ and $sinh\:z$ is $2\pi i$ periodic.
+    \\Therefore we know that $sinh\:z = -sinh(z +\pi i) = -sinh(z +\pi i - 2\pi i) = -sinh(z -\pi i)$.
+    \\Recall that $sinh\:z =\frac{e^z - e^{-z}}{2}$, $\frac{d}{dz} sinh\:z = cosh\:z$, and $\frac{d}{dz} cosh\:z = sinh\:z$.
+    \\Note that $sinh\:0 =\frac{e^0 - e^0}{2} = 0$ and $cosh\:0 =\frac{e^0 + e^0}{2} = 1$.
+    \\This means that the Taylor series for $f(z) = sinh\:z$ about $z_0 = 0$ is given by:
+    \[\sum _{n=0}^{\infty}\frac{z^n f^{(n)} (0)}{n!} =\sum _{n=0}^{\infty}\frac{z^{2n} sinh\:0}{(2n)!} +\sum _{n=0}^{\infty}\frac{z^{2n + 1} cosh\:0}{(2n + 1)!} =\sum _{n=0}^{\infty}\frac{z^{2n + 1}}{(2n + 1)!}\]
+    Through the use of substitution:
+    \[sinh(z -\pi i) =\sum _{n=0}^{\infty}\frac{(z -\pi i)^{2n + 1}}{(2n + 1)!}\]
+    Now we use $sinh\:z = -sinh(z -\pi i)$ to get the Taylor series for $sinh\:z$ about $z_0 =\pi i$ as the following:
+    \[sinh\:z = -sinh(z -\pi i) = -\sum _{n=0}^{\infty}\frac{(z -\pi i)^{2n + 1}}{(2n + 1)!}\]
+\end{center}
+
+
+\section*{65.6}
+\begin{center}
+    \doublespacing
+    Recall that $tanh\:z =\frac{sinh\:z}{cosh\:z}$ and also that $\frac{d}{dz} tanh\:z = sech^2 z =\frac{1}{cosh^2 z}$.
+    \\Note that $sinh\:z$ and $cosh\:z$ are entire, so clearly $tanh\:z$ is well defined and hence analytic wherever $cosh\:z\neq 0$.
+    \\We also know $cosh\:z = 0$ if and only if $z = (\frac{\pi}{2} + n\pi) i$ where $n\in\mathbb{Z}$.
+    \\So $tanh\:z$ is well defined and analytic when $z\neq (\frac{\pi}{2} + n\pi) i$ where $n\in\mathbb{Z}$.
+    \\The two closest zeros of $cosh\:z$ to $z_0 = 0$ are $z =\pm\frac{\pi}{2} i$ and hence $tanh\:z$ is analytic inside (but not on) the circle $|z| =\frac{\pi}{2}$.
+    \\So $tanh\:z$ is analytic throughout $|z| < R =\frac{\pi}{2}$ and hence has a power series representation (which is a Maclaurin series since they are the special case of being centered at 0) with a radius of convergence $R =\frac{\pi}{2}$.
+    \\We are now asked to find the first two nonzero terms of the Maclaurin series representation for $tanh\:z$.
+    \\So $\frac{d^2}{dz^2} tanh\:z =\frac{d}{dz} (\frac{d}{dz} tanh\:z) =\frac{d}{dz} sech^2 z = (2sech\:z)\frac{d}{dz} sech\:z = -2sech^2 z\:tanh\:z$.
+    \\Also $\frac{d^3}{dz^3} tanh\:z =\frac{d^2}{dz^2} (\frac{d}{dz} tanh\:z) =\frac{d}{dz} (\frac{d}{dz} sech^2 z) =\frac{d}{dz} -2sech^2 z\:tanh\:z = -2(-2sech^2 z\:tanh\:z (tanh\:z) + sech^2 z (sech^2 z)) = (2sech\:z\:tanh\:z)^2 - 2sech^4 z$.
+    \break
+    \\Now we have $tanh\:0 =\frac{sinh\:0}{cosh\:0} = 0$, also $\frac{d}{dz} tanh\:z\Big{|}_{z=0} = sech^2 0 =\frac{1}{cosh^2 0} = 1$, also $\frac{d^2}{dz^2} tanh\:z\Big{|}_{z=0} = -2 sech^2 0\:tanh\:0 = -2\frac{1}{cosh^2 0}\frac{sinh\:0}{cosh\:0} = 0$, finally $\frac{d^3}{dz^3} tanh\:z\Big{|}_{z=0} = (2sech\:0\:tanh\:0)^2 - 2sech^4 0 = (2\frac{1}{cosh\:0}\frac{sinh\:0}{cosh\:0})^2 - 2\frac{1}{cosh^4 0} = -2$.
+    \\So the first two nonzero terms of the Maclaurin series representation for $f(z) = tanh\:z$ are:
+    \\$f^{(1)} (0)\frac{(z - 0)}{1!} = z$ and $f^{(3)} (0)\frac{(z - 0)^3}{3!} = -2\frac{z^3}{6} = -\frac{1}{3} z^3$
+\end{center}
+
+
+\newpage
+\section*{65.10}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{sin(z^2)}{z^4}$ where $z\neq 0$.
+\begin{center}
+    \doublespacing
+    Recall that $\frac{d}{dz} sin\:z = cos\:z$ and $\frac{d}{dz} cos\:z = -sin\:z$.
+    Then we get the Taylor series for $g(z) = sin\:z$ about $z_0 = 0$ is given by:
+    \[\sum _{n=0}^{\infty}\frac{z^n g^{(n)} (0)}{n!} =\sum _{n=0}^{\infty}\frac{(-1)^n z^{2n} sin\:0}{(2n)!} +\sum _{n=0}^{\infty}\frac{(-1)^n z^{2n + 1} cos\:0}{(2n+1)!} =\sum _{n=0}^{\infty}\frac{(-1)^n z^{2n + 1}}{(2n+1)!} = z -\frac{z^3}{3!} +\frac{z^5}{5!} -\frac{z^7}{7!} + ...\]
+    Since $sin\:z$ is entire this expansion is valid for all $z\in\mathbb{C}$, or equivalently valid for $|z| <\infty$.
+    \\So by substituting $z^2$ for $z$ we can get the Taylor series for $sin(z^2)$ about $z_0 = 0$ is:
+    \[sin(z^2) =\sum _{n=0}^{\infty}\frac{(-1)^n (z^2)^{2n + 1}}{(2n+1)!} =\sum _{n=0}^{\infty}\frac{(-1)^n z^{4n + 2}}{(2n+1)!} = z^2 -\frac{z^6}{3!} +\frac{z^{10}}{5!} -\frac{z^{14}}{7!} + ...\]
+    Which again is valid for all $z\in\mathbb{C}$ since $z^2$ is also entire, so it's valid for $|z| <\infty$.
+    \\Then as long as $z\neq 0$ we may divide both sides by $z^4$ to get:
+    \[\frac{sin(z^2)}{z^4} =\frac{1}{z^4}\sum _{n=0}^{\infty}\frac{(-1)^n z^{4n + 2}}{(2n+1)!} =\sum _{n=0}^{\infty}\frac{(-1)^n z^{4n + 2}}{z^4(2n+1)!} =\sum _{n=0}^{\infty}\frac{(-1)^n z^{4n - 2}}{(2n+1)!} =\frac{1}{z^2} -\frac{z^2}{3!} +\frac{z^6}{5!} -\frac{z^{10}}{7!} + ...\]
+    Which is valid when $z\neq 0$ since before it was valid over $\mathbb{C}$ but now we are dividing by $z^4$, so it's valid for $0 < |z| <\infty$.
+\end{center}
+
+
+\newpage
+\section*{68.5}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{-1}{(z - 1)(z - 2)} =\frac{1}{z - 1} -\frac{1}{z - 2}$, we know $f$ has the two singular points $z = 1$ and $z = 2$.
+    \\We also know $f$ is analytic on the domains $D_1: |z| < 1$, $D_2: 1 < |z| < 2$, and $D_3: 2 < |z| <\infty$.
+\end{center}
+\begin{itemize}
+    \item For $D_1$: Clearly $D_1$ is the inside of a circle and $f$ is analytic on $D_1$ so $f$ has a Taylor series representation over $D_1$.
+\end{itemize}
+\begin{center}
+    \doublespacing
+    We know $\frac{d}{dz}\frac{1}{z - 1} =\frac{-1}{(z - 1)^2}$ and $\frac{d^2}{dz^2}\frac{1}{z - 1} =\frac{d}{dz} (\frac{d}{dz}\frac{1}{z - 1}) =\frac{d}{dz}\frac{-1}{(z - 1)^2} =\frac{2}{(z - 1)^3}$. In general $\frac{d^n}{dz^n}\frac{1}{z - 1} =\frac{n! (-1)^n}{(z - 1)^{n+1}}$.
+    \\Similarly $\frac{d^n}{dz^n}\frac{1}{z - 2} =\frac{n! (-1)^n}{(z - 2)^{n+1}}$.
+    \\So we have the Taylor series representation for $g(z) =\frac{1}{z - 1}$ at $z_0 = 0$ is:
+    \[\sum _{n=0}^{\infty}\frac{z^n g^{(n)} (0)}{n!} =\sum _{n=0}^{\infty}\frac{-z^n n!}{n!} = -\sum _{n=0}^{\infty} z^n\]
+    Again we are considering this over $D_1: |z| < 1$ so we know this will converge since the series converges absolutely since in absolute value it's a geometric series with ratio less than 1.
+    \\Similarly the Taylor series representation for $h(z) =\frac{1}{z - 2}$ at $z_0 = 0$ is:
+    \[\sum _{n=0}^{\infty}\frac{z^n h^{(n)} (0)}{n!} =\sum _{n=0}^{\infty}\frac{-z^n n!}{n! 2^{n+1}} = -\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}}\]
+    Again we are considering this over $D_1: |z| < 1$ so we know this will converge since the series converges absolutely since in absolute value it's a geometric series with ratio less than 1.
+    \\So for $f(z)$ over $D_1: |z| < 1$ we get the Taylor series representation at $z_0 = 0$ is:
+    \[f(z) =\frac{1}{z - 1} -\frac{1}{z - 2} = -\sum _{n=0}^{\infty} z^n -\Bigg{(}-\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}}\Bigg{)} =\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}} -\sum _{n=0}^{\infty} z^n =\sum _{n=0}^{\infty} z^n\Big{(}\frac{1}{2^{n+1}} - 1\Big{)}\]
+    \break
+    \newline\newline\newline\newline\newline
+    The cases for $D_2$ and $D_3$ are continued on the next pages.
+\end{center}
+\break
+\begin{itemize}
+    \item For $D_2$: Clearly $D_2$ is an annular domain and $f$ is analytic on $D_2$ so $f$ has a Laurent series representation over $D_2$.
+\end{itemize}
+\begin{center}
+    \doublespacing
+    We already know that $\frac{1}{w - 1}$ has a Taylor series representation when $|w| < 1$ (which was found in part a).
+    \\If $|z| > 1$ then we know $|\frac{1}{z}| =\frac{1}{|z|} < 1$.
+    \\Therefore substituting $\frac{1}{z}$ for $w$ we get the Taylor series representation for $\frac{1}{\frac{1}{z} - 1}$ when $|z| > 1$ is:
+    \[\frac{1}{\frac{1}{z} - 1} = -\sum _{n=0}^{\infty}\Big{(}\frac{1}{z}\Big{)}^n = -\sum _{n=0}^{\infty}\frac{1}{z^n}\]
+    Since $D_2$ is given by $1 < |z| < 2$ we know over $D_2$ that:
+    \[\frac{1}{z - 1} =\frac{1}{z(1 -\frac{1}{z})} = -\frac{1}{z(\frac{1}{z} - 1)} = -\frac{1}{z}\Big{(}\frac{1}{\frac{1}{z} - 1}\Big{)} = -\frac{1}{z}\Bigg{(}-\sum _{n=0}^{\infty}\frac{1}{z^n}\Bigg{)} =\sum _{n=0}^{\infty}\frac{1}{z^{n+1}}\]
+    Similarly we know that $\frac{1}{z - 2}$ has a Taylor series representation when $|z| < 2$ (which was found in part a).
+    \\Since $D_2$ is given by $1 < |z| < 2$ we know over $D_2$ that:
+    \[\frac{1}{z - 2} = -\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}}\]
+    So for $f(z)$ over $D_2: 1 < |z| < 2$ we get the series representation at $z_0 = 0$ is:
+    \[f(z) =\frac{1}{z - 1} -\frac{1}{z - 2} =\sum _{n=0}^{\infty}\frac{1}{z^{n+1}} -\Bigg{(}-\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}}\Bigg{)} =\sum _{n=0}^{\infty}\frac{z^n}{2^{n+1}} +\sum _{n=0}^{\infty}\frac{1}{z^{n+1}}\]
+    \break
+    \newline\newline\newline\newline\newline\newline
+    The case of $D_3$ is continued on the next page.
+\end{center}
+\break
+\begin{itemize}
+    \item For $D_3$: Clearly $D_3$ is an annular domain and $f$ is analytic on $D_3$ so $f$ has a Laurent series representation over $D_3$.
+\end{itemize}
+\begin{center}
+    \doublespacing
+    We saw in the previous part that the Taylor series representation for $\frac{1}{\frac{1}{z} - 1}$ when $|z| > 1$ is:
+    \[\frac{1}{\frac{1}{z} - 1} = -\sum _{n=0}^{\infty}\frac{1}{z^n}\]
+    Since $D_3$ is given by $|z| > 2$ we know over $D_3$ that:
+    \[\frac{1}{z - 1} =\frac{1}{z(1 -\frac{1}{z})} = -\frac{1}{z(\frac{1}{z} - 1)} = -\frac{1}{z}\Big{(}\frac{1}{\frac{1}{z} - 1}\Big{)} = -\frac{1}{z}\Bigg{(}-\sum _{n=0}^{\infty}\frac{1}{z^n}\Bigg{)} =\sum _{n=0}^{\infty}\frac{1}{z^{n+1}}\]
+    We already know that $\frac{1}{w - 1}$ has a Taylor series representation when $|w| < 1$ (which was found in part a).
+    \\If $|z| > 2$ then we know $|\frac{2}{z}| =\frac{2}{|z|} < 1$.
+    \\Therefore substituting $\frac{2}{z}$ for $w$ we get the Taylor series representation for $\frac{1}{\frac{2}{z} - 1}$ when $|z| > 2$ is:
+    \[\frac{1}{\frac{2}{z} - 1} = -\sum _{n=0}^{\infty} \Big{(}\frac{2}{z}\Big{)}^n = -\sum _{n=0}^{\infty}\frac{2^n}{z^n}\]
+    Since $D_3$ is given by $|z| > 2$ we know over $D_3$ that:
+    \[\frac{1}{z - 2} =\frac{1}{z(1 -\frac{2}{z})} = -\frac{1}{z(\frac{2}{z} - 1)} = -\frac{1}{z}\Big{(}\frac{1}{\frac{2}{z} - 1}\Big{)} = -\frac{1}{z}\Bigg{(}-\sum _{n=0}^{\infty}\frac{2^n}{z^n}\Bigg{)} =\sum _{n=0}^{\infty}\frac{2^n}{z^{n+1}}\]
+    So for $f(z)$ over $D_3: |z| > 2$ we get the series representation at $z_0 = 0$ is:
+    \[f(z) =\frac{1}{z - 1} -\frac{1}{z - 2} =\sum _{n=0}^{\infty}\frac{1}{z^{n+1}} -\sum _{n=0}^{\infty}\frac{2^n}{z^{n+1}} =\sum _{n=0}^{\infty}\frac{1 - 2^n}{z^{n+1}}\]
+\end{center}
+
+\end{document}
