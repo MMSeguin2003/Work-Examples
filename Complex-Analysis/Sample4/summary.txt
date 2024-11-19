@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around polar coordinates and the Cauchy Riemann Equations.

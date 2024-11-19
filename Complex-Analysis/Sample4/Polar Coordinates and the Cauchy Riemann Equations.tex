@@ -1,0 +1,316 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Polar Coordinates, Cauchy Riemann Equations, and Integration}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{24.1}
+
+{\Large\textbf{d.}} Let $f(z) = e^{\overline{z}} = e^x e^{-iy} = e^x (cos(-y) + i\:sin(-y)) = e^x (cos(y) - i\:sin(y))$ when $z = x + iy$.
+\begin{center}
+    \doublespacing
+    Recall that if a function $g(z) = u(x, y) + iv(x, y)$ is differentiable at $z_0 = x_0 + i y_0$ then we must have:
+    \\$u_x = v_y$ and $u_y = -v_x$ at the point $(x_0, y_0)$.
+    \\Now we know $f(z) = e^{\overline{z}} = e^x (cos(y) - i\:sin(y)) = e^x cos(y) - ie^x sin(y)$.
+    \\So we can write $f(z) = e^{\overline{z}} = u(x, y) + iv(x, y)$ where $u(x, y) = e^x cos(y)$ and $v(x, y) = -e^x sin(y)$.
+    \\From this we get $u_x =\frac{\partial}{\partial x} u = e^x cos(y)$, $u_y =\frac{\partial}{\partial y} u = -e^x sin(y)$, $v_x =\frac{\partial}{\partial x} v = -e^x sin(y)$, and $v_y =\frac{\partial}{\partial y} v = -e^x cos(y)$.
+    \\When we take the derivative with respect to only one variable (partial derivative) the other variable acts as a constant.
+    \break
+    \\So we have from above that $u_x = e^x cos(y)$ while $v_y = -e^x cos(y)$.
+    \\If we want $u_x = v_y$ then $e^x cos(y) = - e^x cos(y)$. Since $e^x\neq 0$ we get $cos(y) = - cos(y)$ and $2 cos(y) = 0$ i.e. $cos(y) = 0$. \\So $u_x(x, y) = v_y(x, y)$ only if $y =\frac{\pi}{2} + n\pi$ for some $n\in\mathbb{Z}$.
+    \break
+    \\We also have $u_y = - e^x sin(y)$ and $v_x = - e^x sin(y)$.
+    \\If we want $u_y = -v_x$ then $- e^x sin(y) = e^x sin(y)$. Since $e^x\neq 0$ we get $- sin(y) = sin(y)$ and $2 sin(y) = 0$ i.e. $sin(y) = 0$. \\So $u_y(x, y) = - v_x(x, y)$ only if $y = m\pi$ for some $m\in\mathbb{Z}$.
+    \break
+    \\It is not possible for $y = m\pi$ and $y =\frac{\pi}{2} + n\pi$ where $m, n\in\mathbb{Z}$ simultaneously.
+    \\Proof:
+    \\Assume $y =\frac{\pi}{2} + n\pi$ and $y = m\pi$ for some $m, n\in\mathbb{Z}$. Then $\frac{\pi}{2} + n\pi = m\pi$ and $\frac{1}{2} + n = m$.
+    \\This is a contradiction because by assumption $m, n\in\mathbb{Z}$.
+    \\Therefore it is not possible for $y = m\pi$ and $y =\frac{\pi}{2} + n\pi$ where $m, n\in\mathbb{Z}$ simultaneously.
+    \break
+    \\So the Cauchy Riemann equations ($u_x = v_y$ and $u_y = -v_x$) are not satisfied anywhere.
+    \\Consequently, we know that $f(z) = e^{\overline{z}}$ is not differentiable for any $z\in\mathbb{C}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{24.4}
+\begin{center}
+    \doublespacing
+    Recall that if a function $g(z) = u(r,\theta) + iv(r,\theta)$ is defined in a neighborhood of a point $z_0 = r_0 e^{i\theta_0}$. Then if the partial derivatives of the component functions exist in that neighborhood, are continuous at $z_0$, and satisfy the polar Cauchy Riemann equations ($r u_r = v_\theta$ and $u_\theta = -r v_r$) at $z_0$ then $g(z)$ is differentiable at $z_0$ and $g'(z_0) = e^{-i\theta} (u_r + iv_r)\Big{|}_{(r_0,\theta_0)}$
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) =\frac{1}{z^4}$. Then if we write $z = r e^{i\theta}$ we have $f(z) =\frac{1}{(r e^{i\theta})^4} =\frac{1}{r^4} e^{-4i\theta}$.
+\begin{center}
+    \doublespacing
+    We have that $f(z) =\frac{1}{z^4} =\frac{1}{r^4} e^{-4i\theta} =\frac{1}{r^4} (cos(-4\theta) + i\:sin(-4\theta)) =\frac{1}{r^4} (cos(4\theta) - i\:sin(4\theta)) =\frac{1}{r^4} cos(4\theta) - i\frac{1}{r^4} sin(4\theta)$.
+    \\So we can write $f(z) = u(r,\theta) + iv(r,\theta)$ where $u(r,\theta) = r^{-4} cos(4\theta)$ and $v(r,\theta) = -r^{-4} sin(4\theta)$.
+    \break
+    \\Therefore $u_r =\frac{\partial}{\partial r} u = -4 r^{-5} cos(4\theta)$, $u_\theta =\frac{\partial}{\partial\theta} u = -4 r^{-4} sin(4\theta)$, $v_r =\frac{\partial}{\partial r} v = 4 r^{-5} sin(4\theta)$, and $v_\theta =\frac{\partial}{\partial\theta} v = -4 r^{-4} cos(4\theta)$.
+    \\These are all continuous if $r\neq 0$ because the product of continuous functions is continuous.
+    \\We also have that $r u_r = r(-4 r^{-5} cos(4\theta)) = -4 r^{-4} cos(4\theta) = v_\theta$ and $u_\theta = -4 r^{-4} sin(4\theta) = -r(4 r^{-5} sin(4\theta)) = -r v_r$.
+    \break
+    \\So partial derivatives of the component functions exist and are continuous when $z\neq 0$ and the Cauchy Riemann equations satisfied for $z\neq 0$, therefore $f(z)$ is differentiable for $z\neq 0$ and $f'(z) = e^{-i\theta} (u_r + iv_r) = e^{-i\theta} (-4 r^{-5} cos(4\theta) + 4i r^{-5} sin(4\theta)) =\frac{-4}{r^5} e^{-i\theta} (cos(4\theta) - i\:sin(4\theta)) =\frac{-4}{r^5} e^{-i\theta} (cos(-4\theta) + i\:sin(-4\theta)) =\frac{-4}{r^5} e^{-i\theta} e^{-4i\theta} =\frac{-4}{r^5 e^{5i\theta}} =\frac{-4}{(re^{i\theta})^5} =\frac{-4}{z^5}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) = e^{-\theta} cos(ln(r)) + i e^{-\theta} sin(ln(r))$ where $z = r e^{i\theta}$ and $r > 0$, $\theta\in (0, 2\pi)$.
+\begin{center}
+    \doublespacing
+    So we can write $f(z) = u(r,\theta) + iv(r,\theta)$ where $u(r,\theta) = e^{-\theta} cos(ln(r))$ and $v(r,\theta) = e^{-\theta} sin(ln(r))$.
+    \break
+    \\Therefore $u_r =\frac{\partial}{\partial r} u = -e^{-\theta} sin(ln(r))\frac{1}{r}$, $u_\theta =\frac{\partial}{\partial\theta} u = -e^{-\theta} cos(ln(r))$, $v_r =\frac{\partial}{\partial r} v = e^{-\theta} cos(ln(r))\frac{1}{r}$, and $v_\theta =\frac{\partial}{\partial\theta} v = -e^{-\theta} sin(ln(r))$.
+    \\These are all continuous for $r > 0$ because the product of continuous functions is continuous.
+    \\We also have that $r u_r = r(-e^{-\theta} sin(ln(r))\frac{1}{r}) = -e^{-\theta} sin(ln(r)) = v_\theta$ and $u_\theta = -e^{-\theta} cos(ln(r)) = -r (e^{-\theta} cos(ln(r))\frac{1}{r}) = -r v_r$.
+    \break
+    \\So partial derivatives of the component functions exist and are continuous when $r > 0$ and the Cauchy Riemann equations satisfied for $r > 0$, therefore $f(z)$ is differentiable for $z\neq 0$ and $f'(z) = e^{-i\theta} (u_r + iv_r) = e^{-i\theta} (-e^{-\theta} sin(ln(r))\frac{1}{r} + i e^{-\theta} cos(ln(r))\frac{1}{r}) =\frac{1}{r} e^{-\theta} e^{-i\theta} (i^2 sin(ln(r)) + i\:cos(ln(r))) =\frac{i}{r e^{i\theta}} e^{-\theta} (i\:sin(ln(r)) + cos(ln(r))) =\frac{i}{r e^{i\theta}} (e^{-\theta} cos(ln(r)) + ie^{-\theta} sin(ln(r))) =\frac{i f(z)}{z}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{24.8}
+
+{\Large\textbf{b.}} The operator $\frac{\partial}{\partial\overline{z}} =\frac{1}{2} (\frac{\partial}{\partial x} + i\frac{\partial}{\partial y})$ is given in the question. Now let $f(z) = u(x, y) + iv(x, y)$ where $z = x + iy$.
+\begin{center}
+    \doublespacing
+    Fix some point $z_0 = x_0 + iy_0$ and assume that $f(z)$ satisfies the Cauchy Riemann equations at $z_0$.
+    \\That is assume $u_x = v_y$ and $u_y = -v_x$ at $(x_0, y_0)$.
+    \\Then we have:
+    \[\frac{\partial}{\partial\overline{z}} f(z) =\frac{1}{2} \Big{(}\frac{\partial}{\partial x} + i\frac{\partial}{\partial y}\Big{)} f(z) =\frac{1}{2} \Big{(}\frac{\partial}{\partial x} f(z) + i\frac{\partial}{\partial y} f(z)\Big{)} =\frac{1}{2} \Big{(}\frac{\partial}{\partial x} (u(x, y) + iv(x, y)) + i\frac{\partial}{\partial y} (u(x, y) + iv(x, y))\Big{)} =\]
+    \[\frac{1}{2} \Big{(}\frac{\partial}{\partial x} u(x, y) + i\frac{\partial}{\partial x}v(x, y) + i\frac{\partial}{\partial y} u(x, y) + i^2\frac{\partial}{\partial y}v(x, y)\Big{)} =\frac{1}{2} \Big{(}(u_x(x, y) - v_y (x, y)) + i(u_y(x, y) + v_x(x, y))\Big{)}\]
+    Since we know that the Cauchy Riemann equations are satisfied at $z_0$ we know $u_x = v_y$ and $u_y = -v_x$ at $(x_0, y_0)$.
+    \\Therefore $\frac{\partial f}{\partial\overline{z}}\Big{|}_{z_0} =\frac{1}{2} \Big{(}(u_x(x_0, y_0) - v_y (x_0, y_0)) + i(u_y(x_0, y_0) + v_x(x_0, y_0))\Big{)} =\frac{1}{2} \Big{(}0 + 0i\Big{)} = 0$.
+    \\This was true for an arbitrary $z_0\in\mathbb{C}$ and is therefore true for all $z_0\in\mathbb{C}$.
+    \\So if the Cauchy Riemann equations are satisfied at $z_0$ then $\frac{\partial f}{\partial\overline{z}}\Big{|}_{z_0} = 0$, and clearly the reverse is true \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{26.2}
+\begin{center}
+    \doublespacing
+    Recall that if a function $g(z) = u(x, y) + iv(x, y)$ is differentiable at $z_0 = x_0 + i y_0$ then we must have:
+    \\$u_x = v_y$ and $u_y = -v_x$ at the point $(x_0, y_0)$.
+    \\Further recall that in order for a function to be analytic at $z_0\in\mathbb{C}$ it must be differentiable in some neighborhood of $z_0$.
+    \\When $x$ and $y$ are used in this problem I am referring to the real and imaginary parts of a complex variable $z = x + iy$.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) = xy + iy$. Then $f(z) = u(x, y) + iv(x, y)$ where $u = xy$ and $v = y$.
+\begin{center}
+    \doublespacing
+    We know that $u_x =\frac{\partial}{\partial x} u = y$, $u_y =\frac{\partial}{\partial y} u = x$, $v_x =\frac{\partial}{\partial x} v = 0$, and $v_y =\frac{\partial}{\partial y} v = 1$.
+    \\If we want $u_x = v_y$ then $y = 1$, and if we want $u_y = -v_x$ then $x = 0$.
+    \\So we have that $f$ can not be differentiable at any point that is not $0 + 1i = i$. Note that I am not stating that $f$ is differentiable at $i$, I am just saying $f$ can not be differentiable at any other point.
+    \\Clearly if $z_0\neq i$ then $f$ is not differentiable at $z_0$ and hence not differentiable in any neighborhood of $z_0$.
+    \\If $z_0 = i$ then for any neighborhood of $z_0$ there exists some point $z\neq z_0$ in the neighborhood. Hence $f$ is not differentiable at $z$ and consequently not differentiable in any neighborhood of $z_0$.
+    \\Therefore for any $z_0\in\mathbb{C}$ there does not exist a neighborhood of $z_0$ where $f$ is differentiable.
+    \\So $f(z) = xy + iy$ where $z = x + iy$ is nowhere analytic \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) = 2xy + i(x^2 - y^2)$. Then $f(z) = u(x, y) + iv(x, y)$ where $u = 2xy$ and $v = x^2 - y^2$.
+\begin{center}
+    \doublespacing
+    We know that $u_x =\frac{\partial}{\partial x} u = 2y$, $u_y =\frac{\partial}{\partial y} u = 2x$, $v_x =\frac{\partial}{\partial x} v = 2x$, and $v_y =\frac{\partial}{\partial y} v = -2y$.
+    \\If we want $u_x = v_y$ then $2y = -2y$ and hence $y = 0$, and if we want $u_y = -v_x$ then $2x = -2y$ and hence $x = -y$.
+    \\If both of these are simultaneously true then we must have $y = 0$ and $x = -y = 0$.
+    \\So we have that $f$ can not be differentiable at any point that is not $0 + 0i = 0$. Note that I am not stating that $f$ is differentiable at $0$, I am just saying $f$ can not be differentiable at any other point.
+    \\Clearly if $z_0\neq 0$ then $f$ is not differentiable at $z_0$ and hence not differentiable in any neighborhood of $z_0$.
+    \\If $z_0 = 0$ then for any neighborhood of $z_0$ there exists some point $z\neq z_0$ in the neighborhood. Hence $f$ is not differentiable at $z$ and consequently not differentiable in any neighborhood of $z_0$.
+    \\Therefore for any $z_0\in\mathbb{C}$ there does not exist a neighborhood of $z_0$ where $f$ is differentiable.
+    \\So $f(z) = 2xy + i(x^2 - y^2)$ where $z = x + iy$ is nowhere analytic \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) = e^y e^{ix} = e^y (cos(x) + i\:sin(x))$. Then $f(z) = u(x, y) + iv(x, y)$ where $u = e^y cos(x)$ and $v = e^y sin(x)$.
+\begin{center}
+    \doublespacing
+    We know that $u_x =\frac{\partial}{\partial x} u = - e^y sin(x)$, $u_y =\frac{\partial}{\partial y} u = e^y cos(x)$, $v_x =\frac{\partial}{\partial x} v = e^y cos(x)$, and $v_y =\frac{\partial}{\partial y} v = e^y sin(x)$.
+    \\If we want $u_x = v_y$ then $-e^y sin(x) = e^y sin(x)$ and hence $sin(x) = 0$, and if we want $u_y = -v_x$ then $e^y cos(x) = - e^y cos(x)$ and hence $cos(x) = 0$.
+    \\I showed earlier in this sample work that these equations can not be simultaneously true.
+    \\So we have that $f$ can not be differentiable at any point.
+    \\Clearly if $z_0\in\mathbb{C}$ then $f$ is not differentiable at $z_0$ and hence not differentiable in any neighborhood of $z_0$.
+    \\Therefore for any $z_0\in\mathbb{C}$ there does not exist a neighborhood of $z_0$ where $f$ is differentiable.
+    \\So $f(z) = e^y e^{ix}$ where $z = x + iy$ is nowhere analytic \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{26.4}
+\begin{center}
+    \doublespacing
+    Recall that a point $z_0$ is a singular point of $f$ if $f$ fails to be analytic at $z_0$ but is analytic at some point for every neighborhood of $z_0$.
+\end{center}
+
+{\Large\textbf{c.}} Let $f(z) =\frac{z^2 + 1}{(z + 2)(z^2 + 2z + 2)}$.
+\begin{center}
+    \doublespacing
+    The roots of a complex polynomial $P(z)$ can be found with the quadratic equation as shown in a previous sample work.
+    \\So $z =\frac{-2\pm\sqrt{2^2 - 4(1)(2)}}{2} =\frac{-2\pm\sqrt{-4}}{2} = -1\pm i$ are the roots of $z^2 + 2z + 2$
+    \\Therefore $z^2 + 2z + 2 = (z - (-1 - i))(z - (-1 + i))$ and consequently $f(z) =\frac{z^2 + 1}{(z + 2)(z - (-1 - i))(z - (-1 + i))}$.
+    \\Clearly if $z_0 = -2$ or $z_0 = -1 - i$ or $z_0 = -1 + i$ then $f(z_0)$ does not exist and hence $f$ is not continuous at $z_0$ and can not be differentiable at $z_0$. Consequently $f$ is not differentiable in any neighborhood of $-2$, $-1 - i$, and $-1 + i$.
+    \\So $f$ is not analytic at $-2$, $-1 - i$, and $-1 + i$.
+    \break
+    \\However, if $z_0\notin\{-2, -1 - i, -1 + i\}$ then there exists some neighborhood of $z_0$ that contains none of these points.
+    \\Simply let $\epsilon < min\{|z_0 - (-2)|, |z_0 - (-1 - i)|, |z_0 - (-1 + i)|\}$, that is let $\epsilon$ be less than the minimum distance to any of the points $-2$, $-1 - i$, and $-1 + i$.
+    \\Then the neighborhood $\{z\in\mathbb{C} :|z_0 - z| <\epsilon\}$ of $z_0$ won't contain any of the points $-2$, $-1 - i$, and $-1 + i$ since they are more than a distance of $\epsilon$ away from $z_0$.
+    \\The numerator of $f(z)$ is a complex polynomial and hence is differentiable at all $z_0\in\mathbb{C}$.
+    \\Similarly the denominator of $f(z)$ is a complex polynomial and hence is differentiable at all $z_0\in\mathbb{C}$.
+    \\Therefore for any $z_0\notin\{-2, -1 - i, -1 + i\}$ we have that the denominator of $f$ evaluated at $z_0$ is not 0.
+    \\Then since the quotient of differentiable functions is differentiable when the denominator is not 0, we have that $f(z)$ is differentiable at $z_0$ when $z_0\notin\{-2, -1 - i, -1 + i\}$.
+    \break
+    \\Now we know for any neighborhood of any of any the points $-2$, $-1 - i$, and $-1 + i$ we can find a $z_0\notin\{-2, -1 - i, -1 + i\}$ in that neighborhood.
+    \\For such a $z_0$ we know that we can find a neighborhood of $z_0$ that does not contain any of the points $-2$, $-1 - i$, and $-1 + i$. Hence we can find a neighborhood of $z_0$ where $f$ is differentiable since its denominator is nonzero.
+    \break
+    \\Similarly if we just start with a $z\notin\{-2, -1 - i, -1 + i\}$ then we know there exists a neighborhood of $z$ that does not contain any of the points $-2$, $-1 - i$, and $-1 + i$. Hence there exists a neighborhood of $z$ where $f$ is differentiable since its denominator is nonzero.
+    \break
+    \\Therefore $f$ fails to be analytic at each of the points $-2$, $-1 - i$, and $-1 + i$, but is analytic at some point in every neighborhood of each of these points. Also, $f$ is analytic at every $z\notin\{-2, -1 - i, -1 + i\}$.
+    \\Therefore $-2$, $-1 - i$, and $-1 + i$ are the singular points of $f$ and $f$ is analytic everywhere else. \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{27.2}
+\begin{center}
+    \doublespacing
+    Recall that two lines are perpendicular in $\mathbb{R}^2$ if their slopes $m_1, m_2$ satisfy $m_1 =-\frac{1}{m_2}$.
+    \\Proof:
+    \\Let $L_1$ and $L_2$ be two lines in $\mathbb{R}^2$ with slopes $m_1\neq 0$ and $m_2\neq 0$ respectively.
+    \\Then the coordinate rates of change are given by $(1, m_1)$ and $(1, m_2)$ for lines one and two respectively.
+    \\Taking the dot product we get $1 + m_1 m_2$, if we want this to be equal to 0 (meaning the lines are perpendicular we get):
+    \\$1 + m_1 m_2 = 0$ and $1 = - m_1 m_2$ and finally $m_1 =-\frac{1}{m_2}$.
+    \break
+    \\Let $f(z) = u(x, y) + iv(x, y)$ be analytic over some domain $D$. Let $c_1, c_2\in\mathbb{R}$ be arbitrary.
+    \\Consider the level curves $u(x, y) = c_1$ and $v(x, y) = c_2$.
+    \\Fix some $z_0 = x_0 + iy_0$ that is common to both curves.
+    \\Further assume that $f'(z_0)\neq 0$.
+    \\Then by differentiating the equations $u(x, y) = c_1$ and $v(x, y) = c_2$ with respect to $x$ we get:
+    \\$\frac{\partial u}{\partial x} +\frac{\partial u}{\partial y}\frac{dy}{dx} =\frac{d}{dx} c_1 = 0$ and $\frac{\partial v}{\partial x} +\frac{\partial v}{\partial y}\frac{dy}{dx} =\frac{d}{dx} c_2 = 0$.
+    \\We also know that $\frac{\partial u}{\partial x} =\frac{\partial v}{\partial y}$ and $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ since $f$ is analytic over $D$ and hence the Cauchy Riemann equations must be satisfied over $D$.
+    \\Furthermore we know that $\frac{\partial v}{\partial y} =\frac{\partial u}{\partial x}\neq 0$ and $-\frac{\partial u}{\partial y} = \frac{\partial v}{\partial x}\neq 0$ at $(x_0, y_0)$ by our assumption that $f'(z_0)\neq 0$.
+    \break
+    \\Therefore for the first curve, $u(x, y) = c_1$, we have:
+    \\$\frac{\partial u}{\partial x} -\frac{\partial v}{\partial x}\frac{dy}{dx} = 0$ and $\frac{\partial v}{\partial x}\frac{dy}{dx} =\frac{\partial u}{\partial x}$.
+    \\Finally since $v_x =\frac{\partial v}{\partial x}\neq 0$ at $(x_0, y_0)$ we have $\frac{dy}{dx} =\frac{u_x}{v_x}$ at $(x_0, y_0)$.
+    \break
+    \\Similarly for the second curve, $v(x, y) = c_2$, we have:
+    \\$\frac{\partial v}{\partial x} +\frac{\partial u}{\partial x}\frac{dy}{dx} = 0$ and $\frac{\partial u}{\partial x}\frac{dy}{dx} = -\frac{\partial v}{\partial x}$.
+    \\Finally since $u_x =\frac{\partial u}{\partial x}\neq 0$ at $(x_0, y_0)$ we have $\frac{dy}{dx} =-\frac{v_x}{u_x}$ at $(x_0, y_0)$.
+    \break
+    \\Let $m_1$ be the rate of change of the line tangent to the first curve ($u(x, y) = c_1$) at $(x_0, y_0)$, then $m_1 =\frac{u_x}{v_x}\Big{|}_{(x_0, y_0)}$
+    \break
+    \\Let $m_2$ be the rate of change of the line tangent to the second curve ($v(x, y) = c_2$) at $(x_0, y_0)$, then $m_2 =-\frac{v_x}{u_x}\Big{|}_{(x_0, y_0)}$
+    \\Therefore we have that:
+    \[m_1 =\frac{u_x}{v_x} = -(-\frac{u_x}{v_x}) = -(\frac{1}{-\frac{v_x}{u_x}}) = -\frac{1}{m_2}\]
+    By the proof at the start of this problem we have shown that $u(x, y) = c_1$ is perpendicular to $v(x, y) = c_2$ at $(x_0, y_0)$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+\begin{center}
+    \doublespacing
+    Let $f(z) = z^2$ if $z\in\mathbb{R}$ and $f(z) = z^3$ otherwise.
+    \begin{itemize}
+        \item Showing $f$ is differentiable at $z_0 = 0$:
+    \end{itemize}
+    Let $\epsilon > 0$ then let $\delta < min\{\epsilon, 1\}$. Then $\delta <\epsilon$.
+    \\We know that $|\frac{f(z) - f(0)}{z - 0}| = |\frac{f(z)}{z}|$ for $z\neq 0$.
+    \\Therefore $|\frac{f(z) - f(0)}{z - 0} - 0| = |\frac{f(z)}{z}| = |\frac{z^2}{z}| = |z|$ for all nonzero $z\in\mathbb{R}$.
+    \\Similarly $|\frac{f(z) - f(0)}{z - 0} - 0| = |\frac{f(z)}{z}| = |\frac{z^3}{z}| = |z^2|$ for all nonzero $z\in\mathbb{C}\cap\mathbb{R}^c$.
+    \\Now if $|z - 0| = |z| <\delta$ we have that $|z| <\delta < 1$ and therefore $|z^2| = |z|^2 < |z|$.
+    \\Therefore we have that if $|z - 0| <\delta$ then $|\frac{f(z) - f(0)}{z - 0} - 0| = |\frac{f(z)}{z}| < |z| <\delta <\epsilon$.
+    \\This was true for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore $f'(0) = lim _{z\rightarrow 0}\frac{f(z) - f(0)}{z - 0} = 0$, so $f$ is differentiable at 0.
+    \begin{itemize}
+        \item Showing $f$ is not analytic at 0:
+    \end{itemize}
+    When $z\notin\mathbb{R}$ clearly $f(z) = z^3$ is differentiable because it is a complex polynomial, but that is not what we are looking at.
+    \\We will now look at $lim_{\Delta z\rightarrow 0}\frac{f(z_0 +\Delta z) - f(z_0)}{\Delta z}$ from the vertical direction when $z_0\in\mathbb{R}\backslash\{0, 1\}$.
+    \\By taking the vertical approach we have $\Delta z =\Delta x + i\Delta y = i\Delta y$ since we take $\Delta x = 0$.
+    \\So $z_0 +\Delta z = z_0 + i\Delta y\notin\mathbb{R}$ since $z_0\in\mathbb{R}$ and $i\Delta y\notin\mathbb{R}$, and $f(z_0 +\Delta z) = f(z_0 + i\Delta y) = (z_0 + i\Delta y)^3$.
+    \\I claim that for $z_0\in\mathbb{R}\backslash\{0, 1\}$ from the vertical approach $lim_{\Delta z\rightarrow 0}\frac{f(z_0 +\Delta z) - f(z_0)}{\Delta z} = lim_{\Delta y\rightarrow 0}\frac{f(z_0 + i\Delta y) - f(z_0)}{i\Delta y} =\infty$.
+    \\I am excluding the point 1 for reasons that will be obvious when taking the limit, but since we are only removing a finite number of points we will still get the desired result.
+    \[lim_{\Delta y\rightarrow 0}\frac{1}{\frac{f(z_0 + i\Delta y) - f(z_0)}{i\Delta y}} = lim_{\Delta y\rightarrow 0}\frac{i\Delta y}{f(z_0 + i\Delta y) - f(z_0)} = lim_{\Delta y\rightarrow 0}\frac{i\Delta y}{(z_0 + i\Delta y)^3 - z_0^2} =\]
+    \[lim_{\Delta y\rightarrow 0}\frac{i\Delta y}{z_0^3 + 3i z_0^2\Delta y - 3z_0 (\Delta y)^2 - i(\Delta y)^3 - z_0^2}\]
+    \break
+    We know that clearly $lim_{\Delta y\rightarrow 0} (z_0^3 + 3i z_0^2\Delta y - 3z_0 (\Delta y)^2 - i(\Delta y)^3 - z_0^2) = z_0^3 - z_0^2 = z_0^2 (z_0 - 1)$ and $lim_{\Delta y\rightarrow 0} i\Delta y = 0$.
+    \\Assume $z_0\notin\{0, 1\}$. Then $lim_{\Delta y\rightarrow 0} (z_0^3 + 3i z_0^2\Delta y - 3z_0 (\Delta y)^2 - i(\Delta y)^3 - z_0^2) = z_0^3 - z_0^2 = z_0^2 (z_0 - 1)\neq 0$.
+    \\Therefore if $z_0\in\mathbb{R}\backslash\{0, 1\}$ we have $lim_{\Delta y\rightarrow 0}\frac{i\Delta y}{f(z_0 + i\Delta y) - f(z_0)} = 0$ and consequently, $lim_{\Delta z\rightarrow 0}\frac{f(z_0 +\Delta z) - f(z_0)}{\Delta z} = lim_{\Delta y\rightarrow 0}\frac{f(z_0 + i\Delta y) - f(z_0)}{i\Delta y} =\infty$ from the vertical approach.
+    \\So for $z_0\in\mathbb{R}\backslash\{0, 1\}$ the derivative of $f$ does not exist since the limit approaching vertically is not finite.
+    \\Now consider an arbitrary neighborhood of 0, then you will always be able to find a point $z_0\in\mathbb{R}\backslash\{0, 1\}$ and hence in any neighborhood of 0 you will always be able to find a point where $f$ is not differentiable.
+    \\Therefore $f$ can not be differentiable in any neighborhood of 0 and so $f$ is not analytic at 0 \qedsymbol
+    \\It is actually the case that $f$ is not analytic at any $z_0\in\mathbb{R}$ by similar reasoning.
+\end{center}
+
+
+\newpage
+\section*{Problem 3}
+\begin{center}
+    \doublespacing
+    Let $h(z)$ be a function such that both $h(z)$ and $zh(z)$ solve the Laplace equation over a domain $D$.
+    \\Then if we write $h(z) = u(x, y) + iv(x, y)$ we know that $zh(z) = (x + iy)(u(x, y) + iv(x, y)) = xu(x, y) - yv(x, y) + i(yu(x, y) + xv(x, y))$.
+    \\So let $zh(z) = s(x, y) + it(x, y)$ where $s(x, y) = xu(x, y) - yv(x, y)$ and $t(x, y) = yu(x, y) + xv(x, y)$.
+    \\We also know $u_{xx} + u_{yy} = 0$ and $v_{xx} + v_{yy} = 0$ over $D$. Similarly we know $s_{xx} + s_{yy} = 0$ and $t_{xx} + t_{yy} = 0$ over $D$.
+    \break
+    \\Let's actually find $s_{xx}$, $s_{yy}$, $t_{xx}$, and $t_{yy}$ in terms of $u$ and $v$:
+    \\For $s(x, y)$:
+    \\To start $\frac{\partial s}{\partial x} =\frac{\partial}{\partial x} (xu - yv) = u + xu_x - yv_x$.
+    \\So $s_{xx} =\frac{\partial^2 s}{\partial x^2} =\frac{\partial}{\partial x} (u + xu_x - yv_x) = u_x + u_x + xu_{xx} - yv_{xx} = 2u_x + xu_{xx} - yv_{xx}$.
+    \\Similarly $\frac{\partial s}{\partial y} =\frac{\partial}{\partial y} (xu - yv) = xu_y - v - yv_y$.
+    \\So $s_{yy} =\frac{\partial^2 s}{\partial y^2} =\frac{\partial}{\partial y} (xu_y - v - yv_y) = xu_{yy} - v_y - v_y - yv_{yy} = xu_{yy} - 2v_y - yv_{yy}$.
+    \break
+    \\For $t(x, y)$:
+    \\To start $\frac{\partial t}{\partial x} =\frac{\partial}{\partial x} (yu + xv) = yu_x + v + xv_x$.
+    \\So $t_{xx} =\frac{\partial^2 t}{\partial x^2} =\frac{\partial}{\partial x} (yu_x + v + xv_x) = yu_{xx} + v_{x} + v_x + xv_{xx} = yu_{xx} + 2v_x + xv_{xx}$.
+    \\Similarly $\frac{\partial t}{\partial y} =\frac{\partial}{\partial y} (yu + xv) = u + yu_y + xv_y$.
+    \\So $t_{yy} =\frac{\partial^2 t}{\partial y^2} =\frac{\partial}{\partial y} (u + yu_y + xv_y) = u_y + u_y + yu_{yy} + xv_{yy} = 2u_y + yu_{yy} + xv_{yy}$.
+    \break
+    \\Now lets plug these into the equations $s_{xx} + s_{yy} = 0$ and $t_{xx} + t_{yy} = 0$:
+    \\Keep in mind that $u_{xx} + u_{yy} = 0$ and $v_{xx} + v_{yy} = 0$.
+    \\For $s(x, y)$:
+    \\$s_{xx} + s_{yy} = 2u_x + xu_{xx} - yv_{xx} + xu_{yy} - 2v_y - yv_{yy} = x(u_{xx} + u_{yy}) - y(v_{xx} + v_{yy}) + 2(u_x - v_y) = 2(u_x - v_y) = 0$.
+    \\Therefore we have that $u_x = v_y$ over $D$.
+    \break
+    \\For $t(x, y)$:
+    \\$t_{xx} + t_{yy} = yu_{xx} + 2v_x + xv_{xx} + 2u_y + yu_{yy} + xv_{yy} = y(u_{xx} + u_{yy}) + x(v_{xx} + v_{yy}) + 2(u_y + v_x) = 2(u_y + v_x) = 0$.
+    \\Therefore we have that $u_y = -v_x$ over $D$.
+    \break
+    \\The professor said that we may assume $u$ and $v$ are twice differentiable with continuous derivatives therefore we know that the first order partial derivatives of $u$ and $v$ are continuous.
+    \\Therefore Cauchy Riemann equations are satisfied over $D$ and the first order partial derivatives of the component functions are continuous over $D$.
+    \\So $h(z)$ is analytic over $D$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Bonus}
+\begin{center}
+    \doublespacing
+    Let $h(t)$ be a complex valued function continuous on $[0, 1]$.
+    \\Then define a new function for $z\in\mathbb{C}\backslash[0,1]$ :
+    \[f(z) =\int _0^1\frac{h(t)}{z-t}dt\]
+    \\Then we want to find $f'(z)$:
+    \\Let $z_0\in\mathbb{C}\backslash[0,1]$ be arbitrary, then for $z\neq z_0$:
+    \[\frac{f(z) - f(z_0)}{z - z_0} =\frac{1}{z - z_0}\int _0^1\frac{h(t)}{z -t}dt -\frac{1}{z - z_0}\int _0^1\frac{h(t)}{z_0-t}dt =\frac{1}{z - z_0}\int _0^1\frac{h(t)}{z-t} -\frac{h(t)}{z_0-t}dt =\]
+    \[\frac{1}{z - z_0}\int _0^1\frac{h(t)(z_0 - t) - h(t)(z - t)}{(z-t)(z_0 - t)}dt =\frac{1}{z - z_0}\int _0^1\frac{z_0 h(t) - z h(t)}{(z-t)(z_0 - t)}dt =\frac{1}{z - z_0}\int _0^1\frac{(z_0 - z) h(t)}{(z-t)(z_0 - t)}dt =\]
+    \[\int _0^1\frac{h(t)}{(z-t)(z_0 - t)}dt\]
+    Therefore:
+    \[lim _{z\rightarrow z_0}\frac{f(z) - f(z_0)}{z - z_0} = lim_{z\rightarrow z_0}\int _0^1\frac{h(t)}{(z - t)(z_0 - t)}dt =\int _0^1 lim_{z\rightarrow z_0}\frac{h(t)}{(z - t)(z_0 - t)}dt =\int _0^1\frac{h(t)}{(z_0 - t)^2}dt\]
+    Since we know $z_0\notin [0, 1]$ we know that the limit of the denominator inside the integral is not 0 for any $t\in [0, 1]$ and hence the limit is straightforward since it is the limit of a constant function (with respect to $z$) divided by a polynomial.
+    \break
+    \\This was true for arbitrary $z_0\in\mathbb{C}\backslash[0,1]$ and therefore true for all $z_0\in\mathbb{C}\backslash[0,1]$.
+    \\So $f$ is analytic since it is differentiable at every $z_0\in\mathbb{C}\backslash[0,1]$, and:
+    \[f'(z_0) = lim _{z\rightarrow z_0}\frac{f(z) - f(z_0)}{z - z_0} =\int _0^1\frac{h(t)}{(z_0 - t)^2}dt\]
+    \qedsymbol
+\end{center}
+
+\end{document}
