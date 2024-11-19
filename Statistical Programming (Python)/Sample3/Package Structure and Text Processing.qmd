@@ -1,0 +1,902 @@
+---
+title: "Package Structure and Text Processing"
+author: "Matthew Seguin"
+date: ""
+engine: knitr
+format:
+  pdf:
+    geometry:
+      - margin=1.5cm
+    code-overflow: wrap
+---
+
+# Preliminary Importing of Packages
+
+```{python}
+import re
+import statsmodels
+import pandas as pd
+from plotnine import *
+```
+
+\newpage
+# 1.
+
+## a.
+
+We can import stats models then use dir to check the contents of the namespace created.
+
+\begingroup
+\fontsize{4pt}{5pt}\selectfont
+```{python}
+dir(statsmodels)
+```
+\endgroup
+
+```{python}
+for i in dir(statsmodels):
+  spaces = " :"
+  for j in range(22 - len(i)):
+    spaces += " "
+  print(i, spaces, type(getattr(statsmodels,i)))
+```
+
+As we can see there are a number of double underscore objects ranging from "all" to "version_tuple", then there are a number of submodules. The types of all objects in the name space are displayed.
+
+First to get the absolute file path to the statsmodels package we can use the dunder "file" object.
+
+```{python}
+init_path = statsmodels.__file__
+package_path = init_path[:-12]
+package_path
+```
+
+Now we can see one of the submodules is called _version so this is a reasonable place to start looking for the version of our statsmodels package.
+
+\begingroup
+\fontsize{6pt}{7pt}\selectfont
+```{python}
+dir(statsmodels._version)
+```
+\endgroup
+
+```{python}
+statsmodels._version.__version__
+```
+
+First we see that the _version submodule has a double underscore "version" object. So I check the file contents of _version.py
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "/.../statsmodels/_version.py"
+```
+
+As we can see we already have our answer, the version number is in the _version submodule file.
+
+\newpage
+## b.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/api.py"
+```
+
+First the datasets, distributions, iolib, regression, robust, and tools submodules are all imported so each of the double underscore "init" files for these modules is called. Then the main "init" file in the directory of statsmodels is accessed in order to import the test function contained within it. Then the _version.py file which we saw in the previous part is accessed in order to bring in the version information. Then from each of the submodules conditional_models.py, count_model.py, discrete_model.py, and truncated_model.py from the discrete subpackage a number of classes are imported. Then each of the submodules api, hazard_regression, and survfunc from the duration subpackage are accessed. Then the emplike, formula, gam, and genmod subpackages are accessed where the api.py file is accessed for each and for gam and genmod other submodules are also accessed. Finally a number of files in each of the subpackages graphics, imputation, iolib, multivariate, nonparametric, regression, robust, stats, tools, and tsa are accessed.
+
+It seems like the developers of this package decided to make an api.py module for any larger subpackage. When accessing all of these submodules a number of other submodules are also accessed along with completely different packages (ex: numpy), it would be too much to go over every file accessed.
+
+We can see that the MICE class was imported from imputation.mice as shown from the api before.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/api.py" | grep "MICE"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/imputation/mice.py" | grep -A 7 "class MICE"
+```
+
+We can see there is a mice.py which is where MICE was being imported from. By searching mice.py for MICE we can see that MICE is a class object imported from the imputation subpackage in the mice.py module. MICE is a class used to fit most statsmodels models to data sets with missing values using the 'multiple imputation with chained equations' (MICE) approach.
+
+In a similar fashion I will search for the GLM class.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/api.py" | grep -B 2 "GLM"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/genmod/api.py" | grep "GLM"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/genmod/generalized_linear_model.py" | grep "class GLM"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/genmod/generalized_linear_model.py" | grep -E "import.+base"
+```
+
+We can see there is an api.py which is where GLM was being imported from. From searching api.py for GLM we see it is being imported from the generalized_linear_model submodule (which we saw the .py file for in the genmod folder before) so next I search there. From searching there we see GLM is a class object that inherits from the LikelihoodModel class in the base module and I search for how base is being imported next.
+
+As one might expect it comes from the base subpackage of statsmodels, and in particular the LikelihoodModel class comes from the model module in that subpackage. Which by the following we can see inherits from the Model base class.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/base/model.py" | grep "class LikelihoodModel"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/base/model.py" | grep "class Model"
+```
+
+Therefore we have our final answer that GLM is a class object that inherits from the LikelihoodModel class which inherits from the Model base class (both of which come from the model module of the base subpackage), and GLM is imported from api.py in the genmod subpackage which first imports it from generalized_linear_model.py in the genmod subpackage.
+
+We can check this with python:
+
+```{python}
+import statsmodels.api as sm
+type(sm.MICE)
+type(sm.GLM)
+```
+
+\newpage
+## c.
+
+First we will just check in python what is in the namespace.
+
+\begingroup
+\fontsize{5pt}{6pt}\selectfont
+```{python}
+dir(sm.gam)
+```
+\endgroup
+
+In order to examine how the importing works we will first search the original api.py file for gam.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/api.py" | grep "gam"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/gam/api.py"
+```
+
+We can see the gam subpackage is imported via its api so first I examine that and see that gam imports all of the classes we saw in the namespace before from a number of other modules (which we will explore below).
+
+First generalized_additive_model is accessed to get GLMGam so now we will look at that.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/gam/generalized_additive_model.py" | grep "GLMGam"
+```
+
+So we see GLMGam in the sm.gam namespace comes from generalized_additive_model.py
+
+Now we will look in gam_cross_validation.gam_cross_validation as that is where MultivariateGAMCVPath is imported from.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/gam/gam_cross_validation/gam_cross_validation.py" | grep "MultivariateGAMCVPath"
+```
+
+So we see MultivariateGAMCVPath in the sm.gam namespace comes from gam_cross_validation.py
+
+Now we will look in smooth_basis as that is where BSplines and CyclicCubicSplines are imported from.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/gam/smooth_basis.py" | grep "BSplines"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/gam/smooth_basis.py" | grep "CyclicCubicSplines"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/gam/smooth_basis.py" | grep "AdditiveGamSmoother"
+```
+
+BSplines inherits from AdditiveGamSmoother so I search for that and see that AdditiveGamSmoother inherits from with_metaclass(ABCMeta) so let us search for with_metaclass
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/gam/smooth_basis.py" | grep "with_metaclass"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/compat/python.py" | grep "with_metaclass"
+```
+
+First we see with_metaclass comes from compat.python so I search there and see that it is a function that returns a class. ABCMeta comes from another package but the details of this class aren't that important.
+
+So we see BSplines and CyclicCubicSplines come from smooth_basis.py and inherit from AdditiveGamSmoother (which uses with_metaclass, a function not a class).
+
+\newpage
+## d.
+
+First we want to look for the distributions subpackage in api.py since we know monotone_fn_inverter comes from there.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/api.py" | grep "distributions"
+echo # just adding space
+echo # just adding space
+cat "$statmodeldir/distributions/__init__.py" | grep -B 1 -A 1 "monotone_fn_inverter"
+```
+
+We see distributions is simply imported (directly from its init file) so I look in there and see that monotone_fn_inverter is imported from the empirical_distribution module. Now I will look in there.
+
+```{bash}
+statmodeldir="/.../statsmodels"
+cat "$statmodeldir/distributions/empirical_distribution.py" | grep -A 17 "monotone_fn_inverter"
+```
+
+We see that monotone_fn_inverter is a function from empirical_distribution.py that is imported into the distributions subpackage and imported into the main package from there. The function inverts a monotone function using interpolation after given a set of x values.
+
+
+\newpage
+# 2.
+
+First we start by importing the data using the function given.
+I use one class (designed off of the output of the given file to get the data) to do this entire question, here is a little about it's fields and methods:
+
+ChunkedDebate Takes In:
+\begin{itemize}
+\item string: A string object of debate text where the indication of a new chunk is given by "SPEAKER:" with possibly a space after
+\item candidates: A list of dictionaries containing the candidates (Dem and Rep being the keys)
+\item moderators: A list of moderators (which seems to just be speakers)
+\end{itemize}
+
+ChunkedDebate Has Attributes:
+\begin{itemize}
+\item string: Just the raw debate string passed to it
+\item candidates: A list of candidates for the given debate
+\item moderators: A list of moderators for the given debate
+\item year: The year the debate occured in
+\item cans: A list of all candidates over any set of debates
+\item speakers: A list of all speakers in any set of debates
+\item all\_regex: A regex that will match any "SPEAKER:" with a possible space after
+\item starts,ends,groups: lists of match information in string from using all\_regex
+\item chunk\_locations: A dictionary containing the speaker, start, and end position information of each chunk
+\item Deb\_Info: A string containing the information portion before anyone speaks in string
+\item matches: A pandas dataframe containing the speaker, text, and order spoken in debate information for each chunk
+\item chunk\_counts: A pandas dataframe that contains the number of chunks for each speaker
+\item words: A dictionary containing all of the words spoken by each speaker
+\item words\_stats: A pandas dataframe containing the number of words, characters, and average number of characters per word for each candidate in each debate
+\end{itemize}
+
+ChunkedDebate Has Method:
+\begin{itemize}
+\item init: Construction method for calling all other methods
+\item get\_candidates\_list: Makes a list of all the candidates (they were in a dictionary before)
+\item get\_speakers: Makes a list of all the speakers (moderators and candidates)
+\item speaker\_regex: Construct all\_regex that will match any "SPEAKER:" with a possible space after
+\item get\_year: Gets the year the debate was held in
+\item location\_finder: Gets match information for searching through string with all\_regex
+\item combine\_same\_speaker: Combines adjacent chunks of the same speaker for the location information
+\item text\_exctractor: Uses chunk location information to exctract chunk text, speaker, and order spoken and hold in pandas dataframe
+\item IdentifyModerator: Determines if the moderator is announced at the start by MODERATOR: and adjusts chunk data and debate info as needed
+\item speaker\_counts: Gets the number of chunks per speaker
+\item get\_words: Gets all of the individual words spoken by each speaker
+\item get\_word\_stats: Get the number of words/characters and avg characters for each candidate
+\end{itemize}
+
+I combine all of the candidates and moderators into a vector representing all of the speakers. Then I take only the unique speakers.
+
+We see that in the text the indication of who is speaking is given by SPEAKER: so I make a regex that will match any of these based on the speakers we have. Then I get all of the matches, starting positions, and ending positions from this regex in the text. Then if there are any speakers next to each other that are the same in the list we combine those into one, taking the earliest start position (the first one) and the later end position (the second one) and return a dictionary containing this information. I also get the year of each debate.
+
+Then based on these locations I take the sections of text from start to end for each of these, getting rid of non spoken text and the SPEAKER: with regex (and I get the debate info which is what comes before the first speaker match). I remove all formatting from these chunks add them to a dataframe. Then I noticed that sometimes at the beginning the moderator is specified in the text for example by MODERATOR:whoever it is. So I check to see if there is only one occurence of MODERATOR and if there is I move that data from the dataframe into the debate info. I get the number of chunks for each speaker from our dataframe.
+
+Then I get the individual words spoken by each speaker and some statistics about those words by speaker.
+
+```{python}
+with open("prob3.py") as f:
+  script = f.read()
+  exec(script)
+
+class ChunkedDebate:
+  def __init__(self, string, candidates = candidates, moderators = moderators):
+    if type(string) is not str:
+      raise TypeError("Debate Body Must be a string")
+    if type(candidates) is not list:
+      raise TypeError("Candidates must be a list of dictionaries with keys 'Dem' and 'Rep'")
+    if len(candidates) == 0:
+      raise ValueError("Candidates must have positive length")
+    if type(candidates[0]) is not dict:
+      raise TypeError("Candidates must be a list of dictionaries with keys 'Dem' and 'Rep'")
+    if list(candidates[0].keys()) != ["Dem", "Rep"]:
+      raise ValueError("The entries of candidates must have keys 'Dem' and 'Rep' only")
+    if type(moderators) is not list:
+      raise TypeError("Moderators must be a list")
+    # Assign the raw string to our object
+    self.string = string.strip()
+    # Make a list of moderators
+    self.moderators = moderators
+    # Get the candidates
+    # (note this is over all debates and will be reassigned later)
+    self.candidates = candidates
+    # Get all candidates in list form
+    self.__get_candidate_list__()
+    # Get a list of all speakers
+    self.__get_speakers__()
+    # Get the regex for all speakers
+    self.speaker_regex()
+    # Get the year of the debate
+    try:
+      self.__get_year__()
+    except AttributeError:
+      raise ValueError("Debate must contain a year")
+    # Get the locations of new chunks
+    self.__location_finder__()
+    # Combine adjacent chunks by the same speaker
+    self.__combine_same_speaker__()
+    # Get the text from chunks
+    self.__text_extractor__()
+    # Check if the moderator is defined in the start
+    self.__IdentifyModerator__()
+    # Get the number of chunks by speaker
+    self.__speaker_counts__()
+    # Get words for each speaker
+    self.__get_words__()
+    # Get word statistics
+    self.__get_word_stats__()
+
+  def __get_candidate_list__(self):
+    # Candidates was in a dictionary form so make a list
+    cans = []
+    for i in self.candidates:
+      cans += [str(i["Dem"])]
+      cans += [str(i["Rep"])]
+    self.cans = cans
+    return(cans)
+
+  def __get_speakers__(self):
+    '''
+    Make a list of all the speakers given
+    all moderators and candidates
+    '''
+    speakers = moderators
+    speakers += self.cans
+    # Take only unique speakers
+    self.speakers = list(set(speakers))
+    return(speakers)
+
+  def speaker_regex(self):
+    '''
+    Takes in the list of speakers and makes a regex
+    that will match any "SPEAKER:" with possibly a space
+    after for any of those speakers
+    '''
+    speaker_match = "|".join([f"{i}:\\s?" for i in self.speakers])
+    self.all_regex = speaker_match
+    return(speaker_match)
+
+  def __get_year__(self):
+    '''
+    Gets the year of the debate from the raw string
+    '''
+    self.year = int(re.search("[0-9]{4}", self.string).group())
+
+  def __location_finder__(self):
+    '''
+    Gets the matches, starting positions, and ending
+    positions for each match of our regex
+    '''
+    # Make a list of all the starting positions
+    self.starts = [x.start() for x in re.finditer(self.all_regex, self.string)]
+    # Same for ending positions
+    self.ends = [x.end() for x in re.finditer(self.all_regex, self.string)]
+    # Same for matches
+    self.groups = [x.group() for x in re.finditer(self.all_regex, self.string)]
+    return(None)
+
+  def __combine_same_speaker__(self):
+    '''
+    Takes in all of the starting and ending positions and
+    matches from our regex and combines adjacent chunks of
+    the same speaker
+    '''
+    i = 0
+    while i < len(self.groups) - 1:
+      # If the next speaker is the same
+      if self.groups[i] == self.groups[i+1]:
+        # Keep only the first start position
+        self.starts.pop(i+1)
+        # Keep only the later end position
+        self.ends.pop(i)
+        # Remove one of the matches (they are the same)
+        self.groups.pop(i)
+        # We need to decrease the index to check
+        # the current one with the new next one
+        i -= 1
+      i += 1
+    chunk_locations = {"Starts": self.starts, "Ends": self.ends, "Speakers": self.groups}
+    self.chunk_locations = chunk_locations
+    return(chunk_locations)
+
+  def __text_extractor__(self):
+    '''
+    Takes in all of the starting and ending positions and
+    matches before and gets the text from each chunk, removing
+    unwanted data (like the non spoken text). Also get the
+    debate info at the start of the string
+    '''
+    matches = {"Speaker": [], "Text": [], "Order": []}
+    # Get debate info
+    Deb_Info_end = self.chunk_locations["Starts"][0]
+    self.Deb_Info = self.string[:Deb_Info_end]
+    n = len(self.chunk_locations["Speakers"])
+    
+    for i in range(n):
+      # Add the current speaker
+      matches["Speaker"].append(self.chunk_locations["Speakers"][i])
+      # Get the start position
+      start = self.chunk_locations["Starts"][i]
+      # If we are at the end we want to take the length of the string
+      if i == n -1:
+        end = len(self.string)
+      # Otherwise we want to stop just before the next chunk
+      else:
+        end = self.chunk_locations["Starts"][i+1]
+      # Get the chunk from the string and remove bits like
+      # (APPLAUSE) and [APPLAUSE]
+      text = re.sub("\\([a-zA-Z]*\\)", " ", self.string[start:end])
+      text = re.sub("\\[[a-zA-Z]*\\]", " ", text)
+      # Remove the speaker
+      text = re.sub(self.all_regex, " ", text)
+      # Change and multiple spaces to single ones
+      text = re.sub("\\s+", " ", text)
+      matches["Text"].append(text)
+      # Add the order the chunk was spoken in the debate
+      matches["Order"].append(i+1)
+
+    self.matches = pd.DataFrame(matches)
+    return(matches)
+  
+  def __IdentifyModerator__(self):
+    '''
+    Identifies if the moderator was specified at the start
+    with MODERATOR:whoever it is and removes it from our
+    dataframe but adds it to the debate info
+    '''
+    # Get the data for MODERATOR "spoken" text
+    MOD_ONLY = self.matches[self.matches["Speaker"] == "MODERATOR:"]
+    # If there is only one then it was just the moderator being specified
+    if len(MOD_ONLY) == 1:
+      # Add the moderator name to the debate info
+      MODNAME = MOD_ONLY["Text"][0]
+      self.Deb_Info += f" MODERATOR: {MODNAME}"
+      # Remove the moderator from our data and reinitialize
+      # the indices of our data and spoken order
+      self.matches = self.matches[self.matches["Speaker"] != "MODERATOR:"]
+      self.matches["Order"] = self.matches.index
+      self.matches.index = [x-1 for x in self.matches.index]
+    return(None)
+
+  def __speaker_counts__(self):
+    '''
+    Gets the number of chunks for each speaker
+    '''
+    self.chunk_counts = self.matches["Speaker"].value_counts()
+    
+  def __get_words__(self):
+    '''
+    Extracts the individual words by speaker for the debate
+    '''
+    # Get the speakers and make a dictionary
+    speakers = [re.sub(":\\s?", "", s) for s in list(set(self.matches["Speaker"]))]
+    blanks = [[] for _ in speakers]
+    words_by_speaker = dict(zip(speakers, blanks))
+
+    for i in self.matches.index:
+      # Remove any unwanted text and change multiple spaces to single
+      text = re.sub("[\\.\\?!;:_]", " ", self.matches["Text"][i])
+      text = re.sub(",", "", text)
+      text = re.sub("\\s+", " ", text)
+      # Split the string to individual words
+      words = text.split()
+      # Remove single character "words" that aren't alphanumeric
+      words = [w for w in words if len(w) > 1 or w.isalnum()]
+      speaker = self.matches["Speaker"][i]
+      speaker = re.sub(":\\s?", "", speaker)
+      # Add the new words to our dictionary
+      words_by_speaker[speaker] += words
+    self.words = words_by_speaker
+    return(words_by_speaker)
+    
+  def __get_word_stats__(self):
+    '''
+    Get the desired statistics of spoken words
+    (Number of words/characters and avg characters)
+    '''
+    # Get the candidates for a given debate
+    cans = [x for x in list(self.words.keys()) if x in self.cans]
+    # Reassign candidates
+    self.candidates = cans
+    # Get the number of words for each candidate
+    num_words = [len(self.words[x]) for x in cans]
+    num_chars = []
+    # Get the number of characters for each candidate
+    for x in cans:
+      num_chars.append(sum([len(w) for w in self.words[x]]))
+    # Get the average characters per word for each candidate
+    avg_chars = [float(c)/float(w) for c,w in zip(num_chars,num_words)]
+    year = [self.year for _ in num_words]
+    self.words_stats = pd.DataFrame({"Candidate": cans,
+                                     "Num Words": num_words,
+                                     "Num Chars": num_chars,
+                                     "Avg Chars": avg_chars,
+                                     "Year": year})
+    return(None)
+
+# Create our custom class object for each debate
+debates = [ChunkedDebate(x) for x in debates_body]
+```
+
+\newpage
+## a.
+
+Our class was defined before now we are just showing for each debate some previews of our chunked data now and the number of chunks for each speaker.
+
+```{python}
+for i in debates:
+  print(f"Preview of {i.year} {i.candidates} debate data frame:")
+  print(i.matches.head(n=3))
+  print("")
+  print("Number of chunks by speaker:")
+  print(i.chunk_counts)
+  print("\n")
+```
+
+We can see this structure is in reasonable form.
+
+\newpage
+## b.
+
+Now I show the results of the get_words method from earlier to get all of the individual words spoken by any speaker.
+
+```{python}
+for i in debates:
+  print(f"Preview of {i.year} {i.candidates} Debate:")
+  for j in i.words.keys():
+    print(f"{j}\n{i.words[j][:10]}")
+  print("\n")
+```
+
+So for each speaker in each debate we have a list of all the words they spoke.
+
+\newpage
+## c.
+
+Now I show the results of the get_words method from earlier to get the desired statistics of the words spoken by candidates.
+
+```{python}
+for i in debates:
+  print(f"{i.year} {i.candidates} Debate:")
+  print(i.words_stats)
+  print("\n")
+  
+merged_df = debates[0].words_stats
+for i in debates[1:]:
+  merged_df = pd.concat([merged_df,i.words_stats],axis=0)
+merged_df.index = range(len(merged_df))
+
+# Graph results
+(
+ggplot(merged_df.groupby("Candidate").mean().reset_index(),
+       aes(x = "Candidate")
+      ) +
+      geom_col(aes(y = "Num Words"),
+               color = "black",
+               fill = "lightblue"
+              ) +
+      # Relabel graph
+      labs(title = "Number of Words by Presidential Candidate") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+(
+ggplot(merged_df.groupby("Candidate").mean().reset_index(),
+       aes(x = "Candidate")
+      ) +
+      geom_col(aes(y = "Num Chars"),
+               color = "black",
+               fill = "lightblue"
+              ) +
+      # Relabel graph
+      labs(title = "Number of Characters by Presidential Candidate") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+(
+ggplot(merged_df.groupby("Candidate").mean().reset_index(),
+       aes(x = "Candidate")
+      ) +
+      geom_col(aes(y = "Avg Chars"),
+               color = "black",
+               fill = "lightblue"
+              ) +
+      # Relabel graph
+      labs(title = "Average Characters Per Word by Presidential Candidate") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+
+
+(
+ggplot(merged_df.drop("Candidate", axis=1).groupby("Year").mean().reset_index(),
+       aes(x = "Year")
+      ) +
+      geom_point(aes(y = "Num Words"),
+               color = "black",
+              ) +
+      geom_line(aes(y = "Num Words"),
+               color = "blue",
+              ) +
+      # Relabel graph
+      labs(title = "Number of Words by Year") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+(
+ggplot(merged_df.drop("Candidate", axis=1).groupby("Year").mean().reset_index(),
+       aes(x = "Year")
+      ) +
+      geom_point(aes(y = "Num Chars"),
+               color = "black",
+              ) +
+      geom_line(aes(y = "Num Chars"),
+               color = "blue",
+              ) +
+      # Relabel graph
+      labs(title = "Number of Characters by Year") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+(
+ggplot(merged_df.drop("Candidate", axis=1).groupby("Year").mean().reset_index(),
+       aes(x = "Year")
+      ) +
+      geom_point(aes(y = "Avg Chars"),
+               color = "black",
+              ) +
+      geom_line(aes(y = "Avg Chars"),
+               color = "blue",
+              ) +
+      # Relabel graph
+      labs(title = "Average Characters Per Word by Year") +
+      # Use a simplistic theme
+      theme_minimal()
+).show()
+```
+
+\newpage
+## d.
+
+I will just create some simple inputs to test the class.
+
+```{python}
+# This should work
+test = ChunkedDebate("1999 Random Info A: Welcome B: Hello C: Hi", [{"Dem": "A", "Rep": "B"}], ["C"])
+if test is not None:
+  print("Passed")
+else:
+  print("Failed")
+  
+try:
+  ChunkedDebate("19 Random Info A: Welcome B: Hello C: Hi", [{"Dem": "A", "Rep": "B"}], ["C"])
+  print("Failed")
+except ValueError:
+  print("Passed")
+
+try:
+  ChunkedDebate([], [], [])
+  print("Failed")
+except TypeError:
+  print("Passed")
+  
+try:
+  ChunkedDebate("", [], [])
+  print("Failed")
+except ValueError:
+  print("Passed")
+  
+try:
+  ChunkedDebate("", ["A"], [])
+  print("Failed")
+except TypeError:
+  print("Passed")
+  
+try:
+  ChunkedDebate("", [{"Dem": "A"}], [])
+  print("Failed")
+except ValueError:
+  print("Passed")
+  
+try:
+  ChunkedDebate("", [{"Dem": "A", "Rep": "B"}], "A")
+  print("Failed")
+except TypeError:
+  print("Passed")
+
+test.year
+test.candidates
+test.matches
+test.words
+test.words_stats
+test.chunk_counts
+```
+
+As we can see all of our simple tests passed, checking for possible invalid inputs and the simple case has all of the desired attributes.
+
+\newpage
+## e.
+```{python}
+# Regex for each word
+regexes = [
+  "I", "we", "American?", "democra(cy|tic)", "republic",
+  "Democrat(ic)?", "Republican", "free(dom)?", "terror(ism)?",
+  "safe(r|st|ty)?", "Jesus", "Christ", "Christian"
+  ]
+# Indicate we only want the word to take the whole string
+regexes = ["^" + i + "$" for i in regexes]
+df = {"Candidate": [], "Word": [], "Matches": []}
+for i in debates:
+  # Get candidates
+  cans = i.candidates
+  for j in regexes:
+    # Get the matches of the regex
+    words1 = [re.search(j, x).group() for x in i.words[cans[0]] if re.search(j, x) is not None]
+    words2 = [re.search(j, x).group() for x in i.words[cans[1]] if re.search(j, x) is not None]
+    # Add an entry for each candidate for each of the word(s) that are matched
+    for k in list(set(words1)):
+      df["Word"].append(k)
+      df["Candidate"].append(cans[0])
+      df["Matches"].append(len([word for word in words1 if word == k]))
+    for k in list(set(words2)):
+      df["Word"].append(k)
+      df["Candidate"].append(cans[1])
+      df["Matches"].append(len([word for word in words2 if word == k]))
+      
+# Make dataframe
+df = pd.DataFrame(df).sort_values(by = "Matches", ascending = False)
+df.index = range(len(df))
+df
+(
+
+# Graph results
+ggplot(df.drop("Candidate",axis=1).groupby("Word").sum().reset_index(),
+       aes(x = "reorder(Word, -Matches)")
+      ) +
+      geom_col(aes(y = "Matches"),
+               color = "black",
+               fill = "lightblue"
+              ) +
+      # Relabel graph
+      labs(title = "Key Word Matches Over Presidential Candidates",
+          x = "Word"
+          ) +
+      # Use a simplistic theme
+      theme_minimal() +
+      theme(axis_text_x = element_text(angle = 90))
+).show()
+```
+
+As we can see "I" is the most used words, probably because the candidates are trying to sell themselves and are saying things like "I would do this" and so on. Then we is the next most used so they are likely trying to create a sense of unity with those watching. We can also see that they say America and American a lot indicating they are trying to show dedication to our country. The other words aren't mentioned nearly as much but we can see each major political party is mentioned and other words talking about the safety and freedom of America are mentioned.
+
+\newpage
+# 3.
+
+I did an OOP approach before so now I will outline a FP approach.
+
+The approach here is essentially going to be analogous, we are going to basically use the same code for each function (with a few added functions because I want each to only return one thing) we saw before that each take in needed inputs that were previously saved as class attributes before. So this means the code of the function remains the same we are just replacing self.string for example with string as one of the input arguments.
+
+Here are the functions we will need and a little about what they do (note I am keeping the names the same as the methods before to show how analogous this is):
+\begin{itemize}
+
+\item get\_candidates\_list
+\begin{itemize}
+\item Purpose: Makes a list of all the candidates
+\item Inputs: Dictionary containing all candidates (with keys "Dem" and "Rep")
+\item Output: List of all the candidates (just their names not party)
+\end{itemize}
+
+\item get\_speakers
+\begin{itemize}
+\item Purpose: Makes a list of all the speakers (moderators and candidates)
+\item Inputs: List of all candidates, List of all moderators
+\item Output: List of all speakers (each only appearing once)
+\end{itemize}
+
+\item speaker\_regex
+\begin{itemize}
+\item Purpose: Used to construct a regex that will match any "SPEAKER:" with a possible space at the end
+\item Inputs: List of all speakers
+\item Output: String containing regex to match any "SPEAKER:" with a possible space at the end
+\end{itemize}
+
+\item get\_year
+\begin{itemize}
+\item Purpose: Gets the year the debate was held in
+\item Inputs: String (that must contain a 4 digit number in it)
+\item Output: Integer of the year found
+\end{itemize}
+
+\item start\_location\_finder
+\begin{itemize}
+\item Purpose: Gets the start positions of all matches found with a regex
+\item Inputs: String to find matches in, String with match regex
+\item Output: List of all start positions for the matches
+\end{itemize}
+
+\item end\_location\_finder
+\begin{itemize}
+\item Purpose: Gets the end positions of all matches found with a regex
+\item Inputs: String to find matches in, String with match regex
+\item Output: List of all end positions for the matches
+\end{itemize}
+
+\item group\_finder
+\begin{itemize}
+\item Purpose: Gets the group (i.e. what was matched) of all matches found with a regex
+\item Inputs: String to find matches in, String with match regex
+\item Output: List of all groups for the matches (not a unique list, items might appear multiple times)
+\end{itemize}
+
+\item combine\_same\_speaker
+\begin{itemize}
+\item Purpose: Makes a dictionary with chunk location information to later use to exctract chunks
+\item Inputs: List of start positions from regex match, List of end positions from regex match, List of groups from regex match
+\item Output: Dictionary containing start and end locations as well as group information for all matches (combining adjacent matches from same group)
+\end{itemize}
+
+\item deb\_info\_extractor
+\begin{itemize}
+\item Purpose: Uses chunk location information to exctract pre match info
+\item Inputs: Dictionary containing start and end locations as well as group information for all matches, String that matches were found from
+\item Output: String containing text found before first match
+\end{itemize}
+
+\item text\_exctractor
+\begin{itemize}
+\item Purpose: Uses chunk location information to exctract chunk text, speaker, and order spoken and hold in pandas dataframe
+\item Inputs: Dictionary containing start and end locations as well as group information for all matches, String that matches were found from
+\item Output: Pandas dataframe with the match, text between the match and the next match, and order of the match
+\end{itemize}
+
+\item IdentifyModerator:
+\begin{itemize}
+\item Purpose: Uses chunk match information to determine if the moderator is announced at the start by "MODERATOR:"
+\item Inputs: Pandas dataframe with match information
+\item Output: Boolean that is true if there is only one entry for "MODERATOR:"
+\end{itemize}
+
+\item adjust\_deb\_info:
+\begin{itemize}
+\item Purpose: Add the moderator specification to the debate info if it was counted as a match before
+\item Inputs: Boolean, String of pre match text
+\item Output: String of pre match text (with the moderator specification added if the Boolean is true)
+\end{itemize}
+
+\item adjust\_matches:
+\begin{itemize}
+\item Purpose: Remove the moderator specification from the matches if it was counted as a match before
+\item Inputs: Boolean, Pandas dataframe of match information
+\item Output: Pandas dataframe of matches (removing the moderator entry if the Boolean is true)
+\end{itemize}
+
+\item speaker\_counts:
+\begin{itemize}
+\item Purpose: Count the number of chunks per speaker
+\item Inputs: Pandas dataframe of match information (adjusted if needed)
+\item Output: Count type object with a column for speakers and a column for number of chunks
+\end{itemize}
+
+\item get\_words:
+\begin{itemize}
+\item Purpose: Gets all of the individual words spoken by each speaker
+\item Inputs: Pandas dataframe of match information (adjusted if needed)
+\item Output: Dictionary with columns as speakers where the entries are a list of all words spoken by that speaker
+\end{itemize}
+
+\item get\_word\_stats:
+\begin{itemize}
+\item Purpose: Get the number of words/characters and avg characters for each candidate
+\item Inputs: Dictionary of individual words spoken by each speaker, Integer of the year of the debate
+\item Output: Pandas dataframe with candidate, the number of words, number of characters, average characters per word, and year of the debate
+\end{itemize}
+
+\end{itemize}

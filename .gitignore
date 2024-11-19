@@ -1,6 +1,13 @@
-#R History Files
+#R History files
 *.Rhistory
 #csv files
 *.csv
 #xls files
 *.xls
+#HTML files
+*.html
+#Pycache files
+*.pyc
+#err and out files
+*.err
+*.out
