@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Using Residue Theory to Solve Real Integrals}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{83.5}
+
+{\Large\textbf{a.}} Let $f(z) = tan\:z =\frac{sin\:z}{cos\:z}$. Clearly $f$ is analytic everywhere $cos\:z\neq 0$ (i.e. for $z\neq\frac{\pi}{2} + n\pi$ with $n\in\mathbb{Z}$).
+\begin{center}
+    \doublespacing
+    Now let $C$ be the positively oriented circle $|z| = 2$, clearly $z =\pm\frac{\pi}{2}$ are the only isolated singular points of $f$ interior to $C$.
+    \\Let us look at a derivative of $cos\:z$:
+    \\$\frac{d}{dz} cos\:z = -sin\:z$ so $\frac{d}{dz} cos\:z\Big{|}_{-\frac{\pi}{2}} = -sin(-\frac{\pi}{2}) = 1$ and $\frac{d}{dz} cos\:z\Big{|}_{\frac{\pi}{2}} = -sin(\frac{\pi}{2}) = -1$.
+    \\So we have that there exists an $m$ (namely $m=1$) such that:
+    \\$f(z_0) = f'(z_0) = ... = f^{(m-1)} (z_0) = 0$ and $f^{(m)} (z_0)\neq 0$ where $f(z) = cos\:z$ and $z_0 =\pm\frac{\pi}{2}$.
+    \\Therefore $z_0 =\pm\frac{\pi}{2}$ are first order zeros of $cos\:z$ and hence are simple poles of $tan\:z$.
+    \break
+    \\Recall that if $p(z)$ and $q(z)$ are analytic at $z_0$ with $p(z_0)\neq 0$, $q(z_0) = 0$, and $q'(z_0)\neq 0$ then $z_0$ is a simple pole of $\frac{p(z)}{q(z)}$ and $Res_{z=z_0}\frac{p(z)}{q(z)} =\frac{p(z_0)}{q'(z_0)}$.
+    \\Therefore:
+    \\$Res_{z=-\frac{\pi}{2}} tan\:z = Res_{z=-\frac{\pi}{2}}\frac{sin\:z}{cos\:z} =\frac{sin(-\frac{\pi}{2})}{-sin(-\frac{\pi}{2})} = -1$ and $Res_{z=\frac{\pi}{2}} tan\:z = Res_{z=\frac{\pi}{2}}\frac{sin\:z}{cos\:z} =\frac{sin(\frac{\pi}{2})}{-sin(\frac{\pi}{2})} = -1$.
+    \\Finally since $C$ is positively oriented and simple closed with $z_0 =\pm\frac{\pi}{2}$ as the only isolated singular points of $f$ interior to $C$:
+    \[\int _C tan\:z\;dz =\int _C f(z) dz = 2\pi i\big{(}Res_{z=-\frac{\pi}{2}} f(z) + Res_{z=\frac{\pi}{2}} f(z)\big{)} = 2\pi i\big{(}Res_{z=-\frac{\pi}{2}} tan\:z + Res_{z=\frac{\pi}{2}} tan\:z\big{)} = -4\pi i\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{83.6}
+\begin{center}
+    \doublespacing
+    Let $C_N$ be the positively oriented boundary of the square with sides on $x =\pm (N +\frac{1}{2})\pi$ and $y =\pm (N +\frac{1}{2})\pi$.
+    \\Now let $f(z) =\frac{1}{z^2 sin\:z}$. Clearly $z^2$ has a zero of order 2 at $z_0 = 0$.
+    \\Also $sin\:z$ has zeros only at $z_0 =\pm n\pi$ where $n\leq N$ inside $C_N$.
+    \\Let us look at a derivative of $sin\:z$:
+    \\$\frac{d}{dz} sin\:z = cos\:z$ so $\frac{d}{dz} sin\:z\Big{|}_{\pm n\pi} = cos(\pm n\pi) =\pm 1\neq 0$.
+    \\So we have that there exists an $m$ (namely $m=1$) such that:
+    \\$f(z_0) = f'(z_0) = ... = f^{(m-1)} (z_0) = 0$ and $f^{(m)} (z_0)\neq 0$ where $f(z) = sin\:z$ and $z_0 =\pm n\pi$.
+    \\Therefore $z_0 =\pm n\pi$ are first order zeros of $sin\:z$ and hence are simple poles of $\frac{1}{sin\:z}$.
+    \\So inside $C_N$ we have the only isolated singular points of $f(z)$ are $z_0 =\pm n\pi$ where $n\leq N$.
+    \\All of these poles are simple except for when $n = 0$ corresponding to $z_0 = 0$ which has a pole of order 3 since $z^2$ has a zero of order 2 at 0 and $sin\:z$ has a zero of order 1 at 0.
+\end{center}
+\begin{itemize}
+    \item At $z_0 = 0$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    We know for $|z| <\infty$ that:
+    \[sin\:z =\sum _{n=0}^{\infty}\frac{z^{2n+1} (-1)^{n}}{(2n+1)!} = z -\frac{z^3}{3!} +\frac{z^5}{5!} - ...\]
+    \\Therefore we may find the Laurent series for $\frac{1}{sin\:z}$ about $z_0 = 0$ for $0 < |z| <\infty$ using long division:
+\end{center}
+$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\frac{1}{z} +\frac{z}{6} + ...$
+\[\frac{1}{sin\:z} = z -\frac{z^3}{3!} +\frac{z^5}{5!} -...\;\;\overline{\Bigg{)}\;\; 1 + 0z + 0z^3 + 0z^5 + ...}\]
+$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; -(1 -\frac{z^2}{3!} +\frac{z^4}{5!} -...)$
+\[\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\overline{\;\;\;\;\;\;\;\;\;\frac{z^2}{3!} -\frac{z^4}{5!} + ...}\]
+$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; -(\frac{z^2}{6} -\frac{z^4}{36} +\frac{z^6}{720} -...)$
+\[\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\overline{\;\;\;\;\; z^4 (\frac{1}{36} -\frac{1}{5!}) + ...}\]
+\begin{center}
+    \doublespacing
+    There are many terms here but we only need the term that will give us the residue for $\frac{1}{z^2 sin\:z}$.
+    \\Therefore for $0 < |z| <\infty$ we have:
+    \[\frac{1}{z^2 sin\:z} =\frac{1}{z^2}\Big{(}\frac{1}{z} +\frac{z}{6} + ...\Big{)} =\frac{1}{z^3} +\Big{(}\frac{1}{6}\Big{)}\frac{1}{z} + ...\]
+    So $Res_{z=0}\frac{1}{z^2 sin\:z} =\frac{1}{6}$
+    \break
+    \\Continued on next page.
+\end{center}
+\newpage
+\begin{itemize}
+    \item At $z_0 =\pm n\pi$ for $n\leq N$ and $n\neq 0$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Notice that $\frac{d}{dz} z^2 sin\:z = 2z\:sin\:z + z^2 cos\:z$.
+    \\Since $f(z) =\frac{1}{z^2 sin\:z}$ has a simple pole at all of these points we know:
+    \[Res_{z=\pm n\pi}\frac{1}{z^2 sin\:z} =\frac{1}{2z\:sin\:z + z^2 cos\:z}\Bigg{|}_{z=\pm n\pi} =\frac{1}{0 + n^2\pi ^2 cos(\pm n\pi)} =\frac{1}{n^2\pi ^2 cos(n\pi)} =\frac{(-1)^n}{n^2\pi ^2}\]
+    \break
+    Since there are two residue terms for each $n$ (because each nonzero pole occurs at $\pm n$) we know that:
+    \[\int _{C_N}\frac{1}{z^2 sin\:z} dz = 2\pi i\Bigg{(}\frac{1}{6} + 2\sum_{n=1}^N\frac{(-1)^n}{n^2\pi ^2}\Bigg{)}\]
+    We are given that the value of this integral tends to 0 as $N\rightarrow\infty$.
+    \\Therefore as $N\rightarrow\infty$ we have:
+    \[\int _{C_N}\frac{1}{z^2 sin\:z} dz = 2\pi i\Bigg{(}\frac{1}{6} + 2\sum_{n=1}^N\frac{(-1)^n}{n^2\pi ^2}\Bigg{)}\rightarrow 0\]
+    Which implies that:
+    \[\frac{1}{6} + 2\sum_{n=1}^N\frac{(-1)^n}{n^2\pi ^2}\rightarrow 0\]
+    Consequently:
+    \[\sum_{n=1}^N\frac{(-1)^n}{n^2}\rightarrow -\frac{\pi ^2}{12}\]
+    Finally since we have the convergence of partial sums this gives us the result:
+    \[\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2} = -\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n^2} = -\Big{(} -\frac{\pi ^2}{12}\Big{)} =\frac{\pi ^2}{12}\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{86.7}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{1}{z^2 + 2z + 2} =\frac{1}{(z - (-1 + i))(z - (-1 - i))}$, clearly $f$ has simple poles at $z = -1\pm i$.
+    \\Therefore $Res_{z = -1 + i}\frac{1}{z^2 + 2z + 2} =\frac{1}{z - (-1 - i)}\Big{|}_{z=-1+i} =\frac{1}{2i} = -\frac{i}{2}$.
+    \\Now let $L_R$ be the line on the real axis going from $-R$ to $R$ and let $Q_R$ be the defined by $z(\theta) = Re^{i\theta}$ for $0\leq\theta\leq\pi$ (i.e. the boundary of the semicircle that is the upper half of the circle $|z| = R$ excluding the real axis part).
+    \\Let $C_R = L_R + Q_R$ (i.e. the semicircle boundary that is the upper half of the circle $|z| = R$ including the real axis part).
+    \\Clearly $C_R$ is simple, closed, positively oriented, and if $R >\sqrt{2}$ then it contains the pole $-1 + i$ of $f$ but never the other.
+    \\So we know for $R >\sqrt{2}$:
+    \[\int _{C_R}\frac{1}{z^2 + 2z + 2} dz = 2\pi i\big{(}-\frac{i}{2}\big{)} =\pi\]
+    We also know:
+    \[\int _{C_R}\frac{1}{z^2 + 2z + 2} dz =\int _{L_R}\frac{1}{z^2 + 2z + 2} dz +\int _{Q_R}\frac{1}{z^2 + 2z + 2} dz =\int _{-R}^R\frac{1}{x^2 + 2x + 2} dx +\int _{Q_R}\frac{1}{z^2 + 2z + 2} dz\]
+    So we have that:
+    \[\int _{-R}^R\frac{1}{x^2 + 2x + 2} dx =\pi -\int _{Q_R}\frac{1}{z^2 + 2z + 2} dz\]
+    Along $Q_R$ we know that $|z| = R$ and so $|z^2 + 2z + 2|\geq ||z^2 + 2z| - |2|| = |R|z+2| - 2|\geq |R|R - 2| - 2|$ which for large enough $R$ is just $R^2 - 2R - 2$. Also clearly the length of $Q_R$ is $\pi R$.
+    \\Then we have that $|\frac{1}{z^2 + 2z + 2}| =\frac{1}{|z^2 + 2z + 2|}\leq\frac{1}{R^2 - 2R - 2}$ for large enough $R$.
+    \\Therefore for large enough $R$ we know:
+    \[\Bigg{|}\int _{Q_R}\frac{1}{z^2 + 2z + 2} dz\Bigg{|}\leq\frac{\pi R}{R^2 - 2R - 2}\]
+    Then we know since polynomials are continuous and the denominator of the below is nonzero:
+    \[\lim _{R\rightarrow\infty}\frac{\pi R}{R^2 - 2R - 2} =\lim _{R\rightarrow 0^+}\frac{\frac{\pi}{R}}{\frac{1}{R^2} -\frac{2}{R} - 2} =\lim _{R\rightarrow 0^+}\frac{\pi R}{1 - 2R - 2R^2} =\frac{\pi (0)}{1 - 2(0) - 2(0)^2} = 0\]
+    Therefore by taking $R\rightarrow\infty$:
+    \[\lim _{R\rightarrow\infty}\int _{-R}^R\frac{1}{x^2 + 2x + 2} dx =\pi -\lim _{R\rightarrow\infty}\int _{Q_R}\frac{1}{z^2 + 2z + 2} dz =\pi\]
+    Finally we have that:
+    \[P.V.\int _{-\infty}^{\infty}\frac{1}{x^2 + 2x + 2} dx =\lim _{R\rightarrow\infty}\int _{-R}^R\frac{1}{x^2 + 2x + 2} dx =\pi\]
+\end{center}
+
+
+\newpage
+\section*{88.6}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} =\frac{z(cos\:z + i\:sin\:z)}{(z + i)(z - i)(z + 2i)(z - 2i)}$, clearly $f$ has simple poles at $z =\pm i,\pm 2i$.
+    \\Therefore $Res_{z=i}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} =\frac{ze^{iz}}{(z + i)(z + 2i)(z - 2i)}\Big{|}_{z=i} =\frac{ie^{i^2}}{(2i)(3i)(-i)} =\frac{1}{6e}$.
+    \\Also $Res_{z=2i}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} =\frac{ze^{iz}}{(z + i)(z - i)(z + 2i)}\Big{|}_{z=2i} =\frac{2ie^{2i^2}}{(3i)(i)(4i)} = -\frac{1}{6e^2}$.
+    \\Now let $L_R$ be the line on the real axis going from $-R$ to $R$ and let $Q_R$ be the defined by $z(\theta) = Re^{i\theta}$ for $0\leq\theta\leq\pi$ (i.e. the boundary of the semicircle that is the upper half of the circle $|z| = R$ excluding the real axis part).
+    \\Let $C_R = L_R + Q_R$ (i.e. the semicircle boundary that is the upper half of the circle $|z| = R$ including the real axis part).
+    \\Clearly $C_R$ is simple, closed, positively oriented, and if $R > 2$ then it contains the poles $i$ and $2i$ of $f$ but never the others.
+    \\So we know for $R > 2$:
+    \[\int _{C_R}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} dz = 2\pi i\Big{(}\frac{1}{6e} -\frac{1}{6e^2}\Big{)} = i\frac{\pi (e - 1)}{3e^2}\]
+    We also know:
+    \[\int _{C_R}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} dz =\int _{L_R}\frac{ze^{ix}}{(z^2 + 1)(z^2 + 4)} dz +\int _{Q_R}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} dz\]
+    \[=\int _{-R}^R\frac{x\:cos\:x}{(x^2 + 1)(x^2 + 4)} dx + i\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx +\int _{Q_R}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} dz\]
+    So we have that:
+    \[\int _{-R}^R\frac{x\:cos\:x}{(x^2 + 1)(x^2 + 4)} dx + i\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx = i\frac{\pi (e - 1)}{3e^2} -\int _{Q_R}\frac{z\:sin\:z}{(z^2 + 1)(z^2 + 4)} dz\]
+    We know $g(z) =\frac{z}{(z^2 + 1)(z^2 + 4)}$ is analytic in the upper half of the complex plane ($Im\:z\geq 0$) exterior to the circle $|z| = 2$.
+    \\Clearly the length of $Q_R$ is $\pi R$. Now along $Q_R$ we know that $|z| = R$ and so:
+    \\$|z^2 + 1|\geq ||z^2| - |1|| = |R^2 - 1|$ which for large enough $R$ is just $R^2 - 1$.
+    \\$|z^2 + 4|\geq ||z^2| - |4|| = |R^2 - 4|$ which for large enough $R$ is just $R^2 - 4$.
+    \\Then we have that $|\frac{z}{(z^2 + 1)(z^2 + 4)}| =\frac{|z|}{|z^2 + 1||z^2 + 4|}\leq\frac{R}{(R^2 - 1)(R^2 - 4)}$ for large enough $R$.
+    \\Since polynomials are continuous and the denominator of the below is nonzero:
+    \[\lim _{R\rightarrow\infty}\frac{R}{(R^2 - 1)(R^2 - 4)} =\lim _{R\rightarrow 0^+}\frac{\frac{1}{R}}{(\frac{1}{R^2} - 1)(\frac{1}{R^2} - 4)} =\lim _{R\rightarrow 0^+}\frac{R}{(1 - R^2)(1 - 4R^2)} =\frac{0}{(1 - (0)^2)(1 - 4(0)^2)} = 0\]
+    Therefore by Jordan's Lemma we know for all $a > 0$ (and hence for $a = 1$) that:
+    \[\lim _{R\rightarrow\infty}\int _{Q_R}\frac{ze^{iaz}}{(z^2 + 1)(z^2 + 4)} e^{iaz} dz = 0\]
+    Therefore we have that:
+    \[\lim _{R\rightarrow\infty}\int _{Q_R}\frac{ze^{iz}}{(z^2 + 1)(z^2 + 4)} e^{iaz} dz = 0\]
+    Which means:
+    \[\lim _{R\rightarrow\infty}\Bigg{(}\int _{-R}^R\frac{x\:cos\:x}{(x^2 + 1)(x^2 + 4)} dx + i\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx\Bigg{)}\]
+    \[=\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:cos\:x}{(x^2 + 1)(x^2 + 4)} dx + i\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx\]
+    \[= i\frac{\pi (e - 1)}{3e^2} -\lim _{R\rightarrow\infty}\int _{Q_R}\frac{z\:sin\:z}{(z^2 + 1)(z^2 + 4)} dz = i\frac{\pi (e - 1)}{3e^2}\]
+    Which after taking the imaginary part of both sides we get:
+    \[Im\Bigg{(}\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:cos\:x}{(x^2 + 1)(x^2 + 4)} dx + i\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx\Bigg{)}=\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx\]
+    \[= Im\Big{(}i\frac{\pi (e - 1)}{3e^2}\Big{)} =\frac{\pi (e - 1)}{3e^2}\]
+    Therefore we have:
+    \[P.V.\int _{-\infty}^{\infty}\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx =\lim _{R\rightarrow\infty}\int _{-R}^R\frac{x\:sin\:x}{(x^2 + 1)(x^2 + 4)} dx =\frac{\pi (e - 1)}{3e^2}\]
+\end{center}
+
+\end{document}

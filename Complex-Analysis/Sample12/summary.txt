@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around the applications of residue theory (primarily use in solving real integrals).
