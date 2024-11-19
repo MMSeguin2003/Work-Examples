@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Residue Theory}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{77.3}
+\begin{center}
+    \doublespacing
+    Let $C$ be the positively oriented circle $|z| = 2$ and let $f(z) =\frac{4z - 5}{z(z - 1)}$.
+    \\Clearly $f$ has isolated singular points at $z = 0$ and $z = 1$ and is analytic everywhere else in the finite plane.
+    \\Since these two isolated singular points are interior to the positively oriented simple closed contour $C$ we know:
+    \[\int _C\frac{4z - 5}{z(z - 1)} =\int _C f(z) dz = 2\pi i\:Res _{z=0}\Big{(}\frac{1}{z^2} f\big{(}\frac{1}{z}\big{)}\Big{)} = 2\pi i\:Res _{z=0}\Big{(}\big{(}\frac{1}{z^2}\big{)}\big{(}\frac{\frac{4}{z} - 5}{\frac{1}{z}(\frac{1}{z} - 1)}\big{)}\Big{)} = 2\pi i\:Res _{z=0}\Big{(}\frac{4 - 5z}{z(1 - z)}\Big{)}\]
+    Now recall that we know for $|z| < 1$ that:
+    \[\frac{1}{1 - z} =\sum _{n=0}^{\infty} z^n\]
+    Therefore for $|z| < 1$ we have that:
+    \[\frac{1}{z^2} f(\frac{1}{z}) =\frac{4 - 5z}{z(1 - z)} = (4 - 5z)\Big{(}\big{(}\frac{1}{z}\big{)}\big{(}\frac{1}{1 - z}\big{)}\Big{)} = (4 - 5z)\Bigg{(}\frac{1}{z}\sum _{n=0}^{\infty} z^n\Bigg{)} = (4 - 5z)\Bigg{(}\sum _{n=0}^{\infty} z^{n-1}\Bigg{)}\]
+    \[= 4\Bigg{(}\sum _{n=0}^{\infty} z^{n-1}\Bigg{)} - 5z\Bigg{(}\sum _{n=0}^{\infty} z^{n-1}\Bigg{)} =\Bigg{(}4\sum _{n=0}^{\infty} z^{n-1}\Bigg{)} -\Bigg{(}5\sum _{n=0}^{\infty} z^{n}\Bigg{)}\]
+    \[=\Big{(}\frac{4}{z} + 4 + 4z + 4z^2 + ...\Big{)} -\Big{(}5 + 5z + 5z^2 + ...\Big{)} =\frac{4}{z} -\Big{(}1 + z + z^2 + ...\Big{)} =\frac{4}{z} -\sum _{n=0}^{\infty} z^n\]
+    Therefore we know $Res _{z=0}\Big{(}\frac{1}{z^2} f\big{(}\frac{1}{z}\big{)}\Big{)} = Res _{z=0}\Big{(}\frac{4 - 5z}{z(1 - z)}\Big{)} = 4$.
+    \\Finally we know:
+    \[\int _C\frac{4z - 5}{z(z - 1)} = 2\pi i\:Res _{z=0}\Big{(}\frac{4 - 5z}{z(1 - z)}\Big{)} = 8\pi i\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{77.7}
+\begin{center}
+    \doublespacing
+    Let $P(z) = a_0 + a_1 z + a_2 z^2 + ... + a_n z^n$ where $a_n\neq 0$ and $Q(z) = b_0 + b_1 z + b_2 z^2 + ... + b_m z^m$ where $b_m\neq 0$.
+    \\Also let these polynomials be such that $m\geq n + 2$ which also gives $n\leq m - 2$ and $m - n - 2\geq 0$.
+    \\Let $C$ be a simple closed contour such that all of the zeros of $Q(z)$ are interior to $C$, such a contour exists because $Q(z)$ only has finitely many zeros.
+    \\Now let $f(z) =\frac{P(z)}{Q(z)} =\frac{a_0 + a_1 z + a_2 z^2 + ... + a_n z^n}{b_0 + b_1 z + b_2 z^2 + ... + b_m z^m}$.
+    \\Clearly $f(z)$ has isolated singular points at the zeros of $Q(z)$ and is analytic everywhere on and outside of $C$.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _C\frac{P(z)}{Q(z)} dz = 2\pi i Res_{z=0}\Big{(}\frac{1}{z^2} f\big{(}\frac{1}{z}\big{)}\Big{)}\]
+    So we need to find this residue.
+    \\We know for any $z\neq 0$ such that $Q(\frac{1}{z})\neq 0$ that:
+    \[\frac{1}{z^2}f\Big{(}\frac{1}{z}\Big{)} =\Big{(}\frac{1}{z^2}\Big{)}\Big{(}\frac{a_0 + a_1\frac{1}{z} + a_2\frac{1}{z^2} + ... + a_n\frac{1}{z^n}}{b_0 + b_1\frac{1}{z} + b_2\frac{1}{z^2} + ... + b_m\frac{1}{z^m}}\Big{)} =\frac{a_0 z^{m-2} + a_1 z^{m-3} + a_2 z^{m-4} + ... + a_n z^{m-n-2}}{b_0 z^m + b_1 z^{m-1} + b_2 z^{m-2} + ... + b_m}\]
+    \[= z^{m-n-2}\frac{a_0 z^{n} + a_1 z^{n-1} + a_2 z^{n-2} + ... + a_n}{b_0 z^m + b_1 z^{m-1} + b_2 z^{m-2} + ... + b_m}\]
+    Note that since $b_m\neq 0$ we know that at $z = 0$ the denominator of the above expression is nonzero.
+    \\Furthermore since the denominator is a polynomial of finite degree we know it only has finitely many zeros and so there exists a neighborhood of $z_0 = 0$ where the denominator has no zeros.
+    \\Therefore there exists a neighborhood of $z_0 = 0$ where $\frac{a_0 z^{n} + a_1 z^{n-1} + a_2 z^{n-2} + ... + a_n}{b_0 z^m + b_1 z^{m-1} + b_2 z^{m-2} + ... + b_m}$ is analytic.
+    \\Since $m-n-2\geq 0$ we know $z^{m-n-2}$ is also analytic in the same neighborhood of $z_0 = 0$ (its power is non negative).
+    \\Therefore we know $\frac{1}{z^2} f\Big{(}\frac{1}{z}\Big{)} = z^{m-n-2}\frac{a_0 z^{n} + a_1 z^{n-1} + a_2 z^{n-2} + ... + a_n}{b_0 z^m + b_1 z^{m-1} + b_2 z^{m-2} + ... + b_m}$ is analytic in the same neighborhood which means it has a Taylor series representation about $z_0 = 0$ for that neighborhood.
+    \\That is we can say in some neighborhood of $z_0 = 0$:
+    \[\frac{1}{z^2} f\Big{(}\frac{1}{z}\Big{)} = z^{m-n-2}\frac{a_0 z^{n} + a_1 z^{n-1} + a_2 z^{n-2} + ... + a_n}{b_0 z^m + b_1 z^{m-1} + b_2 z^{m-2} + ... + b_m} =\sum _{k=0}^{\infty} a_k z^k\]
+    In the above series representation there is no $\frac{1}{z}$ term and hence the residue is 0 there.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _C\frac{P(z)}{Q(z)} dz = 2\pi i Res_{z=0}\Big{(}\frac{1}{z^2} f\big{(}\frac{1}{z}\big{)}\Big{)} = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{79.3}
+\begin{center}
+    \doublespacing
+    Let $f(z)$ be analytic at $z_0$, then we know $f(z)$ has a Taylor expansion about $z_0$.
+    \\So for some neighborhood of $z_0$ we may write:
+    \[f(z) =\sum _{n=0}^{\infty} a_n (z - z_0)^n\]
+\end{center}
+
+{\Large\textbf{a.}} If $f(z_0)\neq 0$ then we know the constant term in the series is $a_0 = f(z_0)\neq 0$.
+\begin{center}
+    \doublespacing
+    Therefore we know in some deleted neighborhood of $z_0$ we may write:
+    \[g(z) =\frac{f(z)}{z - z_0} =\frac{1}{z - z_0}\sum _{n=0}^{\infty} a_n (z - z_0)^n =\frac{a_0}{z - z_0} + a_1 + a_2 (z - z_0) + a_3 (z - z_0)^2 + ... =\frac{a_0}{z - z_0} +\sum _{n=0}^{\infty} a_{n+1} (z - z_0)^n\]
+    Since $a_0\neq 0$ we can let $m = 1$ then we have that the coefficients in the Laurent series for $g(z)$ about $z_0$ are such that $b_m\neq 0$ and $b_{m+1} = b_{m+2} = ... = 0$ so $z_0$ is a pole of order $m = 1$ for the function $g(z)$ which means it's a simple pole.
+    \\Clearly the coefficient on the $\frac{1}{z - z_0}$ term is $a_0 = f(z_0)$ so $Res_{z=z_0} g(z) = f(z_0)$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} If $f(z_0) = 0$ then we know the constant term in the series is $a_0 = f(z_0) = 0$.
+\begin{center}
+    \doublespacing
+    Therefore we know in some deleted neighborhood of $z_0$ we may write:
+    \[g(z) =\frac{f(z)}{z - z_0} =\frac{1}{z - z_0}\sum _{n=0}^{\infty} a_n (z - z_0)^n =\frac{a_0}{z - z_0} + a_1 + a_2 (z - z_0) + a_3 (z - z_0)^2 + ... =\sum _{n=0}^{\infty} a_{n+1} (z - z_0)^n\]
+    Since $a_0 = 0$ there are no negative powers of $z - z_0$ in this power series, so the power series so the power series itself is analytic in some neighborhood of $z_0$ (not just a deleted neighborhood but also at $z_0$).
+    \\Therefore in the Laurent series for $g(z)$ about $z_0$ we know every $b_n = 0$ so $z_0$ is a removable singular point of $g(z)$ and in order to remove the singular point we may redefine $g(z_0)$ to be the power series evaluated at $z_0$.
+    \\That is reassign $g(z_0)$ to be:
+    \[\sum _{n=0}^{\infty} a_{n+1} (z - z_0)^n\Bigg{|}_{z=z_0} =\sum _{n=0}^{\infty} a_{n+1} (z_0 - z_0)^n =\sum _{n=0}^{\infty} 0 = 0\]
+    So the newly defined function $g(z)$ below is analytic in some neighborhood of $z_0$:
+    \[g(z_0) = f(z_0) = 0,\;\;\;\;g(z) =\frac{f(z)}{z - z_0} =\sum _{n=0}^{\infty} a_{n+1} (z - z_0)^n\;\;\;\text{for}\;\;z\neq z_0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{81.2}
+\begin{center}
+    \doublespacing
+    Recall that $f(z)$ has a pole of order $m$ at $z_0$ if $f(z)$ can be written as $f(z) =\frac{\phi (z)}{(z - z_0)^m}$ where $\phi (z)$ is analytic and nonzero at $z_0$, and in this case we know $Res_{z=z_0} f(z) =\frac{\phi ^{(m)} (z_0)}{(m-1)!}$.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) =\frac{z^{1/4}}{z + 1}$, clearly $\phi (z) = z^{1/4}$ is analytic and nonzero at $z_0 = -1$.
+\begin{center}
+    \doublespacing
+    Therefore we know $f(z)$ may be written as $f(z) =\frac{\phi (z)}{(z - z_0)^m}$ where $m = 1$, $z_0 = -1$, and $\phi (z) = z^{1/4}$.
+    \\So $f(z)$ has a simple pole ($m = 1$) at $z_0 = -1$ and $Res_{z=z_0} f(z) =\frac{\phi ^{(m)} (z_0)}{(m-1)!} =\phi ^{(0)} (z_0) =\phi (z_0)$.
+    \\Now we know $z^{1/4}$ is multi-valued and we can write:
+    \[(-1)^{1/4} = e^{\frac{1}{4}(ln|-1| + i\:arg(-1))} = e^{i\frac{arg(-1)}{4}}\]
+    Since we were given that we are taking $0 < arg\:z < 2\pi$ for $z^{1/4}$ we must take $arg(-1) =\pi$.
+    \\So for this branch we get $(-1)^{1/4} = e^{i\frac{\pi}{4}} =\frac{1 + i}{\sqrt{2}}$.
+    \\Therefore we have $Res_{z=-1}\frac{z^{1/4}}{z + 1} = (-1)^{1/4} =\frac{1 + i}{\sqrt{2}}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{Log\:z}{(z^2 + 1)^2} =\frac{Log\:z}{(z + i)^2 (z - i)^2}$, clearly $\phi (z) =\frac{Log\:z}{(z+i)^2}$ is analytic and nonzero at $z_0 = i$.
+\begin{center}
+    \doublespacing
+    Therefore we know $f(z)$ may be written as $f(z) =\frac{\phi (z)}{(z - z_0)^m}$ where $m = 2$, $z_0 = i$, and $\phi (z) =\frac{Log\:z}{(z+i)^2}$.
+    \\So $f(z)$ has a pole of order 2 at $z_0 = i$ and $Res_{z=z_0} f(z) =\frac{\phi ^{(m)} (z_0)}{(m-1)!} =\phi ^{(1)} (z_0) =\phi '(z_0)$.
+    \\Now we know $\frac{d}{dz} Log\:z =\frac{1}{z}$, so:
+    \[\frac{d}{dz} \phi (z) =\frac{d}{dz}\frac{Log\:z}{(z+i)^2} =\frac{(\frac{1}{z})(z+i)^2 -2(z+i)Log\:z}{(z+i)^4} =\frac{z+i - 2z Log\:z}{z(z+i)^3}\]
+    Therefore $\phi '(i) =\frac{2i -2i\:Log(i)}{i(2i)^3} =\frac{2i - 2i(ln|i| + i\:Arg(i))}{8} =\frac{2i +\pi}{8}$
+    \\Therefore we have $Res_{z=i}\frac{Log\:z}{(z^2 + 1)^2} = \phi '(i) =\frac{2i +\pi}{8}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}} Let $f(z) =\frac{z^{1/2}}{(z^2 + 1)^2} =\frac{z^{1/2}}{(z+i)^2 (z-i)^2}$, clearly $\phi (z) =\frac{z^{1/2}}{(z+i)^2}$ is analytic and nonzero at $z_0 = i$.
+\begin{center}
+    \doublespacing
+    Therefore we know $f(z)$ may be written as $f(z) =\frac{\phi (z)}{(z - z_0)^m}$ where $m = 2$, $z_0 = i$, and $\phi (z) =\frac{z^{1/2}}{(z+i)^2}$.
+    \\So $f(z)$ has a pole of order 2 at $z_0 = i$ and $Res_{z=z_0} f(z) =\frac{\phi ^{(m)} (z_0)}{(m-1)!} =\phi ^{(1)} (z_0) =\phi '(z_0)$.
+    \\Now we know $\frac{d}{dz} z^{1/2} =\frac{1}{2z^{1/2}}$, so:
+    \[\frac{d}{dz} \phi (z) =\frac{d}{dz}\frac{z^{1/2}}{(z+i)^2} =\frac{(\frac{1}{2z^{1/2}})(z+i)^2 -2(z+i)z^{1/2}}{(z+i)^4} =\frac{z+i - 4z}{2z^{1/2}(z+i)^3} =\frac{i - 3z}{2z^{1/2}(z+i)^3}\]
+    We were given $0 < arg\:z < 2\pi$ so for $z^{1/2}$ we must take $arg(i) =\frac{\pi}{2}$, then $(i)^{1/2} = e^{\frac{1}{2}(ln|i| + i\:arg(i))} = e^{i\frac{arg(i)}{2}} = e^{i\frac{\pi}{4}} =\frac{1 + i}{\sqrt{2}}$.
+    \\So for this branch we get:
+    \[\phi '(i) =\frac{-2i}{2(i)^{1/2}(2i)^3} =\frac{-1}{-8(\frac{1 + i}{\sqrt{2}})} =\frac{1}{8}\Big{(}\frac{\frac{1 - i}{\sqrt{2}}}{(\frac{1 - i}{\sqrt{2}})(\frac{1 + i}{\sqrt{2}})}\Big{)} =\frac{1 - i}{8\sqrt{2}}\]
+    \\Therefore we have $Res_{z=i}\frac{z^{1/2}}{(z^2 + 1)^2} =\phi '(i) =\frac{1 - i}{8\sqrt{2}}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{81.4}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{3z^3 + 2}{(z - 1)(z^2 + 9)}$, clearly $f(z)$ has isolated singular points at $z_1 = 1$, $z_2 = 3i$, and $z_3 = -3i$.
+\begin{center}
+    \doublespacing
+    Furthermore we know each of these isolated singular points is a simple pole ($m=1$) since we can write $f(z) =\frac{3z^3 + 2}{(z - 1)(z - 3i)(z + 3i)}$, so if we consider each point ($z_1, z_2, z_3$) one at a time we know we can write:
+    \[f(z) =\frac{\phi _k (z)}{z - z_k}\;\;\text{where}\;\;k\in\{1, 2, 3\}\;\;\;\text{and}\;\;\phi _k (z)\;\;\text{is analytic and nonzero at}\;z_k\]
+    So at each of these simple poles ($m=1$) we get $Res _{z=z_k} f(z) =\frac{\phi _k^{(m-1)} (z_k)}{(m-1)!} =\phi _k (z_k)$.
+    \\Let's actually find these residues:
+    \\For $z_1 = 1$ we know $\phi _1 (z) =\frac{3z^3 + 2}{z^2 + 9}$ so $Res _{z=1} f(z) = Res _{z=z_1} f(z) =\phi _1 (z_1) =\phi _1 (1) =\frac{3 + 2}{10} =\frac{1}{2}$.
+    \\For $z_2 = 3i$ we know $\phi _2 (z) =\frac{3z^3 + 2}{(z-1)(z+3i)}$ so $Res _{z=3i} f(z) = Res _{z=z_2} f(z) =\phi _2 (z_2) =\phi _2 (3i) =\frac{3(3i)^3 + 2}{6i(3i-1)} =\frac{81i - 2}{18 + 6i} =\frac{(81i - 2)(18 - 6i)}{(18 - 6i)(18 + 6i)} =\frac{30(15+49i)}{360} =\frac{1}{12}(15 + 49i)$.
+    \\For $z_3 = -3i$ we know $\phi _3 (z) =\frac{3z^3 + 2}{(z-1)(z-3i)}$ so $Res _{z=-3i} f(z) = Res _{z=z_3} f(z) =\phi _3 (z_3) =\phi _3 (-3i) =\frac{3(-3i)^3 + 2}{-6i(-3i-1)} =\frac{81i + 2}{6i-18} =\frac{(81i + 2)(-18 - 6i)}{(-18 - 6i)(-18 + 6i)} =\frac{30(15-49i)}{360} =\frac{1}{12}(15-49i)$.
+    \break
+    \\Now let $C$ be the counterclockwise oriented circle $|z| = 4$, clearly $f(z)$ is analytic inside and on $C$ except at each of these singular points which are interior to $C$.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _C\frac{3z^3 + 2}{(z - 1)(z^2 + 9)} = 2\pi i\sum _{k=1}^3 Res_{z=z_k} f(z) = 2\pi i\Big{(}\frac{1}{2} +\frac{1}{12}(15 + 49i) +\frac{1}{12}(15 - 49i)\Big{)}\]
+    \[= 2\pi i\Big{(}\frac{1}{2} +\frac{30}{12}\Big{)} =\pi i\Big{(}1 + 5\Big{)} = 6\pi i\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+
+\begin{center}
+    \doublespacing
+    Let $f, g$ be analytic functions on a bounded domain $D$ where $f = g$ at infinitely many points in a closed set $S\subset D$.
+    \\Now define the function $h(z) = f(z) - g(z)$.
+    \\We know $h$ is analytic in $D$ and that $h(z) = 0$ at infinitely many points in the closed set $S\subset D$.
+    \\From these infinitely many points where $h(z) = 0$ in $S$ define a sequence $(z_n)$, this need not contain every such zero of $h$ and in fact can't if there are unaccountably many but such a sequence does exist.
+    \break
+    \\Clearly the sequence is bounded since it is contained within $S$ which is a subset of $D$ which is bounded.
+    \\Therefore the real sequence $(Re\:z_n)$ is bounded.
+    \\Then by the Bolzano Weierstrass theorem (in the real case) there exists a convergent subsequence $(Re\:z_{n_k})$ of $(Re\:z_n)$.
+    \\Now consider the real sequence $(Im\:z_{n_k})$ where all these $n_k$ are the same as in the above sequence $(Re\:z_{n_k})$.
+    \\Again clearly $(Im\:z_{n_k})$ is bounded.
+    \\So by the Bolzano Weierstrass theorem (in the real case) there exists a convergent subsequence $(Im\:z_{n_p})$ of $(Im\:z_{n_k})$.
+    \\Now we consider the real sequence $(Re\:z_{n_p})$ where all these $n_p$ are the same as in the above sequence $(Im\:z_{n_p})$.
+    \\Since $(Re\:z_{n_p})$ is a subsequence of the convergent sequence $(Re\:z_{n_k})$ we know that $(Re\:z_{n_p})$ converges.
+    \\Therefore the sequence $(z_{n_p}) = (Re\:z_{n_k} + i\:Im\:z_{n_p})$ converges to say $z_0$.
+    \\Since $S$ is closed it contains all its limit points and we know $z_0\in S$.
+    \\Consider the sequence $(h(z_{n_p})) = (f(z_{n_p}) - g(z_{n_p}))$. By construction $(h(z_{n_p})) = (0, 0, 0, ...)$ which clearly converges to 0.
+    \\Since $h(z) = f(z) - g(z)$ is analytic and hence continuous in $D$ and consequently also in $S$ we know:
+    \[\text{The limit}\lim _{z\rightarrow z_0} h(z)\;\;\text{exists and it must be that}\;\lim _{z\rightarrow z_0} h(z) = h(z_0)\]
+    \\Since we already know the sequences $(z_{n_p})\rightarrow z_0$ and $(h(z_{n_p})) = (0, 0, 0, ...)\rightarrow 0$ it must be that:
+    \[\lim _{z\rightarrow z_0} h(z) = 0 = h(z_0)\]
+    Since there are points of the sequence $(z_{n_p})$ in every neighborhood of $z_0$ (by the definition of convergence) we know that there are zeros of $h$ in every neighborhood of $z_0$.
+    \\Therefore $z_0$ is a point such that $h(z_0) = 0$, $h$ is analytic at $z_0$, and there does not exist a deleted neighborhood of $z_0$ where $h(z)\neq 0$, so there must exist a neighborhood of $z_0$ where $h(z) = 0$ identically (otherwise there would exist a deleted neighborhood of $z_0$ where $h(z)\neq 0$).
+    \\Then we know this neighborhood is a domain containing $z_0$, $h(z_0) = 0$, and $h$ is analytic in a neighborhood of $z_0$.
+    \\Therefore we know that $h(z) = f(z) - g(z) = 0$ identically throughout $D$, and hence $f(z) = g(z)$ throughout $D$ \qedsymbol
+\end{center}
+
+\end{document}
