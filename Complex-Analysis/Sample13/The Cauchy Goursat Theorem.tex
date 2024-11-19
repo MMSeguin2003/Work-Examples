@@ -1,0 +1,313 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{The Cauchy Goursat Theorem}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{91.1}
+\begin{center}
+    \doublespacing
+    Let $C_R$ be defined by $z(\theta) = Re^{i\theta}$ in the counterclockwise direction.
+    \\Also let $C_{\rho}$ be defined by $z(\theta) =\rho e^{i\theta}$ in the clockwise direction with $R >\rho$.
+    \\Now let $L_1$ be the line going from $\rho$ to $R$ and $L_2$ be the line going from $-R$ to $-\rho$.
+    \\Clearly $C = C_{\rho} + L_1 + C_R + L_2$ is a simple closed contour in the positive sense.
+    \\Now let $f(z) =\frac{e^{iaz} - e^{ibz}}{z^2}$ where $a, b\geq 0$. Clearly $f$ has a pole of order 2 at $z = 0$.
+    \\Since $z = 0$ is not on or inside $C$ we know that $f$ is analytic inside and on $C$.
+    \\Therefore by the Cauchy Goursat theorem we know:
+    \[\int _C\frac{e^{iaz} - e^{ibz}}{z^2} dz =\int _{C_{\rho}}\frac{e^{iaz} - e^{ibz}}{z^2} dz +\int _{L_1}\frac{e^{iaz} - e^{ibz}}{z^2} dz +\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz +\int _{L_2}\frac{e^{iaz} - e^{ibz}}{z^2} dz = 0\]
+    \\We already know for all $z\in\mathbb{C}$ that:
+    \[e^z =\sum _{n=0}^{\infty}\frac{z^n}{n!} = 1 + z +\frac{z^2}{2} +\frac{z^3}{6} + ...\]
+    Therefore taking $c\geq 0$ (it could really be any complex number though) we know for all $z\in\mathbb{C}$ that:
+    \[e^{icz} =\sum _{n=0}^{\infty}\frac{(icz)^n}{n!}\]
+    Consequently we know for all $z\in\mathbb{C}$ that:
+    \[e^{iaz} - e^{ibz} =\sum _{n=0}^{\infty}\frac{(iaz)^n}{n!} -\sum _{n=0}^{\infty}\frac{(ibz)^n}{n!} =\sum _{n=0}^{\infty}\frac{(iaz)^n - (ibz)^n}{n!} = z(i(a - b)) + z^2(\frac{b^2 - a^2}{2}) + ...\]
+    Therefore we have the Laurent series for $|z| > 0$:
+    \[\frac{e^{iaz} - e^{ibz}}{z^2} =\frac{1}{z^2}\sum _{n=0}^{\infty}\frac{(iaz)^n - (ibz)^n}{n!} =\frac{i(a - b)}{z} +\sum _{n=0}^{\infty} c_n z^n\]
+    \break
+    Continued on next page.
+    \newpage
+    So $z = 0$ is a simple pole of $f$ and we know $Res_{z=0}\frac{e^{iaz} - e^{ibz}}{z^2} = i(a - b)$.
+    \\Since $z = 0$ is a simple pole of $f$ on the real axis with residue $B_0 = i(a - b)$ and $C_{\rho}$ denotes the upper half of the circle $|z| =\rho$ in the clockwise direction we know:
+    \[\lim _{\rho\rightarrow 0}\int _{C_{\rho}}\frac{e^{iaz} - e^{ibz}}{z^2} dz = -B_0 \pi i = -i(a - b)\pi i = (a - b)\pi\]
+    Now notice that if $z = x + iy$ then $|e^{iz}| = |e^{i(x + iy)}| = |e^{ix - y}| = |e^{ix}||e^{-y}| = |e^{-y}|$.
+    \\Therefore if $y = Im\:z\geq 0$ we know that $|e^{iz}|\leq 1$.
+    \\So we have on $C_R$ that $|\frac{e^{iaz} - e^{ibz}}{z^2}| =\frac{|e^{iaz} - e^{ibz}|}{|z^2|}\leq\frac{|e^{iaz}| + |e^{ibz}|}{|z|^2} =\frac{|e^{iz}|^a + |e^{iz}|^b}{R^2}\leq\frac{2}{R^2}$.
+    \\We also know that the length of $C_R$ is $\pi R$ so we have that:
+    \[\Bigg{|}\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{|}\leq\Big{(}\frac{2}{R^2}\Big{)}\pi R =\frac{2\pi}{R}\]
+    Clearly as $R\rightarrow\infty$ we know $\frac{2\pi}{R}\rightarrow 0$ so we have that:
+    \[\lim _{R\rightarrow\infty}\Bigg{|}\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{|} = 0\]
+    Consequently the integral itself is 0 in the limit, that is:
+    \[\lim _{R\rightarrow\infty}\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz = 0\]
+    Along $L_1$ we can take the parameterization $z(x) = x$ where $\rho\leq x\leq R$ to get:
+    \[\int _{L_1}\frac{e^{iaz} - e^{ibz}}{z^2} dz =\int _{\rho}^R\frac{e^{iax} - e^{ibx}}{x^2} dx =\int _{\rho}^R\frac{cos(ax) + i\:sin(ax) - cos(bx) - i\:sin(bx)}{x^2} dx\]
+    \[=\int _{\rho}^R\frac{cos(ax) - cos(bx)}{x^2} dx + i\int _{\rho}^R\frac{sin(ax) - sin(bx)}{x^2} dx\]
+    Along $L_2$ we can take the parameterization $z(x) = x$ where $-R\leq x\leq -\rho$ to get:
+    \[\int _{L_1}\frac{e^{iaz} - e^{ibz}}{z^2} dz =\int _{-R}^{-\rho}\frac{e^{iax} - e^{ibx}}{x^2} dx =\int _{\rho}^R\frac{e^{-iax} - e^{-ibx}}{x^2} dx =\int _{\rho}^R\frac{cos(ax) - i\:sin(ax) - cos(bx) + i\:sin(bx)}{x^2} dx\]
+    \[=\int _{\rho}^R\frac{cos(ax) - cos(bx)}{x^2} dx - i\int _{\rho}^R\frac{sin(ax) - sin(bx)}{x^2} dx\]
+    Therefore we know that:
+    \[\int _{L_1}\frac{e^{iaz} - e^{ibz}}{z^2} dz +\int _{L_2}\frac{e^{iaz} - e^{ibz}}{z^2} dz = 2\int _{\rho}^R\frac{cos(ax) - cos(bx)}{x^2} dx\]
+    This is true for any arbitrary $\rho < R$ and so we may simultaneously take $R\rightarrow\infty$ and $\rho\rightarrow 0$ to get:
+    \[2\int _0^{\infty}\frac{cos(ax) - cos(bx)}{x^2} dx =\lim _{R\rightarrow\infty,\rho\rightarrow 0} 2\int _{\rho}^R\frac{cos(ax) - cos(bx)}{x^2} dx =\lim _{R\rightarrow\infty,\rho\rightarrow 0}\Bigg{(}\int _{L_1}\frac{e^{iaz} - e^{ibz}}{z^2} dz +\int _{L_2}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{)}\]
+    \[=\lim _{R\rightarrow\infty,\rho\rightarrow 0}\Bigg{(}\int _{C}\frac{e^{iaz} - e^{ibz}}{z^2} dz -\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz -\int _{C_{\rho}}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{)}\]
+    \[=\Bigg{(}\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{C}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{)} -\Bigg{(}\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{C_R}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{)} -\Bigg{(}\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{C_{\rho}}\frac{e^{iaz} - e^{ibz}}{z^2} dz\Bigg{)}\]
+    \[= 0 - 0 - (a - b)\pi = (b - a)\pi\]
+    Therefore for any $a, b\geq 0$ we have that:
+    \[\int _0^{\infty}\frac{cos(ax) - cos(bx)}{x^2} dx =\frac{(b - a)\pi}{2}\]
+    \qedsymbol
+    \\We may use this fact, taking $a = 0$ and $b = 2$, as well as the identity $1 - cos(2x) = 2sin^2 x$ to get:
+    \[\int _0^{\infty}\frac{cos(0) - cos(2x)}{x^2} dx =\int _0^{\infty}\frac{1 - cos(2x)}{x^2} dx =\int _0^{\infty}\frac{2sin^2 x}{x^2} dx =\frac{(2 - 0)\pi}{2} =\pi\]
+    Therefore we are left with:
+    \[\int _0^{\infty}\frac{sin^2 x}{x^2} dx =\frac{1}{2}\int _0^{\infty}\frac{2sin^2 x}{x^2} dx =\frac{\pi}{2}\]
+\end{center}
+
+
+\newpage
+\section*{91.6}
+\begin{center}
+    \doublespacing
+    Refer to the figure in the book for the contours $\Gamma _R,\Gamma _{\rho},\gamma _R,\gamma _{\rho},$ and $L$.
+    \\Let $V$ be the line segment on the real axis going from $\rho$ to $R$.
+\end{center}
+
+{\Large\textbf{a.}} The contour on the left in the book is given by $C_1 = V +\Gamma _R + L +\Gamma _{\rho}$ and is clearly simple closed.
+\begin{center}
+    \doublespacing
+    Let $f_1 (z) =\frac{z^{-a}}{z+1}$ where the branch is $|z| > 0, -\frac{\pi}{2} < arg\:z <\frac{3\pi}{2}$.
+    \\We know $f_1$ is analytic inside and on $C_1$ except at the isolated singular point $z = -1$ because none of the branch cut for $z^{-a}$ is inside or on $C_1$, so $z^{-a}$ is hence analytic inside and on $C_1$.
+    \\Notice that along $V$ we may use the parameterization $z(r) = r$ where $\rho\leq r\leq R$ to get:
+    \[\int _{V} f_1 (z) dz =\int _{\rho}^R\frac{r^{-a}}{r+1} dr\]
+    Therefore we know by Cauchy's Residue Theorem that:
+    \[\int _{C_1} f_1 (z) dz =\int _{V} f_1 (z) dz +\int _{\Gamma _R} f_1 (z) dz +\int _{L} f_1 (z) dz +\int _{\Gamma _{\rho}} f_1 (z) dz\]
+    \[=\int _{\rho}^R\frac{r^{-a}}{r+1} dr +\int _{\Gamma _R} f_1 (z) dz +\int _{L} f_1 (z) dz +\int _{\Gamma _{\rho}} f_1 (z) dz = 2\pi i\:Res_{z=-1} f_1 (z)\]
+\end{center}
+
+{\Large\textbf{b.}} The contour on the left in the book is given by $C_2 = -V +\gamma _{\rho} - L +\gamma _R$ and is clearly simple closed.
+\begin{center}
+    \doublespacing
+    Let $f_2 (z) =\frac{z^{-a}}{z+1}$ where the branch is $|z| > 0, \frac{\pi}{2} < arg\:z <\frac{5\pi}{2}$.
+    \\Since we take this branch cut we must represent real numbers as $x = xe^{2\pi i}$ (instead of just $x = xe^{0i}$ as before) when parameterizing for our contours.
+    \\We know $f_2$ is analytic inside and on $C_2$ because none of the branch cut for $z^{-a}$ is inside or on $C_2$, so $z^{-a}$ is hence analytic inside and on $C_2$ and since $z = -1$ is not inside or on $C_2$ we thus have that $f_2$ is analytic inside and on $C_2$.
+    \\Notice that along $-V$ we may use the parameterization $z(x) = (R - x)e^{2\pi i}$ where $0\leq x\leq R -\rho$ to get:
+    \[\int _{-V} f_2 (z) dz =\int _{0}^{R-\rho}\frac{((R-x)e^{2\pi i})^{-a}}{(R-x)+1} dx\]
+    Then using the substitution $r = R - x$ with new bounds $0\leq R - r\leq R -\rho$ (meaning $\rho\leq r\leq R$) we get:
+    \[\int _{-V} f_2 (z) dz =\int _{0}^{R-\rho}\frac{((R-x)e^{2\pi i})^{-a}}{(R-x)+1} dx = -\int _{\rho}^R\frac{r^{-a} e^{-2\pi ai}}{r+1}dr\]
+    Therefore we know by the Cauchy Goursat Theorem that:
+    \[\int _{C_2} f_2 (z) dz =\int _{-V} f_2 (z) dz +\int _{\gamma _{\rho}} f_2 (z) dz +\int _{-L} f_2 (z) dz +\int _{\gamma _R} f_2 (z) dz\]
+    \[= -\int _{\rho}^R\frac{r^{-a} e^{-2\pi ai}}{r+1}dr +\int _{\gamma _{\rho}} f_2 (z) dz -\int _{L} f_2 (z) dz +\int _{\gamma _R} f_2 (z) dz = 0\]
+\end{center}
+
+{\Large\textbf{c.}} Consider the branch $f(z) =\frac{z^{-a}}{z+1}$ with $|z| > 0, 0\leq arg\:z\leq 2\pi$.
+\begin{center}
+    \doublespacing
+    For each of the contours $\Gamma _R,\Gamma _{\rho},\gamma _R,\gamma _{\rho},$ and $L$ this branch cut either doesn't intersect them or it only does so at finitely many (actually just 1) point which is on the positive side of the real axis.
+    \\Therefore $f$ has only finitely many points where it takes a value different from $f_1$ and $f_2$ along $\Gamma _R,\Gamma _{\rho},\gamma _R,\gamma _{\rho},$ and $L$ and hence the integrals will be the same when swapping the branch cuts.
+    \\Since none of the branch cuts intersect $z = -1$ we will have that each of these branches have the same residue there too.
+    \\Then using the fact that $\Gamma _R +\gamma _R = C_R$ and $\Gamma _{\rho} +\gamma _{\rho} = C_{\rho}$ we get that:
+    \[\Bigg{(}\int _{\rho}^R\frac{r^{-a}}{r+1} dr +\int _{\Gamma _R} f_1 (z) dz +\int _{L} f_1 (z) dz +\int _{\Gamma _{\rho}} f_1 (z) dz\Bigg{)} +\Bigg{(}-\int _{\rho}^R\frac{r^{-a} e^{-2\pi ai}}{r+1}dr +\int _{\gamma _{\rho}} f_2 (z) dz -\int _{L} f_2 (z) dz +\int _{\gamma _R} f_2 (z) dz\Bigg{)}\]
+    \[=\int _{\rho}^R\frac{r^{-a}}{r+1} dr +\int _{\Gamma _R} f(z) dz +\int _{L} f(z) dz +\int _{\Gamma _{\rho}} f(z) dz -\int _{\rho}^R\frac{r^{-a} e^{-2\pi ai}}{r+1}dr +\int _{\gamma _{\rho}} f(z) dz -\int _{L} f(z) dz +\int _{\gamma _R} f(z) dz\]
+    \[=\int _{\rho}^R\frac{r^{-a}}{r+1} dr -\int _{\rho}^R\frac{r^{-a} e^{-2\pi ai}}{r+1}dr +\int _{C_{\rho}} f(z) dz +\int _{C_R} f(z) dz = 2\pi i\:Res_{z=-1} f(z)\]
+    The last inequality comes because in the first line the first term in parentheses evaluates to $2\pi i\:Res_{z=-1} f(z)$ and the second term in parentheses evaluates to 0.
+    \\So the inequality has been derived \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{z^{\frac{1}{2}}}{z^4 + 1}$, taking the branch $-\pi < arg\:z <\pi$. Clearly $f$ has simple poles at all the fourth roots of $-1$.
+    \\If $z^4 = -1$ then $z = (-1)^{1/4} = e^{i\frac{\pi + 2k\pi}{4}} = e^{i(\frac{\pi}{4} + k\frac{\pi}{2})}$ where $k\in\{0, 1, 2, 3\}$.
+    \\These roots are:
+    \\$z_1 = e^{i\frac{\pi}{4}}$, $z_2 = e^{i\frac{3\pi}{4}}$, $z_3 = e^{i\frac{5\pi}{4}}$, and $z_4 = e^{i\frac{7\pi}{4}}$
+    \\Since they are simple poles we know:
+    \\$Res_{z = z_n}\frac{z^{\frac{1}{2}}}{z^4 + 1} =\frac{z_n^{\frac{1}{2}}}{4z_n^3} = -\frac{1}{4} z_n^{\frac{3}{2}}$.
+    \\Let $R > 1$ and $\rho < 1$ so that the desired pole of $f$ will lie interior to our contour.
+    \\Let $\gamma _{\rho}$ be the clockwise part of the circle $|z| =\rho$ in the first quadrant.
+    \\Let $\gamma _R$ be the counterclockwise part of the circle $|z| = R$ in the first quadrant.
+    \\Then let $L_1$ be the line from $\rho$ to $R$ on the real axis and $L_2$ be the line from $iR$ to $i\rho$ on the imaginary axis.
+    \\Clearly $C =\gamma _{\rho} + L_1 +\gamma _R + L_2$ is a positively oriented simple closed contour.
+    \\Also $f$ is analytic inside and on $C$ except at $z = e^{i\frac{\pi}{4}} =\frac{1}{\sqrt{2}}(1 + i)$.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _{\gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz = 2\pi i Res_{z=\frac{1}{\sqrt{2}}(1 + i)} f(z) = -\frac{\pi i}{2} e^{i\frac{3\pi}{8}}\]
+    \\We know that $\Big{|}\frac{z^{\frac{1}{2}}}{z^4 + 1}\Big{|} =\frac{|z|^{\frac{1}{2}}}{|z^4 + 1|}\leq\frac{\sqrt{|z|}}{||z^4| - |1||} =\frac{\sqrt{|z|}}{||z|^4 - 1|}$
+    \\Along $\gamma _R$ we know $|z| = R$ and clearly $\gamma _R$ has length $\frac{\pi R}{2}$.
+    \\Since $R > 1$ we know $\Big{|}\frac{z^{\frac{1}{2}}}{z^4 + 1}\Big{|}\leq\frac{\sqrt{|z|}}{||z|^4 - 1|} =\frac{\sqrt{R}}{|R^4 - 1|} =\frac{\sqrt{R}}{R^4 - 1}$ on $\gamma _R$.
+    \break
+    \\Since clearly $\frac{\pi R^{\frac{3}{2}}}{2(R^4 - 1)}\rightarrow 0$ as $R\rightarrow\infty$ we know that:
+    \[\Bigg{|}\int _{\gamma _R} f(z) dz\Bigg{|}\leq\frac{\pi R^{\frac{3}{2}}}{2(R^4 - 1)}\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{R\rightarrow\infty}\int _{\gamma _R} f(z) dz = 0\]
+    Along $\gamma _{\rho}$ we know $|z| =\rho$ and clearly $\gamma _{\rho}$ has length $\frac{\pi\rho}{2}$.
+    \\Since $\rho < 1$ we know $\Big{|}\frac{z^{\frac{1}{2}}}{z^4 + 1}\Big{|}\leq\frac{\sqrt{|z|}}{||z|^4 - 1|} =\frac{\sqrt{\rho}}{|\rho ^4 - 1|} =\frac{\sqrt{\rho}}{1 -\rho ^4}$ on $\gamma _{\rho}$.
+    \break
+    \\Since clearly $\frac{\pi \rho ^{\frac{3}{2}}}{2(1 -\rho ^4)}\rightarrow 0$ as $\rho\rightarrow 0$ we know that:
+    \[\Bigg{|}\int _{\gamma _{\rho}} f(z) dz\Bigg{|}\leq\frac{\pi \rho ^{\frac{3}{2}}}{2(1 -\rho ^4)}\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{\rho\rightarrow 0}\int _{\gamma _R} f(z) dz = 0\]
+    \break
+    Continued on next page
+    \newpage
+    Along $L_1$ we have the parameterization $z(r) = re^{0i}$ where $\rho\leq r\leq R$, so:
+    \[\int _{L_1} f(z) dz =\int _{\rho}^R\frac{(re^{0i})^{\frac{1}{2}}}{r^4 + 1} dr =\int _{\rho}^R\frac{\sqrt{r}}{r^4 + 1} dr\]
+    Along $L_2$ we have the parameterization $z(x) = (R - x)e^{i\frac{\pi}{2}}$ where $0\leq x\leq R -\rho$, so:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{((R - x)e^{i\frac{\pi}{2}})^{\frac{1}{2}}}{((R-x)e^{i\frac{\pi}{2}})^4 + 1} dx\]
+    Then using the substitution $r = R - x$ with new bounds $0\leq R - r\leq R -\rho$ (meaning $\rho\leq r\leq R$) we get:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{((R - x)e^{i\frac{\pi}{2}})^{\frac{1}{2}}}{((R-x)e^{i\frac{\pi}{2}})^4 + 1} dx = -\int _{\rho}^R\frac{(re^{i\frac{\pi}{2}})^{\frac{1}{2}}}{(re^{i\frac{\pi}{2}})^4 + 1} dr = -\int _{\rho}^R\frac{e^{i\frac{\pi}{4}}\sqrt{r}}{e^{2\pi i}r^4 + 1} dr = -e^{i\frac{\pi}{4}}\int _{\rho}^R\frac{\sqrt{r}}{r^4 + 1} dr\]
+    Therefore we have:
+    \[\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _C f(z) dz =\lim _{R\rightarrow\infty,\rho\rightarrow 0}\Bigg{(}\int _{\gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz\Bigg{)}\]
+    \[=\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _{\rho}} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _R} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0} (1 - e^{i\frac{\pi}{4}})\int _{\rho}^R\frac{\sqrt{r}}{r^4 + 1} dr\]
+    \[= (1 - e^{i\frac{\pi}{4}})\int _0^{\infty}\frac{\sqrt{r}}{r^4 + 1} dr = 2\pi i Res_{z =\frac{1}{\sqrt{2}}(1 + i)} f(z) = -\frac{\pi i}{2} e^{i\frac{3\pi}{8}}\]
+    Then by taking the imaginary part of both sides:
+    \[-sin(\frac{\pi}{4})\int _0^{\infty}\frac{\sqrt{r}}{r^4 + 1} dr = -\frac{\pi}{2} cos(\frac{3\pi}{8})\]
+    So finally we have the result:
+    \[\int _0^{\infty}\frac{\sqrt{r}}{r^4 + 1} dr =\frac{\pi cos(\frac{3\pi}{8})}{2\sqrt{2}} =\frac{\pi}{2\sqrt{2}} sin(\frac{\pi}{8})\]
+\end{center}
+
+
+\newpage
+\section*{Problem 3}
+\begin{center}
+    \doublespacing
+    We are considering the integral:
+    \[\int _0^{2\pi}\frac{1}{2 + cos\theta} d\theta\]
+    Using the contour $C$ as the unit circle centered at the origin with the parameterization $z(\theta) = e^{i\theta}$ we get that $cos\theta =\frac{e^{i\theta} + e^{-i\theta}}{2} =\frac{z + z^{-1}}{2}$, and $\frac{dz}{d\theta} = ie^{i\theta} = iz$.
+    \\Therefore we know:
+    \[\int _0^{2\pi}\frac{1}{2 + cos\theta} d\theta =\int _C\frac{1}{2 +\frac{z + z^{-1}}{2}}\frac{dz}{iz} = -2i\int _C\frac{1}{4z + z^2 + 1} dz\]
+    Clearly $\frac{1}{z^2 + 4z + 1}$ will have simple poles at the zeros of $z^2 + 4z + 1$.
+    \\From a previous sample work we know $z =\frac{-4\pm\sqrt{4^2 - 4}}{2} = -2\pm\sqrt{3}$ are the zeros of $z^2 + 4z + 1$.
+    \\Clearly the only one of these that will be interior to $C$ is $-2 +\sqrt{3}$.
+    \\Since this is a simple pole we know:
+    \\$Res _{z=-2+\sqrt{3}}\Big{(}\frac{1}{z^2 + 4z + 1}\Big{)} = Res _{z=-2+\sqrt{3}}\Big{(}\frac{1/(z - (-2-\sqrt{3}))}{z - (-2 +\sqrt{3})}\Big{)} =\frac{1}{-2 +\sqrt{3} + 2 +\sqrt{3}} =\frac{1}{2\sqrt{3}}$.
+    \\Since $C$ is simple closed, and positively oriented we know:
+    \[\int _C\frac{1}{4z + z^2 + 1} dz = 2\pi i Res_{z = -2+\sqrt{3}}\Big{(}\frac{1}{4z + z^2 + 1}\Big{)} = 2\pi i(\frac{1}{2\sqrt{3}}) =\frac{\pi i}{\sqrt{3}}\]
+    Therefore we have:
+    \[\int _0^{2\pi}\frac{1}{2 + cos\theta} d\theta = -2i\int _C\frac{1}{4z + z^2 + 1} dz = -2i(\frac{\pi i}{\sqrt{3}}) =\frac{2\pi}{\sqrt{3}}\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 4}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{1}{z^{\frac{1}{2}}(z^3 + 1)} =\frac{z^{\frac{1}{2}}}{z(z^3 + 1)}$, taking the branch $0 < arg\:z < 2\pi$. Clearly $f$ has simple poles at all the third roots of $-1$.
+    \\If $z^3 = -1$ then $z = (-1)^{1/3} = e^{i\frac{\pi + 2k\pi}{3}} = e^{i(\frac{\pi}{3} + k\frac{2\pi}{3})}$ where $k\in\{0, 1, 2\}$.
+    \\These roots are:
+    \\$z_1 = e^{i\frac{\pi}{3}}$, $z_2 = e^{i\pi}$, and $z_3 = e^{i\frac{5\pi}{3}}$
+    \\Since they are simple poles we know:
+    \\$Res_{z = z_n}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)} = Res_{z = z_n}\frac{z^{\frac{1}{2}}}{z(z^3 + 1)} =\frac{z_n^{\frac{1}{2}}}{4z_n^3 + 1} = -\frac{z_n^{\frac{1}{2}}}{3}$.
+    \\Let $R > 1$ and $\rho < 1$ so that the poles of $f$ will lie interior to our contour.
+    \\Let $\Gamma _{\rho}$ be the upper half of the clockwise circle $|z| =\rho$.
+    \\Let $\Gamma _R$ be the upper half of the counterclockwise circle $|z| = R$.
+    \\Let $\gamma _{\rho}$ be the lower half of the clockwise circle $|z| =\rho$.
+    \\Let $\gamma _R$ be the lower half of the counterclockwise circle $|z| = R$.
+    \\Let $L_1$ be the line from $\rho$ to $R$ on the real axis approached from above.
+    \\Let $L_2$ be the line from $\rho$ to $R$ on the real axis approached from below.
+    \\Clearly $C =\Gamma _{\rho} + L_1 +\Gamma _R +\gamma _R + L_2 +\gamma _{\rho}$ is a positively oriented simple closed contour.
+    \\Also $f$ is analytic inside and on $C$ except at the simple poles that are the three third roots of $-1$.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _{\Gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\Gamma _R} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz +\int _{\gamma _{\rho}} f(z) dz\]
+    \[= 2\pi i\Big{(}\sum _{n=1}^3 Res_{z=z_n}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)}\Big{)} = -\frac{2\pi i}{3}\Big{(}\sum _{n=1}^3 z_n^{\frac{1}{2}}\Big{)} = -\frac{2\pi i}{3} (e^{i\frac{\pi}{6}} + e^{i\frac{\pi}{2}} + e^{i\frac{5\pi}{6}})\]
+    \[=\frac{2\pi}{3}\Big{(}sin(\frac{\pi}{6}) + sin(\frac{\pi}{2}) + sin(\frac{5\pi}{6})\Big{)} -\frac{2\pi i}{3}\Big{(}cos(\frac{\pi}{6}) + cos(\frac{\pi}{2}) + cos(\frac{\pi}{6})\Big{)} =\frac{4\pi}{3}\]
+    \\We know that $\Big{|}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)}\Big{|} =\frac{1}{|z^\frac{1}{2}||z^3 + 1|}\leq\frac{1}{||z^3| - |1||\sqrt{|z|}} =\frac{1}{||z|^3 - 1|\sqrt{|z|}}$
+    \\Along $\Gamma _R$ and $\gamma _R$ we know $|z| = R$ and clearly they both have length $\pi R$.
+    \\Since $R > 1$ we know $\Big{|}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)}\Big{|}\leq\frac{1}{||z|^3 - 1|\sqrt{|z|}} =\frac{1}{|R^3 - 1|\sqrt{R}} =\frac{1}{(R^3 - 1)\sqrt{R}}$ on $\Gamma _R$ and $\gamma _R$.
+    \\Therefore we know:
+    \[\Bigg{|}\int _{\Gamma _R} f(z) dz\Bigg{|}\leq\frac{\pi\sqrt{R}}{R^3 - 1}\;\;\;\;\;\text{and}\;\;\;\;\;\Bigg{|}\int _{\gamma _R} f(z) dz\Bigg{|}\leq\frac{\pi\sqrt{R}}{R^3 - 1}\]
+    Since clearly $\frac{\pi\sqrt{R}}{R^3 - 1}\rightarrow 0$ as $R\rightarrow\infty$ we know that:
+    \[\lim _{R\rightarrow\infty}\int _{\Gamma _R} f(z) dz = 0\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{R\rightarrow\infty}\int _{\gamma _R} f(z) dz = 0\]
+    \newpage
+    Along $\Gamma _{\rho}$ and $\gamma _{\rho}$ we know $|z| =\rho$ and clearly they both have length $\pi\rho$.
+    \\Since $\rho < 1$ we know $\Big{|}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)}\Big{|}\leq\frac{1}{||z|^3 - 1|\sqrt{|z|}} =\frac{1}{|\rho ^3 - 1|\sqrt{\rho}} =\frac{1}{(1 -\rho ^3)\sqrt{\rho}}$ on $\Gamma _{\rho}$ and $\gamma _{\rho}$.
+    \\Therefore we know:
+    \[\Bigg{|}\int _{\Gamma _{\rho}} f(z) dz\Bigg{|}\leq\frac{\pi\sqrt{\rho}}{1 -\rho ^3}\;\;\;\;\;\text{and}\;\;\;\;\;\Bigg{|}\int _{\gamma _{\rho}} f(z) dz\Bigg{|}\leq\frac{\pi\sqrt{\rho}}{1 -\rho ^3}\]
+    Since clearly $\frac{\pi\sqrt{\rho}}{1 -\rho ^3}\rightarrow 0$ as $\rho\rightarrow 0$ we know that:
+    \[\lim _{\rho\rightarrow 0}\int _{\Gamma _{\rho}} f(z) dz = 0\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{\rho\rightarrow 0}\int _{\gamma _{\rho}} f(z) dz = 0\]
+    Along $L_1$ we have the parameterization $z(r) = re^{0i}$ where $\rho\leq r\leq R$, so:
+    \[\int _{L_1} f(z) dz =\int _{\rho}^R\frac{1}{(re^{0i})^{\frac{1}{2}} ((re^{0i})^3 + 1)} dr =\int _{\rho}^R\frac{1}{\sqrt{r}(r^3 + 1)} dr\]
+    Along $L_2$ we have the parameterization $z(x) = (R - x)e^{2\pi i}$ where $0\leq x\leq R -\rho$, so:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{1}{((R-x)e^{2\pi i})^{\frac{1}{2}}(((R-x)e^{2\pi i})^3 + 1)} dx\]
+    Then using the substitution $r = R - x$ with new bounds $0\leq R - r\leq R -\rho$ (meaning $\rho\leq r\leq R$) we get:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{1}{((R-x)e^{2\pi i})^{\frac{1}{2}}(((R-x)e^{2\pi i})^3 + 1)} dx = -\int _{\rho}^R\frac{1}{(re^{2\pi i})^{\frac{1}{2}}((re^{2\pi i})^3 + 1)} dr\]
+    \[= -\int _{\rho}^R\frac{1}{e^{\pi i}\sqrt{r}(e^{6\pi i}r^3 + 1)} dr =\int _{\rho}^R\frac{1}{\sqrt{r}(r^3 + 1)} dr\]
+    Therefore we have:
+    \[\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _C f(z) dz =\lim _{R\rightarrow\infty,\rho\rightarrow 0}\Bigg{(}\int _{\Gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\Gamma _R} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz +\int _{\gamma _{\rho}} f(z) dz\Bigg{)}\]
+    \[=\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\Gamma _{\rho}} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\Gamma _R} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _R} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _{\rho}} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0} 2\int _{\rho}^R\frac{1}{\sqrt{r}(r^3 + 1)} dr\]
+    \[= 2\int _0^{\infty}\frac{1}{\sqrt{r}(r^3 + 1)} dr = 2\pi i\Big{(}\sum _{n=1}^3 Res_{z=z_n}\frac{1}{z^{\frac{1}{2}}(z^3 + 1)}\Big{)} =\frac{4\pi}{3}\]
+    So finally we have the result:
+    \[\int _0^{\infty}\frac{1}{\sqrt{r}(r^3 + 1)} dr =\frac{2\pi}{3}\]
+    In order to do this formally we would need to use the same process as in problem 91.6 where we switch the branch cut, but doing that is essentially the same process it just takes longer.
+\end{center}
+
+
+\newpage
+\section*{Extra Problem}
+\begin{center}
+    \doublespacing
+    We are considering the integral below:
+    \[\int _0^1\frac{1}{x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx\]
+    We can not easily use results from complex analysis yet so first I will use some substitutions.
+    \\First let $u =\frac{1}{x}$, then $du = -\frac{dx}{x^2}$ and our new bounds are $\infty$ and 1 since we approach 0 from the positive side:
+    \[\int _0^1\frac{1}{x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx =\int _0^1\frac{-x^2}{-x^2 x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx =\int _0^1\frac{-x^{\frac{4}{3}}}{-x^2(1-x)^{\frac{1}{3}}} dx =\int _{\infty}^1\frac{-1}{u^{\frac{4}{3}}(1 -\frac{1}{u})^{\frac{1}{3}}} du\]
+    Then after taking out the negative to switch the bounds of integration and simplifying:
+    \[\int _0^1\frac{1}{x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx =\int _{\infty}^1\frac{-1}{u^{\frac{4}{3}}(1 -\frac{1}{u})^{\frac{1}{3}}} du =\int _1^{\infty}\frac{1}{(u^4(1 -\frac{1}{u}))^{\frac{1}{3}}} du =\int _1^{\infty}\frac{1}{u(u - 1)^{\frac{1}{3}}} du\]
+    Finally using the substitution $v = u - 1$ where $dv = du$ and our new bounds are 0 and $\infty$ we have:
+    \[\int _0^1\frac{1}{x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx =\int _1^{\infty}\frac{1}{u(u - 1)^{\frac{1}{3}}} du =\int _0^{\infty}\frac{1}{(v+1)v^{\frac{1}{3}}} dv\]
+    Now the process is similar to the previous problem.
+    \break
+    Let $f(z) =\frac{1}{z^{\frac{1}{3}}(z + 1)}$, taking the branch $0 < arg\:z < 2\pi$. Clearly $f$ has a simple pole at $z = -1$.
+    \\Since it is a simple pole we know:
+    \\$Res_{z = -1}\frac{1}{z^{\frac{1}{3}}(z + 1)} =\frac{1}{(-1)^{\frac{1}{3}}} =\frac{1}{(e^{i\pi})^{\frac{1}{3}}} =\frac{1}{e^{i\frac{\pi}{3}}} = e^{-i\frac{\pi}{3}} =\frac{1}{2} - i\frac{\sqrt{3}}{2}$.
+    \\Let $R > 1$ and $\rho < 1$ so that the pole of $f$ will lie interior to our contour.
+    \\Let $\Gamma _{\rho}$ be the upper half of the clockwise circle $|z| =\rho$.
+    \\Let $\Gamma _R$ be the upper half of the counterclockwise circle $|z| = R$.
+    \\Let $\gamma _{\rho}$ be the lower half of the clockwise circle $|z| =\rho$.
+    \\Let $\gamma _R$ be the lower half of the counterclockwise circle $|z| = R$.
+    \\Let $L_1$ be the line from $\rho$ to $R$ on the real axis approached from above.
+    \\Let $L_2$ be the line from $\rho$ to $R$ on the real axis approached from below.
+    \\Clearly $C =\Gamma _{\rho} + L_1 +\Gamma _R +\gamma _R + L_2 +\gamma _{\rho}$ is a positively oriented simple closed contour.
+    \\Also $f$ is analytic inside and on $C$ except at the simple pole $-1$ of $f$.
+    \\Therefore we know:
+    \[\int _C f(z) dz =\int _{\Gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\Gamma _R} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz +\int _{\gamma _{\rho}} f(z) dz\]
+    \[= 2\pi i Res_{z=-1}\frac{1}{z^{\frac{1}{3}}(z + 1)} =2\pi i(\frac{1}{2} - i\frac{\sqrt{3}}{2}) =\pi(\sqrt{3} + i)\]
+    \newpage
+    We know that $\Big{|}\frac{1}{z^{\frac{1}{3}}(z + 1)}\Big{|} =\frac{1}{|z^\frac{1}{3}||z + 1|}\leq\frac{1}{|z|^{\frac{1}{3}}||z| - |1||} =\frac{1}{|z|^{\frac{1}{3}}||z| - 1|}$
+    \\Along $\Gamma _R$ and $\gamma _R$ we know $|z| = R$ and clearly they both have length $\pi R$.
+    \\Since $R > 1$ we know $\Big{|}\frac{1}{z^{\frac{1}{3}}(z + 1)}\Big{|}\leq\frac{1}{|z|^{\frac{1}{3}}||z| - 1|} =\frac{1}{R^{\frac{1}{3}}|R - 1|} =\frac{1}{R^{\frac{1}{3}}(R - 1)}$ on $\Gamma _R$ and $\gamma _R$.
+    \\Therefore we know:
+    \[\Bigg{|}\int _{\Gamma _R} f(z) dz\Bigg{|}\leq\frac{\pi R^{\frac{2}{3}}}{R - 1}\;\;\;\;\;\text{and}\;\;\;\;\;\Bigg{|}\int _{\gamma _R} f(z) dz\Bigg{|}\leq\frac{\pi R^{\frac{2}{3}}}{R - 1}\]
+    Since clearly $\frac{\pi R^{\frac{2}{3}}}{R - 1}\rightarrow 0$ as $R\rightarrow\infty$ we know that:
+    \[\lim _{R\rightarrow\infty}\int _{\Gamma _R} f(z) dz = 0\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{R\rightarrow\infty}\int _{\gamma _R} f(z) dz = 0\]
+    Along $\Gamma _{\rho}$ and $\gamma _{\rho}$ we know $|z| =\rho$ and clearly they both have length $\pi\rho$.
+    \\Since $\rho < 1$ we know $\Big{|}\frac{1}{z^{\frac{1}{3}}(z + 1)}\Big{|}\leq\frac{1}{|z|^{\frac{1}{3}}||z| - 1|} =\frac{1}{\rho ^{\frac{1}{3}}|\rho - 1|} =\frac{1}{\rho ^{\frac{1}{3}}(1 -\rho )}$ on $\Gamma _{\rho}$ and $\gamma _{\rho}$.
+    \\Therefore we know:
+    \[\Bigg{|}\int _{\Gamma _{\rho}} f(z) dz\Bigg{|}\leq\frac{\pi\rho ^{\frac{2}{3}}}{1 -\rho}\;\;\;\;\;\text{and}\;\;\;\;\;\Bigg{|}\int _{\gamma _{\rho}} f(z) dz\Bigg{|}\leq\frac{\pi\rho ^{\frac{2}{3}}}{1 -\rho}\]
+    Since clearly $\frac{\pi\rho ^{\frac{2}{3}}}{1 -\rho}\rightarrow 0$ as $\rho\rightarrow 0$ we know that:
+    \[\lim _{\rho\rightarrow 0}\int _{\Gamma _{\rho}} f(z) dz = 0\;\;\;\;\;\text{and}\;\;\;\;\;\lim _{\rho\rightarrow 0}\int _{\gamma _{\rho}} f(z) dz = 0\]
+    Along $L_1$ we have the parameterization $z(r) = re^{0i}$ where $\rho\leq r\leq R$, so:
+    \[\int _{L_1} f(z) dz =\int _{\rho}^R\frac{1}{(re^{0i})^{\frac{1}{3}} (re^{0i} + 1)} dr =\int _{\rho}^R\frac{1}{r^{\frac{1}{3}}(r + 1)} dr\]
+    Along $L_2$ we have the parameterization $z(x) = (R - x)e^{2\pi i}$ where $0\leq x\leq R -\rho$, so:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{1}{((R-x)e^{2\pi i})^{\frac{1}{3}}((R-x)e^{2\pi i} + 1)} dx\]
+    Then using the substitution $r = R - x$ with new bounds $0\leq R - r\leq R -\rho$ (meaning $\rho\leq r\leq R$) we get:
+    \[\int _{L_2} f(z) dz =\int _0^{R-\rho}\frac{1}{((R-x)e^{2\pi i})^{\frac{1}{3}}((R-x)e^{2\pi i} + 1)} dx = -\int _{\rho}^R\frac{1}{(re^{2\pi i})^{\frac{1}{3}}(re^{2\pi i} + 1)} dr\]
+    \[= -\int _{\rho}^R\frac{1}{e^{i\frac{2\pi}{3}}r^{\frac{1}{3}}(r + 1)} dr = -e^{-i\frac{2\pi}{3}}\int _{\rho}^R\frac{1}{r^{\frac{1}{3}}(r + 1)} dr = (\frac{1}{2} + i\frac{\sqrt{3}}{2})\int _{\rho}^R\frac{1}{r^{\frac{1}{3}}(r + 1)} dr\]
+    \newpage
+    Therefore we have:
+    \[\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _C f(z) dz =\lim _{R\rightarrow\infty,\rho\rightarrow 0}\Bigg{(}\int _{\Gamma _{\rho}} f(z) dz +\int _{L_1} f(z) dz +\int _{\Gamma _R} f(z) dz +\int _{\gamma _R} f(z) dz +\int _{L_2} f(z) dz +\int _{\gamma _{\rho}} f(z) dz\Bigg{)}\]
+    \[=\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\Gamma _{\rho}} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\Gamma _R} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _R} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0}\int _{\gamma _{\rho}} f(z) dz +\lim _{R\rightarrow\infty,\rho\rightarrow 0} (\frac{3}{2} + i\frac{\sqrt{3}}{2})\int _{\rho}^R\frac{1}{r^{\frac{1}{3}}(r + 1)} dr\]
+    \[= (\frac{3}{2} + i\frac{\sqrt{3}}{2})\int _0^{\infty}\frac{1}{r^{\frac{1}{3}}(r + 1)} dr = 2\pi i Res_{z=-1}\frac{1}{z^{\frac{1}{3}}(z + 1)} =\pi (\sqrt{3} + i)\]
+    Then taking the imaginary part of both sides we have:
+    \[\frac{\sqrt{3}}{2}\int _0^{\infty}\frac{1}{r^{\frac{1}{3}}(r + 1)} dr =\pi\]
+    So finally we have the result:
+    \[\int _0^1\frac{1}{x^{\frac{2}{3}}(1-x)^{\frac{1}{3}}} dx =\int _0^{\infty}\frac{1}{r^{\frac{1}{3}}(r + 1)} dr =\frac{2\pi}{\sqrt{3}}\]
+\end{center}
+
+\end{document}
