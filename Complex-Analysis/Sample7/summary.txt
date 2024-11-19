@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around integration of complex functions over regions of the complex plane and the equality of such integrals for nested regions.
