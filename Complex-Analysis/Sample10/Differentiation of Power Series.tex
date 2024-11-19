@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Differentiation of Power Series}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{72.5}
+\begin{center}
+    \doublespacing
+    Let $f(z) =\frac{cos\:z}{z^2 -(\frac{\pi}{2})^2} =\frac{cos\:z}{(z -\frac{\pi}{2})(z +\frac{\pi}{2})}$ when $z\neq\pm\frac{\pi}{2}$ and let $f(z) = -\frac{1}{\pi}$ when $z =\pm\frac{\pi}{2}$.
+    \\Note that $f(-z) =\frac{cos(-z)}{(-z)^2 - (\frac{\pi}{2})^2} =\frac{cos\:z}{z^2 - (\frac{\pi}{2})^2} = f(z)$ when $z\neq\pm\frac{\pi}{2}$ and $f(-\frac{\pi}{2}) = -\frac{1}{\pi} = f(\frac{\pi}{2})$. So $f(-z) = f(z)$ for all $z\in\mathbb{C}$.
+    \\We already know for $|w| <\infty$ that:
+    \[sin\:w =\sum _{n=0}^{\infty}\frac{(-1)^n w^{2n + 1}}{(2n + 1)!} = w -\frac{w^3}{3!} +\frac{w^5}{5!} - ...\]
+    Similarly we already know for $|w| < 1$ that:
+    \[\frac{1}{1 - w} =\sum _{n=0}^{\infty} w^n = 1 + w + w^2 + ...\]
+    \break
+    Letting $w = z -\frac{\pi}{2}$ we know for $|z -\frac{\pi}{2}| <\infty$ (or equivalently for $|z| <\infty$) that:
+    \[cos\:z = -sin(z -\frac{\pi}{2}) = -\sum _{n=0}^{\infty}\frac{(-1)^n (z -\frac{\pi}{2})^{2n+1}}{(2n+1)!} = -(z -\frac{\pi}{2}) +\frac{(z -\frac{\pi}{2})^3}{3!} -\frac{(z -\frac{\pi}{2})^5}{5!} ...\]
+    Letting $w =\frac{-(z -\frac{\pi}{2})}{\pi}$ we know for $|\frac{-(z -\frac{\pi}{2})}{\pi}| =\frac{|z -\frac{\pi}{2}|}{\pi} < 1$ (or equivalently $|z -\frac{\pi}{2}| <\pi$) that:
+    \[\frac{1}{z +\frac{\pi}{2}} =\frac{1}{\pi + (z -\frac{\pi}{2})} =\frac{1}{\pi}\Bigg{(}\frac{1}{1 -\frac{-(z -\frac{\pi}{2})}{\pi}}\Bigg{)} =\frac{1}{\pi}\sum _{n=0}^{\infty}\Big{(}\frac{-(z -\frac{\pi}{2})}{\pi}\Big{)}^n =\frac{1}{\pi}\sum _{n=0}^{\infty}\frac{(-1)^n (z -\frac{\pi}{2})^n}{\pi ^n} =\sum _{n=0}^{\infty}\frac{(-1)^n (z -\frac{\pi}{2})^n}{\pi ^{n+1}}\]
+    \break
+    \newline\newline\newline\newline
+    Continued on next page
+    \newpage
+    Therefore for $0 < |z -\frac{\pi}{2}| <\pi$ we know:
+    \[f(z) =\frac{cos\:z}{(z -\frac{\pi}{2})(z +\frac{\pi}{2})} =\Bigg{(}-\sum _{n=0}^{\infty}\frac{(-1)^n (z -\frac{\pi}{2})^{2n+1}}{(2n+1)!}\Bigg{)}\Bigg{(}\sum _{n=0}^{\infty}\frac{(-1)^n (z -\frac{\pi}{2})^n}{\pi ^{n+1}}\Bigg{)}\Bigg{(}\frac{1}{z -\frac{\pi}{2}}\Bigg{)}\]
+    \[=\Bigg{(}\frac{1}{z -\frac{\pi}{2}}\Big{(}-(z -\frac{\pi}{2}) +\frac{(z -\frac{\pi}{2})^3}{3!} -\frac{(z -\frac{\pi}{2})^5}{5!} + ...\Big{)}\Bigg{)}\Bigg{(}\frac{1}{\pi} -\frac{z -\frac{\pi}{2}}{\pi ^2} +\frac{(z -\frac{\pi}{2})^2}{\pi ^3} - ...\Bigg{)}\]
+    \[= \Bigg{(}-1 +\frac{(z -\frac{\pi}{2})^2}{3!} -\frac{(z -\frac{\pi}{2})^4}{5!} + ...\Bigg{)}\Bigg{(}\frac{1}{\pi} -\frac{z -\frac{\pi}{2}}{\pi ^2} +\frac{(z -\frac{\pi}{2})^2}{\pi ^3} - ...\Bigg{)}\]
+    When we evaluate the right hand side at $z =\frac{\pi}{2}$ we get $\Big{(} -1 + 0 + 0 + ...\Big{)}\Big{(}\frac{1}{\pi} + 0 + 0 + ...\Big{)} = -\frac{1}{\pi}$ since all terms except the constant ones evaluate to 0.
+    \\Therefore we have that $f(z) =\Big{(}-1 +\frac{(z -\frac{\pi}{2})^2}{3!} -\frac{(z -\frac{\pi}{2})^4}{5!} + ...\Big{)}\Big{(}\frac{1}{\pi} -\frac{z -\frac{\pi}{2}}{\pi ^2} +\frac{(z -\frac{\pi}{2})^2}{\pi ^3} - ...\Big{)}$ for $|z -\frac{\pi}{2}| <\pi$ since $f(\frac{\pi}{2}) = -\frac{1}{\pi}$ and the right hand side evaluates to the same at $z =\frac{\pi}{2}$.
+    \\So we know that $f(z)$ can be written as the product of power series with positive powers and hence as a power series with positive powers itself in the neighborhood $|z -\frac{\pi}{2}| <\pi$.
+    \\This means that $f(z)$ is analytic inside that neighborhood and hence analytic at $z =\frac{\pi}{2}$ since it can be represented as a power series.
+    \\Using the same process you get the same result for $z = -\frac{\pi}{2}$ but this can also be seen using $f(-z) = f(z)$ for all $z\in\mathbb{C}$.
+    \\Therefore we have shown that $f(z)$ is analytic at $z =\pm\frac{\pi}{2}$.
+    \\Since $f(z) =\frac{cos\:z}{(z -\frac{\pi}{2})(z +\frac{\pi}{2})}$ we know already that it is analytic for all $z\neq\pm\frac{\pi}{2}$ since the numerator and denominator are entire and the denominator is 0 if and only if $z =\pm\frac{\pi}{2}$.
+    \\Therefore we know that $f(z)$ is analytic for all $z\in\mathbb{C}$ and is hence entire \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{72.9}
+\begin{center}
+    \doublespacing
+    Recall that power series may be differentiated term by term when the series converges.
+    \\Let $f(z)$ be a function with a power series representation around $z_0$ inside some circle $|z - z_0| = R$ given below.
+    \[f(z) =\sum _{n=0}^{\infty} a_n (z - z_0)^n\]
+    Let $S =\{n\in\{0, 1, 2, ...\}: f^{(n)} (z) =\sum _{k=0}^{\infty}\frac{(n + k)!}{k!} a_{n+k} (z - z_0)^k\;\;\text{when}\;\;|z - z_0| < R\}$.
+\end{center}
+\begin{itemize}
+    \item Base case ($n = 0$):
+\end{itemize}
+\begin{center}
+    \doublespacing
+    We know that whenever $|z - z_0| < R$:
+    \[f^{(0)} (z) = f(z) =\sum _{k=0}^{\infty} a_k (z - z_0)^k =\sum _{k=0}^{\infty}\frac{(0 + k)!}{k!} a_{0+k} (z - z_0)^k\]
+    Therefore we know $0\in S$.
+\end{center}
+\begin{itemize}
+    \item Inductive step ($n$ implies $n+1$):
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Assume that $n\in S$, then:
+    \[f^{(n)} (z) =\sum _{k=0}^{\infty}\frac{(n + k)!}{k!} a_{n+k} (z - z_0)^k\]
+    The above is a power series representation for $f^{(n)} (z)$ which converges when $|z - z_0| < R$ and hence we know we may differentiate it term by term when $|z - z_0| < R$.
+    So we have:
+    \[\frac{d}{dz} f^{(n)} (z) = f^{(n+1)} (z) =\sum _{m=0}^{\infty}\frac{d}{dz}\frac{(n + m)!}{m!} a_{n+m} (z - z_0)^m =\sum _{m=1}^{\infty} m\frac{(n + m)!}{m!} a_{n+m} (z - z_0)^{m-1}\]
+    Then letting $k = m - 1$ (which gives $m = k + 1$) we have for $|z - z_0| < R$:
+    \[f^{(n+1)} (z) =\sum _{m=1}^{\infty} m\frac{(n + m)!}{m!} a_{n+m} (z - z_0)^{m-1} =\sum _{k=0}^{\infty} (k + 1)\frac{(n + k + 1)!}{(k + 1)!} a_{n+k+1} (z - z_0)^{k}\]
+    \[=\sum _{k=0}^{\infty}\frac{((n + 1) + k)!}{(k+1)!/(k+1)} a_{(n+1)+k} (z - z_0)^{k} =\sum _{k=0}^{\infty}\frac{((n + 1) + k)!}{k!} a_{(n+1)+k} (z - z_0)^{k}\]
+    Therefore we know $n+1\in S$
+    \break
+    \newline\newline
+    Continued on next page
+    \newpage
+    Since we know $0\in S$ and we know $n\in S$ implies $n+1\in S$ we have that $S =\{n\in\{0, 1, 2, ...\}: f^{(n)} (z) =\sum _{k=0}^{\infty}\frac{(n + k)!}{k!} a_{n+k} (z - z_0)^k\;\;\text{when}\;\;|z - z_0| < R\} =\{0, 1, 2, ...\}$.
+    \\Which means that for all $n\in\{0, 1, 2, ...\}$ we know for $|z - z_0| < R$:
+    \[f^{(n)} (z) =\sum _{k=0}^{\infty}\frac{(n + k)!}{k!} a_{n+k} (z - z_0)^k\]
+\end{center}
+\begin{itemize}
+    \item Showing that the power series representation for $f(z)$ is the Taylor series representation.
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Now we know that for all $n\in\{0, 1, 2, ...\}$ when $|z - z_0| < R$:
+    \[f^{(n)} (z) =\sum _{k=0}^{\infty}\frac{(n + k)!}{k!} a_{n+k} (z - z_0)^k = n!\:a_n + (n + 1)!\:a_{n+1} (z - z_0) +\frac{(n + 2)!}{2!} a_{n+2} (z - z_0)^2 + ...\]
+    Therefore when we evaluate both sides at $z = z_0$ we get the following when $|z - z_0| < R$:
+    \[f^{(n)} (z_0) = n! a_n + (n + 1)!\:a_{n+1} (z_0 - z_0) +\frac{(n + 2)!}{2!} a_{n+2} (z_0 - z_0)^2 + ... = n!\:a_n + 0 + 0 + ... = n!\:a_n\]
+    So we have shown that for every $n\in\{0, 1, 2, ...\}$ that $f^{(n)} (z_0) = n!\:a_n$ which means that $a_n =\frac{f^{(n)} (z_0)}{n!}$.
+    \break
+    \\This is the $n$th term of the Taylor series for $f(z)$, so the power series representation for $f(z)$ is the Taylor series.
+    \\This was true for an arbitrary function $f(z)$ and an arbitrary power series representation for $f(z)$ and hence is true for all power series representations of any function $f(z)$ that has a power series representation with the circle of convergence $|z - z_0| < R$.
+    \break
+    \\Therefore if $f(z)$ has a power series representation for $|z - z_0| < R$ then that power series is the Taylor series \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{73.1}
+\begin{center}
+    \doublespacing
+    We already know that for $|z| <\infty$:
+    \[e^z =\sum _{n=0}^{\infty}\frac{z^n}{n!} = 1 + z +\frac{z^2}{2!} +\frac{z^3}{3!} + ...\]
+    We also already know that for $|z| < 1$:
+    \[\frac{1}{1 - z} =\sum _{n=0}^{\infty} z^n = 1 + z + z^2 + z^3 + ...\]
+    Therefore if $|-z^2| = |z|^2 < 1$ (or equivalently $|z| < 1$) we know:
+    \[\frac{1}{1 + z^2} =\frac{1}{1 - (-z^2)} =\sum _{n=0}^{\infty} (-z^2)^n =\sum _{n=0}^{\infty} (-1)^n z^{2n} = 1 - z^2 + z^4 - z^6 + ...\]
+    Then we know for $0 < |z| < 1$:
+    \[\frac{1}{z(1 + z^2)} =\frac{1}{z}\Big{(}\frac{1}{1 + z^2}\Big{)} =\frac{1}{z}\Bigg{(}\sum _{n=0}^{\infty} (-1)^n z^{2n}\Bigg{)} =\sum _{n=0}^{\infty}\frac{1}{z}(-1)^n z^{2n} =\sum _{n=0}^{\infty} (-1)^n z^{2n-1} =\frac{1}{z} - z + z^3 - z^5 + ...\]
+    \break
+    So using multiplication of series we get for $0 < |z| < 1$:
+    \[\frac{e^z}{z(1 + z^2)} = e^z\Big{(}\frac{1}{z(1 + z^2)}\Big{)} =\Bigg{(}\sum _{n=0}^{\infty}\frac{z^n}{n!}\Bigg{)}\Bigg{(}\sum _{n=0}^{\infty} (-1)^n z^{2n-1}\Bigg{)} =\Bigg{(}1 + z +\frac{z^2}{2!} +\frac{z^3}{3!} + ...\Bigg{)}\Bigg{(}\sum _{n=0}^{\infty} (-1)^n z^{2n-1}\Bigg{)}\]
+    \[= 1\sum _{n=0}^{\infty} (-1)^n z^{2n-1} + z\sum _{n=0}^{\infty} (-1)^n z^{2n-1} +\frac{z^2}{2!}\sum _{n=0}^{\infty} (-1)^n z^{2n-1} +\frac{z^3}{3!}\sum _{n=0}^{\infty} (-1)^n z^{2n-1} + ...\]
+    \[=\sum _{n=0}^{\infty} (-1)^n z^{2n-1} +\sum _{n=0}^{\infty} z (-1)^n z^{2n-1} +\frac{1}{2!}\sum _{n=0}^{\infty} z^2 (-1)^n z^{2n-1} +\frac{1}{3!}\sum _{n=0}^{\infty} z^3 (-1)^n z^{2n-1} + ...\]
+    \[=\sum _{n=0}^{\infty} (-1)^n z^{2n-1} +\sum _{n=0}^{\infty} (-1)^n z^{2n} +\frac{1}{2!}\sum _{n=0}^{\infty} (-1)^n z^{2n+1} +\frac{1}{3!}\sum _{n=0}^{\infty} (-1)^n z^{2n+2} + ...\]
+    \[=\Big{(}\frac{1}{z} - z + z^3 - z^5 + ...\Big{)} +\Big{(}1 - z^2 + z^4 - z^6 + ...\Big{)} +\frac{1}{2!}\Big{(}z - z^3 + z^5 - z^7 + ...\Big{)} +\frac{1}{3!}\Big{(}z^2 - z^4 + z^6 - z^8 + ...\Big{)}\]
+    Notice that only finitely many of the series have a given term $z^n$ so for $0 < |z| < 1$ we get the following:
+    \[\frac{e^z}{z(1 + z^2)} =\frac{1}{z} + 1 + z\Big{(}-1 +\frac{1}{2!}\Big{)} + z^2\Big{(}-1 +\frac{1}{3!}\Big{)} + z^3\Big{(}1 -\frac{1}{2!} +\frac{1}{4!}\Big{)} + z^4\Big{(}1 -\frac{1}{3!} +\frac{1}{5!}\Big{)}\]
+    \[=\frac{1}{z} + 1 -\frac{1}{2} z -\frac{5}{6} z^2 +\frac{13}{24} z^3 +\frac{101}{120} z^4 - ...\]
+\end{center}
+
+
+\newpage
+\section*{73.5}
+\begin{center}
+    \doublespacing
+    Recall that the coefficients for a Laurent series about $z_0$ are given by:
+    \[c_n =\frac{1}{2\pi i}\int _{C}\frac{f(z)}{(z - z_0)^{n+1}} dz\]
+    Let $C$ be the positively oriented circle $|z| = 1$, then clearly $z_0 = 0$ is inside $C$.
+    \\We are already given the Laurent series below for $0 < |z| <\pi$:
+    \[\frac{1}{z^2 sinh\:z} =\frac{1}{z^3} -\frac{1}{6}\Big{(}\frac{1}{z}\Big{)} +\frac{7}{360} z + ...\]
+    Since $C$ is positively oriented and $z_0 = 0$ is inside $C$ we know for the Laurent series about $z_0 = 0$ of $f(z) =\frac{1}{z^2 sinh\:z}$:
+    \[-\frac{1}{6} = c_{-1} =\frac{1}{2\pi i}\int _{C} f(z) dz =\frac{1}{2\pi i}\int _{C}\frac{1}{z^2 sinh\:z} dz\]
+    Therefore we have that:
+    \[\int _{C}\frac{1}{z^2 sinh\:z} dz = 2\pi i\Big{(}-\frac{1}{6}\Big{)} = -\frac{\pi i}{3}\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{73.8}
+\begin{center}
+    \doublespacing
+    Let $f(z)$ be an entire function with the series representation $f(z) = z + a_2 z^2 + a_3 z^3 + ...$ for $|z| <\infty$.
+    \\Recall that power series may be differentiated term by term in their radius of convergence to get the total derivative.
+\end{center}
+
+{\Large\textbf{a.}} Let $g(z) = f(f(z))$, then $g(0) = f(f(0)) = f(0) = 0$.
+\begin{center}
+    \doublespacing
+    We know $g(z)$ is entire so it has a series representation for $|z| <\infty$:
+    \[g(z) =\sum _{n=0}^{\infty}\frac{g^{(n)} (0)}{n!} z^n = g(0) + g'(0) z +\frac{g''(0)}{2!} z^2 +\frac{g'''(0)}{3!} z^3 + ... = g'(0) z +\frac{g''(0)}{2!} z^2 +\frac{g'''(0)}{3!} z^3 + ...\]
+    Let us first find the series expansions for $f'(z), f''(z),$ and $f'''(z)$ about $z_0 = 0$ whenever $|z| <\infty$:
+    \[f'(z) =\frac{d}{dz}\Big{(}z + a_2 z^2 + a_3 z^3 + ... + a_n z^n + ...\Big{)} =\frac{d}{dz} z +\frac{d}{dz} a_2 z^2 +\frac{d}{dz} a_3 z^3 + ... +\frac{d}{dz} a_n z^n + ... = 1 + 2a_2 z + 3a_3 z^2 + ... n a_n z^{n-1} + ...\]
+    \[f''(z) =\frac{d}{dz}\Big{(}1 + 2a_2 z + 3a_3 z^2 + ... + n a_n z^{n-1} + ...\Big{)} = 2a_2 + 6a_3 z + ... + n(n-1) a_n z^{n-2} + ...\]
+    \[f'''(z) =\frac{d}{dz}\Big{(}2a_2 + 6a_3 z + 12a_4 z^2 ... + n(n-1) a_n z^{n-2} + ...\Big{)} = 6a_3 + 24 a_4 z + ... + n(n-1)(n-2) a_n z^{n-3} + ...\]
+    We know that $g'(z) =\frac{d}{dz} f(f(z)) = f'(z) f'(f(z))$.
+    \\Then $g''(z) =\frac{d}{dz}\Big{(}f'(z) f'(f(z))\Big{)}= f''(z) f'(f(z)) +\big{(}f'(z)\big{)}^2 f''(f(z))$.
+    \\Finally $g'''(z) =\frac{d}{dz}\Big{(}f''(z) f'(f(z)) +\big{(}f'(z)\big{)}^2 f''(f(z))\Big{)}= f'''(z) f'(f(z)) + f''(z) f'(z) f''(f(z)) + 2f'(z) f''(z) f''(f(z)) +\big{(}f'(z)\big{)}^3 f'''(f(z))$
+    \break
+    \\Now note that by evaluating the power series found above $f'(0) = 1$, $f''(0) = 2 a_2$, and $f'''(0) = 6a_3$.
+    \\Therefore the first three nonzero terms in the Taylor series for $g(z)$ about $z_0 = 0$ are:
+    \\$b_1 =\frac{g'(0)}{1!} = f'(0) f'(f(0)) =\big{(}f'(0)\big{)}^2 = 1$.
+    \break
+    \\$b_2 =\frac{g''(0)}{2!} =\frac{1}{2}\Big{(}f''(0) f'(f(0)) +\big{(}f'(0)\big{)}^2 f''(f(0))\Big{)} =\frac{1}{2}\Big{(}f''(0) f'(0) +\big{(}f'(0)\big{)}^2 f''(0)\Big{)} =\frac{1}{2}\Big{(}2 a_2 + 2 a_2\Big{)} = 2 a_2$
+    \break
+    \\$b_3 =\frac{g'''(0)}{3!} =\frac{1}{6}\Big{(}f'''(0) f'(f(0)) + f''(0) f'(0) f''(f(0)) + 2f'(0) f''(0) f''(f(0)) +\big{(}f'(0)\big{)}^3 f'''(f(0))\Big{)} =\frac{1}{6}\Big{(}f'''(0) f'(0) +\big{(}f''(0)\big{)}^2 f'(0) + 2f'(0)\big{(}f''(0)\big{)}^2 +\big{(}f'(0)\big{)}^3 f'''(0)\Big{)} =\frac{1}{6}\Big{(}2f'''(0) + 3\big{(}f''(0)\big{)}^2\Big{)}$
+    \\$=\frac{1}{6}\Big{(}2(6a_3) + 3(2a_2)^2\Big{)} = 2(a_3 + a_2^2)$.
+    \break
+    \\Therefore we have that for $|z| <\infty$:
+    \[g(z) = f(f(z)) = z + 2a_2 z^2 + 2(a_3 + a_2^2) z^3 + ...\]
+    \qedsymbol
+\end{center}
+
+\newpage
+{\Large\textbf{c.}} Let $f(z) = sin\:z$ and $g(z) = sin(sin(z))$.
+\begin{center}
+    \doublespacing
+    We already know for $|z| <\infty$:
+    \[f(z) = sin\:z = z -\frac{z^3}{3!} +\frac{z^5}{5!} - ...\]
+    So we have that $a_2 = 0$ and $a_3 = -\frac{1}{3!}$ and $sin\:z$ has a power series of the form from part a.
+    \\Therefore we may apply our results from part a on $g(z) = f(f(z)) = sin(sin(z))$.
+    \\That is we know for $|z| <\infty$:
+    \[g(z) = f(f(z)) = sin(sin(z)) = z + 2a_2 z^2 + 2(a_3 + a_2^2) z^3 + ... = z + 2(0) z^2 + 2(-\frac{1}{3!} + 0^2) z^3 + ... = z -\frac{z^3}{3} + ...\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+\begin{center}
+    \doublespacing
+    Let $f(z)$ be analytic in the domain $|z| < 1$, such that $f(0) = 1$ and $f(z) = z + f(z^2)$.
+    \\Since $f(z)$ is analytic in $|z| < 1$ we know it has a power series representation for $|z| < 1$:
+    \[f(z) =\sum _{n=0}^{\infty} a_n z^n\]
+    Therefore for $|z^2| = |z|^2 < 1$ (or equivalently for $|z| < 1$):
+    \[f(z^2) =\sum _{n=0}^{\infty} a_n (z^2)^n =\sum _{n=0}^{\infty} a_n z^{2n}\]
+    Also note that since these series must be each the respective Taylor series we know $a_0 = f(0^2) = f(0) = 1$.
+    \\Therefore we have the following:
+    \[f(z) =\sum _{n=0}^{\infty} a_n z^n = 1 +\sum _{n=1}^{\infty} a_n z^n = z +\Bigg{(}1 +\sum _{n=1}^{\infty} a_n z^{2n}\Bigg{)} = z + f(z^2)\]
+    \[\sum _{n=1}^{\infty} a_n z^n = (a_1 z + a_2 z^2 + a_3 z^3 + a_4 z^4 + a_5 z^5 + a_6 z^6 + ...) = (z + a_1 z^2 + a_2 z^4 + a_3 z^6 + ...) = z +\sum _{n=1}^{\infty} a_n z^{2n}\]
+    \[z (a_1 - 1) + z^2 (a_2 - a_1) + z^3 (a_3 - 0) + z^4 (a_4 - a_2) + z^5 (a_5 - 0) + z^6 (a_6 - a_3) + ... = 0\]
+    From which we know:
+    \\$a_1 = 1, a_{2k + 1} = 0$ for any $k\in\mathbb{N}$ (i.e. odd coefficients are 0), and $a_{2n} = a_n$ for any $n\in\mathbb{N}$ divisible by 2.
+    \\So if $n$ is divisible by any odd natural number greater than 1, then $a_{2n} = a_n = ... = a_{2k+1} = 0$ for some $k\in\mathbb{N}$.
+    \\Which means that $a_n = 1$ if $n = 2^k$ for some $k\in\{0, 1, 2, ...\}$, $a_0 = 1$, and otherwise $a_n = 0$.
+    \\Therefore we have for $|z| < 1$ that:
+    \[f(z) =\sum _{n=0}^{\infty} a_n z^n = 1 + z + z^2 + z^4 + z^8 + z^{16} + ... = 1 +\sum _{n=0}^{\infty} z^{(2^n)}\]
+    \qedsymbol
+\end{center}
+
+\end{document}
