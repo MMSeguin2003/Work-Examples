@@ -1,0 +1,281 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Complex Integration}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{42.2}
+
+{\Large\textbf{c.}}
+\begin{center}
+    \doublespacing
+    I will do this two ways, first recall that $\frac{d}{dt} e^{zt} = z e^{zt}$.
+    \\Therefore $\frac{d}{dt} e^{2it} = 2ie^{2it}$ and so $\frac{d}{dt}\frac{1}{2i}e^{2it} = e^{2it}$.
+    \\Further recall that if $\frac{d}{dt} W(t) = w(t)$ then:
+    \[\int _a^b w(t) dt = W(t)\Bigg{|}_a^b = W(b) - W(a)\]
+    Then we have:
+    \[\int _0^{\frac{\pi}{6}} e^{2it} dt =\frac{1}{2i} e^{2it}\Bigg{|}_0^{\frac{\pi}{6}} = -\frac{i}{2}(e^{i\frac{\pi}{3}} - e^0) = \frac{i}{2} (1 - (cos(\frac{\pi}{3}) + i\:sin(\frac{\pi}{3}))) =\frac{i}{2} (1 -\frac{1}{2} - i\frac{\sqrt{3}}{2}) =\frac{\sqrt{3}}{4} + i\frac{1}{4}\]
+    Now for the second way:
+    \\Recall that for $\theta\in\mathbb{R}$ we know $e^{i\theta} = cos(\theta) + i\:sin(\theta)$.
+    \\Further recall that if $w(t) = u(t) + iv(t)$ then:
+    \[\int _a^b w(t) dt =\int _a^b u(t) + iv(t) dt =\int _a^b u(t) dt + i\int _a^b v(t) dt\]
+    So if $f(t) = e^{2it}$ for $t\in\mathbb{R}$ then we can write $f(t) = cos(2t) + i\:sin(2t)$.
+    \\Now we are evaluating:
+    \[\int _0^{\frac{\pi}{6}} e^{2it} dt =\int _0^{\frac{\pi}{6}} cos(2t) + i\:sin(2t)dt =\int _0^{\frac{\pi}{6}} cos(2t) dt + i\int _0^{\frac{\pi}{6}}\:sin(2t)dt =\frac{1}{2} sin(2t)\Bigg{|}_0^{\frac{\pi}{6}} + i(-\frac{1}{2} cos(2t))\Bigg{|}_0^{\frac{\pi}{6}} =\]
+    \[\frac{1}{2} (sin(\frac{\pi}{3}) - sin(0) - i\:cos(\frac{\pi}{3}) + i\:cos(0)) =\frac{1}{2} (\frac{\sqrt{3}}{2} + i(1 -\frac{1}{2})) =\frac{\sqrt{3}}{4} + i\frac{1}{4}\]
+    Consistent with out answer from before.
+    \\Therefore we have:
+    \[\int _0^{\frac{\pi}{6}} e^{2it} dt =\frac{\sqrt{3}}{4} + i\frac{1}{4}\] \qedsymbol
+\end{center}
+
+
+\section*{42.3}
+\begin{center}
+    \doublespacing
+    Let $m, n\in\mathbb{Z}$ be arbitrary. Then notice that we can write:
+    \[\int _0^{2\pi} e^{im\theta} e^{-in\theta} d\theta =\int _0^{2\pi} e^{i(m-n)\theta} d\theta\]
+    \\Recall that if $\frac{d}{dt} W(t) = w(t)$ then:
+    \[\int _a^b w(t) dt = W(t)\Bigg{|}_a^b = W(b) - W(a)\]
+\end{center}
+\begin{itemize}
+    \item If $m = n$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Then we get:
+    \[\int _0^{2\pi} e^{i(m-n)\theta} d\theta =\int _0^{2\pi} d\theta =\theta\Bigg{|}_0^{2\pi} = 2\pi\]
+    This is due to the fact that $\frac{d}{d\theta}\theta = 1$.
+\end{center}
+\begin{itemize}
+    \item If $m\neq n$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Then we know that $\frac{d}{d\theta} e^{i(m-n)\theta} = i(m-n) e^{i(m-n)\theta}$ and since $m-n\neq 0$ we know $\frac{1}{m-n}$ is well defined and $\frac{d}{d\theta}\frac{1}{i(m-n)} e^{i(m-n)\theta} = e^{i(m-n)\theta}$.
+    \\So we get:
+    \[\int _0^{2\pi} e^{i(m-n)\theta} d\theta =\frac{1}{i(m-n)} e^{i(m-n)\theta}\Bigg{|}_0^{2\pi} = -\frac{i}{m-n} (e^{2(m-n)\pi i} - e^0)\]
+    Then since $m, n\in\mathbb{Z}$ we know $k = m-n\in\mathbb{Z}$. So $2k = 2(m-n)$ is an even integer.
+    \\Therefore $-\frac{i}{m-n} (e^{2k\pi i} - 1) = -\frac{i}{m-n} (cos(2k\pi) + i\:sin(2k\pi) - 1) = -\frac{i}{m-n} (1 - 1) = 0$.
+    \break
+    \\Therefore we have that:
+    \\If $m = n$:
+    \[\int _0^{2\pi} e^{im\theta} e^{-in\theta} d\theta = 2\pi\]
+    And if $m\neq n$:
+    \[\int _0^{2\pi} e^{im\theta} e^{-in\theta} d\theta = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{42.5}
+\begin{center}
+    \doublespacing
+    Recall that for a function $w(t) = u(t) + iv(t)$ defined on $[a, b]$:
+    \[\int _a^b w(t) dt =\int _a^c w(t) dt +\int _c^b w(t) dt\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;(a\leq c\leq b)\]
+    Furthermore:
+    \[\int _a^b w(t) dt = -\int _b^a w(t) dt\]
+    Let $w(t) = u(t) + iv(t)$ be defined on $-a\leq t\leq a$.
+\end{center}
+
+{\Large\textbf{a.}} Assume $w(t)$ is even on $[-a, a]$, that is $w(t) = w(-t)$ for all $t\in [-a, a]$.
+\begin{center}
+    \doublespacing
+    Then we have that:
+    \[\int _{-a}^a w(t) dt =\int _{-a}^0 w(t) dt +\int _0^a w(t) dt\]
+    After using the substitution $\tau = -t$ (where $d\tau = -dt$) in the first integral we have:
+    \[\int _{-a}^a w(t) dt =\int _{-a}^0 w(t) dt +\int _0^a w(t) dt = -\int _a^0 w(\tau) d\tau +\int _0^a w(t) dt = \int _0^a w(\tau) d\tau +\int _0^a w(t) dt = 2\int _0^a w(t) dt\]
+    So if $w(t)$ is even on $[-a, a]$ then:
+    \[\int _{-a}^a w(t) dt = 2\int _0^a w(t) dt\] \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Assume $w(t)$ is odd on $[-a, a]$, that is $w(-t) = -w(t)$ for all $t\in [-a, a]$.
+\begin{center}
+    \doublespacing
+    Then we have that:
+    \[\int _{-a}^a w(t) dt =\int _{-a}^0 w(t) dt +\int _0^a w(t) dt = -\int _0^{-a} w(t) dt +\int _0^a w(t) dt =\int _0^{-a} w(-t) dt +\int _0^a w(t) dt\]
+    After using the substitution $\tau = -t$ (where $d\tau = -dt$) in the first integral we have:
+    \[\int _{-a}^a w(t) dt =\int _0^{-a} w(-t) dt +\int _0^a w(t) dt = -\int _0^a w(\tau) d\tau +\int _0^a w(t) dt =\int _0^a w(t) dt -\int _0^a w(t) dt = 0\]
+    So if $w(t)$ is odd on $[-a, a]$ then:
+    \[\int _{-a}^a w(t) dt = 0\] \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{43.5}
+\begin{center}
+    \doublespacing
+    Recall that if a function $f(z) = u(x, y) + iv(x, y)$ is differentiable at $z_0 = x_0 + iy_0$ then $f'(z) = u_x (x_0, y_0) + iv_x (x_0, y_0)$.
+    \\Further recall that for a function $w(t) = x(t) + iy(t)$ we know $w'(t) = x'(t) + iy'(t)$.
+    \break
+    \\Assume that $f(z) = u(x, y) + iv(x, y)$ is analytic at a point $z_0 = x_0 + iy_0 = x(t_0) + iy(t_0) = z(t_0)$ on a smooth arc $z(t) = x(t) + iy(t)$ where $a\leq t\leq b$.
+    \break
+    \\Then we know at $z_0 = x_0 + iy_0$ the Cauchy Riemann equations are satisfied.
+    \\That is $u_x (x_0, y_0) = v_y (x_0, y_0)$ and $u_y (x_0, y_0) = -v_x (x_0, y_0)$.
+    \\Now define $w(t) = f(z(t)) = u(x(t), y(t)) + iv(x(t), y(t))$ for $a\leq t\leq b$.
+    \\Then we have that $\frac{d}{dt} w(t) =\frac{d}{dt}\Big{(}u(x(t), y(t)) + iv(x(t), y(t))\Big{)} =\frac{d}{dt} u(x(t), y(t)) + i\frac{d}{dt} v(x(t), y(t))$.
+    \break
+    \\Then using the chain rule we have:
+    \[\frac{d}{dt} w(t) =\frac{du}{dx}\frac{dx}{dt} +\frac{du}{dy}\frac{dy}{dt} + i(\frac{dv}{dx}\frac{dx}{dt} +\frac{dv}{dy}\frac{dy}{dt}) = u_x x'(t) + u_y y'(t) + i(v_x x'(t) + v_y y'(t))\]
+    \\Then at $t_0$ (and hence at $z(t_0) = z_0$) we can use the Cauchy Riemann equations to write:
+    \[w'(t_0) = u_x (x(t_0), y(t_0))\Big{(}x'(t_0) + iy'(t_0)\Big{)} + v_x (x(t_0), y(t_0))\Big{(}ix'(t_0) - y'(t_0)\Big{)} =\]
+    \[u_x (x(t_0), y(t_0))\Big{(}x'(t_0) + iy'(t_0)\Big{)} + iv_x (x(t_0), y(t_0))\Big{(}x'(t_0) + iy'(t_0)\Big{)} =\]
+    \[\Big{(} u_x (x(t_0), y(t_0)) + iv_x (x(t_0), y(t_0))\Big{)}\Big{(}x'(t_0) + iy'(t_0)\Big{)} = f'(z(t_0))z'(t_0)\]
+    \\This was true for arbitrary $t_0\in [a, b]$ and is therefore true for all $t_0\in [a, b]$.
+    \break
+    \\Therefore if $f(z)$ is analytic at $z_0 = z(t_0)$ and $w(t) = f(z(t))$ then $w'(t_0) = f'(z(t_0))z'(t_0)$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{46.4}
+\begin{center}
+    \doublespacing
+    Let $f(z) = 1$ if $Im\:z < 0$ and $f(z) = 4Im\:z$ if $Im\:z > 0$.
+    \\Then let $C$ be the contour from $z = -1 - i$ to $z = 1 + i$ along the curve $y = x^3$ ($-1\leq x\leq 1$).
+    \\We can write $C = C_1 + C_2$ where $C_1$ is the arc from $-1 - i$ to 0 and $C_2$ is the arc from 0 to $1 + i$ (both along $y = x^3$).
+    \\Clearly along $C_1$ we know $f(z) = 1$ since $x < 0$ and hence $Im\:z = y = x^3 < 0$.
+    \\Similarly along $C_2$ we know $f(z) = 4Im\:z$ since $x > 0$ and hence $Im\:z = y = x^3 > 0$.
+    \\Our path for each is therefore $z(t) = t + it^3$. This gives $z'(t) = 1 + 3it^2$.
+    \\For $C_1$ we know $-1\leq t\leq 0$ and for $C_2$ we know $0\leq t\leq 1$.
+    \\Therefore we have that:
+    \[\int _C f(z) dz =\int _{C_1} f(z) dz +\int _{C_2} f(z) dz =\int _{-1}^0 (1)(1 + 3it^2) dt +\int _0^1 (4t^3)(1 + 3it^2) dt =\]
+    \[\Bigg{(}\int _{-1}^0 dt + i\int _{-1}^0 3t^2 dt\Bigg{)} +\Bigg{(}\int _0^1 4t^3 dt + i\int _0^1 12t^5 dt\Bigg{)} = t\Big{|}_{-1}^0 + i\Big{(} t^3\Big{|} _{-1}^0\Big{)} + t^4\Big{|}_0^1 + i\Big{(}2t^6\Big{|}_0^1\Big{)} =\]
+    \[1 + i + 1 + 2i = 2 + 3i\] \qedsymbol
+\end{center}
+
+
+\section*{46.7}
+\begin{center}
+    \doublespacing
+    Let $f(z)$ be the principle branch of $z^{-1 - 2i}$, that is $f(z) = e^{(-1 - 2i)Log\:z}$ (where $Log\:z = ln|z| + i\:Arg\:z$).
+    \\Then let $C$ be the contour $z(\theta) = e^{i\theta}$ where $0\leq\theta\leq\frac{\pi}{2}$.
+    \\For any point $z$ on $C$ we know $|z| = |e^{i\theta}| = 1$ and $Arg\:z =\theta$ since $0\leq\theta\leq\frac{\pi}{2}$ which is a subset of the range for the principle argument of a complex number.
+    \\This means that for any point $z$ on $C$ we know $f(z) = e^{(-1 - 2i)Log\:z} = e^{(-1 - 2i)(ln|z| + i\:Arg\:z)} = e^{(-1 - 2i)i\theta} = e^{2\theta - i\theta}$.
+    \\We have also seen before that $\frac{d}{d\theta} e^{i\theta} = ie^{i\theta}$, so $z'(\theta) = ie^{i\theta}$.
+    \\Therefore we have that:
+    \[\int _C f(z) dz =\int _0^{\frac{\pi}{2}} (e^{2\theta - i\theta})(ie^{i\theta}) d\theta = i\int _0^{\frac{\pi}{2}} e^{2\theta - i\theta + i\theta} d\theta = i\int _0^{\frac{\pi}{2}} e^{2\theta} d\theta = i\Big{(}\frac{1}{2} e^{2\theta}\Big{|}_0^{\frac{\pi}{2}}\Big{)} =\frac{i}{2} (e^{\pi} - e^0) =\frac{i}{2} (e^{\pi} - 1)\] \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{46.10}
+\begin{center}
+    \doublespacing
+    Let $C$ be the unit circle $|z| = 1$ taken counter clockwise, we can parameterize this with $z(\theta) = e^{i\theta}$ where $0\leq\theta\leq 2\pi$.
+    \\Now let $m, n\in\mathbb{Z}$ be arbitrary. Recall from a previous problem that we know:
+    \\If $m = n$:
+    \[\int _0^{2\pi} e^{im\theta} e^{-in\theta} d\theta = 2\pi\]
+    And if $m\neq n$:
+    \[\int _0^{2\pi} e^{im\theta} e^{-in\theta} d\theta = 0\]
+    Now notice that if $z = re^{i\theta} = r(cos(\theta) + i\:sin(\theta))$ then $\overline{z} = r(cos(\theta) - i\:sin(\theta)) = r(cos(-\theta) + i\:sin(-\theta)) = re^{-i\theta}$.
+    \\For any point $z$ on $C$ we then have that $z^m = e^{im\theta}$ and $\overline{z}^n = (e^{-i\theta})^n = e^{-in\theta}$. We also know that $\frac{d}{d\theta} z(\theta) = ie^{i\theta}$.
+    \\Therefore we have:
+    \[\int _C z^m\overline{z}^n dz = i\int _0^{2\pi} e^{im\theta}e^{-in\theta}e^{i\theta} d\theta = i\int _0^{2\pi} e^{i(m+1)\theta}e^{-in\theta} d\theta\]
+    Then since $m\in\mathbb{Z}$ we know $m + 1\in\mathbb{Z}$, say $m + 1 = k$.
+    \\By the results of the previously mentioned problem we have:
+    \\If $m + 1 = k = n$:
+    \[\int _C z^m\overline{z}^n dz = i\int _0^{2\pi} e^{ik\theta}e^{-in\theta} d\theta = i(2\pi) = 2\pi i\]
+    And if $m + 1 = k\neq n$:
+    \[\int _C z^m\overline{z}^n dz = i\int _0^{2\pi} e^{ik\theta}e^{-in\theta} d\theta = i(0) = 0\]
+    This was true for arbitrary $m, n\in\mathbb{Z}$ and is therefore true for all $m, n\in\mathbb{Z}$.
+    Therefore we have that:
+    \\If $m + 1 = n$:
+    \[\int _C z^m\overline{z}^n dz = 2\pi i\]
+    And if $m + 1\neq n$:
+    \[\int _C z^m\overline{z}^n dz = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{46.13}
+\begin{center}
+    \doublespacing
+    Let $C_0$ be the circle centered at $z_0$ with radius $R$ parameterized by $z(\theta) = z_0 + Re^{i\theta}$ where $-\pi\leq\theta\leq\pi$.
+    \\Now let $n\in\mathbb{Z}$ be arbitrary.
+    \\Similar to what we have seen before we then know $\frac{d}{d\theta} z(\theta) = Rie^{i\theta}$.
+    \\Also for any point $z$ on $C$ we have that $(z - z_0)^{n-1} = (z_0 + Re^{i\theta} - z_0)^{n-1} = R^{n-1} e^{i(n-1)\theta}$.
+    \\Now we have that:
+    \[\int _C (z - z_0)^{n-1} dz = i\int _{-\pi}^{\pi} (R^{n-1} e^{i(n-1)\theta})(Re^{i\theta}) d\theta = i\int _{-\pi}^{\pi} R^n e^{in\theta} d\theta\]
+    Now if $n = 0$ then we have:
+    \[\int _C (z - z_0)^{n-1} dz = i\int _{-\pi}^{\pi} d\theta = i(\pi - (-\pi)) = 2\pi i\]
+    If $n\neq 0$ then we have:
+    \[\int _C (z - z_0)^{n-1} dz = iR^n\int _{-\pi}^{\pi} e^{in\theta} d\theta =iR^n\Big{(}\frac{1}{in} e^{in\theta}\Big{|}_{-\pi}^{\pi}\Big{)} =\frac{R^n}{n} (e^{in\pi} - e^{-in\pi}) =\]
+    \[\frac{R^n}{n} (cos(n\pi) + i\:sin(n\pi) - cos(-n\pi) - i\:sin(-n\pi)) =\frac{R^n}{n} (cos(n\pi) + i\:sin(n\pi) - cos(n\pi) + i\:sin(n\pi)) =\]
+    \[\frac{2iR^n}{n} sin(n\pi) = 0\]
+    Therefore we have that:
+    \\If $n = 0$:
+    \[\int _C (z - z_0)^{n-1} dz = 2\pi i\]
+    And if $n\neq 0$:
+    \[\int _C (z - z_0)^{n-1} dz = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{47.2}
+\begin{center}
+    \doublespacing
+    Recall that for a contour $C$ and a function $f(z)$, if $|f(z)|\leq M$ for all $z\in C$ and the length of $C$ is $L$ then we know:
+    \[\Bigg{|}\int _C f(z) dz\Bigg{|}\leq ML\]
+    Let $C$ be the line segment from $z = i$ to $z = 1$. Clearly the length of $C$ is $L = |1 - i| =\sqrt{1^2 + (-1)^2} =\sqrt{2}$.
+    \break
+    \\As suggested in the problem notice that if $z\in C$, that is if $z(t) = i + (1 - i)t$ for some $t\in [0, 1]$ then it's distance from the origin is greater than the distance of the midpoint $z(\frac{1}{2}) =\frac{1}{2} +\frac{1}{2} i$ (where $|z(\frac{1}{2})| =\sqrt{(\frac{1}{2})^2 + (\frac{1}{2})^2} =\sqrt{\frac{1}{2}} =\frac{\sqrt{2}}{2}$.
+    \break
+    \\One way to see this is by finding the minimum of the modulus (or equivalently the modulus squared) as a function of $t$.
+    \\We know $|z(t)|^2 = |i + (1 - i)t|^2 = |t + i(1 - t)|^2 = t^2 + (1 - t)^2$ where $t\in [0, 1]$.
+    \\Then we get $\frac{d}{dt} |z(t)|^2 =\frac{d}{dt} (t^2 + (1 - t)^2) = 2t - 2(1 - t) = 4t - 2$.
+    \\Setting this equal to 0 we get $t =\frac{1}{2}$ is the only critical point. Furthermore $\frac{d^2}{dt^2} |z(t)|^2 =\frac{d}{dt} 4t - 2 = 4 > 0$.
+    \\So this function is concave up and therefore $z(\frac{1}{2})$ must be the minimum.
+    \break
+    \\Since the midpoint is the closest to the origin we know $|\frac{1}{z^4}| =\frac{1}{|z|^4}$ is maximized over $C$ at the midpoint since $|z(\frac{1}{2})| < |z(t)|$ for all $t\in [0, 1]\backslash\{\frac{1}{2}\}$ and hence $\frac{1}{|z(\frac{1}{2})|} >\frac{1}{|z(t)|}$ for all $t\in [0, 1]\backslash\{\frac{1}{2}\}$.
+    \break
+    \\So we have that $|\frac{1}{z^4}| =\frac{1}{|z|^4}\leq\frac{1}{(\frac{\sqrt{2}}{2})^4} = (\sqrt{2})^4 = 4$.
+    \\Therefore we know:
+    \[\Bigg{|}\int _C\frac{1}{z^4} dz\Bigg{|}\leq 4\sqrt{2}\] \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{47.4}
+\begin{center}
+    \doublespacing
+     Recall that for a contour $C$ and a function $f(z)$, if $|f(z)|\leq M$ for all $z\in C$ and the length of $C$ is $L$ then we know:
+    \[\Bigg{|}\int _C f(z) dz\Bigg{|}\leq ML\]
+    Let $C_R$ be the upper half of the circle $|z| = R$ taken in the counterclockwise direction where $R > 2$.
+    \\We know that the length of $C_R$ is then $L =\pi R$.
+    \\Now we are considering the function $f(z) =\frac{2z^2 - 1}{z^4 + 5z^2 + 4} =\frac{2z^2 - 1}{(z^2 + 4)(z^2 + 1)}$ over $C_R$.
+    \\Since $|z| = R$ over $C_R$ we know that $|f(z)| = |\frac{2z^2 - 1}{(z^2 + 4)(z^2 + 1)}| =\frac{|2z^2 - 1|}{|z^2 + 4||z^2 + 1|}$.
+    \break
+    \\Then using the triangle inequalities $|z_1 + z_2|\leq |z_1| + |z_2|$ and $|z_1 + z_2|\geq ||z_1| - |z_2||$ we get:
+    \\$|2z^2 - 1|\leq |2z^2| + |-1| = 2|z|^2 + 1$ and $|z^2 + 4|\geq ||z^2| - |4|| = ||z|^2 - 4|$ and $|z^2 + 1|\geq ||z^2| - |1|| = ||z|^2 - 1|$.
+    \\Since $|z| = R > 2$ over $C_R$ we know $R^2 - 1 > R^2 - 4 > 0$ so we have the following over $C_R$:
+    \\$|2z^2 - 1|\leq 2R^2 + 1$ and $|z^2 + 4|\geq |R^2 - 4| = R^2 - 4$ and $|z^2 + 1|\geq |R^2 - 1| = R^2 - 1$.
+    \break
+    \\So over $C_R$ we know $|f(z)| =\frac{|2z^2 - 1|}{|z^2 + 4||z^2 + 1|}\leq\frac{2R^2 + 1}{(R^2 - 4)(R^2 - 1)}$
+    \\Therefore we know:
+    \[\Bigg{|}\int _{C_R}\frac{2z^2 - 1}{z^4 + 5z^2 + 4} dz\Bigg{|}\leq\Big{(}\frac{2R^2 + 1}{(R^2 - 4)(R^2 - 1)}\Big{)}\Big{(}\pi R\Big{)} =\frac{\pi R(2R^2 + 1)}{(R^2 - 4)(R^2 - 1)}\]
+    Then as the problem suggests we can divide the numerator and denominator by $R^4$ to get:
+    \[\Bigg{|}\int _{C_R}\frac{2z^2 - 1}{z^4 + 5z^2 + 4} dz\Bigg{|}\leq\frac{\pi R(2R^2 + 1)}{(R^2 - 4)(R^2 - 1)} =\frac{\frac{\pi R(2R^2 + 1)}{R^4}}{\frac{(R^2 - 4)(R^2 - 1)}{R^4}} =\frac{\pi (\frac{2}{R} +\frac{1}{R^3})}{\frac{R^4 - 5R^2 + 4}{R^4}} =\frac{\pi (\frac{2}{R} +\frac{1}{R^3})}{1 -\frac{5}{R^2} +\frac{4}{R^4}}\]
+    Clearly $lim _{R\rightarrow\infty}\frac{2}{R} = 0$, $lim _{R\rightarrow\infty}\frac{1}{R^3} = 0$, $lim _{R\rightarrow\infty}\frac{-5}{R^2} = 0$, and $lim _{R\rightarrow\infty}\frac{4}{R^4} = 0$.
+    \\Therefore by the familiar limit theorems we know $lim _{R\rightarrow\infty}\pi(\frac{2}{R} +\frac{1}{R^3}) = 0$ and $lim _{R\rightarrow\infty} 1 -\frac{5}{R^2} +\frac{4}{R^4} = 1$.
+    \\And finally since $1\neq 0$ we know:
+    \[\lim _{R\rightarrow\infty}\frac{\pi (\frac{2}{R} +\frac{1}{R^3})}{1 -\frac{5}{R^2} +\frac{4}{R^4}} =\frac{0}{1} = 0\]
+    \\Since $|z|\geq 0$ for all $z\in\mathbb{C}$ and we have just seen the limit as $R\rightarrow\infty$ of the above expression is 0 (where the expression is an upper bound for the modulus of the integral we examined before) we can say by the squeeze theorem:
+    \[\lim _{R\rightarrow\infty}\Bigg{|}\int _{C_R}\frac{2z^2 - 1}{z^4 + 5z^2 + 4} dz\Bigg{|} = 0\]
+    \qedsymbol
+\end{center}
+
+\end{document}
