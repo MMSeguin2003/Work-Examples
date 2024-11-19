@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Arguments and Branches of Functions}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{30.6}
+\begin{center}
+    \doublespacing
+    Recall that for $z_1, z_2\in\mathbb{C}$ we know $|z_1 z_2| = |z_1||z_2|$.
+    \\Also recall that for $t_1, t_2,\theta\in\mathbb{R}$ we know that if $t_1\leq t_2$ then $e^{t_1}\leq e^{t_2}$ since $e^t$ is an increasing function and $|e^{i\theta}| = 1$.
+    \\Let $z = x + iy$ then consider $e^{(z^2)} = e^{(x + iy)^2} = e^{x^2 + 2ixy - y^2} = e^{x^2 - y^2} e^{2ixy}$.
+    \\Then we have that $|e^{(z^2)}| = |e^{x^2 - y^2} e^{2ixy}| = |e^{x^2 - y^2}||e^{2ixy}| = |e^{x^2 - y^2}| = e^{x^2 - y^2}$ since $x, y\in\mathbb{R}$.
+    \\Furthermore we know $x^2 - y^2\leq x^2 + y^2$, so $e^{x^2 - y^2}\leq e^{x^2 + y^2} = e^{|z|^2}$ \qedsymbol
+\end{center}
+
+
+\section*{30.8}
+
+{\Large\textbf{c.}} We want to find all $z\in\mathbb{C}$ such that $e^{2z - 1} = 1$. Let $z = x + iy$, then $e^{2z - 1} = e^{2(x + iy) - 1} = e^{(2x - 1) + 2iy}$.
+\begin{center}
+    \doublespacing
+    So we want to solve $e^{(2x - 1) + 2iy} = 1$. We have $e^{(2x - 1) + 2iy} =e^{2x - 1} e^{2iy} = e^{2x - 1}(cos(2y) + i\:sin(2y))$.
+    \\Setting this equal to 1 we get $e^{2x - 1}(cos(2y) + i\:sin(2y)) = e^{2x - 1}cos(2y) + i e^{2x - 1}sin(2y) = 1 + 0i$.
+    \\Therefore we must have the simultaneous equations $e^{2x - 1} cos(2y) = 1$ and $e^{2x - 1} sin(2y) = 0$.
+    \break
+    \\From the second equation ($e^{2x - 1} sin(2y) = 0$):
+    \\Since $e^{2x-1}\neq 0$ for any $x\in\mathbb{R}$ we must have that $sin(2y) = 0$.
+    \\Therefore $2y = n\pi$, hence $y =\frac{n\pi}{2}$ for $n\in\mathbb{Z}$.
+    \break
+    \\From the first equation ($e^{2x - 1} cos(2y) = 1$):
+    \\Now we have restricted $y =\frac{n\pi}{2}$ and so $2y = n\pi$ for $n\in\mathbb{Z}$.
+    \\However if $n\:mod\:2 = 1$ (meaning $n$ is odd) then $cos(n\pi) = -1$ and this would give $e^{2x - 1} cos(2y) = -e^{2x - 1} = 1$.
+    \\This clearly has no solutions as $e^{2x - 1} > 0$ so it can not be that $e^{2x - 1} = -1$.
+    \\So we must further restrict $y$ so that both equations are satisfied.
+    \\We need $cos(2y) > 0$ and $2y = n\pi$ where $n\in\mathbb{Z}$, therefore we must have that $n$ is an even integer.
+    \\So $y =\frac{n\pi}{2}$ for $n\in\{m\in\mathbb{Z}:m\:mod\:2 = 0\} =\{0,\pm 2,\pm 4,\pm 6, ...\}$.
+    \\Now we know $cos(2y) = cos(n\pi) = 1$ since $n$ is even. So $e^{2x - 1} cos(2y) = e^{2x - 1}$.
+    \\Setting this equal to 1 we get $e^{2x - 1} = 1$ and hence $ln(e^{2x - 1}) = 2x - 1 = ln(1) = 0$. Consequently $x =\frac{1}{2}$.
+    \break
+    \\So $e^{2z - 1} = 1$ if and only if $z =\frac{1}{2} + i\frac{n\pi}{2}$ where $n\in\{m\in\mathbb{Z}:m\:mod\:2 = 0\} =\{0,\pm 2,\pm 4,\pm 6, ...\}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{33.5}
+
+{\Large\textbf{a.}} Recall that for $\theta\in\mathbb{R}$ we know $|e^{i\theta}| = 1$. Also recall that $log(z) = ln|z| + i\:arg\:z$.
+\begin{center}
+    \doublespacing
+    As seen previously we know that the $n$ distinct $n$th roots of a complex number $z$ are given by $c_0, c_1, ..., c_{n-1}$.
+    \\Where $c_k =\sqrt[n]{r} (e^{i\frac{\theta}{n}} w_n^k)$, $w_n = e^{i\frac{2\pi}{n}}$, and $k\in\{0, 1, ..., n-1\}$ (here we take $r = |z|$ and $\theta = Arg\:z$).
+    \\Therefore for $n = 2$ we have the two distinct roots $c_0 =\sqrt{r} e^{i\frac{\theta}{2}}$ and $c_1 =\sqrt{r} e^{i\frac{\theta}{2}} e^{i\pi} =\sqrt{r} e^{i(\frac{\theta}{2} +\pi)}$.
+    \\We know that $i = e^{i\frac{\pi}{2}}$ since $Arg\:i =\frac{\pi}{2}$ and $|i| = 1$, so we use $\theta =\frac{\pi}{2}$ and $r = 1$.
+    \\Therefore the two roots of $i$ are given by $i^{\frac{1}{2}} =\{e^{i\frac{\pi}{4}}, e^{i(\frac{\pi}{4} +\pi)}\} =\{e^{i\frac{\pi}{4}}, e^{i\frac{5\pi}{4}}\}$.
+    \break
+    \\Then we know $Arg\:e^{i\frac{\pi}{4}} =\frac{\pi}{4}$ and hence $arg\:e^{i\frac{\pi}{4}} =\{\theta =\frac{\pi}{4} + 2n\pi:n\in\mathbb{Z}\}$. Also $|e^{i\frac{\pi}{4}}| = 1$.
+    \\So $log(e^{i\frac{\pi}{4}}) = ln|e^{i\frac{\pi}{4}}| + i\:arg\:e^{i\frac{\pi}{4}} = ln\:1 + i\:arg\:e^{i\frac{\pi}{4}} = i\:arg\:e^{i\frac{\pi}{4}} =\{\theta =\frac{\pi}{4} + 2n\pi:n\in\mathbb{Z}\} =\{\theta =\pi(\frac{1}{4} + 2n):n\in\mathbb{Z}\}$.
+    \break
+    \\Similarly we know $\pi (\frac{1}{4} + 1) =\frac{5\pi}{4}\in arg\:e^{i\frac{5\pi}{4}}$ and hence $arg\:e^{i\frac{5\pi}{4}} =\{\theta =\frac{\pi}{4} +\pi + 2n\pi:n\in\mathbb{Z}\}$. Also $|e^{i\frac{5\pi}{4}}| = 1$.
+    \\So $log(e^{i\frac{5\pi}{4}}) = ln|e^{i\frac{5\pi}{4}}| + i\:arg\:e^{i\frac{5\pi}{4}} = ln\:1 + i\:arg\:e^{i\frac{5\pi}{4}} = i\:arg\:e^{i\frac{5\pi}{4}} =\{\theta =\pi (\frac{1}{4} + (2n + 1)):n\in\mathbb{Z}\}$.
+    \break
+    \\Clearly $\{2n:n\in\mathbb{Z}\} =\{0,\pm 2,\pm 4,\pm 6, ...\}$ is the set of even integers.
+    \\Similarly $\{2n+1:n\in\mathbb{Z}\} =\{\pm 1,\pm 3,\pm 5, ...\}$ is the set of odd integers.
+    \\Therefore $\{2n:n\in\mathbb{Z}\}\cup\{2n+1:n\in\mathbb{Z}\} =\{n:n\in\mathbb{Z}\} =\mathbb{Z}$.
+    \\This results in the fact that $\{\frac{1}{4}+2n:n\in\mathbb{Z}\}\cup\{\frac{1}{4}+2n+1:n\in\mathbb{Z}\} =\{\frac{1}{4}+n:n\in\mathbb{Z}\}$.
+    \\Consequently $\{\pi(\frac{1}{4}+2n):n\in\mathbb{Z}\}\cup\{\pi(\frac{1}{4}+(2n+1)):n\in\mathbb{Z}\} =\{\pi(\frac{1}{4}+n):n\in\mathbb{Z}\}$.
+    \break
+    \\Now since the square roots of $i$ are given by $i^{\frac{1}{2}} =\{e^{i\frac{\pi}{4}}, e^{i\frac{5\pi}{4}}\}$ and we know:
+    \\$log(e^{i\frac{\pi}{4}}) =\{\theta =\pi(\frac{1}{4} + 2n):n\in\mathbb{Z}\}$ and $log(e^{i\frac{5\pi}{4}}) =\{\theta =\pi (\frac{1}{4} + (2n + 1)):n\in\mathbb{Z}\}$.
+    \break
+    \\We have that $log(i^{\frac{1}{2}})$ must be the union of both of the above sets because those are the log sets for each of the only two square roots of $i$. Clearly each of those above sets is a subset of $log(i^{\frac{1}{2}})$ and since they are the log sets for each of the only square roots of $i$ we must have that if $z\in log(i^{\frac{1}{2}})$ then $z$ is in one of those two sets. Hence the union of the two sets above is a subset of $log(i^{\frac{1}{2}})$ and $log(i^{\frac{1}{2}})$ is a subset of the union of the two sets above (meaning they are equal).
+    \break
+    \\Therefore $log(i^{\frac{1}{2}}) =\{\theta =\pi(\frac{1}{4} + 2n):n\in\mathbb{Z}\}\cup\{\theta =\pi (\frac{1}{4} + (2n + 1)):n\in\mathbb{Z}\} =\{\theta =\pi(\frac{1}{4}+n):n\in\mathbb{Z}\}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{34.2}
+
+{\Large\textbf{b.}} Recall that $log(z) = ln|z| + i\:arg\:z$. Now for $z\neq 0$ write $z = r e^{i\theta}$ where $r = |z|$ and $\theta\in arg\:z$ is arbitrary.
+\begin{center}
+    \doublespacing
+    Then we have $\frac{1}{z} =\frac{1}{r e^{i\theta}} =\frac{1}{r} e^{-i\theta}$. So we know that $-\theta\in arg\frac{1}{z}$.
+    \\Therefore after fixing some $\theta\in arg\:z$ we can write:
+    \\$arg\frac{1}{z} =\{-\theta +2n\pi:n\in\mathbb{Z}\} =\{-\theta -2n\pi:n\in\mathbb{Z}\} =\{-(\theta +2n\pi):n\in\mathbb{Z}\}$.
+    \\Since $arg\:z =\{\theta +2n\pi:n\in\mathbb{Z}\}$ we get that $arg\frac{1}{z} =\{-(\theta +2n\pi):n\in\mathbb{Z}\} =\{-\phi:\phi\in arg\:z\} = -arg\:z$.
+    \\We also know that $|\frac{1}{z}| =\frac{1}{|z|} =\frac{1}{r}$ where $r = |z| > 0$.
+    \\Therefore $log\frac{1}{z} = ln|\frac{1}{z}| + i\:arg\frac{1}{z} = ln\frac{1}{|z|} - i\:arg\:z = ln(|z|^{-1}) - i\:arg\:z = -ln|z| - i\:arg\:z = -(ln|z| + i\:arg\:z) = -log\:z$.
+    \break
+    \\Now recall the fact that for $z_1, z_2\neq 0$ we know $log(z_1 z_2) = log\:z_1 + log\:z_2$.
+    \\Finally for $z_1, z_2\neq 0$ we have that $log(\frac{z_1}{z_2}) = log(z_1\frac{1}{z_2}) = log\:z_1 + log\frac{1}{z_2} = log\:z_1 - log\:z_2$ \qedsymbol
+\end{center}
+
+
+\section*{36.1}
+
+{\Large\textbf{a.}} We already know for $z, c\in\mathbb{C}$ we can write $z^c = e^{c\:log z}$.
+\begin{center}
+    \doublespacing
+    Recall that $log(z) = ln|z| + i\:arg\:z$.
+    \\Then we have $(1 + i)^i = e^{i\:log(1 + i)}$.
+    \break
+    \\We may write $log(1 + i) = ln|1 + i| + i\:arg(1 + i) =ln|\sqrt{2}| + i\{\frac{\pi}{4} - 2n\pi:n\in\mathbb{Z}\}$.
+    \\Therefore $i\:log(1 + i) = i\:ln|\sqrt{2}| + i^2\{\frac{\pi}{4} - 2n\pi:n\in\mathbb{Z}\} = i\:ln\sqrt{2} +\{-(\frac{\pi}{4} - 2n\pi):n\in\mathbb{Z}\} = i\frac{ln\:2}{2} +\{-\frac{\pi}{4} + 2n\pi:n\in\mathbb{Z}\}$.
+    \\So for $n\in\mathbb{Z}$ we have $e^{i\:log(1 + i)} = e^{i\frac{ln\:2}{2} -\frac{\pi}{4} + 2n\pi} = e^{i\frac{ln\:2}{2}} e^{-\frac{\pi}{4} + 2n\pi}$.
+    \break
+    \\This was true for arbitrary $n\in\mathbb{Z}$ and is therefore true for all $n\in\mathbb{Z}$.
+    \\So for $n\in\mathbb{Z}$ we are left with:
+    \\$(1 + i)^i = e^{i\frac{ln\:2}{2}} e^{-\frac{\pi}{4} + 2n\pi}$ \qedsymbol
+\end{center}
+
+
+\section*{36.6}
+\begin{center}
+    \doublespacing
+    We already know that $|e^{i\phi}| = 1$ for all $\phi\in\mathbb{R}$, furthermore we know for $z, c\in\mathbb{C}$ we can write $z^c = e^{c\:log z}$.
+    \\So for $a\in\mathbb{R}\subseteq\mathbb{C}$ we have $z^a = e^{a\:log\:z}$ where $log\:z = ln|z| + i\:arg\:z$.
+    \\Then we know $a\:log\:z = a\:ln|z| + ia\:arg\:z$.
+    \\The set $arg\:z =\{Arg\:z + 2n\pi:n\in\mathbb{Z}\}$, so $ia\:arg\:z =\{i(a\:Arg\:z + 2na\pi):n\in\mathbb{Z}\}$.
+    \\Then $e^{ia\:arg\:z} =\{e^{i(a\:Arg\:z + 2na\pi)}:n\in\mathbb{Z}\}$ and so $|e^{ia\:arg\:z}| =\{|e^{i(a\:Arg\:z + 2na\pi)}|:n\in\mathbb{Z}\} =\{1\}$
+    \\Therefore $|z^a| = |e^{a\:log\:z}| = |e^{a\:ln|z| + ia\:arg\:z}| = |e^{a\:ln|z|}||e^{ia\:arg\:z}| = e^{a\:ln|z|} = |z|^a$.
+    \\Where $|z|^a$ is the principle argument of $\{|z|^a e^{2in\pi}:n\in\mathbb{Z}\}$.
+    \\This was true for arbitrary $z\in\mathbb{C}$ and $a\in\mathbb{R}$ and is therefore true for all $z\in\mathbb{C}$ and $a\in\mathbb{R}$.
+    \\So for $z\in\mathbb{C}$ and $a\in\mathbb{R}$ we have shown that $|z^a| = |z|^a$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{38.9}
+
+{\Large\textbf{b.}} Recall that for $z = x + iy$ we know $|sin\:z|^2 = sin^2 x + sinh^2 y$ and $|cos\:z|^2 = cos^2 x + sinh^2 y$.
+\begin{center}
+    \doublespacing
+    Further recall that $cos(z_1 + z_2) = cos\:z_1\;cos\:z_2 - sin\:z_1\;sin\:z_2$, $cos\:iz = cosh\:z$, and $sin\:iz = isinh\:z$.
+    \\Note that for $t\in\mathbb{R}$ we have $sinh\:t =\frac{e^t - e^{-t}}{2}\leq\frac{e^t + e^{-t}}{2} = cosh\:t$ since $e^{-t} > 0$.
+    \\So $cos(x + iy) = cos\:x\;cos\:iy - sin\:x\;sin\:iy = cos\:x\;cosh\:y - i\:sin\:x\;sinh\:y$.
+    \\Therefore $|cos(x + iy)|^2 = |cos\:x\;cosh\:y - i\:sin\:x\;sinh\:y| = cos^2 x\:cosh^2 y + sin^2 x\:sinh^2 y\leq cos^2 x cosh^2 y + sin^2 x cosh^2 y = cosh^2 y(cos^2 x + sin^2 x) = cosh^2 y$.
+    \\So we know that $|cos\:z|^2\leq cosh^2 y$ and hence $|cos\:z|\leq |cosh\:y| = cosh\:y$ (since $cosh\:y > 0$).
+    \\Furthermore we know $sinh^2 y = |cos\:z|^2 - cos^2 x$ and since $cos^2 x\geq 0$ we know $sinh^2 y\leq |cos\:z|^2$.
+    \\Consequently we know that $|sinh\:y|\leq |cos\:z|$.
+    \\So we have shown that $|sinh\:y|\leq |cos\:z|\leq cosh\:y$ \qedsymbol
+\end{center}
+
+
+\section*{38.14}
+\begin{center}
+    \doublespacing
+    Recall that if $z = x + iy$ we know $cos\:z = cos\:x\;cosh\:y - i\:sin\:x\;sinh\:y$ and $sin\:z = sin\:x\;cosh\:y + i\:cos\:x\;sinh\:y$.
+    \\Further recall that for $t\in\mathbb{R}$ (and also $t\in\mathbb{C}$) $cos(-t) = cos\:t$ and $sin(-t) = -sin\:t$.
+\end{center}
+
+{\Large\textbf{a.}}
+\begin{center}
+    \doublespacing
+    So $cos\:iz = cos(ix - y) = cos(-y)\;cosh\:x - i\:sin(-y)\;sinh\:x = cos\:y\;cosh\:x + i\:sin\:y\;sinh\:x$.
+    \\Therefore:
+    \\$\overline{cos\:iz} =\overline{cos\:y\;cosh\:x + i\:sin\:y\;sinh\:x} = cos\:y\;cosh\:x - i\:sin\:y\;sinh\:x =$
+    \\$cos(ix + y) = cos(i(x - iy)) = cos(i(\overline{x + iy})) = cos(i\overline{z})$
+    \\This was true for arbitrary $z\in\mathbb{C}$ and is therefore true for all $z\in\mathbb{C}$.
+    \\So we have shown that $\overline{cos\:iz} = cos(i\overline{z})$ for all $z\in\mathbb{C}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}}
+\begin{center}
+    \doublespacing
+    So $sin\:iz = sin(ix - y) = sin(-y)\;cosh\:x + i\:cos(-y)\;sinh\:x = -sin\:y\;cosh\:x + i\:cos\:y\;sinh\:x$.
+    \\Therefore:
+    \\$\overline{sin\:iz} =\overline{-sin\:y\;cosh\:x + i\:cos\:y\;sinh\:x} = -sin\:y\;cosh\:x - i\:cos\:y\;sinh\:x =$
+    \\$-(sin\:y\;cosh\:x + i\:cos\:y\;sinh\:x) = -sin(ix + y) = -sin(i(x - iy)) = -sin(i(\overline{x + iy})) = -sin(i\overline{z})$
+    \\So if we want $\overline{sin\:iz} = sin(i\overline{z})$ then we get $-sin(i\overline{z}) = sin(i\overline{z})$.
+    \\Therefore $sin(i\overline{z}) = 0$ and since $sin(z_0) = 0$ if and only if $z_0 = n\pi$ for some $n\in\mathbb{Z}$, we get $sin(i\overline{z}) = 0$ if and only if $iz = n\pi$ and hence $z = -n\pi i$ for some $n\in\mathbb{Z}$ (which is equivalent to $z = n\pi i$ for some $n\in\mathbb{Z}$).
+    \\So we have shown $\overline{sin\:iz} = sin(i\overline{z})$ if and only if $z = n\pi i$ for some $n\in\mathbb{Z}$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{39.6}
+
+{\Large\textbf{b.}} Recall from a previous problem that for $z\in\mathbb{C}$ we know $|sinh(Im\:z)|\leq |cos\:z|\leq cosh(Im\:z)$.
+\begin{center}
+    \doublespacing
+    Let $z\in\mathbb{C}$ be arbitrary with representation $z = x + iy$.
+    \\Let $w = iz = i(x + iy) = ix - y$ we may apply the above inequality to $w$.
+    \\We get $|sinh\:x|\leq |cos\:w|\leq cosh\:x$ where $w = iz$.
+    \\Then since $cos\:iz = cosh\:z$ we have $|sinh\:x|\leq |cosh\:z|\leq cosh\:x$.
+    \\This was true for arbitrary $z\in\mathbb{C}$ and is therefore true for all $z\in\mathbb{C}$.
+    \\So we have shown that $|sinh\:x|\leq |cosh\:z|\leq cosh\:x$ \qedsymbol
+\end{center}
+
+
+\section*{Problem 2}
+\begin{center}
+    \doublespacing
+    Recall that for $z\in\mathbb{C}$ we know $log\:z = ln|z| + i\:arg\:z$.
+    \\Further recall that for $n\in\mathbb{N}$ we know $z^{\frac{1}{n}} =\sqrt[n]{|z|} e^{i\frac{arg\:z}{n}}$.
+    \\When I say $\frac{arg\:z}{n}$ I mean $\frac{arg\:z}{n} =\{\frac{\theta}{n}:\theta\in arg\:z\}$.
+    \\Similarly, when I say $e^{i\frac{arg\:z}{n}}$ I mean $e^{i\frac{arg\:z}{n}} =\{e^{i\frac{\theta}{n}}:\theta\in arg\:z\}$.
+    \\This expression gives all the possible representations for $z^\frac{1}{n}$.
+    \break
+    \\Therefore we have $|z^{\frac{1}{n}}| =\sqrt[n]{|z|} = |z|^{\frac{1}{n}}$ and $arg\:z^{\frac{1}{n}} =\frac{arg\:z}{n}$.
+    \\So we get:
+    \\$log(z^{\frac{1}{n}}) = ln|z^{\frac{1}{n}}| + i\:arg\:z^{\frac{1}{n}} = ln(|z|^{\frac{1}{n}}) + i\frac{arg\:z}{n} =\frac{1}{n} ln|z| + i\frac{arg\:z}{n} =\frac{1}{n} (ln|z| + i\:arg\:z) =\frac{1}{n} log\:z$.
+    \\This was true for arbitrary $n\in\mathbb{N}$ and is therefore true for all $n\in\mathbb{N}$.
+    \\This was also true for arbitrary $z\in\mathbb{C}$ and is therefore true for all $z\in\mathbb{C}$.
+    \\So for all $z\in\mathbb{C}$ we have that $log\:z^{\frac{1}{n}} =\frac{1}{n} log\:z$ for all $n\in\mathbb{N}$ \qedsymbol
+\end{center}
+
+\end{document}
