@@ -1,0 +1,196 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{The Cauchy Integral Formula}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{57.1}
+\begin{center}
+    \doublespacing
+    Recall that if a function $f$ is analytic inside and on a simple closed contour $C$ (taken in the positive sense) then if $z_0$ is any point interior to $C$ we know:
+    \[f^{(n)} (z_0) =\frac{n!}{2\pi i}\int _C\frac{f(z)}{(z - z_0)^{n+1}} dz\]
+    From which it follows:
+    \[\int _C\frac{f(z)}{(z - z_0)^{n+1}} dz = i\frac{2\pi f^{(n)} (z_0)}{n!}\]
+    Where $n\in\{0, 1, 2, ...\}$ and $f^{(n)} (z_0)$ is the $n$th derivative of $f$ at $z_0$.
+    \\Let $C$ be the positively oriented boundary of the square whose sides lie on $x =\pm 2$ and $y =\pm 2$.
+    \\Clearly $C$ is simple and closed.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) = e^{-z}$. Since $g(z) = e^z$ and $h(z) = -z$ are entire we know $f$ is entire and hence analytic inside and on $C$.
+\begin{center}
+    \doublespacing
+    Therefore we know for any $z_0$ interior to $C$ and $n\in\{0, 1, 2, ...\}$ we may use the Cauchy Integral Formula extension.
+    \\Clearly since $\frac{\pi}{2} < 2$ we have that $z_0 =\frac{\pi i}{2}$ is interior to $C$.
+    \\So we know:
+    \[\int _C\frac{e^{-z}}{(z -\frac{\pi i}{2})} dz =\int _C\frac{f(z)}{(z - z_0)^{0+1}} dz = i\frac{2\pi f^{(0)} (z_0)}{0!} = 2\pi i f(z_0) = 2\pi i e^{-\frac{\pi i}{2}} = 2\pi i (-i) = 2\pi\]
+    \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{cos\:z}{z^2 + 8}$. Recall that $g(z) = cos\:z$ and $h(z) = z^2 + 8$ are entire.
+\begin{center}
+    \doublespacing
+    Since $\sqrt{8} > 2$ we have that $z^2 + 8\neq 0$ inside or on $C$ (because $z\neq\pm i\sqrt{8}$), so $f$ is analytic inside and on $C$.
+    \\Therefore we know for any $z_0$ interior to $C$ and $n\in\{0, 1, 2, ...\}$ we may use the Cauchy Integral Formula extension.
+    \\Clearly $z_0 = 0$ is obviously interior to $C$.
+    \\So we know:
+    \[\int _C\frac{cos\:z}{z(z^2 + 8)} dz =\int _C\frac{f(z)}{(z - z_0)^{0+1}} dz = i\frac{2\pi f^{(0)} (z_0)}{0!} = 2\pi i f(z_0) = 2\pi i\frac{cos(0)}{0^2 + 8} =\frac{\pi i}{4}\]
+    \qedsymbol
+\end{center}
+
+{\Large\textbf{d.}} Let $f(z) = cosh\:z =\frac{e^z + e^{-z}}{2}$. Then we know $f$ is entire and hence analytic inside and on $C$.
+\begin{center}
+    \doublespacing
+    Therefore we know for any $z_0$ interior to $C$ and $n\in\{0, 1, 2, ...\}$ we may use the Cauchy Integral Formula extension.
+    \\Clearly $z_0 = 0$ is interior to $C$.
+    \\Now recall $\frac{d}{dz} cosh\:z = sinh\:z$ and $\frac{d}{dz} sinh\:z = cosh\:z$.
+    \\Then $\frac{d^3}{dz^3} cosh\:z =\frac{d^2}{dz^2} (\frac{d}{dz} cosh\:z) =\frac{d^2}{dz^2} sinh\:z =\frac{d}{dz} (\frac{d}{dz} sinh\:z) =\frac{d}{dz} cosh\:z = sinh\:z =\frac{e^z - e^{-z}}{2}$.
+    \\So we know:
+    \[\int _C\frac{cosh\:z}{z^4} dz =\int _C\frac{f(z)}{(z - z_0)^{3+1}} dz = i\frac{2\pi f^{(3)} (z_0)}{3!} =\frac{\pi i}{3} sinh\:z_0 =\frac{\pi i}{3}\Big{(}\frac{e^0 - e^{-0}}{2}\Big{)} = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{57.4}
+\begin{center}
+    \doublespacing
+    Recall that if a function $f$ is analytic inside and on a simple closed contour $C$ (taken in the positive sense) then if $z_0$ is any point interior to $C$ we know:
+    \[f^{(n)} (z_0) =\frac{n!}{2\pi i}\int _C\frac{f(z)}{(z - z_0)^{n+1}} dz\]
+    From which it follows:
+    \[\int _C\frac{f(z)}{(z - z_0)^{n+1}} dz = i\frac{2\pi f^{(n)} (z_0)}{n!}\]
+    Where $n\in\{0, 1, 2, ...\}$ and $f^{(n)} (z_0)$ is the $n$th derivative of $f$ at $z_0$.
+    \\Let $C$ be any simple closed contour (taken in the positive sense) on the complex plane.
+    \\Let $f(z) = z^3 + 2z$, clearly $f$ is entire and hence analytic inside and on $C$. Then let:
+    \[g(z) =\int _C\frac{s^3 + 2s}{(s - z)^3} ds =\int _C\frac{f(s)}{(s - z)^3} ds\]
+\end{center}
+\begin{itemize}
+    \item If $z$ is interior to $C$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    If $z$ is interior to $C$ then we may use the Cauchy Integral Formula extension.
+    \\Note that $\frac{d^2}{dz^2} f(z) =\frac{d^2}{dz^2} (z^3 + 2z) =\frac{d}{dz} (\frac{d}{dz} (z^3 + 2z)) =\frac{d}{dz} (3z^2 + 2) = 6z$.
+    \\So we know:
+    \[g(z) =\int _C\frac{s^3 + 2s}{(s - z)^3} ds =\int _C\frac{f(s)}{(s - z)^3} ds =\int _C\frac{f(s)}{(s - z)^{2 + 1}} ds = i\frac{2\pi f^{(2)} (z)}{2!} = 6\pi i z\]
+    \qedsymbol
+\end{center}
+\begin{itemize}
+    \item If $z$ is exterior to $C$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    If $z$ is exterior to $C$ then we know $s - z\neq 0$ inside or on $C$ and hence $(s - z)^3\neq 0$ inside or on $C$.
+    \\Note that $h(s) = (s - z)^3$ is entire and hence analytic inside and on $C$.
+    \\Since we already know $f(s) = s^3 + 2s$ is analytic inside and on $C$, so is $h(s) = (s - z)^3$, and $h(s)\neq 0$ inside or on $C$ we know that $\frac{s^3 + 2s}{(s - z)^3} =\frac{f(s)}{h(s)}$ is analytic inside and on $C$.
+    \\Then since $C$ is a simple closed contour we know via the Cauchy-Goursat Theorem:
+    \[g(z) =\int _C\frac{s^3 + 2s}{(s - z)^3} ds = 0\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{57.5}
+\begin{center}
+    \doublespacing
+    Recall the Cauchy Integral Formula's extension which has been stated in the previous two problems.
+    \\Let $C$ be a simple closed contour, $f$ be a function that is analytic inside and on $C$, and $z_0$ be a point not on $C$.
+    \\Then since $f$ is analytic inside and on $C$ so is $f'$, the derivative of $f$.
+\end{center}
+\begin{itemize}
+    \item If $z_0$ is interior to $C$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    First take $C$ in the positive sense (call it $C^+$), then since $z_0$ is interior to $C$ then we may use the Cauchy Integral Formula extension:
+    \[\int _{C^+}\frac{f'(z)}{(z - z_0)} dz =\int _{C^+}\frac{f'(z)}{(z - z_0)^{0 + 1}} dz = i\frac{2\pi f'^{(0)} (z_0)}{0!} = 2\pi i f'(z_0)\]
+    \[\int _{C^+}\frac{f(z)}{(z - z_0)^2} dz =\int _{C^+}\frac{f'(z)}{(z - z_0)^{1 + 1}} dz = i\frac{2\pi f^{(1)} (z_0)}{1!} = 2\pi i f'(z_0)\]
+    Now take $C$ to be in the negative sense (call it $C^-$):
+    \[\int _{C^-}\frac{f'(z)}{(z - z_0)} dz =\int _{-C^+}\frac{f'(z)}{(z - z_0)} dz = -\int _{C^+}\frac{f'(z)}{(z - z_0)} dz = -2\pi i f'(z_0)\]
+    \[\int _{C^-}\frac{f(z)}{(z - z_0)^2} dz =\int _{-C^+}\frac{f(z)}{(z - z_0)^2} dz = -\int _{C^+}\frac{f(z)}{(z - z_0)^2} dz = -2\pi i f'(z_0)\]
+    Therefore when $z_0$ is interior to $C$, we have that in either orientation of $C$:
+    \[\int _C\frac{f'(z)}{(z - z_0)} dz =\int _C\frac{f(z)}{(z - z_0)^2} dz\]
+\end{center}
+\begin{itemize}
+    \item If $z$ is exterior to $C$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    If $z_0$ is exterior to $C$ then $z - z_0\neq 0$ inside or on $C$.
+    \\Since we already know $f(z)$ and $f'(z)$ are analytic inside and on $C$, and $z - z_0$ and $(z - z_0)^2$ are analytic and nonzero inside and on $C$, both $\frac{f'(z)}{z - z_0}$ and $\frac{f(z)}{(z - z_0)^2}$ are analytic inside and on $C$.
+    \\Then since $C$ is a simple closed contour we know via the Cauchy-Goursat Theorem:
+    \[\int _C\frac{f'(z)}{(z - z_0)} dz = 0 =\int _C\frac{f(z)}{(z - z_0)^2} dz\]
+    \break
+    Therefore if $C$ is a simple closed contour, $f$ is analytic inside and on $C$, and $z_0$ is not on $C$ (meaning it must be interior or exterior to $C$) then:
+    \[\int _C\frac{f'(z)}{(z - z_0)} dz =\int _C\frac{f(z)}{(z - z_0)^2} dz\]
+    \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{59.7}
+\begin{center}
+    \doublespacing
+    Recall that if a function $f$ is continuous on a closed bounded region $R$ and it is also analytic and non-constant in the interior of $R$ then the maximum value of $|f(z)|$ (which will exist since $f$ is continuous over $R$ which is closed and bounded) occurs somewhere on the boundary of $R$ and never in the interior.
+    \break
+    \\Let $f(z) = u(x, y) + iv(x, y)$ be a continuous function over a closed and bounded region $R$, and suppose $f$ is analytic and non-constant on the interior of $R$.
+\end{center}
+\begin{itemize}
+        \item Showing $v$ attains a maximum on the boundary of $R$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Let $g(z) = e^{-i\:f(z)} = e^{-i(u(x, y) + iv(x, y))} = e^{v(x, y)-iu(x, y)} = e^{v(x, y)}e^{-iu(x, y)}$, then $|g(z)| = |e^{v(x, y)}e^{-iu(x, y)}| = |e^{v(x, y)}||e^{-iu(x, y)}| = e^{v(x, y)}$.
+    \\Since $e^w$ is entire and $f$ is analytic and non-constant on the interior of $R$ we know $g$ is analytic and non-constant on the interior of $R$. Since $e^w$ is continuous everywhere and $f$ is continuous over $R$ we know that $g$ is continuous over $R$.
+    \\The conditions for the above theorem are satisfied and we may use it on $g$.
+    \break
+    \\So we know that $|g(z)| = e^{v(x, y)}$ attains its maximum on the boundary of $R$ and never in the interior of $R$.
+    \\Therefore since the real function $e^t$ is strictly increasing we know that this must mean $v(x, y)$ attains its maximum on the boundary of $R$ and never in the interior of $R$.
+\end{center}
+\begin{itemize}
+        \item Showing $v$ attains a minimum on the boundary of $R$:
+\end{itemize}
+\begin{center}
+    \doublespacing
+    Let $h(z) =\frac{1}{g(z)} =\frac{1}{e^{-i\:f(z)}} =\frac{1}{e^{v(x, y)}e^{-iu(x, y)}}$, then $|h(z)| = |\frac{1}{g(z)}| =\frac{1}{|g(z)|} =\frac{1}{e^{v(x, y)}}$.
+    \\Note that $g(z) = e^{-if(z)}\neq 0$ since $e^w\neq 0$ for all $w\in\mathbb{C}$.
+    \\We know from before that $g(z)$ is analytic and non-constant on the interior of $R$, and also that it is continuous over $R$. Since $g(z)\neq 0$ anywhere over $R$ we know $h$ is analytic and non-constant on the interior of $R$. Similarly since $g(z)\neq 0$ anywhere over $R$ we know $h$ is continuous over $R$.
+    \\The conditions for the above theorem are satisfied and we may use it on $h$.
+    \break
+    \\So we know that $|h(z)| =\frac{1}{e^{v(x, y)}}$ attains its maximum on the boundary of $R$ and never in the interior of $R$, which means that $e^{v(x, y)}$ attains its minimum on the boundary of $R$ and never in the interior of $R$.
+    \\Therefore since the real function $e^t$ is strictly increasing we know that this must mean $v(x, y)$ attains its minimum on the boundary of $R$ and never in the interior of $R$.
+    \break
+    \\So if $f(z) = u(x, y) + iv(x, y)$ is a continuous function over a closed and bounded region $R$ where $f$ is analytic and non-constant on the interior of $R$ then the component function $v(x, y)$ attains both a maximum and minimum value on the boundary of $R$ and never in the interior of $R$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Problem 2}
+\begin{center}
+    \doublespacing
+    Recall that if a function is entire and bounded (in modulus) on all of $\mathbb{C}$ then it is constant.
+    \break
+    \\Assume that $f$ is entire and that there exists an $M > 0$ such that $|f(z)| > M$ for all $z\in\mathbb{C}$.
+    \\Then since $|f(z)| > M > 0$ for all $z\in\mathbb{C}$ we know that $|f(z)| > 0$ and hence $f(z)\neq 0$ for all $z\in\mathbb{C}$.
+    \\Therefore the function $g(z) =\frac{1}{f(z)}$ is well defined and is also entire.
+    \\Furthermore we know $|g(z)| = |\frac{1}{f(z)}| =\frac{1}{|f(z)|} <\frac{1}{M}$ for all $z\in\mathbb{C}$ (since $|f(z)| > M$).
+    \break
+    \\Since $g(z)$ is entire and bounded (in modulus) on all of $\mathbb{C}$ we know it must be constant.
+    \\That is $g(z) =\frac{1}{f(z)} = c$ for some $c\in\mathbb{C}$ (note that $|g(z)| =\frac{1}{|f(z)|} > 0$ and hence $c\neq 0$).
+    \\Which implies $f(z) =\frac{1}{c}$ for some $c\in\mathbb{C}$ (which is well defined because $c\neq 0$).
+    \break
+    \\Therefore if $f$ is entire and there exists an $M > 0$ such that $|f(z)| > M$ for all $z\in\mathbb{C}$, then it follows that $f$ is constant \qedsymbol
+\end{center}
+
+\end{document}
