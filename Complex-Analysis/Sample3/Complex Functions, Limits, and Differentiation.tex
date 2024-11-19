@@ -1,0 +1,352 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Functions, Limits, Differentiation}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{18.1}
+
+{\Large\textbf{b.}} Let $f(z) =\overline{z}$. Then consider some arbitrary $z_0\in\mathbb{C}$.
+\begin{center}
+    \doublespacing
+    Recall that for $z, z_1, z_2\in\mathbb{C}$ we know $|z| = |\overline{z}|$ and $\overline{z_1 + z_2} =\overline{z_1} +\overline{z_2}$ (from which it follows $\overline{z_1 - z_2} =\overline{z_1} -\overline{z_2})$.
+    \\Now let $\epsilon > 0$. Then let $\delta =\epsilon$.
+    \\Then if $|z - z_0| <\delta$ we have $|f(z) -\overline{z_0}| = |\overline{z} -\overline{z_0}| = |\overline{z - z_0}| = |z - z_0| <\delta =\epsilon$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore we have $lim_{z\rightarrow z_0}\overline{z} =\overline{z_0}$.
+    \\This was also for arbitrary $z_0\in\mathbb{C}$ and is therefore true for all $z_0\in\mathbb{C}$.
+    \\So $lim_{z\rightarrow z_0}\overline{z} =\overline{z_0}$ for all $z_0\in\mathbb{C}$ \qedsymbol
+\end{center}
+
+
+\section*{18.2}
+
+{\Large\textbf{c.}} Let $f(z) = f(x + iy) = x + i(2x + y)$ where $z = x + iy$. Then we are considering the point $z_0 = 1 - i$.
+\begin{center}
+    \doublespacing
+    Recall that for $z\in\mathbb{C}$ we know $|z|\geq |Im\:z|$ and similarly $|z|\geq |Re\:z|$.
+    \\Further recall that for $z_1, z_2, ..., z_n\in\mathbb{C}$ we know $|z_1 + z_2|\leq |z_1| + |z_2|$ and $|z_1 z_2| = |z_1||z_2|$.
+    \\Now let $\epsilon > 0$. Then let $\delta =\frac{\epsilon}{3}$.
+    \\Then if $|z - z_0| = |z - (1 - i)| = |(x - 1) + i(y + 1)| <\delta$ we have
+    \[|f(z) - (1 + i)| = |x + i(2x + y) - (1 + i)| = |(x - 1) + i(2x + y - 1)| = |(x - 1) + i(2x + y + 1 - 1 - 1)| =\]
+    \[|(x - 1) + i((2x - 2) + (y + 1))| = |(x - 1) + i(y + 1) + 2i(x - 1))|\leq |(x - 1) + i(y + 1)| + |2i(x - 1)| =\]
+    \[|(x - 1) + i(y + 1)| + |2i||x - 1| = |(x - 1) + i(y + 1)| + 2|x - 1| = |z - (1 - i)| + 2|Re\:(z - (1 - i))|\leq \]
+    \[|z - (1 - i)| + 2|z - (1 - i)| = 3|z - (1 - i)| = 3|z - z_0| < 3\delta =\epsilon\]
+    This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So $lim _{z\rightarrow 1 - i} f(z) = 1 + i$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{18.3}
+\begin{center}
+    \doublespacing
+    Recall the limit theorems that if $f, g$ are complex valued functions such that:
+    \\$lim_{z\rightarrow z_0} f(z) = w_0$ and $lim_{z\rightarrow z_0} g(z) = W_0$ for some $z_0\in\mathbb{C}$.
+    \\Then it follows that:
+    \\$lim _{z\rightarrow z_0} f(z) + g(z) = w_0 + W_0$
+    \\$lim _{z\rightarrow z_0} f(z) g(z) = w_0 W_0$
+    \\And if $W_0\neq 0$ then $lim _{z\rightarrow z_0}\frac{f(z)}{g(z)} =\frac{w_0}{W_0}$.
+    \\It was also given that for a polynomial $P(z)$, we know $lim_{z\rightarrow z_0} P(z) = P(z_0)$ for all $z_0\in\mathbb{C}$.
+\end{center}
+
+{\Large\textbf{a.}} Let $n\in\mathbb{N}$ then consider the function $f(z) =\frac{1}{z^n}$.
+\begin{center}
+    \doublespacing
+    As seen in the book $lim _{z\rightarrow z_0} z^n = (z_0)^n$ for all $z_0\in\mathbb{C}$.
+    \\Now let $z_0\neq 0$, then we have that $lim _{z\rightarrow z_0} z^n = (z_0)^n\neq 0$ since $\mathbb{C}$ has no zero divisors.
+    \\Therefore $lim _{z\rightarrow z_0} f(z) = lim _{z\rightarrow z_0}\frac{1}{z^n} =\frac{1}{(z_0)^n} = (\frac{1}{z_0})^n$ since clearly $lim _{z\rightarrow z_0} 1 = 1$.
+    \\This was true for arbitrary $z_0\neq 0$ and is therefore true for all $z_0\neq 0$.
+    \\This was also true for arbitrary $n\in\mathbb{N}$ and is therefore true for all $n\in\mathbb{N}$.
+    \\So $lim _{z\rightarrow z_0}\frac{1}{z^n} = (\frac{1}{z_0})^n$ for all $n\in\mathbb{N}$ and all complex numbers $z_0\neq 0$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{i z^3 - 1}{z + i}$. Then we are considering the point $z_0 = i$.
+\begin{center}
+    \doublespacing
+    If we let $g(z) = i z^3 - 1$ and $h(z) = z + i$ we have that $f(z) =\frac{g(z)}{h(z)}$.
+    \\We know from the previous problem that $lim _{z\rightarrow z_0} z^3 = (z_0)^3$.
+    \\Clearly $lim _{z\rightarrow z_0} i = i$ and $lim _{z\rightarrow z_0} -1 = -1$.
+    \\So by the limit theorems we know that $lim _{z\rightarrow z_0} g(z) = lim _{z\rightarrow z_0} i z^3 - 1 = i(z_0)^3 - 1 = i^4 - 1 = 0$.
+    \\Similarly we know $lim _{z\rightarrow z_0} h(z) = lim _{z\rightarrow z_0} z + i = z_0 + i = 2i$.
+    \\Since $lim _{z\rightarrow z_0} h(z) = 2i\neq 0$ we know that:
+    \\$lim _{z\rightarrow z_0} f(z) = lim _{z\rightarrow z_0}\frac{g(z)}{h(z)} =\frac{0}{2i} = 0$ (where $z_0 = i$ as stated before) \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}} Let $P(z)$ and $Q(z)$ be complex valued polynomials with complex coefficients. Then let $f(z) =\frac{P(z)}{Q(z)}$.
+\begin{center}
+    \doublespacing
+    By the limit theorems $lim _{z\rightarrow z_0} P(z) = P(z_0)$ and $lim _{z\rightarrow z_0} Q(z) = Q(z_0)$ for all $z_0\in\mathbb{C}$.
+    \\If $z_0\in\mathbb{C}$ is such that $lim _{z\rightarrow z_0} Q(z) = Q(z_0)\neq 0$ then we know that:
+    \\$lim _{z\rightarrow z_0} f(z) = lim _{z\rightarrow z_0}\frac{P(z)}{Q(z)} =\frac{P(z_0)}{Q(z_0)}$.
+    \\This was true for arbitrary $z_0\in\mathbb{C}$ where $Q(z_0)\neq 0$ and is therefore true for all $z_0\in\mathbb{C}$ where $Q(z_0)\neq 0$.
+    \\So $lim _{z\rightarrow z_0} f(z) = lim _{z\rightarrow z_0}\frac{P(z)}{Q(z)} =\frac{P(z_0)}{Q(z_0)}$ for all $z_0\in\mathbb{C}$ where $Q(z_0)\neq 0$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{18.9}
+\begin{center}
+    \doublespacing
+    Let $f, g$ be complex valued functions such that:
+    \\$lim _{z\rightarrow z_0} f(z) = 0$ and there exists an $M > 0$ such that $|g(z)|\leq M$ in some neighborhood of $z_0$.
+    \\Fix an $M > 0$ such that there exists a neighborhood of $z_0$ where $|g(z)|\leq M$.
+    \\Let $\alpha > 0$ be such that $|g(z)|\leq M$ for all $z\in V_{\alpha} (z_0)$, that is $|z - z_0| <\alpha$ implies $|g(z)|\leq M$.
+    \\Now let $\epsilon > 0$. Then let $\gamma > 0$ be such that if $|z - z_0| <\gamma$ it follows that $|f(z) - 0| = |f(z)| <\frac{\epsilon}{M}$.
+    \\Now let $\delta < min\{\alpha ,\gamma\}$.
+    \\Then we have if $|z - z_0| <\delta$ it must be $|z - z_0| <\alpha$ and $|z - z_0| <\gamma$.
+    \\Therefore it follows that if $|z - z_0| <\delta$ we have $|f(z)| <\frac{\epsilon}{M}$ and $|g(z)|\leq M$.
+    \\Then if $|z - z_0| <\delta$ we have $|f(z) g(z) - 0| = |f(z)||g(z)|\leq M |g(z)| < M\frac{\epsilon}{M} =\epsilon$.
+    \\This was for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\So if $lim _{z\rightarrow z_0} f(z) = 0$ and $g(z)$ is bounded in some neighborhood of $z_0$ then we have that $lim _{z\rightarrow z_0} f(z) g(z) = 0$ \qedsymbol
+\end{center}
+
+
+\section*{18.10}
+\begin{center}
+    \doublespacing
+    Recall that:
+    \\$lim _{z\rightarrow\infty} f(z) = w$ if $lim _{z\rightarrow 0} f(\frac{1}{z}) = w$.
+    \\$lim _{z\rightarrow z_0} f(z) =\infty$ if $lim _{z\rightarrow z_0}\frac{1}{f(z)} = 0$.
+    \\$lim _{z\rightarrow\infty} f(z) =\infty$ if $lim _{z\rightarrow 0}\frac{1}{f(\frac{1}{z})} = 0$.
+    \\Also recall the limit theorems mentioned in problem 18.3 about limits of polynomials and limits of divisions of functions.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) =\frac{4z^2}{(z-1)^2}$, then for $z\neq 0$ we have $f(\frac{1}{z}) =\frac{4\frac{1}{z^2}}{(\frac{1}{z} - 1)^2} =\frac{4}{z^2(\frac{1}{z} - 1)^2} =\frac{4}{(z(\frac{1}{z} - 1))^2} =\frac{4}{(1 - z)^2}$.
+\begin{center}
+    \doublespacing
+    Then $P(z) = (1 - z)^2 = 1 - 2z + z^2$ is a complex polynomial and therefore $lim _{z\rightarrow 0} P(z) = P(0) = (1 - 0)^2 = 1$.
+    \\Since $lim _{z\rightarrow 0} (1 - z)^2 = 1\neq 0$ we have that $lim _{z\rightarrow 0} f(\frac{1}{z}) = lim _{z\rightarrow 0}\frac{4}{(1 - z)^2} = 4$ since clearly $lim _{z\rightarrow 0} 4 = 4$.
+    \\Therefore since $lim _{z\rightarrow 0} f(\frac{1}{z}) = 4$ we have that $lim _{z\rightarrow\infty} f(z) = 4$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) =\frac{1}{(z - 1)^3}$, then we have $\frac{1}{f(z)} =\frac{1}{1 / (z - 1)^3} = (z - 1)^3$.
+\begin{center}
+    \doublespacing
+    Then $P(z) = (z - 1)^3 = z^3 - 3z^2 + 3z - 1$ is a complex polynomial and therefore $lim _{z\rightarrow 1} P(z) = P(1) = (1 - 1)^3 = 0$.
+    \\So we have that $lim _{z\rightarrow 1}\frac{1}{f(z)} = lim _{z\rightarrow 1} (z - 1)^3 = 0$.
+    \\Therefore since $lim _{z\rightarrow 1}\frac{1}{f(z)} = 0$ we have that $lim _{z\rightarrow 1} f(z) =\infty$ \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}} Let $f(z) =\frac{z^2 + 1}{z - 1}$, then for $z\neq 0$ we have $f(\frac{1}{z}) =\frac{(\frac{1}{z})^2 + 1}{\frac{1}{z} - 1} =\frac{z^2 (\frac{1}{z^2} + 1)}{z^2 (\frac{1}{z} - 1)} =\frac{1 + z^2}{z - z^2}$. So $\frac{1}{f(\frac{1}{z})} =\frac{1}{(1 + z^2) / (z - z^2)} =\frac{z - z^2}{1 + z^2}$.
+\begin{center}
+    \doublespacing
+    Then $P(z) = z - z^2$ is a complex polynomial and therefore $lim _{z\rightarrow 0} P(z) = P(0) = 0$.
+    \\Similarly $Q(z) = 1 + z^2$ is a complex polynomial and therefore $lim _{z\rightarrow 0} Q(z) = Q(0) = 1$.
+    \\Since $lim _{z\rightarrow 0} 1 + z^2 = 1\neq 0$ we have that $lim _{z\rightarrow 0}\frac{1}{f(\frac{1}{z})} = lim _{z\rightarrow 0}\frac{z - z^2}{1 + z^2} =\frac{0}{1} = 0$.
+    \\Therefore since $lim _{z\rightarrow 0}\frac{1}{f(\frac{1}{z})} = 0$ we have that $lim _{z\rightarrow\infty} f(z) =\infty$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{18.13}
+\begin{center}
+    \doublespacing
+    Recall that an $\epsilon$ neighborhood of the point of infinity is given by $|z| >\frac{1}{\epsilon}$.
+    \\Further recall that a set $S$ is bounded if there exists an $R > 0$ such that every element of $S$ is inside of the circle $|z| = R$.
+    \\Let $S\subseteq\mathbb{C}$ be an arbitrary complex set.
+    \break
+    \\First, assume that $S$ is unbounded:
+    \break
+    \\Then there does not exist an $R > 0$ such that all elements of $S$ are contained in the circle $|z| = R$.
+    \\This means that for all $R > 0$ there must be at least one element of $S$ on the boundary of or outside of the circle $|z| = R$.
+    \\Therefore for all $R > 0$ there exists some $z\in S$ where $|z|\geq R$.
+    \\Let $\epsilon > 0$, then $\frac{1}{\epsilon}$ is well defined. Now let $R\in\mathbb{R}$ be such that $R >\frac{1}{\epsilon}$.
+    \\Such an $R$ exists due to the unboundedness of $\mathbb{R}$.
+    \\Then we know $R > 0$ and therefore there exists some $z_0\in S$ such that $|z_0|\geq R >\frac{1}{\epsilon}$.
+    \\So we have found a $z\in S$ where $z$ is in an $\epsilon$ neighborhood of the point at infinity.
+    \\This was true for arbitrary $\epsilon > 0$ and is therefore true for all $\epsilon > 0$.
+    \\Therefore if $S$ is unbounded then there exists some element of $S$ in every neighborhood of the point at infinity.
+    \break
+    \\Now, assume that every neighborhood of the point at infinity contains some element of $S$:
+    \break
+    \\Then for all $\epsilon > 0$ there exists some $z\in S$ such that $|z| >\frac{1}{\epsilon}$.
+    \\Let $R > 0$, then let $\epsilon > 0$ be such that $R\leq\frac{1}{\epsilon}$.
+    \\Such an $\epsilon$ exists due to the unboundedness of $\mathbb{R}$.
+    \\So we know there exists some $z_0\in S$ such that $|z_0| >\frac{1}{\epsilon}\geq R$.
+    \\So there exists some element of $S$ that lies outside of the circle $|z| = R$.
+    \\This was true for arbitrary $R > 0$ and is therefore true for all $R > 0$.
+    \\So there does not exist an $R > 0$ such that every element of $S$ is contained in the circle $|z| = R$.
+    \\This means that $S$ is not bounded, and hence is unbounded.
+    \\Therefore if every neighborhood of the point at infinity contains some element of $S$ then $S$ is unbounded.
+    \break
+    \\So $S\subseteq\mathbb{C}$ is unbounded if and only if every neighborhood of the point at infinity contains some element of $S$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{20.1}
+\begin{center}
+    \doublespacing
+    Recall the limit theorems mentioned in problem 18.3 about limits of polynomials.
+    \\Let $f(z) = w = z^2$.
+    \\Then $\Delta w = f(z +\Delta z) - f(z) = (z +\Delta z)^2 - z^2 = z^2 + 2z\Delta z + (\Delta z)^2 - z^2 = (\Delta z)^2 + 2z\Delta z$.
+    \\Therefore when $\Delta z\neq 0$ we get $\frac{\Delta w}{\Delta z} =\frac{(\Delta z)^2 + 2z\Delta z}{\Delta z} =\frac{\Delta z (\Delta z + 2z)}{\Delta z} =\Delta z + 2z$.
+    \\Since $z$ does not depend on $\Delta z$ we can write $P(\Delta z) =\Delta z + 2z$ as a complex polynomial in $\Delta z$ where $z$ acts as a constant.
+    \\Hence $lim _{\Delta z\rightarrow 0}\frac{\Delta w}{\Delta z} = lim _{\Delta z\rightarrow 0}\Delta z + 2z = lim _{\Delta z\rightarrow 0} P(\Delta z) = P(0) = 2z$.
+    \\Therefore since $lim _{\Delta z\rightarrow 0}\frac{\Delta w}{\Delta z} = 2z$ we have $\frac{dw}{dz} = 2z$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{20.2}
+\begin{center}
+    \doublespacing
+    Recall the following:
+    \\$\frac{d}{dz} (f(z) + g(z)) =\frac{d}{dz} f(z) +\frac{d}{dz} g(z)$ for any two differentiable functions $f, g$.
+    \\$\frac{d}{dz} c f(z) = c\frac{d}{dz} f(z)$ and $\frac{d}{dz} c = 0$ for all $c\in\mathbb{C}$.
+    \\$\frac{d}{dz} z^n = n z^{n-1}$ for all $n\in\mathbb{N}$
+    \\$\frac{d}{dz}\frac{f(z)}{g(z)} =\frac{g(z) f'(z) - f(z) g'(z)}{(g(z))^2}$ when $g(z)\neq 0$ for any two differentiable functions $f, g$.
+    \\$\frac{d}{dz} f(g(z)) = f'(g(z)) g'(z)$ for any two differentiable functions $f, g$.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) = 3z^2 - 2z + 4$.
+\begin{center}
+    \doublespacing
+    We know from the theorems above that $\frac{d}{dz} 3z^2 = 3\frac{d}{dz} z^2 = 6z$, $\frac{d}{dz} (-2z) = -2\frac{d}{dz} z = -2$, and $\frac{d}{dz} 4 = 0$.
+    \\Therefore $\frac{d}{dz} f(z) =\frac{d}{dz} (3z^2 - 2z + 4) =\frac{d}{dz} 3z^2 +\frac{d}{dz} (-2z) +\frac{d}{dz} 4 = 6z - 2$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) = (2z^2 + i)^5$.
+\begin{center}
+    \doublespacing
+    Then we can write $f(z) = g(h(z))$ where $g(z) = z^5$ and $h(z) = 2z^2 + i$.
+    \\We know from the theorems above that $\frac{d}{dz} g(z) =\frac{d}{dz} z^5 = 5z^4$ and $\frac{d}{dz} h(z) =\frac{d}{dz} (2z^2 + i) =\frac{d}{dz} (2z^2) +\frac{d}{dz} i = 2\frac{d}{dz} z^2 = 4z$.
+    \\We also know that $\frac{d}{dz} f(z) =\frac{d}{dz} g(h(z)) = g'(h(z)) h'(z)$.
+    \\So we have that $\frac{d}{dz} f(z) = 5(2z^2 + i)^4 (4z) = 20z(2z^2 + i)^4$ \qedsymbol
+\end{center}
+
+{\Large\textbf{c.}} Let $f(z) =\frac{z - 1}{2z + 1}$ where $z\neq -\frac{1}{2}$.
+\begin{center}
+    \doublespacing
+    Then we can write $f(z) =\frac{g(z)}{h(z)}$ where $g(z) = z - 1$ and $h(z) = 2z + 1$.
+    \\We know from the theorems above that:
+    \\$\frac{d}{dz} g(z) =\frac{d}{dz} (z - 1) =\frac{d}{dz} z +\frac{d}{dz} (-1) = 1$ and $\frac{d}{dz} h(z) =\frac{d}{dz} (2z + 1) =\frac{d}{dz} (2z) +\frac{d}{dz} 1 = 2\frac{d}{dz} z = 2$.
+    \\We also know that $\frac{d}{dz} f(z) =\frac{d}{dz}\frac{g(z)}{h(z)} =\frac{h(z) g'(z) - g(z) h'(z)}{(h(z))^2}$ when $z\neq -\frac{1}{2}$.
+    \\So we have that $\frac{d}{dz} f(z) =\frac{(2z + 1)(1) - (z - 1)(2)}{(2z + 1)^2} =\frac{2z + 1 - 2z + 2}{(2z + 1)^2} =\frac{3}{(2z + 1)^2}$ when $z\neq -\frac{1}{2}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{d.}} Let $f(z) =\frac{(1 + z^2)^4}{z^2}$ where $z\neq 0$.
+\begin{center}
+    \doublespacing
+    Then we can write $f(z) =\frac{l(z)}{k(z)} = \frac{g(h(z))}{k(z)}$ where $g(z) = z^4$, $h(z) = 1 + z^2$, and $k(z) = z^2$, and $l(z) = g(h(z))$.
+    \\We know from the theorems above that:
+    \\$\frac{d}{dz} g(z) =\frac{d}{dz} (z^4) = 4z^3$, $\frac{d}{dz} h(z) =\frac{d}{dz} (1 + z^2) =\frac{d}{dz} 1 +\frac{d}{dz} z^2 = 2z$, and $\frac{d}{dz} k(z) =\frac{d}{dz} z^2 = 2z$.
+    \\We also know that $\frac{d}{dz} l(z) =\frac{d}{dz} g(h(z)) = g'(h(z)) h'(z)$.
+    \\Furthermore we know $\frac{d}{dz} f(z) =\frac{d}{dz}\frac{l(z)}{k(z)} =\frac{k(z) l'(z) - l(z) k'(z)}{(k(z))^2}$.
+    \\So we have that \[\frac{d}{dz} f(z) =\frac{(z^2)(4(1+z^2)^3 (2z)) - ((1+z^2)^4)(2z)}{(z^2)^2} =\frac{8z^3 (1 + z^2)^3 - 2z (1 + z^2)^4}{z^4} =\]
+    \[\frac{2z(1 + z^2)^3(4z^2 - (1 + z^2))}{z^4} =\frac{2(1 + z^2)^3 (3z^2 - 1)}{z^3}\] for $z\neq 0$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{20.7}
+\begin{center}
+    \doublespacing
+    Recall the following:
+    \\$\frac{d}{dz} c = 0$ for all $c\in\mathbb{C}$.
+    \\$\frac{d}{dz} z^n = n z^{n-1}$ for all $n\in\mathbb{N}$.
+    \\$\frac{d}{dz}\frac{f(z)}{g(z)} =\frac{g(z) f'(z) - f(z) g'(z)}{(g(z))^2}$ when $g(z)\neq 0$ for any two differentiable functions $f, g$.
+    \break
+    \\Let $n\in\mathbb{N}$ be arbitrary. Then let $m = -n$ and $z\neq 0$.
+    \\Then we have that $z^m = z^{-n} =\frac{1}{z^n}$.
+    \\We know from the theorems above that:
+    \[\frac{d}{dz} z^m =\frac{d}{dz}\frac{1}{z^n} =\frac{z^n (\frac{d}{dz} 1) - 1 (\frac{d}{dz} z^n)}{(z^n)^2} =\frac{-n z^{n-1}}{z^{2n}} =\frac{-n}{z^{2n -(n-1)}} =\frac{-n}{z^{n+1}} = -n z^{-(n+1)} = -n z^{-n-1} = mz^{m-1}\]
+    This was for arbitrary $n\in\mathbb{N}$ and is therefore true for all $n\in\mathbb{N}$.
+    \\So $\frac{d}{dz} z^{-n} = -n z^{-n-1}$ for all $n\in\mathbb{N}$ when $z\neq 0$.
+    \\Rewriting with $m = -n$ we get $\frac{d}{dz} z^m = m z^{m-1}$ for all $m\in\{-1, -2, -3, ...\} =\mathbb{Z^-}$ when $z\neq 0$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{20.8}
+\begin{center}
+    \doublespacing
+    Recall that for a complex valued function $f(z)$ and $z_0\in\mathbb{C}$ in order for $lim _{z\rightarrow z_0} f(z)$ to exist the limit must be the same from all directions you can approach $z_0$ due to the uniqueness of limits.
+\end{center}
+
+{\Large\textbf{a.}} Let $f(z) = Re\:z$. Then for $z = x + iy$ we can write $f(z) = f(x + iy) = x$.
+\begin{center}
+    \doublespacing
+    Let us begin by considering approaching along the real axis.
+    \\That is we take $\Delta y = 0$ giving $\Delta z = \Delta x + i\Delta y =\Delta x$.
+    \\Then using this approach we get:
+    \\$f(z +\Delta z) - f(z) = Re\:(z +\Delta z) - Re\:z = Re\:(x + iy +\Delta x) - Re\:(x + iy) = x +\Delta x - x =\Delta x$.
+    \\Therefore $\frac{f(z +\Delta z) - f(z)}{\Delta z} =\frac{\Delta x}{\Delta x} = 1$ where $z = x + iy$.
+    \\This gives $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z} = lim _{\Delta z\rightarrow 0} 1 = 1$.
+    \break
+    \\Now consider approaching along the imaginary axis.
+    \\That is we take $\Delta x = 0$ giving $\Delta z = \Delta x + i\Delta y = i\Delta y$.
+    \\Then using this approach we get:
+    \\$f(z +\Delta z) - f(z) = Re\:(z +\Delta z) - Re\:z = Re\:(x + iy + i\Delta y) - Re\:(x + iy) = x - x = 0$.
+    \\Therefore $\frac{f(z +\Delta z) - f(z)}{\Delta z} =\frac{0}{\Delta x} = 0$ where $z = x + iy$.
+    \\This gives $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z} = lim _{\Delta z\rightarrow 0} 0 = 0$.
+    \break
+    \\Since $0\neq 1$ we have that $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z}$ does not exist. Therefore $\frac{d}{dz} Re\:z$ does not exist anywhere \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}} Let $f(z) = Im\:z$. Then for $z = x + iy$ we can write $f(z) = f(x + iy) = y$.
+\begin{center}
+    \doublespacing
+    Let us begin by considering approaching along the real axis.
+    \\That is we take $\Delta y = 0$ giving $\Delta z = \Delta x + i\Delta y =\Delta x$.
+    \\Then using this approach we get:
+    \\$f(z +\Delta z) - f(z) = Im\:(z +\Delta z) - Im\:z = Im\:(x + iy +\Delta x) - Im\:(x + iy) = y - y = 0$.
+    \\Therefore $\frac{f(z +\Delta z) - f(z)}{\Delta z} =\frac{0}{\Delta y} = 0$ where $z = x + iy$.
+    \\This gives $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z} = lim _{\Delta z\rightarrow 0} 0 = 0$.
+    \break
+    \\Now consider approaching along the imaginary axis.
+    \\That is we take $\Delta x = 0$ giving $\Delta z = \Delta x + i\Delta y = i\Delta y$.
+    \\Then using this approach we get:
+    \\$f(z +\Delta z) - f(z) = Im\:(z +\Delta z) - Im\:z = Im\:(x + iy + i\Delta y) - Im\:(x + iy) = y +\Delta y - y =\Delta y$.
+    \\Therefore $\frac{f(z +\Delta z) - f(z)}{\Delta z} =\frac{\Delta y}{\Delta y} = 1$ where $z = x + iy$.
+    \\This gives $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z} = lim _{\Delta z\rightarrow 0} 1 = 1$.
+    \break
+    \\Since $0\neq 1$ we have that $lim _{\Delta z\rightarrow 0}\frac{f(z +\Delta z) - f(z)}{\Delta z}$ does not exist. Therefore $\frac{d}{dz} Im\:z$ does not exist anywhere \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{Extra Problem}
+\begin{center}
+    \doublespacing
+    Let the Riemann sphere be the unit sphere centered at the origin.
+    \\We are asked to find the point on the Riemann sphere corresponding to $z_0 = 2 + 3i$.
+    \\I will actually provide a method for finding the corresponding point $P$ on the Riemann sphere for any complex number.
+    \\Let $z\in\mathbb{C}$ then we can write $z = x + iy$, or in three dimensions $z = (x, y, 0)$.
+    \\Then since the Riemann sphere is the unit sphere centered at the origin we know $N = (0, 0, 1)$ is its north pole.
+    \\We can construct a parametric equation of a line segment connecting $z$ and $N$.
+    \\This will be given by: $tz + (1-t)N = t(x, y, 0) + (1-t)(0, 0, 1) = (tx, ty, 0) + (0, 0, 1 - t) = (tx, ty, 1 - t)$ for $t\in [0, 1]$.
+    \break
+    \\Notice at $t = 0$ we get $0z + (1 - 0)N = N$ and at $t = 1$ we get $z + (1 - 1)N = z$.
+    \\What we are doing here is taking the vector going from $N$ to $z$ (which is $z - N = (x, y, 0) - (0, 0, 1) = (x, y, -1)$), scaling its size with a parameter $t$. We do this because the direction of our parameterized vector stays the same, we are just varying the distance in order to be able to "travel" to any point connecting $N$ and $z$.
+    \\Then $t(z - N) = t(x, y, -1) = (tx, ty, -t)$, but this vector does not start at $N$ as we want (it starts at the origin) so we add $N$ to recenter it.
+    \\This finally gives $t(z - N) + N = (tx, ty, -t) + (0, 0, 1) = (tx, ty, 1 - t)$, the equation of our parametric line.
+    \\Now that we have an equation representing the line segment connecting $N$ and $z$ we can find $P$ on the sphere corresponding to $z$.
+    \\Since this point $P$ lies on the sphere (which is a unit sphere) we know its distance from the origin must be 1.
+    \\The distance from the origin of any point on our parametric line is $\sqrt{(tx)^2 + (ty)^2 + (1 - t)^2}$, using the normal Euclidean norm.
+    \\Therefore we must have $||P|| = \sqrt{(tx)^2 + (ty)^2 + (1 - t)^2} = 1$ and hence $(tx)^2 + (ty)^2 + (1 - t)^2 = 1$.
+    \\So $x^2 t^2 + y^2 t^2 + 1 - 2t + t^2 = t^2 (x^2 + y^2 + 1) - 2t + 1 = 1$ and $t^2 (x^2 + y^2 + 1) = 2t$.
+    \\We know $t\neq 0$ because at $t = 0$ we are at $N$, the point at infinity but we are dealing with a finite $z\in\mathbb{C}$.
+    \\Therefore we can divide both sides by $t$ and get $t(x^2 + y^2 + 1) = 2$ and get $t =\frac{2}{x^2 + y^2 + 1} =\frac{2}{|z|^2 + 1}$.
+    \\Plugging this $t$ back into our parametric equation we get:
+    \[P = (tx, ty, 1 - t) = \Bigg{(}\frac{2x}{x^2 + y^2 + 1},\frac{2y}{x^2 + y^2 + 1}, 1 -\frac{2}{x^2 + y^2 + 1}\Bigg{)} =\Bigg{(}\frac{2x}{x^2 + y^2 + 1},\frac{2y}{x^2 + y^2 + 1},\frac{x^2 + y^2 - 1}{x^2 + y^2 + 1}\Bigg{)}\]
+    Finally:
+    \[P = \Bigg{(}\frac{2 Re\:z}{|z|^2 + 1},\frac{2 Im\:z}{|z|^2 + 1},\frac{|z|^2 - 1}{|z|^2 + 1}\Bigg{)}\]
+    For our particular desired value, $z_0 = 2 + 3i$ we know $|z_0|^2 = 2^2 + 3^2 = 13$, $Re\:z_0 = 2$, and $Im\:z_0 = 3$.
+    \\Therefore $P_{z_0} =\Big{(}\frac{4}{13 + 1},\frac{6}{13 + 1},\frac{13 - 1}{13 + 1}\Big{)} =\Big{(}\frac{4}{14},\frac{6}{14},\frac{12}{14}\Big{)} =\Big{(}\frac{2}{7},\frac{3}{7},\frac{6}{7}\Big{)}$ \qedsymbol
+\end{center}
+
+\end{document}
