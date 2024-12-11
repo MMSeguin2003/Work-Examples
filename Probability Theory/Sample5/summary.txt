@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around multivariate normal distributions and transformations of joint random variables.
