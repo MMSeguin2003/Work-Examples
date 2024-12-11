@@ -1,0 +1,1 @@
+This sample work contains problems largely centered around the Law of Large Numbers and moment generating functions.
