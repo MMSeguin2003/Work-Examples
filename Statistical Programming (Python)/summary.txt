@@ -1,0 +1,1 @@
+This folder contains work on statistical analysis in Python ranging from the basics of computation on a computer to data extraction, cleaning, and analysis.

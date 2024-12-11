@@ -1,3 +1,3 @@
 This folder contains work on real analysis ranging from the basics of sets and sequences of real numbers all the way through differentiation and integration. There are many types of problems, both proof based and application based. This work is extended in the complex analysis folder.
 
-The complexity of concepts increases as the samples go on. This means that sample 12 is more conventionally advanced than sample 11, which is more conceptually advanced than sample 10, and so on. This is because each sample work builds on concepts in the previous ones.
+The complexity of concepts increases as the samples go on. This means that sample 12 is more conceptually advanced than sample 11, which is more conceptually advanced than sample 10, and so on. This is because each sample work builds on concepts in the previous ones.

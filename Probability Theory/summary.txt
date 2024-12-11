@@ -1,0 +1,3 @@
+This folder contains work on probability theory ranging from the basics of events, random variables, and probability spaces to Gaussian and Markov processes.
+
+The complexity of concepts increases as the samples go on. This means that sample 6 is more conceptually advanced than sample 5, which is more conceptually advanced than sample 4, and so on. This is because each sample work builds on concepts in the previous ones.
