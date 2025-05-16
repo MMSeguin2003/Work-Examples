@@ -1,0 +1,1 @@
+This sample work contains basic problems on multivariate parameter estimation through means of maximum likelihood estimation.

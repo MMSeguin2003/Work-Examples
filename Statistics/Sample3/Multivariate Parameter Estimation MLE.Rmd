@@ -1,0 +1,568 @@
+---
+title: "Multivariate Parameter Estimation MLE"
+author: "Matthew Seguin"
+date: ''
+output:
+  pdf_document:
+    extra_dependencies:
+    - setspace
+    - amsmath
+    - amsfonts
+    - amsthm
+    - indentfirst
+    - physics
+geometry: margin=1.5cm
+---
+
+# 1.
+\begin{center}
+\doublespacing
+    Let $X_1, ..., X_n\overset{\mbox{iid}}{\sim} N(\mu,\sigma^2)$ and $\tau$ be such that $\mathbb{P}[X <\tau] = 0.9$.
+    \\First we will calculate the MLE for $\theta = (\mu,\sigma^2)$:
+    \[L(\theta) =\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}}\;\implies\;l(\theta) = log\:L(\theta) =\sum_{i=1}^n log(\frac{1}{\sigma\sqrt{2\pi}}) -\frac{(x_i -\mu)^2}{2\sigma^2}\]
+    \[= n\:log(\frac{1}{\sqrt{2\pi}}) -\frac{n}{2}\:log(\sigma^2) -\sum_{i=1}^n\frac{(x_i -\mu)^2}{2\sigma^2}\]
+    \[\grad l(\theta) =\Bigg{(}\frac{\partial}{\partial\mu} l(\theta),\frac{\partial}{\partial\sigma^2} l(\theta)\Bigg{)} =\Bigg{(}-\frac{1}{2\sigma^2}\Big{(}\sum_{i=1}^n\frac{\partial}{\partial\mu} (x_i -\mu)^2\Big{)}, -\frac{\partial}{\partial\sigma^2}\frac{n}{2} log(\sigma^2) -\sum_{i=1}^n\frac{\partial}{\partial\sigma^2}\frac{(x_i -\mu)^2}{2\sigma^2}\Bigg{)}\]
+    \[=\Bigg{(}\frac{1}{\sigma^2}\Big{(}\Big{(}\sum_{i=1}^n x_i\Big{)} -n\mu\Big{)},\Big{(}\sum_{i=1}^n\frac{(x_i -\mu)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2}\Bigg{)}\]
+    Setting this equal to $(0,0)$ we get the simultaneous equations:
+    \[\frac{1}{\sigma^2}\Big{(}\Big{(}\sum_{i=1}^n x_i\Big{)} -n\mu\Big{)} = 0\hspace{1in}\Big{(}\sum_{i=1}^n\frac{(x_i -\mu)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2} = 0\]
+    \[\sum_{i=1}^n x_i = n\mu\hspace{1in}\sum_{i=1}^n (x_i -\mu)^2 = n\sigma^2\]
+    \[\mu =\frac{1}{n}\sum_{i=1}^n x_i\hspace{1in}\sigma^2 =\frac{1}{n}\sum_{i=1}^n (x_i -\mu)^2\]
+    So our critical point is:
+    \[\Bigg{(}\hat{\mu},\hat{\sigma^2}\Bigg{)} =\Bigg{(}\frac{1}{n}\sum_{i=1}^n x_i,\;\frac{1}{n}\sum_{i=1}^n \Big{(}x_i -\frac{1}{n}\sum_{i=1}^n x_i\Big{)}^2\Bigg{)}\]
+    \break
+    Continued on next page.
+    \newpage
+    To show this is indeed a maximum we take the determinant of the Hessian matrix:
+    \[\mbox{\textbf{det}}\:H_{l} (\mu,\sigma^2) =
+    \begin{vmatrix}
+    \frac{\partial^2}{\partial\mu^2} l(\theta) & \frac{\partial^2}{\partial\mu\partial\sigma^2} l(\theta) \\
+    \frac{\partial^2}{\partial\sigma^2\partial\mu} l(\theta) & \frac{\partial^2}{\partial(\sigma^2)^2} l(\theta)
+    \end{vmatrix}
+    =
+    \begin{vmatrix}
+    \frac{\partial}{\partial\mu}\frac{1}{\sigma^2}\Big{(}\Big{(}\sum_{i=1}^n x_i\Big{)} -n\mu\Big{)}  & \frac{\partial}{\partial\sigma^2}\frac{1}{\sigma^2}\Big{(}\Big{(}\sum_{i=1}^n x_i\Big{)} -n\mu\Big{)} \\
+    \frac{\partial}{\partial\mu}\Big{(}\Big{(}\sum_{i=1}^n\frac{(x_i -\mu)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2}\Big{)} & \frac{\partial}{\partial\sigma^2}\Big{(}\Big{(}\sum_{i=1}^n\frac{(x_i -\mu)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2}\Big{)}
+    \end{vmatrix}
+    \]
+    \[=
+    \begin{vmatrix}
+    -\frac{n}{\sigma^2} & \frac{1}{\sigma^4}\Big{(}n\mu -\sum_{i=1}^n x_i\Big{)} \\
+    \frac{1}{\sigma^4}\Big{(}n\mu -\sum_{i=1}^n x_i\Big{)} & \frac{n}{2\sigma^4} -\frac{1}{\sigma^6}\sum_{i=1}^n (x_i -\mu)^2
+    \end{vmatrix}
+    =
+    \Big{(}-\frac{n}{\sigma^2}\Big{)}\Big{(}\frac{n}{2\sigma^4} -\frac{1}{\sigma^6}\sum_{i=1}^n (x_i -\mu)^2\Big{)} -\Big{(}\frac{1}{\sigma^4}\Big{(}n\mu -\sum_{i=1}^n x_i\Big{)}\Big{)}^2
+    \]
+    Then we evaluate this at our critical point:
+    \[\Bigg{(}\hat{\mu},\hat{\sigma^2}\Bigg{)} =\Bigg{(}\frac{1}{n}\sum_{i=1}^n x_i,\;\frac{1}{n}\sum_{i=1}^n \Big{(}x_i -\frac{1}{n}\sum_{i=1}^n x_i\Big{)}^2\Bigg{)} =\Bigg{(}\frac{1}{n}\sum_{i=1}^n x_i,\;\frac{1}{n}\sum_{i=1}^n \Big{(}x_i -\hat{\mu}\Big{)}^2\Bigg{)}\]
+    \[\mbox{\textbf{det}}\:H_{l} (\hat{\mu},\hat{\sigma^2}) =\Big{(}-\frac{n}{\hat{\sigma^2}}\Big{)}\Big{(}\frac{n}{2(\hat{\sigma^2})^2} -\frac{1}{(\hat{\sigma}^2)^3}\sum_{i=1}^n (x_i -\hat{\mu})^2\Big{)} -\Big{(}\frac{1}{(\hat{\sigma^2})^2}\Big{(}n\hat{\mu} -\sum_{i=1}^n x_i\Big{)}\Big{)}^2\]
+    \[=\Big{(}-\frac{n}{\hat{\sigma^2}}\Big{)}\Big{(}\frac{n}{2(\hat{\sigma^2})^2} -\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (x_i -\hat{\mu})^2\Big{)} =\Big{(}-\frac{n}{\hat{\sigma^2}}\Big{)}\Big{(}\frac{n}{2(\hat{\sigma^2})^2} -\frac{1}{(\hat{\sigma^2})^3}n\hat{\sigma^2}\Big{)} =\Big{(}-\frac{n}{\hat{\sigma^2}}\Big{)}\Big{(}\frac{n}{2(\hat{\sigma^2})^2} -\frac{n}{(\hat{\sigma^2})^2}\Big{)} =\frac{n^2}{2(\hat{\sigma^2})^3} > 0\]
+    So the product of the eigenvalues of the Hessian matrix is positive, and since $\frac{\partial^2}{\partial\mu^2} l(\theta) =-\frac{n}{\sigma^2} < 0$ this means that both of the eigenvalues are negative and hence the Hessian matrix is negative definite. Showing that $l(\theta)$ at our critical point is indeed a maximum point.
+    \\So the MLE is indeed:
+    \[\hat{\theta}_n =\Bigg{(}\hat{\mu}_n,\hat{\sigma^2}_n\Bigg{)} =\Bigg{(}\frac{1}{n}\sum_{i=1}^n X_i,\;\frac{1}{n}\sum_{i=1}^n \Big{(}X_i -\frac{1}{n}\sum_{i=1}^n X_i\Big{)}^2\Bigg{)}\]
+    Which implies that the MLE of $(\mu,\sigma)$ is:
+    \[\Bigg{(}\hat{\mu}_n,\hat{\sigma}_n\Bigg{)} =\Bigg{(}\frac{1}{n}\sum_{i=1}^n X_i,\;\sqrt{\frac{1}{n}\sum_{i=1}^n \Big{(}X_i -\frac{1}{n}\sum_{i=1}^n X_i\Big{)}^2}\Bigg{)}\]
+    Now continuing with $\tau$:
+    \[0.9 =\mathbb{P}[X <\tau] =\mathbb{P}[\frac{X -\mu}{\sigma} <\frac{\tau -\mu}{\sigma}] =\Phi (\frac{\tau -\mu}{\sigma})\]
+    \[\frac{\tau -\mu}{\sigma} =\Phi^{-1} (0.9)\;\implies\;\tau =\mu +\sigma\Phi^{-1}(0.9)\]
+    Then the MLE of $\tau$ is:
+    \[\hat{\tau}_n =\hat{\mu}_n +\hat{\sigma}_n\Phi^{-1} (0.9) =\Big{(}\frac{1}{n}\sum_{i=1}^n X_i\Big{)} +\Phi^{-1} (0.9)\sqrt{\frac{1}{n}\sum_{i=1}^n \Big{(}X_i -\frac{1}{n}\sum_{i=1}^n X_i\Big{)}^2}\;\;\;\;\;\;\qedsymbol\]
+    Where $\Phi$ is the standard normal CDF and $\Phi^{-1}$ is its inverse.
+\end{center}
+
+
+\newpage
+# 2.
+\begin{center}
+\doublespacing
+    Let $Y_i\overset{\mbox{ind.}}{\sim} N(\beta_0 +\beta_1 x_i,\sigma^2)$ for each $i\in\{1, 2, ..., n\}$.
+\end{center}
+
+## a.
+\begin{center}
+\doublespacing
+    We are going to find the MLE of $\theta = (\beta_0,\beta_1,\sigma^2)$:
+    \[L(\theta) =\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^2}}\;\implies\;l(\theta) = log\:L(\theta) =\sum_{i=1}^n log(\frac{1}{\sigma\sqrt{2\pi}}) -\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^2}\]
+    \[= n\:log(\frac{1}{\sqrt{2\pi}}) -\frac{n}{2}\:log(\sigma^2) -\sum_{i=1}^n\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^2}\]
+    \[\grad l(\theta) =\Bigg{(}\frac{\partial}{\partial\beta_0} l(\theta),\frac{\partial}{\partial\beta_1} l(\theta), \frac{\partial}{\partial\sigma^2} l(\theta)\Bigg{)}\]
+    \[=\Bigg{(}-\frac{1}{2\sigma^2}\Big{(}\sum_{i=1}^n\frac{\partial}{\partial\beta_0} (y_i -\beta_0 -\beta_1 x_i)^2\Big{)}, -\frac{1}{2\sigma^2}\Big{(}\sum_{i=1}^n\frac{\partial}{\partial\beta_1} (y_i -\beta_0 -\beta_1 x_i)^2\Big{)}, -\frac{\partial}{\partial\sigma^2}\frac{n}{2} log(\sigma^2) -\sum_{i=1}^n\frac{\partial}{\partial\sigma^2}\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^2}\Bigg{)}\]
+    \[=\Bigg{(}\frac{1}{\sigma^2}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i),\frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i),\Big{(}\sum_{i=1}^n\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2}\Bigg{)}\]
+    Setting this equal to $(0,0,0)$ we get the simultaneous equations:
+    \[\frac{1}{\sigma^2}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) = 0\hspace{0.5in}\frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) = 0\hspace{0.5in}\Big{(}\sum_{i=1}^n\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^4}\Big{)}-\frac{n}{2\sigma^2} = 0\]
+    \[\Big{(}\sum_{i=1}^n y_i\Big{)} - n\beta_0 -\beta_1\Big{(}\sum_{i=1}^n x_i\Big{)} = 0\hspace{0.5in}\Big{(}\sum_{i=1}^n x_i y_i\Big{)} -\beta_0\Big{(}\sum_{i=1}^n x_i\Big{)} -\beta_1\Big{(}\sum_{i=1}^n x_i^2\Big{)} = 0\hspace{0.5in}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2 = n\sigma^2\]
+    \[\beta_0 =\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)} -\beta_1\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}\hspace{0.5in}\beta_1 =\frac{\Big{(}\sum_{i=1}^n x_i y_i\Big{)} -\beta_0\Big{(}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\sum_{i=1}^n x_i^2\Big{)}}\hspace{0.5in}\sigma^2 =\frac{1}{n}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2\]
+    Plugging equation 1 into equation 2 we get:
+    \[\beta_1 =\frac{\Big{(}\sum_{i=1}^n x_i y_i\Big{)} -\Big{(}\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)} -\beta_1\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}\Big{)}\Big{(}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\sum_{i=1}^n x_i^2\Big{)}}\]
+    \[=\frac{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i y_i\Big{)} -\Big{(}\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)} -\beta_1\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)}}\]
+    \[\beta_1\Bigg{(}1 -\frac{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}^2}{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)}}\Bigg{)} =\frac{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i y_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)}}\]
+    Continued on next page.
+    \newpage
+    \[\beta_1 =\frac{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i y_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}^2}\]
+    Then plugging this into equation 1 we get:
+    \[\beta_0 =\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)} +\Bigg{(}\frac{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i y_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}}{\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}^2}\Bigg{)}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)}\]
+    Then plugging these in for $\sigma^2$ we get:
+    \[\sigma^2 =\frac{1}{n}\sum_{i=1}^n (y_i -\Big{(}\frac{1}{n}\sum_{i=1}^n y_i\Big{)} +\beta_1\Big{(}\frac{1}{n}\sum_{i=1}^n x_i\Big{)} -\beta_1 x_i)^2\]
+    From here on out for simplicity I will use the following abbreviations of terms:
+    \[\bar{z} =\frac{1}{n}\sum_{i=1}^n z_i\hspace{0.5in}s_{wz} = s_{zw} =\Big{(}\frac{1}{n}\sum_{i=1}^n z_i w_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n w_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n z_i\Big{)} =\overline{zw} -\bar{w}\bar{z}\]
+    Where $z$ and $w$ can be appropriately replaced with other variables as needed.
+    \\So our critical point is:
+    \[\Bigg{(}\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2}\Bigg{)} =\Bigg{(}\bar{y} -\frac{s_{xy}}{s_{xx}}\bar{x},\;\;\frac{s_{xy}}{s_{xx}},\;\;\frac{1}{n}\sum_{i=1}^n\Big{(}(y_i -\bar{y}) -\frac{s_{xy}}{s_{xx}} (x_i -\bar{x})\Big{)}^2\Bigg{)}\]
+    \break
+    Continued on next page.
+    \newpage
+    To show this is indeed a maximum we examine the Hessian matrix:
+    \[H_{l} (\beta_0,\beta_1,\sigma^2) =
+    \begin{bmatrix}
+    \frac{\partial^2}{\partial\beta_0^2} l(\theta) & \frac{\partial^2}{\partial\beta_0\partial\beta_1} l(\theta) & \frac{\partial^2}{\partial\beta_0\partial\sigma^2} l(\theta) \\
+    \frac{\partial^2}{\partial\beta_1\partial\beta_0} l(\theta) & \frac{\partial^2}{\partial\beta_1^2} l(\theta) & \frac{\partial^2}{\partial\beta_1\partial\sigma^2} l(\theta) \\
+    \frac{\partial^2}{\partial\sigma^2\partial\beta_0} l(\theta) & \frac{\partial^2}{\partial\sigma^2\partial\beta_1} l(\theta) & \frac{\partial^2}{\partial(\sigma^2)^2} l(\theta)
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    \frac{\partial}{\partial\beta_0}\frac{1}{\sigma^2}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) & \frac{\partial}{\partial\beta_1}\frac{1}{\sigma^2}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) & \frac{\partial}{\partial\sigma^2}\frac{1}{\sigma^2}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) \\
+    \frac{\partial}{\partial\beta_0}\frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) & \frac{\partial}{\partial\beta_1}\frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) & \frac{\partial}{\partial\sigma^2}\frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) \\
+    \frac{\partial}{\partial\beta_0}\Big{(}\sum_{i=1}^n\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^4}\Big{)} & \frac{\partial}{\partial\beta_1}\Big{(}\sum_{i=1}^n\frac{(y_i -\beta_0 -\beta_1 x_i)^2}{2\sigma^4}\Big{)} & \frac{\partial}{\partial\sigma^2}\Big{(}\sum_{i=1}^n\frac{(y_i -\beta_0 - \beta_1 x_i)^2}{2\sigma^4}\Big{)}-\frac{\partial}{\partial\sigma^2}\frac{n}{2\sigma^2}
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    -\frac{n}{\sigma^2} & -\frac{n}{\sigma^2}\bar{x} & -\frac{1}{\sigma^4}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) \\
+    -\frac{n}{\sigma^2}\bar{x} & -\frac{1}{\sigma^2}\sum_{i=1}^n x_i^2 & -\frac{1}{\sigma^4}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) \\
+    -\frac{1}{\sigma^4}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i) & -\frac{1}{\sigma^4}\sum_{i=1}^n x_i(y_i -\beta_0 -\beta_1 x_i) & \frac{n}{2\sigma^4}-\frac{1}{\sigma^6}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    -\frac{n}{\sigma^2} & -\frac{n}{\sigma^2}\bar{x} & -\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)} \\
+    -\frac{n}{\sigma^2}\bar{x} & -\frac{n}{\sigma^2}\Big{(}s_{xx} +\bar{x}^2\Big{)} & -\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)} \\
+    -\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)} & -\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)} & \frac{n}{2\sigma^4}-\frac{1}{\sigma^6}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2
+    \end{bmatrix}
+    \]
+    Then we evaluate this at our critical point:
+    \[\Bigg{(}\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2}\Bigg{)} =\Bigg{(}\bar{y} -\frac{s_{xy}}{s_{xx}}\bar{x},\;\;\frac{s_{xy}}{s_{xx}},\;\;\frac{1}{n}\sum_{i=1}^n\Big{(}(y_i -\bar{y}) -\frac{s_{xy}}{s_{xx}} (x_i -\bar{x})\Big{)}^2\Bigg{)} =\Bigg{(}\bar{y} -\hat{\beta_1}\bar{x},\hat{\beta_1},\frac{1}{n}\sum_{i=1}^n\Big{(}y_i -\hat{\beta_0} -\hat{\beta_1} x_i\Big{)}^2\Bigg{)}\]
+    \[H_{l} (\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2}) =
+    \begin{bmatrix}
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\bar{y} -\hat{\beta_0} -\hat{\beta_1}\bar{x}\Big{)} \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\overline{xy} -\hat{\beta_0}\bar{x} -\hat{\beta_1} (s_{xx} +\bar{x}^2)\Big{)} \\
+    -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\bar{y} -\hat{\beta_0} -\hat{\beta_1}\bar{x}\Big{)} & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\overline{xy} -\hat{\beta_0}\bar{x} -\hat{\beta_1} (s_{xx} +\bar{x}^2)\Big{)} & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & 0 \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\overline{xy} -\bar{x}\bar{y} +\hat{\beta_1}\bar{x}^2 -\hat{\beta_1} (s_{xx} +\bar{x}^2)\Big{)} \\
+    0 & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}\overline{xy} -\bar{x}\bar{y} +\hat{\beta_1}\bar{x}^2 -\hat{\beta_1} (s_{xx} +\bar{x}^2)\Big{)} & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & 0 \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}s_{xy} - s_{xx}\frac{s_{xy}}{s_{xx}}\Big{)} \\
+    0 & -\frac{n}{(\hat{\sigma^2})^2}\Big{(}s_{xy} - s_{xx}\frac{s_{xy}}{s_{xx}}\Big{)} & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & 0 \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & 0 \\
+    0 & 0 & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2
+    \end{bmatrix}
+    \]
+    Continued on next page.
+    \newpage
+    Now we need to look at the principle sub-matrices of this matrix.
+    \\First: $\mbox{\textbf{det}} A_1 = -\frac{n}{\hat{\sigma^2}} < 0$
+    \\Then:
+    \[\mbox{\textbf{det}} A_2 =
+    \begin{vmatrix}
+        -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} \\
+        -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)}
+    \end{vmatrix}
+    =\frac{n^2}{(\hat{\sigma^2})^2}\Big{(}s_{xx} +\bar{x}^2\Big{)} -\frac{n^2}{(\hat{\sigma^2})^2}\bar{x}^2 =\Big{(}\frac{n}{(\hat{\sigma^2})^2}\Big{)}\Bigg{(}\Big{(}\frac{1}{n}\sum_{i=1}^n x_i^2\Big{)} -\bar{x}^2\Bigg{)}
+    \]
+    \[=\Big{(}\frac{n^2}{(\hat{\sigma^2})^2}\Big{)}\Bigg{(}\frac{1}{n}\sum_{i=1}^n (x_i^2 - 2\bar{x}^2 +\bar{x}^2)\Bigg{)} =\Big{(}\frac{n}{(\hat{\sigma^2})^2}\Big{)}\Bigg{(}\sum_{i=1}^n\Big{(}x_i -\bar{x}\Big{)}^2\Bigg{)} > 0\]
+    Finally:
+    \[\mbox{\textbf{det}} A_3 =\mbox{\textbf{det}} H_{l} (\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2}) =
+    \begin{vmatrix}
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & 0 \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & 0 \\
+    0 & 0 & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2
+    \end{vmatrix}
+    \]
+    \[= -
+    \begin{vmatrix}
+    0 & 0 & \frac{n}{2(\hat{\sigma^2})^2}-\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2 \\
+    -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} & 0 \\
+    -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} & 0
+    \end{vmatrix}
+    \]
+    \[=\Bigg{(}\Big{(}\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2\Big{)} -\frac{n}{2(\hat{\sigma^2})^2}\Bigg{)}
+    \begin{vmatrix}
+        -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)} \\
+        -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x}
+    \end{vmatrix}
+    \]
+    \[=\Bigg{(}\frac{n}{2(\hat{\sigma^2})^2} -\Big{(}\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2\Big{)}\Bigg{)}
+    \begin{vmatrix}
+        -\frac{n}{\hat{\sigma^2}} & -\frac{n}{\hat{\sigma^2}}\bar{x} \\
+        -\frac{n}{\hat{\sigma^2}}\bar{x} & -\frac{n}{\hat{\sigma^2}}\Big{(}s_{xx} +\bar{x}^2\Big{)}
+    \end{vmatrix}
+    \]
+    We already saw the determinant of that 2x2 matrix was positive so $\mbox{\textbf{det}} A_3 =\mbox{\textbf{det}} H_{l} (\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2}) < 0$ if and only if:
+    \[\frac{n}{2(\hat{\sigma^2})^2} -\Big{(}\frac{1}{(\hat{\sigma^2})^3}\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2\Big{)} < 0\;\mbox{i.e.}\;\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2 >\frac{n\hat{\sigma^2}}{2}\;\mbox{i.e.}\;\sum_{i=1}^n (y_i -\hat{\beta_0} -\hat{\beta_1} x_i)^2 = n\hat{\sigma^2} >\frac{n\hat{\sigma^2}}{2}\]
+    Which is true so we have shown that $\mbox{\textbf{det}} A_1 < 0$, $\mbox{\textbf{det}} A_2 > 0$, and $\mbox{\textbf{det}} A_3 < 0$ and therefore we know $H_{l} (\hat{\beta_0},\hat{\beta_1},\hat{\sigma^2})$ is negative definite. Showing that $l(\theta)$ at our critical point is indeed a maximum point.
+    \\So the MLE is indeed:
+    \[\hat{\theta}_n =\Bigg{(}\hat{\beta_0}_n,\hat{\beta_1}_n,\hat{\sigma^2}_n\Bigg{)} =\Bigg{(}\bar{Y} -\frac{s_{xY}}{s_{xx}}\bar{x},\;\;\frac{s_{xY}}{s_{xx}},\;\;\frac{1}{n}\sum_{i=1}^n\Big{(}(Y_i -\bar{Y}) -\frac{s_{xY}}{s_{xx}} (x_i -\bar{x})\Big{)}^2\Bigg{)}\]
+    Where (with $z$ and $w$ appropriately replaced with other variables as needed):
+    \[\bar{z} =\frac{1}{n}\sum_{i=1}^n z_i\hspace{0.5in}s_{wz} = s_{zw} =\Big{(}\frac{1}{n}\sum_{i=1}^n z_i w_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n w_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n z_i\Big{)} =\overline{zw} -\bar{w}\bar{z}\]
+\end{center}
+
+\newpage
+## b.
+\begin{center}
+\doublespacing
+    From before we know the Hessian matrix was:
+    \[H_{l} (\beta_0,\beta_1,\sigma^2) =
+    \begin{bmatrix}
+    -\frac{n}{\sigma^2} & -\frac{n}{\sigma^2}\bar{x} & -\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)} \\
+    -\frac{n}{\sigma^2}\bar{x} & -\frac{n}{\sigma^2}\Big{(}s_{xx} +\bar{x}^2\Big{)} & -\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)} \\
+    -\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)} & -\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)} & \frac{n}{2\sigma^4}-\frac{1}{\sigma^6}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2
+    \end{bmatrix}
+    \]
+    Where again we have the following:
+    \[\bar{z} =\frac{1}{n}\sum_{i=1}^n z_i\hspace{0.5in}s_{wz} = s_{zw} =\Big{(}\frac{1}{n}\sum_{i=1}^n z_i w_i\Big{)} -\Big{(}\frac{1}{n}\sum_{i=1}^n w_i\Big{)}\Big{(}\frac{1}{n}\sum_{i=1}^n z_i\Big{)} =\overline{zw} -\bar{w}\bar{z}\]
+    And $z$ and $w$ can be appropriately replaced with other variables as needed.
+    \\First note that:
+    \[\mathbb{E}[\bar{x}] =\mathbb{E}[\frac{1}{n}\sum_{i=1}^n x_i] =\frac{1}{n}\sum_{i=1}^n\mathbb{E}[x_i] =\frac{1}{n}\sum_{i=1}^n x_i =\bar{x}\]
+    Quickly note $s_{xx} +\bar{x}^2 =\frac{1}{n}\sum_{i=1}^n x_i^2$ where $\mathbb{E}[s_{xx} +\bar{x}^2] =\mathbb{E}[\frac{1}{n}\sum_{i=1}^n x_i^2] =\frac{1}{n}\sum_{i=1}^n x_i^2 =\overline{x^2}$
+    \\Also note that $\mathbb{E}[\bar{y}] =\mathbb{E}[\frac{1}{n}\sum_{i=1}^n y_i] =\frac{1}{n}\sum_{i=1}^n\mathbb{E}[y_i] =\frac{1}{n}\sum_{i=1}^n\beta_0 +\beta_1 x_i =\beta_0 +\beta_1\bar{x}$
+    \\Finally note that $\mathbb{E}[\overline{xy}] =\mathbb{E}[\frac{1}{n}\sum_{i=1}^n x_i y_i] =\frac{1}{n}\sum_{i=1}^n\mathbb{E}[x_i y_i] =\frac{1}{n}\sum_{i=1}^n\beta_0 x_i +\beta_1 x_i^2 =\beta_0\bar{x} +\beta_1\overline{x^2}$
+    \\Therefore:
+    \[I_n (\theta) = -\mathbb{E}[H_{l} (\beta_0,\beta_1,\sigma^2)] =\]
+    \[=
+    \begin{bmatrix}
+    \mathbb{E}[\frac{n}{\sigma^2}] & \mathbb{E}[\frac{n}{\sigma^2}\bar{x}] & \mathbb{E}[\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)}] \\
+    \mathbb{E}[\frac{n}{\sigma^2}\bar{x}] & \mathbb{E}[\frac{n}{\sigma^2}\Big{(}s_{xx} +\bar{x}^2\Big{)}] & \mathbb{E}[\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)}] \\
+    \mathbb{E}[\frac{n}{\sigma^4}\Big{(}\bar{y} -\beta_0 -\beta_1\bar{x}\Big{)}] & \mathbb{E}[\frac{n}{\sigma^4}\Big{(}\overline{xy} -\beta_0\bar{x} -\beta_1 (s_{xx} +\bar{x}^2)\Big{)}] & \mathbb{E}[\frac{1}{\sigma^6}\sum_{i=1}^n (y_i -\beta_0 -\beta_1 x_i)^2 -\frac{n}{2\sigma^4}]
+    \end{bmatrix}
+    \]
+    \[=
+    \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n}{\sigma^2}\bar{x} & 0 \\
+    \frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}\overline{x^2} & 0 \\
+    0 & 0 & \frac{n}{\sigma^6}\mathbb{V}[Y] -\frac{n}{2\sigma^4}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n}{\sigma^2}\bar{x} & 0 \\
+    \frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}\overline{x^2} & 0 \\
+    0 & 0 & \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    \]
+    So we have our final answer:
+    \[I_n (\theta) =
+    \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n}{\sigma^2}\bar{x} & 0 \\
+    \frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}\overline{x^2} & 0 \\
+    0 & 0 & \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    \]
+\end{center}
+
+\newpage
+## c.
+\begin{center}
+\doublespacing
+    We saw before that:
+    \[I_n (\theta) =
+    \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n}{\sigma^2}\bar{x} & 0 \\
+    \frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}\overline{x^2} & 0 \\
+    0 & 0 & \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    A & 0 \\
+    0 & B
+    \end{bmatrix}
+    \]
+    Where:
+    \[A =
+    \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n}{\sigma^2}\bar{x}\\
+    \frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}\overline{x^2}
+    \end{bmatrix}
+    \;\;\;\mbox{and}\;\;\;
+    B =
+    \begin{bmatrix}
+    \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    \]
+    So to find the variance matrix we invert it:
+    \[V_n (\theta) = (I_n (\theta))^{-1} =
+    \begin{bmatrix}
+    A & 0 \\
+    0 & B
+    \end{bmatrix}^{-1}
+    =
+    \begin{bmatrix}
+    A^{-1} & 0 \\
+    0 & B^{-1}
+    \end{bmatrix}
+    \]
+    First inverting $B$ is easy since:
+    \[B^{-1} =
+    \begin{bmatrix}
+    \frac{2\sigma^4}{n}
+    \end{bmatrix}
+    \;\;\;\mbox{results in}\;\;\;
+    B^{-1}B =
+    \begin{bmatrix}
+    \frac{2\sigma^4}{n}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \frac{n}{2\sigma^4}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \frac{2\sigma^4}{n}
+    \end{bmatrix}
+    = BB^{-1}
+    \]
+    Then inverting $A$:
+    \[A^{-1} =\frac{1}{(\frac{n}{\sigma^2})(\frac{n}{\sigma^2}\overline{x^2}) - (\frac{n}{\sigma^2}\bar{x})^2}
+    \begin{bmatrix}
+    \frac{n}{\sigma^2}\overline{x^2} & -\frac{n}{\sigma^2}\bar{x}\\
+    -\frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}
+    \end{bmatrix}
+    =\frac{\sigma^4}{n^2 s_{xx}}
+    \begin{bmatrix}
+    \frac{n}{\sigma^2}\overline{x^2} & -\frac{n}{\sigma^2}\bar{x}\\
+    -\frac{n}{\sigma^2}\bar{x} & \frac{n}{\sigma^2}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    (\frac{\sigma^2}{n})(\frac{\overline{x^2}}{s_{xx}}) & -(\frac{\sigma^2}{n})(\frac{\bar{x}}{s_{xx}})\\
+    -(\frac{\sigma^2}{n})(\frac{\bar{x}}{s_{xx}}) & (\frac{\sigma^2}{n})(\frac{1}{s_{xx}})
+    \end{bmatrix}
+    \]
+    Therefore we have the variance matrix:
+    \[V_n (\theta) = (I_n (\theta))^{-1} =
+    \begin{bmatrix}
+    A^{-1} & 0 \\
+    0 & B^{-1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    (\frac{\sigma^2}{n})(\frac{\overline{x^2}}{s_{xx}}) & -(\frac{\sigma^2}{n})(\frac{\bar{x}}{s_{xx}}) & 0\\
+    -(\frac{\sigma^2}{n})(\frac{\bar{x}}{s_{xx}}) & (\frac{\sigma^2}{n})(\frac{1}{s_{xx}}) & 0 \\
+    0 & 0 & \frac{2\sigma^4}{n}
+    \end{bmatrix}
+    \]
+    Then by the properties of the MLE we know $\hat{\theta}_n$ is asymptotically normal with mean $\theta$ and variance matrix $V_n (\theta)$.
+    \\Which implies that $\hat{\beta_0}\sim N\Big{(}\beta_0,(\frac{\sigma^2}{n})(\frac{\overline{x^2}}{s_{xx}})\Big{)}$ and $\hat{\beta_1}\sim N\Big{(}\beta_1,(\frac{\sigma^2}{n})(\frac{1}{s_{xx}})\Big{)}$.
+    \\Then we can plug in the estimates of our unknown variables to get the $1 -\alpha$ confidence intervals:
+    \[\beta_0: \Bigg{(}\hat{\beta_0} - z_{\alpha/2}\sqrt{\frac{\hat{\sigma^2}\overline{x^2}}{n s_{xx}}},\hat{\beta_0} + z_{\alpha/2}\sqrt{\frac{\hat{\sigma^2}\overline{x^2}}{n s_{xx}}}\Bigg{)}\;\;\;\mbox{and}\;\;\;\beta_1: \Bigg{(}\hat{\beta_1} - z_{\alpha/2}\sqrt{\frac{\hat{\sigma^2}}{n s_{xx}}},\hat{\beta_1} + z_{\alpha/2}\sqrt{\frac{\hat{\sigma^2}}{n s_{xx}}}\Bigg{)}\]
+\end{center}
+
+
+\newpage
+# 3.
+\begin{center}
+\doublespacing
+    Let $X_1, ..., X_n\overset{\mbox{iid}}{\sim}\mbox{Gamma}(\alpha,\beta)$, i.e. $f_{X_i} (x_i) =\frac{1}{\beta^\alpha\Gamma (\alpha)} x_i^{\alpha -1}e^{-\frac{x_i}{\beta}}$ for $0\leq x_i <\infty$.
+\end{center}
+
+## a.
+\begin{center}
+\doublespacing
+    Here we assume $\alpha$ is known and find the MLE for $\beta$:
+    \[L (\beta) =\prod_{i=1}^n\frac{1}{\beta^\alpha\Gamma (\alpha)} x_i^{\alpha -1}e^{-\frac{x_i}{\beta}}\;\implies\; l(\beta) = log\:L(\beta) =\sum_{i=1}^n\alpha\:log\:\frac{1}{\beta} - log\:\Gamma(\alpha) + (\alpha - 1)\:log\:x_i -\frac{x_i}{\beta}\]
+    Now I am actually going to find the MLE with respect to $\frac{1}{\beta}$
+    \\Taking the derivative with respect to $\frac{1}{\beta}$:
+    \[\frac{d}{d\frac{1}{\beta}} l(\beta) =\frac{d}{d\frac{1}{\beta}}\sum_{i=1}^n\alpha\:log\:\frac{1}{\beta} - log\:\Gamma(\alpha) + (\alpha - 1)\:log\:x_i -\frac{x_i}{\beta} =\sum_{i=1}^n \frac{d}{d\frac{1}{\beta}}\Big{(}\alpha\:log\:\frac{1}{\beta} -\frac{x_i}{\beta}\Big{)}\]
+    \[=\sum_{i=1}^n\frac{\alpha}{(\frac{1}{\beta})} - x_i = n\frac{\alpha}{(\frac{1}{\beta})} -\sum_{i=1}^n x_i\]
+    Setting this equal to 0 we get:
+    \[n\frac{\alpha}{(\frac{1}{\beta})} -\sum_{i=1}^n x_i = 0\;\implies\;\frac{1}{n}\sum_{i=1}^n x_i =\frac{\alpha}{(\frac{1}{\beta})}\;\implies\;\frac{1}{\beta} =\frac{\alpha}{\frac{1}{n}\sum_{i=1}^n x_i}\]
+    So our critical point is:
+    \[\frac{1}{\beta} =\frac{\alpha}{\frac{1}{n}\sum_{i=1}^n x_i}\]
+    To verify this is indeed a maximum point we take the second derivative:
+    \[\frac{d^2}{d(\frac{1}{\beta})^2} l(\beta) =\frac{d}{d\frac{1}{\beta}}\Bigg{(}n\frac{\alpha}{(\frac{1}{\beta})} -\sum_{i=1}^n x_i\Bigg{)} = -n\frac{\alpha}{(\frac{1}{\beta})^2} = -n\alpha\beta^2 < 0\]
+    Since $\alpha > 0$, Showing that $l(\beta)$ at our critical point is indeed a maximum point. So the MLE for $\frac{1}{\beta}$ is indeed:
+    \[\hat{\Bigg{(}\frac{1}{\beta}\Bigg{)}} =\frac{\alpha}{\frac{1}{n}\sum_{i=1}^n X_i}\]
+    Therefore the MLE of $\beta$ is given by:
+    \[\hat{\beta} =\frac{1}{\hat{\Big{(}\frac{1}{\beta}\Big{)}}} =\frac{1}{\alpha}\Big{(}\frac{1}{n}\sum_{i=1}^n X_i\Big{)}\;\;\qedsymbol\]
+\end{center}
+
+\newpage
+## b.
+\begin{center}
+\doublespacing
+    First I will show a result about the Gamma distribution, letting $X\sim\mbox{Gamma}(\alpha,\beta)$:
+    \[\mathbb{E}[X] =\int_{-\infty}^\infty x f_X (x)\:dx =\int_0^\infty x\frac{1}{\beta^\alpha\Gamma(\alpha)}x^{\alpha-1} e^{-\frac{x}{\beta}}dx =\frac{1}{\Gamma(\alpha)}\int_0^\infty \Big{(}\frac{x}{\beta}\Big{)}^\alpha e^{-\frac{x}{\beta}}dx\]
+    Let $u =\frac{x}{\beta}$ then $\frac{du}{dx} =\frac{1}{\beta}$ and:
+    \[\mathbb{E}[X] =\frac{1}{\Gamma(\alpha)}\int_0^\infty \Big{(}\frac{x}{\beta}\Big{)}^\alpha e^{-\frac{x}{\beta}}dx =\frac{\beta}{\Gamma(\alpha)}\int_0^\infty u^\alpha e^{-u}du\]
+    Now let $v = u^\alpha$ and $\frac{dw}{du} = e^{-u}$ so that $\frac{dv}{du} =\alpha u^{\alpha - 1}$ and $w = -e^{-u}$, then:
+    \[\mathbb{E}[X] =\frac{\beta}{\Gamma(\alpha)}\int_0^\infty u^\alpha e^{-u}du =\frac{\beta}{\Gamma (\alpha)}\Bigg{(}-u^\alpha e^{-u}\Big{|}_0^\infty +\int_0^\infty\alpha u^{\alpha - 1} e^{-u} du\Bigg{)} =\frac{\Gamma(\alpha)\beta\alpha}{\Gamma(\alpha)} =\beta\alpha\]
+    Where we use the fact that the exponential grows faster than the polynomial term as $u\rightarrow\infty$ and the fact that the remaining integral is the definition of $\Gamma(\alpha)$.
+    \\Now computing $\mathbb{E}[X^2]$:
+    \[\mathbb{E}[X^2] =\int_{-\infty}^\infty x^2 f_X (x)\:dx =\int_0^\infty x^2\frac{1}{\beta^\alpha\Gamma(\alpha)}x^{\alpha-1} e^{-\frac{x}{\beta}}dx =\frac{\beta}{\Gamma(\alpha)}\int_0^\infty \Big{(}\frac{x}{\beta}\Big{)}^{\alpha+1} e^{-\frac{x}{\beta}}dx\]
+    Let $u =\frac{x}{\beta}$ then $\frac{du}{dx} =\frac{1}{\beta}$ and:
+    \[\mathbb{E}[X^2] =\frac{\beta}{\Gamma(\alpha)}\int_0^\infty \Big{(}\frac{x}{\beta}\Big{)}^{\alpha+1} e^{-\frac{x}{\beta}}dx =\frac{\beta^2}{\Gamma(\alpha)}\int_0^\infty u^{\alpha+1} e^{-u}dx\]
+    Now let $v = u^{\alpha+1}$ and $\frac{dw}{du} = e^{-u}$ so that $\frac{dv}{du} =(\alpha +1) u^\alpha$ and $w = -e^{-u}$, then:
+    \[\mathbb{E}[X^2] =\frac{\beta^2}{\Gamma(\alpha)}\int_0^\infty u^{\alpha+1} e^{-u}dx =\frac{\beta^2}{\Gamma(\alpha)}\Bigg{(}-u^{\alpha +1}e^{-u}\Big{|}_0^\infty +\int_0^\infty (\alpha + 1) u^\alpha e^{-u}du\Bigg{)}\]
+    \[=\frac{\beta^2}{\Gamma(\alpha)}\Big{(}(\alpha + 1)\int_0^\infty u^\alpha e^{-u}du\Big{)} =\frac{(\alpha + 1)\beta^2}{\Gamma(\alpha)}\alpha\Gamma(\alpha) =\alpha(\alpha+1)\beta^2\]
+    Where we use the fact that the exponential grows faster than the polynomial term as $u\rightarrow\infty$ and the fact that we just solved the preceding integral before.
+    \\Then we can find the variance:
+    \[\mathbb{V}[X] =\mathbb{E}[X^2] -\Big{(}\mathbb{E}[X]\Big{)}^2 =\alpha(\alpha + 1)\beta^2 - (\alpha\beta)^2 =\alpha^2\beta^2 +\alpha\beta^2 -\alpha^2\beta^2 =\alpha\beta^2\]
+    \\Continued on next page.
+    \newpage
+    The MLE is asymptotically normal so we just need to find the variance and we can construct a $1-p$ confidence interval.
+    \[\mathbb{V}[\hat{\beta}] =\mathbb{V}[\frac{1}{\alpha}\Big{(}\frac{1}{n}\sum_{i=1}^n X_i\Big{)}] =\frac{1}{(n\alpha)^2}\sum_{i=1}^n\mathbb{V}[X_i] =\frac{1}{n^2\alpha^2}\sum_{i=1}^n\alpha\beta^2 =\frac{n\alpha\beta^2}{n^2\alpha^2} =\frac{\beta^2}{n\alpha}\]
+    Where I used the fact that all of the $X_i$ are mutually independent and the variance of a sum of independent variables is just the sum of the variances.
+    \\Then plugging in our MLE we get the approximate $1-p$ confidence interval:
+    \[\Big{(}\hat{\beta} - z_{p/2}\frac{\hat{\beta}}{\sqrt{n\alpha}},\hat{\beta} + z_{p/2}\frac{\hat{\beta}}{\sqrt{n\alpha}}\Big{)}\]
+    So a 95\% confidence interval is given by:
+    \[\Big{(}\hat{\beta} - z_{0.05/2}\frac{\hat{\beta}}{\sqrt{n\alpha}},\hat{\beta} + z_{0.05/2}\frac{\hat{\beta}}{\sqrt{n\alpha}}\Big{)} =\Big{(}\hat{\beta} - z_{0.025}\frac{\hat{\beta}}{\sqrt{n\alpha}},\hat{\beta} + z_{0.025}\frac{\hat{\beta}}{\sqrt{n\alpha}}\Big{)}\approx\Big{(}\hat{\beta} - 1.96\frac{\hat{\beta}}{\sqrt{n\alpha}},\hat{\beta} + 1.96\frac{\hat{\beta}}{\sqrt{n\alpha}}\Big{)}\]
+\end{center}
+
+\newpage
+## c.
+
+\begin{center}
+\doublespacing
+    Similar to before we have the likelihood function (just using $\theta = (\alpha,\beta)$ instead of $\beta$ now):
+    \[L (\theta) =\prod_{i=1}^n\frac{1}{\beta^\alpha\Gamma (\alpha)} x_i^{\alpha -1}e^{-\frac{x_i}{\beta}}\;\implies\; l(\theta) = log\:L(\theta) =\sum_{i=1}^n -\alpha\:log\:\beta - log\:\Gamma(\alpha) + (\alpha - 1)\:log\:x_i -\frac{x_i}{\beta}\]
+    We will use numerical approximation to maximize this, optim in R finds the minimum point so we will minimize the negative log likelihood which maximizes the log likelihood. I will also be using hessian = TRUE to approximate the observed fisher information.
+    \\From before we knew $\hat{\beta} =\frac{\bar{x}}{\alpha}$ was the MLE if $\alpha$ was known so I will be using $(\alpha,\beta) = (a,\frac{\bar{x}}{a})$ as my starting point where $a$ is just some real number (I will try a number of different values for $a$).
+\end{center}
+
+```{r}
+lifetimes <- scan("guineapigdata.txt",sep=",",comment.char="#")
+
+neg_log_lik <- function(theta, x = lifetimes){
+  a <- theta[1]
+  b <- theta[2]
+  return(-1*sum(-a*log(b) - lgamma(a) + (a - 1)*log(x) - x/b))
+}
+
+find_mle <- function(){
+  a <- 1
+  mle <- optim(par = c(a, mean(lifetimes)/a), fn = neg_log_lik, hessian = TRUE)
+  while (mle$convergence != 0){
+    a <- a + 0.5
+    mle <- optim(par = c(a, mean(lifetimes)/a), fn = neg_log_lik, hessian = TRUE)
+  }
+  a <- a + 1
+  mle_alt1 <- optim(par = c(a, mean(lifetimes)/a), fn = neg_log_lik, hessian = TRUE)
+  a <- a + 1
+  mle_alt2 <- optim(par = c(a, mean(lifetimes)/a), fn = neg_log_lik, hessian = TRUE)
+  return(list(mle1 = mle, mle2 = mle_alt1, mle3 = mle_alt1))
+}
+
+mles <- find_mle()
+```
+
+First we check the convergence codes (0 is a success)
+
+```{r}
+mles$mle1$convergence
+mles$mle2$convergence
+mles$mle3$convergence
+```
+
+\newpage
+Then we check the function values found
+```{r}
+mles$mle1$value
+mles$mle2$value
+mles$mle3$value
+```
+
+Then we check the actual parameters
+
+```{r}
+mles$mle1$par
+mles$mle2$par
+mles$mle3$par
+```
+
+Just because I am also going to check the Hessian matrices
+
+```{r}
+mles$mle1$hessian
+mles$mle2$hessian
+mles$mle3$hessian
+```
+
+\begin{center}
+Continued on next page.
+\end{center}
+
+\newpage
+\begin{center}
+\doublespacing
+    We can see that mle2 and mle3 match each other basically exactly so I will take that as the true MLE. That is we are taking $\hat{\theta}_n =\Bigg{(}\hat{\alpha}_n,\hat{\beta}_n\Bigg{)} =\Bigg{(}3.082983, 57.345690\Bigg{)}$ with the estimated observed Fisher information being:
+\[I_n (\theta) =\mathbb{E}[H(\theta)]\approx H(\hat{\theta}_n)\approx
+\begin{bmatrix}
+27.543038 & 1.2555434 \\
+1.255543 & 0.0675178
+\end{bmatrix}
+\]
+    Then we can invert the estimated observed Fisher information to get the matrix:
+\[V_n (\theta) = I_n (\theta)^{-1} =\mathbb{E}[H(\theta)]^{-1}\approx H(\hat{\theta}_n)^{-1}\approx
+\begin{bmatrix}
+27.543038 & 1.2555434 \\
+1.255543 & 0.0675178
+\end{bmatrix}^{-1}
+\]
+\[=\frac{1}{(27.543038)(0.0675178) - (1.255543)(1.2555434)}
+\begin{bmatrix}
+0.0675178 & -1.2555434 \\
+-1.255543 & 27.543038
+\end{bmatrix}
+\]
+\[=
+\begin{bmatrix}
+0.238363 & -4.432535 \\
+-4.432535 & 97.237174
+\end{bmatrix}
+=\hat{V_n (\theta)}
+\]
+\end{center}
+
+```{r}
+v <- solve(mles$mle2$hessian)
+v
+```
+
+\begin{center}
+\doublespacing
+    Then by the properties of the MLE we know $\hat{\theta}_n$ is asymptotically normal with mean $\theta$ and variance matrix $V_n (\theta)$.
+    \\Which implies that $\hat{\alpha}_n\sim N\Big{(}\alpha,V_n(\theta)_{1,1}\Big{)}$ and $\hat{\beta}_n\sim N\Big{(}\beta,V_n(\theta)_{2,2}\Big{)}$.
+    \\Then we can use this to construct approximate $1-p$ confidence intervals:
+    \[\alpha: \Bigg{(}\hat{\alpha}_n - z_{p/2} \hat{V_n (\theta)}_{1,1},\hat{\alpha}_n + z_{p/2} \hat{V_n (\theta)}_{1,1}\Bigg{)}\;\;\;\mbox{and}\;\;\;\beta: \Bigg{(}\hat{\beta}_n - z_{p/2} \hat{V_n (\theta)}_{2,2},\hat{\beta}_n + z_{p/2} \hat{V_n (\theta)}_{2,2}\Bigg{)}\]
+    Therefore our 95\% confidence intervals are:
+    \[\alpha: \Bigg{(}\hat{\alpha}_n - 1.96\sqrt{0.238363},\hat{\alpha}_n + 1.96\sqrt{0.238363}\Bigg{)}\;\;\;\mbox{and}\;\;\;\beta: \Bigg{(}\hat{\beta}_n - 1.96\sqrt{97.2371},\hat{\beta}_n + 1.96\sqrt{97.2371}\Bigg{)}\]
+    Which by the R code below is:
+    \[\alpha: \Bigg{(}2.126064,4.039903\Bigg{)}\;\;\;\mbox{and}\;\;\;\beta: \Bigg{(}38.01834,76.67304\Bigg{)}\]
+    As a side note one might want to use 2 instead of 1.96 to make this more accurate due to the large amount of approximating used in this problem.
+\end{center}
+
+```{r}
+mles$mle2$par[1] + c(-1,1)*1.96*sqrt(v[1,1])
+mles$mle2$par[2] + c(-1,1)*1.96*sqrt(v[2,2])
+```
+
+\begin{center}
+\doublespacing
+    Since the optimization function returned a success code of 0 we can say that the algorithm used found a maximum. This is also supported by the fact that we got very similar points for three optimizations with different start points (with two of them even being the same point) and very similar hessian matrices as well.
+\end{center}
+

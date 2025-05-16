@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+
+\title{Method of Moments and MLE}
+\author{Matthew Seguin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1.}
+\begin{center}
+\doublespacing
+    Let $X_1, X_2, ..., X_n\overset{iid}{\sim} F$ with density $f(x |\theta ) =\theta x^{-2}$ for $0 <\theta\leq x <\infty$
+\end{center}
+
+{\Large\textbf{a.}}
+\begin{center}
+\doublespacing
+    \[L (\theta) = f(X_1, X_2, ..., X_n |\theta) =\prod_{i=1}^n f(X_i |\theta) =\prod_{i=1}^n\theta X_i^{-2} =\theta^n\Big{(}\prod_{i=1}^n X_i\Big{)}^{-2}\]
+    \[l(\theta) = log\big{(} L(\theta)\big{)} = log\Bigg{(}\theta^n\Big{(}\prod_{i=1}^n X_i\Big{)}^{-2}\Bigg{)} = n\:log\:\theta - 2\sum_{i=1}^n log\:X_i\]
+    $\frac{\partial l(\theta)}{\partial\theta} =\frac{n}{\theta}$ which is monotonically decreasing in $\theta$.
+    \\Therefore our estimate for $\theta$ should be as small as possible with respect to our data.
+    \\So the MLE is $\hat{\theta}_n = min\{X_1, X_2, ..., X_n\}$ \qedsymbol
+\end{center}
+
+{\Large\textbf{b.}}
+\begin{center}
+\doublespacing
+    First we will calculate $\mathbb{E}[X]$:
+    \[\mathbb{E}[X] =\int_{-\infty}^\infty x\:f(x |\theta)\:dx =\int_\theta^\infty\theta x^{-1}\:dx =\theta\:log|x|\Big{|}_\theta^\infty =\theta\lim_{x\rightarrow\infty}log|x| -\theta\:log|\theta| =\infty\]
+    So $\mathbb{E}[X]$ does not converge and hence we can not use $\bar{X} =\frac{1}{n}\sum_{i=1}^n X_i$ for our MOM estimate.
+    \\Doing so would introduce the equation $\bar{X} =\mathbb{E}[X] =\infty$ which will not be true for any sample, we need the first moment to converge and be a function with $\theta$ present in order to use the first sample moment in our MOM estimate.
+\end{center}
+
+{\Large\textbf{c.}}
+\begin{center}
+\doublespacing
+    Let $g(X) = X^{1/2}$ then let $\overline{X^{1/2}} =\sum_{i=1}^n X_i^{1/2}$
+    \[\mathbb{E}[g(X)] =\int_{-\infty}^\infty g(x)\:f(x |\theta)\:dx =\int_\theta^\infty\theta x^{-3/2}\:dx = -2\theta x^{-1/2}\Big{|}_\theta^\infty = -2\theta\lim_{x\rightarrow\infty}\frac{1}{x^{1/2}} + 2\theta\frac{1}{\theta^{1/2}} = 0 + 2\theta^{1/2} = 2\theta^{1/2}\]
+    Then we solve $\overline{X^{1/2}} =\mathbb{E}[g(X)] = 2\theta^{1/2}$ to get us our MOM estimate is $\tilde{\theta}_n =\frac{1}{4}\Big{(}\overline{X^{1/2}}\Big{)}^2$ \qedsymbol
+\end{center}
+
+
+\newpage
+\section*{2.}
+\begin{center}
+\doublespacing
+    Let $\theta > 0$ then let $X_1, X_2, ..., X_n\overset{iid}{\sim} N(\theta, \theta)$.
+    \[L (\theta) = f(X_1, X_2, ..., X_n |\theta) =\prod_{i=1}^n f(X_i |\theta) =\prod_{i=1}^n\theta X_i^{-2} =\prod_{i=1}^n\frac{1}{\sqrt{2\pi\theta}} e^{-\frac{1}{2\theta}(X_i -\theta)^2}\]
+    \[l (\theta) = log\big{(}L(\theta)\big{)} = log\Bigg{(}\prod_{i=1}^n\frac{1}{\sqrt{2\pi\theta}} e^{-\frac{1}{2\theta}(X_i -\theta)^2}\Bigg{)} =\sum_{i=1}^n log\big{(}\frac{1}{\sqrt{2\pi\theta}}\big{)} -\frac{1}{2\theta}(X_i -\theta)^2 = -n\:log\big{(}\sqrt{2\pi\theta}\big{)} -\sum_{i=1}^n\frac{1}{2\theta}(X_i -\theta)^2\]
+    \[= -n\:log\big{(}\sqrt{2\pi\theta}\big{)} -\sum_{i=1}^n \frac{1}{2\theta}(X_i^2 - 2X_i\theta +\theta^2) = -n\:log\big{(}\sqrt{2\pi\theta}\big{)} -\sum_{i=1}^n \frac{X_i^2}{2\theta} - X_i +\frac{\theta}{2}\]
+    \[= -n\:log\big{(}\sqrt{2\pi\theta}\big{)} -\frac{n\theta}{2} -\frac{1}{2\theta}\Big{(}\sum_{i=1}^n X_i^2\Big{)} + \Big{(}\sum_{i=1}^n X_i\Big{)}\]
+    Then:
+    \[\frac{\partial l(\theta)}{\partial\theta} = - n\frac{\partial}{\partial\theta} log\big{(}\sqrt{2\pi\theta}\big{)} -\frac{n}{2}\frac{\partial}{\partial\theta}\theta -\Big{(}\sum_{i=1}^n X_i^2\Big{)}\frac{\partial}{\partial\theta}\frac{1}{2\theta} = -n\big{(}\frac{1}{\sqrt{2\pi\theta}}\big{)}\big{(}\frac{\sqrt{2\pi}}{2\sqrt{\theta}}\big{)} -\frac{n}{2} +\frac{1}{2\theta^2}\sum_{i=1}^n X_i^2\]
+    \[= -\frac{n}{2\theta} -\frac{n}{2} +\frac{1}{2\theta^2}\sum_{i=1}^n X_i^2\]
+    Then we know the MLE will be at a critical point of $l(\theta)$ and hence we can set $\frac{\partial l(\theta)}{\partial\theta} = 0$:
+    \[\frac{\partial l(\theta)}{\partial\theta} = -\frac{n}{2\theta} -\frac{n}{2} +\frac{1}{2\theta^2}\sum_{i=1}^n X_i^2 = 0\]
+    Then multiplying both sides by $-\frac{2\theta^2}{n}$ implies:
+    \[\theta^2 +\theta -\frac{1}{n}\sum_{i=1}^n X_i^2 = 0\]
+    Which demonstrates that the MLE is a root of $\theta^2 +\theta - W$ where $W =\bar{X}_n^2 =\frac{1}{n}\sum_{i=1}^n X_i^2$ as desired.
+    \\The roots of this polynomial are:
+    \[\theta =\frac{-1\pm\sqrt{1+4W}}{2}\]
+    To find which is the MLE we can use the fact that we know $\theta > 0$:
+    \\Since $\frac{-1 -\sqrt{1 + 4W}}{2} < 0$ we know this can't be the MLE.
+    \break
+    \\However, we know $\sqrt{1 + 4W} > 1$ since $W =\bar{X}_n^2 > 0$.
+    \break
+    \\Therefore the MLE is $\hat{\theta}_n =\frac{-1 +\sqrt{1 + 4W}}{2} =\frac{-1 +\sqrt{1 + 4\bar{X}_n^2}}{2} =\frac{-1 +\sqrt{1 +\frac{4}{n}\sum_{i=1}^n X_i^2}}{2}$ \qedsymbol
+\end{center}
+
+\end{document}
