@@ -125,8 +125,12 @@ class AdaptiveRejectionSampler:
     def _initialize_abscissae(self, x0 = None, k = 10, distance = 1.0):
         if self.abscissae is not None:
             return
+        
+        if not hasattr(self, 'dh'):
+            self._compute_log_density_derivative()
         if not callable(self.dh):
             raise TypeError('Input dh must be a callable function.')
+        
         try:
             iter(self.support)
         except TypeError:
@@ -149,7 +153,7 @@ class AdaptiveRejectionSampler:
             L, R = a + diff/10, b - diff/10
         else:
             if not hasattr(self, 'mode'):
-                self._find_mode()
+                self._find_mode(x0)
 
             eps = np.finfo(np.float64).eps
             if a > -np.inf:
@@ -443,8 +447,9 @@ class AdaptiveRejectionSampler:
 
                 # Since h is concave dh must be strictly decreasing
                 # So this is a check for log concavity of f
-                # FIX ERRORS, floating point precision could cause issues
-                # if (len(set(dh_vals)) != len(dh_vals)):
+
+                # slow O(n^2) operation
+                # if np.min(np.abs(dh_vals[:, None] - dh_vals[None, :])) < tol:
                 #     raise ValueError("Input f must be a strictly log concave function.")
                 
                 # Find the intercept points for the upper hull
@@ -489,8 +494,8 @@ class AdaptiveRejectionSampler:
             )
             
             # Check for log concavity of f
-            # if not np.all((l <= self.h(x_star) + 10*tol) & (self.h(x_star) <= u + 10*tol)):
-            #     raise ValueError('Input f must be a strictly log concave function.')
+            if not np.all((l <= self.h(x_star) + tol) & (self.h(x_star) <= u + tol)):
+                raise ValueError('Input f must be a strictly log concave function.')
             
             # Implement rejection steps
             step1 = (w <= np.exp(l - u))
